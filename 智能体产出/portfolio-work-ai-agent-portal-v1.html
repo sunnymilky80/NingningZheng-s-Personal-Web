@@ -1,0 +1,1220 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>作品详情 · AI 智能体产品体系规划</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-primary: #fbf7ee;
+      --bg-secondary: #f5f0e3;
+      --bg-paper: #fffdf7;
+      --ink: #1f2522;
+      --muted: #687168;
+      --moss: #5d7052;
+      --moss-deep: #3d6b54;
+      --rust: #c18c5d;
+      --amber: #d4a574;
+      --line: #e5dfd0;
+      --line-strong: #cfc5b7;
+      --r-pill: 999px;
+      --r-card-lg: 24px;
+      --r-card: 18px;
+      --r-sm: 12px;
+      --shadow-sm: 0 2px 8px rgba(31, 37, 34, 0.04);
+      --shadow-md: 0 8px 24px rgba(31, 37, 34, 0.08);
+      --shadow-lg: 0 18px 46px rgba(31, 37, 34, 0.1);
+      --shadow-hover: 0 14px 32px rgba(31, 37, 34, 0.12);
+      --font-display: "Fraunces", "Noto Serif SC", "Songti SC", serif;
+      --font-body: "Inter", "PingFang SC", -apple-system, system-ui, sans-serif;
+      --paper: var(--bg-paper);
+      --bg: var(--bg-primary);
+      --card: var(--bg-paper);
+      --green: var(--moss);
+      --blue: #285f84;
+      --teal: var(--moss-deep);
+      --orange: var(--rust);
+      --red: #a85448;
+      --soft-green: rgba(93, 112, 82, 0.12);
+      --soft-blue: #e6f1f6;
+      --soft-teal: rgba(61, 107, 84, 0.12);
+      --soft-orange: rgba(193, 140, 93, 0.14);
+      --soft-yellow: #fbf2d4;
+      --radius: var(--r-card);
+      --shadow: var(--shadow-lg);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      color: var(--ink);
+      background: var(--bg-primary);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 28px 72px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 28px;
+      border: 1px solid rgba(222, 216, 207, 0.55);
+      border-radius: var(--r-card-lg);
+      background: var(--bg-paper);
+      box-shadow: var(--shadow-md);
+    }
+
+    .hero-nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px 18px;
+      margin-bottom: 22px;
+    }
+
+    .breadcrumb {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 0;
+      padding: 8px 12px;
+      display: inline-block;
+      border-radius: var(--r-sm);
+      background: rgba(93, 112, 82, 0.07);
+      border: 1px solid rgba(222, 216, 207, 0.5);
+    }
+
+    .breadcrumb span { opacity: 0.55; margin: 0 7px; }
+
+    .back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--bg-primary);
+      border-radius: var(--r-pill);
+      border: 1px solid rgba(61, 75, 55, 0.35);
+      background: var(--moss);
+      box-shadow: var(--shadow-md);
+      transition: transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .back-home:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .back-home:focus-visible {
+      outline: 2px solid var(--moss-deep);
+      outline-offset: 2px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--rust);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 24px;
+      height: 2px;
+      background: currentColor;
+    }
+
+    h1 {
+      max-width: 840px;
+      margin: 10px 0 12px;
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4.2vw, 48px);
+      font-weight: 600;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      color: var(--moss-deep);
+    }
+
+    .lead {
+      max-width: 800px;
+      margin: 0;
+      padding: 14px 16px 14px 18px;
+      color: var(--muted);
+      font-size: 15.5px;
+      border-left: 3px solid rgba(93, 112, 82, 0.42);
+      border-radius: 0 var(--r-sm) var(--r-sm) 0;
+      background: linear-gradient(90deg, rgba(93, 112, 82, 0.08), transparent 52%);
+    }
+
+    .meta,
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      margin-top: 22px;
+      border: 1px solid var(--line);
+      background: var(--line);
+    }
+
+    .kpis { margin-top: 14px; }
+
+    .meta-item,
+    .kpi {
+      min-height: 72px;
+      padding: 13px 14px;
+      background: linear-gradient(180deg, rgba(255, 253, 247, 0.98), rgba(240, 235, 229, 0.38));
+    }
+
+    .meta-item b {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--green);
+      font-size: 12px;
+    }
+
+    .meta-item span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .kpi strong {
+      display: block;
+      color: var(--ink);
+      font-size: 25px;
+      line-height: 1.05;
+    }
+
+    .kpi strong span {
+      margin-left: 4px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .kpi p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .section {
+      margin-top: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--r-card-lg);
+      overflow: hidden;
+      background: var(--paper);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 17px 22px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(245, 240, 227, 0.6), var(--bg-paper));
+    }
+
+    .section-head > .sub {
+      display: none !important;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      padding: 5px 10px;
+      border-radius: var(--r-pill);
+      background: rgba(93, 112, 82, 0.1);
+      color: var(--moss-deep);
+      border: 1px solid rgba(93, 112, 82, 0.2);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.25;
+      color: var(--ink);
+    }
+
+    .body {
+      padding: 20px 22px 22px;
+    }
+
+    .page > .section:nth-of-type(odd) > .body {
+      background: rgba(255, 253, 247, 0.65);
+    }
+
+    .page > .section:nth-of-type(even) > .body {
+      background: linear-gradient(180deg, rgba(240, 235, 229, 0.48) 0%, rgba(255, 253, 247, 0.4) 50%, transparent 100%);
+    }
+
+    .brief-grid,
+    .ability-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .brief-card,
+    .ability-card {
+      padding: 14px;
+      border: 1px solid rgba(222, 216, 207, 0.85);
+      border-radius: var(--r-sm);
+      background: linear-gradient(165deg, rgba(255, 253, 247, 0.98), rgba(240, 235, 229, 0.28));
+      box-shadow: 0 1px 0 rgba(93, 112, 82, 0.05);
+    }
+
+    .brief-card b,
+    .ability-card b {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--green);
+      font-size: 13px;
+    }
+
+    .brief-card p,
+    .ability-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .takeaway-grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 14px;
+    }
+
+    .takeaway-card,
+    .fjs-card {
+      padding: 16px;
+      border: 1px solid rgba(222, 216, 207, 0.85);
+      border-radius: var(--r-sm);
+      background: #fff;
+    }
+
+    .takeaway-card {
+      background: linear-gradient(135deg, rgba(93, 112, 82, 0.07), rgba(255, 253, 247, 0.98) 42%, rgba(193, 140, 93, 0.06) 100%);
+      border-color: rgba(93, 112, 82, 0.2);
+    }
+
+    .fjs-card {
+      background: linear-gradient(180deg, rgba(255, 253, 247, 0.98), rgba(232, 240, 245, 0.35));
+    }
+
+    .takeaway-card b,
+    .fjs-card b {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--moss-deep);
+      font-size: 13px;
+    }
+
+    .takeaway-card p,
+    .fjs-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .fjs-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .fjs-row {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed rgba(32, 37, 32, 0.18);
+    }
+
+    .fjs-row:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .fjs-row strong {
+      color: var(--orange);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .transform {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid var(--line-strong);
+      background: #fff;
+    }
+
+    .transform-card {
+      position: relative;
+      min-height: 168px;
+      padding: 15px;
+      border-right: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .transform-card:nth-child(1) { background: linear-gradient(180deg, rgba(251, 242, 212, 0.85), rgba(255, 253, 247, 0.95)); }
+    .transform-card:nth-child(2) { background: linear-gradient(180deg, rgba(93, 112, 82, 0.09), rgba(255, 253, 247, 0.96)); }
+    .transform-card:nth-child(3) { background: linear-gradient(180deg, rgba(61, 107, 84, 0.1), rgba(255, 253, 247, 0.96)); }
+    .transform-card:nth-child(4) { background: linear-gradient(180deg, rgba(193, 140, 93, 0.12), rgba(255, 253, 247, 0.96)); border-right: 0; }
+
+    .transform-card::after {
+      content: "→";
+      position: absolute;
+      top: 14px;
+      right: -11px;
+      z-index: 2;
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: var(--ink);
+      border-radius: 999px;
+      font-size: 12px;
+    }
+
+    .transform-card:last-child::after { display: none; }
+
+    .step-id {
+      color: var(--orange);
+      font-size: 10.5px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .transform-card h3 {
+      margin: 8px 0 8px;
+      font-size: 15px;
+      line-height: 1.25;
+    }
+
+    .transform-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12.5px;
+    }
+
+    .mini-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 12px;
+    }
+
+    .pill {
+      padding: 3px 7px;
+      border: 1px solid rgba(32, 37, 32, 0.14);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      color: #4d574f;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .portal {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .customer-stack {
+      display: grid;
+      gap: 10px;
+    }
+
+    .customer-card {
+      padding: 13px;
+      border: 1px solid rgba(222, 216, 207, 0.85);
+      border-radius: var(--r-sm);
+      background: linear-gradient(165deg, rgba(255, 253, 247, 0.98), rgba(240, 235, 229, 0.22));
+    }
+
+    .customer-card b {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--moss-deep);
+      font-size: 13px;
+    }
+
+    .customer-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12.5px;
+    }
+
+    .funnel {
+      display: grid;
+      gap: 8px;
+      padding: 14px;
+      border: 1px solid rgba(222, 216, 207, 0.85);
+      border-radius: var(--r-sm);
+      background: linear-gradient(135deg, rgba(255, 253, 247, 0.98), rgba(240, 235, 229, 0.35));
+    }
+
+    .funnel-row {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 10px;
+      align-items: center;
+      min-height: 44px;
+    }
+
+    .funnel-row b {
+      color: var(--green);
+      font-size: 12px;
+    }
+
+    .funnel-row div {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 8px;
+      background: #fbf8f0;
+      border: 1px solid var(--line);
+    }
+
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .value-card {
+      min-height: 150px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 15px;
+      border: 1px solid rgba(222, 216, 207, 0.85);
+      border-radius: var(--r-sm);
+      background: #fff;
+    }
+
+    .value-card:nth-child(1) { background: linear-gradient(165deg, rgba(230, 241, 246, 0.55), rgba(255, 253, 247, 0.95)); }
+    .value-card:nth-child(2) { background: linear-gradient(165deg, rgba(93, 112, 82, 0.1), rgba(255, 253, 247, 0.96)); }
+    .value-card:nth-child(3) { background: linear-gradient(165deg, rgba(251, 242, 212, 0.75), rgba(255, 253, 247, 0.96)); }
+    .value-card:nth-child(4) { background: linear-gradient(165deg, rgba(193, 140, 93, 0.12), rgba(255, 253, 247, 0.96)); }
+
+    .value-card b {
+      color: var(--ink);
+      font-size: 15px;
+    }
+
+    .value-card p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 12.5px;
+    }
+
+    .matrix-wrap {
+      display: grid;
+      grid-template-columns: 1fr 0.75fr;
+      gap: 16px;
+    }
+
+    .matrix {
+      position: relative;
+      height: 340px;
+      overflow: hidden;
+      border: 1px solid rgba(61, 107, 84, 0.22);
+      border-radius: 16px;
+      background:
+        radial-gradient(circle at 78% 22%, rgba(61, 107, 84, 0.18), transparent 28%),
+        radial-gradient(circle at 24% 78%, rgba(193, 140, 93, 0.14), transparent 30%),
+        linear-gradient(90deg, rgba(93, 112, 82, 0.1) 1px, transparent 1px),
+        linear-gradient(rgba(93, 112, 82, 0.1) 1px, transparent 1px),
+        linear-gradient(135deg, #fffdf7, #f0ebe3 46%, #f5f8f4);
+      background-size: auto, auto, 28px 28px, 28px 28px, auto;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.72), 0 18px 40px rgba(61, 107, 84, 0.08);
+    }
+
+    .matrix::before,
+    .matrix::after {
+      content: "";
+      position: absolute;
+      background: linear-gradient(90deg, transparent, rgba(61, 107, 84, 0.45), transparent);
+      pointer-events: none;
+    }
+
+    .matrix::before {
+      left: 8%;
+      right: 8%;
+      top: 50%;
+      height: 1px;
+    }
+
+    .matrix::after {
+      top: 8%;
+      bottom: 14%;
+      left: 50%;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(61, 107, 84, 0.45), transparent);
+    }
+
+    .axis-x,
+    .axis-y {
+      position: absolute;
+      z-index: 3;
+      color: var(--moss-deep);
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    .axis-x {
+      right: 22px;
+      bottom: 14px;
+      padding-right: 28px;
+    }
+
+    .axis-x::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 50%;
+      width: 22px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    .axis-x::before {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: calc(50% - 4px);
+      border-left: 7px solid currentColor;
+      border-top: 4px solid transparent;
+      border-bottom: 4px solid transparent;
+    }
+
+    .axis-y {
+      top: 48px;
+      left: 18px;
+      padding-left: 0;
+      writing-mode: vertical-lr;
+    }
+
+    .axis-y::before {
+      content: "";
+      position: absolute;
+      top: -34px;
+      left: 50%;
+      height: 26px;
+      width: 1px;
+      transform: translateX(-50%);
+      background: currentColor;
+    }
+
+    .axis-y::after {
+      content: "";
+      position: absolute;
+      top: -38px;
+      left: calc(50% - 4px);
+      border-bottom: 7px solid currentColor;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+    }
+
+    .quadrant {
+      position: absolute;
+      z-index: 2;
+      width: 38%;
+      min-height: 78px;
+      padding: 12px 13px;
+      border-radius: 14px;
+      border: 1px solid rgba(93, 112, 82, 0.18);
+      background: rgba(255, 253, 247, 0.72);
+      backdrop-filter: blur(10px);
+      color: var(--muted);
+      font-size: 12px;
+      box-shadow: 0 10px 24px rgba(61, 107, 84, 0.07);
+    }
+
+    .q1 {
+      top: 24px;
+      right: 24px;
+      border-color: rgba(200, 102, 53, 0.55);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.84), rgba(255, 240, 230, 0.86));
+      box-shadow: 0 18px 34px rgba(200, 102, 53, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.7) inset;
+    }
+
+    .q2 { top: 24px; left: 52px; }
+    .q3 { bottom: 48px; left: 52px; opacity: 0.78; }
+    .q4 { bottom: 48px; right: 24px; }
+
+    .quadrant b {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--ink);
+      margin-bottom: 5px;
+      font-size: 13px;
+    }
+
+    .quadrant b::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--moss-deep);
+      box-shadow: 0 0 0 4px rgba(61, 107, 84, 0.12);
+    }
+
+    .q1 b::before {
+      background: var(--orange);
+      box-shadow: 0 0 0 4px rgba(200, 102, 53, 0.14), 0 0 16px rgba(200, 102, 53, 0.5);
+    }
+
+    .matrix-core {
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      left: 50%;
+      width: 88px;
+      height: 88px;
+      border-radius: 999px;
+      transform: translate(-50%, -50%);
+      border: 1px solid rgba(61, 107, 84, 0.22);
+      background:
+        radial-gradient(circle, rgba(255, 255, 255, 0.9) 0 30%, rgba(61, 107, 84, 0.1) 31% 100%);
+      box-shadow: 0 0 28px rgba(61, 107, 84, 0.12);
+    }
+
+    .matrix-core::before {
+      content: "筛选";
+      position: absolute;
+      inset: 21px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--moss-deep);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .signal-dot {
+      position: absolute;
+      z-index: 4;
+      width: 11px;
+      height: 11px;
+      border-radius: 999px;
+      background: var(--orange);
+      box-shadow: 0 0 0 5px rgba(200, 102, 53, 0.16), 0 0 22px rgba(200, 102, 53, 0.58);
+    }
+
+    .dot-1 { top: 62px; right: 108px; }
+    .dot-2 { top: 94px; right: 62px; }
+    .dot-3 { top: 132px; right: 146px; }
+
+    .selected-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .selected-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 11px 12px;
+      border: 1px solid rgba(222, 216, 207, 0.85);
+      border-radius: var(--r-sm);
+      background: linear-gradient(180deg, rgba(255, 253, 247, 0.95), rgba(240, 235, 229, 0.25));
+    }
+
+    .selected-item strong {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      background: var(--soft-orange);
+      color: var(--orange);
+      font-size: 13px;
+    }
+
+    .selected-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12.5px;
+    }
+
+    .data-table {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    table {
+      width: 100%;
+      min-width: 850px;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+
+    th, td {
+      padding: 10px 11px;
+      text-align: left;
+      vertical-align: top;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    th:last-child, td:last-child { border-right: 0; }
+    tr:last-child td { border-bottom: 0; }
+
+    th {
+      color: var(--ink);
+      background: #fbf8f0;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    td { color: var(--muted); }
+    td strong { color: var(--ink); }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 14px;
+    }
+
+    .impact-copy {
+      padding: 16px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .impact-copy p {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .impact-copy p:last-child { margin-bottom: 0; }
+
+    .impact-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .impact-item {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.82);
+    }
+
+    .impact-item strong {
+      color: var(--orange);
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .impact-item span {
+      color: var(--muted);
+      font-size: 12.5px;
+    }
+
+    .footnote {
+      margin: 28px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    @media (max-width: 920px) {
+      .meta,
+      .kpis,
+      .brief-grid,
+      .ability-grid,
+      .takeaway-grid,
+      .transform,
+      .portal,
+      .value-grid,
+      .matrix-wrap,
+      .impact-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .transform-card:nth-child(2) { border-right: 0; }
+      .transform-card { border-bottom: 1px solid var(--line); }
+      .transform-card:nth-last-child(-n+2) { border-bottom: 0; }
+      .transform-card::after { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .page { padding: 26px 14px 50px; }
+      .hero { padding: 20px; }
+      .meta,
+      .kpis,
+      .brief-grid,
+      .ability-grid,
+      .takeaway-grid,
+      .transform,
+      .portal,
+      .value-grid,
+      .matrix-wrap,
+      .impact-grid {
+        grid-template-columns: 1fr;
+      }
+      .transform-card { border-right: 0; }
+      .transform-card:nth-last-child(-n+2) { border-bottom: 1px solid var(--line); }
+      h1 { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="hero-nav">
+        <div class="breadcrumb">作品集 <span>/</span> AI 产品 <span>/</span> 智能体产品体系</div>
+        <a class="back-home" href="../prototype-v2.4.html#work-ai-agent" aria-label="返回作品集主页并定位到智能体产品体系规划作品">返回作品集主页</a>
+      </div>
+      <div class="eyebrow">作品 03 · AI Product Systems</div>
+      <h1>基于 170+ 智能体的 AI 门户产品体系规划与发布策划</h1>
+      <p class="lead">
+        公司集中研发出 170+ 个智能体后，需要把内部“三点三边”研发逻辑，转化为运营商客户能理解、门户能展示、销售能讲清、发布能传播的产品体系。我参与了智能体分类、客户分层展示逻辑、业务价值衡量和高价值智能体发布筛选。
+      </p>
+
+      <div class="meta">
+        <div class="meta-item"><b>我的角色</b><span>产品分类、展示逻辑、发布清单、直播脚本策划</span></div>
+        <div class="meta-item"><b>服务对象</b><span>运营商支撑类、网络类、政企类客户</span></div>
+        <div class="meta-item"><b>核心任务</b><span>把内部能力清单转化为外部产品表达</span></div>
+        <div class="meta-item"><b>展示边界</b><span>表格化重绘，隐藏内部评审信息和未公开产品细节</span></div>
+      </div>
+
+      <div class="kpis">
+        <div class="kpi"><strong>170+<span>个</span></strong><p>智能体产品清单</p></div>
+        <div class="kpi"><strong>3<span>类</span></strong><p>运营商客户入口</p></div>
+        <div class="kpi"><strong>4<span>维</span></strong><p>业务价值衡量框架</p></div>
+        <div class="kpi"><strong>10<span>个</span></strong><p>高价值智能体直播展示</p></div>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="section-head">
+        <div class="section-title">
+          <span class="tag">Overview</span>
+          <h2>背景、问题与我的角色</h2>
+        </div>
+      </div>
+      <div class="body">
+        <div class="brief-grid">
+          <article class="brief-card">
+            <b>背景</b>
+            <p>2025 年 8 月，公司基于内部“三点三边”理论，从员工、客户、产商品及其关系场景出发，集中研发形成 170+ 个智能体。</p>
+          </article>
+          <article class="brief-card">
+            <b>问题</b>
+            <p>“三点三边”适合内部研发，不适合直接对外表达。公司需要为统一 AI 门户设计一套客户能理解、销售能讲清的产品分类和展示逻辑。</p>
+          </article>
+          <article class="brief-card">
+            <b>我的角色</b>
+            <p>我参与连接智能体研发成果、AI 门户设计和产品发布表达，梳理角色、场景、业务价值、痛点和高价值智能体发布清单。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div class="section-title">
+          <span class="tag">Key Takeaway</span>
+          <h2>核心判断与分析逻辑</h2>
+        </div>
+      </div>
+      <div class="body">
+        <div class="takeaway-grid">
+          <article class="takeaway-card">
+            <b>Key Takeaway</b>
+            <p>这个项目的关键不是给智能体做简单归类，而是把 170+ 个内部能力，重组为面向运营商客户、门户展示和发布传播都能使用的产品表达体系。</p>
+          </article>
+          <article class="fjs-card">
+            <b>Fact / Judgment / So what</b>
+            <div class="fjs-list">
+              <div class="fjs-row"><strong>Fact</strong><p>公司基于“三点三边”研发出 170+ 个智能体，但内部研发逻辑不适合直接暴露给外部客户。</p></div>
+              <div class="fjs-row"><strong>Judgment</strong><p>智能体产品化需要围绕客户类型、角色、场景、痛点和业务价值重组，而不是只展示功能清单。</p></div>
+              <div class="fjs-row"><strong>So what</strong><p>我参与梳理分类清单、门户展示逻辑、四维价值框架和高价值智能体筛选，支撑统一 AI 门户和直播发布。</p></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div class="section-title">
+          <span class="tag">Evidence 01</span>
+          <h2>内部研发逻辑 → 外部产品表达</h2>
+        </div>
+      </div>
+      <div class="body">
+        <div class="transform">
+          <article class="transform-card">
+            <span class="step-id">Internal Logic</span>
+            <h3>三点三边生成智能体</h3>
+            <p>从员工、客户、产商品三类对象及关系场景出发，生成大量智能体能力。</p>
+            <div class="mini-list"><span class="pill">员工</span><span class="pill">客户</span><span class="pill">产商品</span><span class="pill">三条边</span></div>
+          </article>
+          <article class="transform-card">
+            <span class="step-id">Product Translation</span>
+            <h3>转成客户可理解分类</h3>
+            <p>按客户类型、角色、场景、痛点和业务价值重组，而不是直接暴露内部理论。</p>
+            <div class="mini-list"><span class="pill">客户类型</span><span class="pill">角色</span><span class="pill">场景</span><span class="pill">痛点</span></div>
+          </article>
+          <article class="transform-card">
+            <span class="step-id">Portal Display</span>
+            <h3>形成门户展示逻辑</h3>
+            <p>用户登录后按身份进入对应页面，看到自己的角色、场景和智能体能力。</p>
+            <div class="mini-list"><span class="pill">支撑类</span><span class="pill">网络类</span><span class="pill">政企类</span><span class="pill">千人千面</span></div>
+          </article>
+          <article class="transform-card">
+            <span class="step-id">Launch Story</span>
+            <h3>支撑产品发布</h3>
+            <p>基于客户需求和产品成熟度筛选高价值智能体，进入直播脚本和现场展示。</p>
+            <div class="mini-list"><span class="pill">发布清单</span><span class="pill">直播脚本</span><span class="pill">10 个智能体</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div class="section-title">
+          <span class="tag">Evidence 02</span>
+          <h2>AI 门户“千人千面”展示逻辑</h2>
+        </div>
+      </div>
+      <div class="body">
+        <div class="portal">
+          <div class="customer-stack">
+            <article class="customer-card"><b>支撑类客户</b><p>包含支撑-市场、支撑-政企等入口，面向市场经理、政企市场经理等角色。</p></article>
+            <article class="customer-card"><b>网络类客户</b><p>面向网络规划、运维、装维等角色，聚焦网络资源、故障、需求分析等场景。</p></article>
+            <article class="customer-card"><b>政企类客户</b><p>面向 ICT 生态合作、行业客户经营等场景，强调解决方案和客户价值。</p></article>
+          </div>
+          <div class="funnel">
+            <div class="funnel-row"><b>客户类型</b><div><span class="pill">支撑类</span><span class="pill">网络类</span><span class="pill">政企类</span></div></div>
+            <div class="funnel-row"><b>角色</b><div><span class="pill">市场经理</span><span class="pill">运维人员</span><span class="pill">装维人员</span><span class="pill">政企客户经理</span></div></div>
+            <div class="funnel-row"><b>场景</b><div><span class="pill">市场分析</span><span class="pill">网络规划</span><span class="pill">故障处理</span><span class="pill">ICT 合作</span></div></div>
+            <div class="funnel-row"><b>痛点</b><div><span class="pill">数据分散</span><span class="pill">判断难</span><span class="pill">响应慢</span><span class="pill">流程重复</span></div></div>
+            <div class="funnel-row"><b>智能体</b><div><span class="pill">市场洞察助手</span><span class="pill">网络需求分析助手</span><span class="pill">故障处置数字员工</span></div></div>
+            <div class="funnel-row"><b>业务价值</b><div><span class="pill">客户价值</span><span class="pill">员工价值</span><span class="pill">产商品价值</span><span class="pill">企业价值</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div class="section-title">
+          <span class="tag">Evidence 03</span>
+          <h2>业务价值四维框架</h2>
+        </div>
+      </div>
+      <div class="body">
+        <div class="value-grid">
+          <article class="value-card"><b>客户价值</b><p>是否提升运营商客户体验、响应速度、服务质量或业务洞察能力。</p></article>
+          <article class="value-card"><b>员工价值</b><p>是否减少重复劳动、提升一线人员或管理人员的分析、处理和决策效率。</p></article>
+          <article class="value-card"><b>产商品价值</b><p>是否增强公司已有产品/方案能力，形成更容易售卖和解释的 AI 化能力。</p></article>
+          <article class="value-card"><b>企业价值</b><p>是否提升公司产品竞争力、客户沟通效率、发布传播效果和商业转化可能。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div class="section-title">
+          <span class="tag">Evidence 04</span>
+          <h2>高价值智能体筛选矩阵</h2>
+        </div>
+      </div>
+      <div class="body">
+        <div class="matrix-wrap">
+          <div class="matrix">
+            <span class="axis-y">产品成熟度</span>
+            <span class="axis-x">运营商客户需求强度</span>
+            <div class="quadrant q1"><b>优先发布展示</b>客户需求强，产品成熟度高，适合进入直播展示。</div>
+            <div class="quadrant q2"><b>能力储备</b>产品成熟但需求验证不足，适合继续匹配场景。</div>
+            <div class="quadrant q3"><b>暂缓发布</b>需求与成熟度都不足，留作内部迭代。</div>
+            <div class="quadrant q4"><b>重点孵化</b>需求强但成熟度不足，需要补齐产品能力。</div>
+            <div class="matrix-core" aria-hidden="true"></div>
+            <span class="signal-dot dot-1" aria-hidden="true"></span>
+            <span class="signal-dot dot-2" aria-hidden="true"></span>
+            <span class="signal-dot dot-3" aria-hidden="true"></span>
+          </div>
+          <div class="selected-list">
+            <div class="selected-item"><strong>01</strong><p>根据运营商客户需求，优先选择可被客户直接理解的高频场景。</p></div>
+            <div class="selected-item"><strong>02</strong><p>根据产品成熟度，筛掉 demo 感强、交付风险高的能力。</p></div>
+            <div class="selected-item"><strong>03</strong><p>最终选出 10 个高价值智能体，用于现场直播和发布脚本。</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div class="section-title">
+          <span class="tag">Evidence 05</span>
+          <h2>分类清单字段样例</h2>
+        </div>
+      </div>
+      <div class="body">
+        <div class="data-table">
+          <table>
+            <thead>
+              <tr>
+                <th>三类客户</th>
+                <th>领域</th>
+                <th>场景</th>
+                <th>角色</th>
+                <th>数字员工/助手</th>
+                <th>智能体</th>
+                <th>三点三边对应</th>
+                <th>价值分层</th>
+                <th>发布状态</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>支撑类</td>
+                <td>营销服务</td>
+                <td>市场分析</td>
+                <td>市场经理</td>
+                <td>市场洞察助手</td>
+                <td>市场洞察智能体</td>
+                <td>员工-客户</td>
+                <td>中</td>
+                <td>待发布</td>
+              </tr>
+              <tr>
+                <td>支撑类</td>
+                <td>营销服务</td>
+                <td>市场分析</td>
+                <td>市场经理</td>
+                <td>客群分析助手</td>
+                <td>客群挖掘智能体</td>
+                <td>员工-客户</td>
+                <td>高</td>
+                <td>候选展示</td>
+              </tr>
+              <tr>
+                <td>网络类</td>
+                <td>资源规划</td>
+                <td>需求分析</td>
+                <td>网络规划管理人员</td>
+                <td>网络需求分析助手</td>
+                <td>网络需求分析智能体</td>
+                <td>员工-产商品</td>
+                <td>高</td>
+                <td>候选展示</td>
+              </tr>
+              <tr>
+                <td>政企类</td>
+                <td>ICT 生态合作</td>
+                <td>市场分析</td>
+                <td>研究员 / 客户经理</td>
+                <td>行业分析助手</td>
+                <td>行业洞察智能体</td>
+                <td>员工-客户</td>
+                <td>中</td>
+                <td>待发布</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div class="section-title">
+          <span class="tag">Result</span>
+          <h2>结果与影响</h2>
+        </div>
+      </div>
+      <div class="body">
+        <div class="impact-grid">
+          <div class="impact-copy">
+            <p>
+              这个项目将公司内部基于“三点三边”研发出的 170+ 智能体，转化为面向运营商客户的产品分类体系和 AI 门户展示逻辑。
+              通过客户类型、角色、场景、痛点和业务价值的重新组织，智能体不再只是内部能力清单，而是可以被客户理解、被销售介绍、被门户承载、被直播发布的产品资产。
+            </p>
+            <p>
+              项目最终支撑了公司统一 AI 门户设计和产品发布工作，并基于运营商客户需求和产品成熟度，筛选出 10 个高价值智能体用于现场直播展示。
+            </p>
+          </div>
+          <div class="impact-list">
+            <div class="impact-item"><strong>170+</strong><span>智能体被纳入分类与发布清单，形成统一产品视图。</span></div>
+            <div class="impact-item"><strong>3</strong><span>类运营商客户被拆解为不同展示入口和页面逻辑。</span></div>
+            <div class="impact-item"><strong>4</strong><span>维业务价值框架，用于判断智能体价值和发布优先级。</span></div>
+            <div class="impact-item"><strong>10</strong><span>个高价值智能体进入发布直播展示候选。</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div class="section-title">
+          <span class="tag">Ability Map</span>
+          <h2>这个项目体现的岗位能力</h2>
+        </div>
+      </div>
+      <div class="body">
+        <div class="ability-grid">
+          <article class="ability-card"><b>AI 产品体系化</b><p>能将大量智能体能力按客户、角色、场景和价值重新组织成产品体系。</p></article>
+          <article class="ability-card"><b>产品策略</b><p>能基于客户需求、产品成熟度和业务价值判断哪些能力适合优先发布。</p></article>
+          <article class="ability-card"><b>产品运营与发布策划</b><p>能参与门户展示、发布清单、直播脚本和高价值智能体展示策略。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <p class="footnote">
+      脱敏说明：本页面为作品集展示版本，已隐藏内部评审纪要、未公开产品细节、具体人员和内部链接；表格内容为基于原始资产的结构化重绘。
+    </p>
+  </main>
+</body>
+</html>

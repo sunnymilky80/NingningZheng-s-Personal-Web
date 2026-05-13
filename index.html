@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>郑宁宁｜AI 行业研究与产品策略作品集</title>
+  <meta name="description" content="郑宁宁，关注 AI 行业研究、产品策略与智能体产品化。展示研究方向、代表项目与 AI 行业分析。">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* §1.1 颜色 Token（精确十六进制，禁止改动） */
+    :root {
+      --bg-primary: #FBF7EE;
+      --bg-secondary: #F5F0E3;
+      --bg-paper: #FFFDF7;
+      --ink: #1F2522;
+      --muted: #687168;
+      --moss: #5D7052;
+      --moss-deep: #3D6B54;
+      --rust: #C18C5D;
+      --amber: #D4A574;
+      --line: #E5DFD0;
+      --line-strong: #CFC5B7;
+
+      --font-display: "Fraunces", "Noto Serif SC", "Songti SC", serif;
+      --font-body: "Inter", "PingFang SC", -apple-system, system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+      --container-max: 1200px;
+      --container-pad-x: clamp(24px, 4vw, 48px);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--bg-primary);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* §1.3 容器 */
+    .container {
+      max-width: var(--container-max);
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: var(--container-pad-x);
+      padding-right: var(--container-pad-x);
+    }
+
+    /* ========== §3.1 Hero ========== */
+    .hero {
+      padding-top: clamp(96px, 14vh, 160px);
+      padding-bottom: clamp(96px, 14vh, 160px);
+    }
+
+    .hero__grid {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      align-items: center;
+      gap: clamp(32px, 5vw, 64px);
+    }
+
+    .hero__left {
+      min-width: 0;
+    }
+
+    .hero__row-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    /* C1 · Status Chip */
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background-color: rgba(93, 112, 82, 0.12);
+      color: var(--moss);
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.5;
+      font-weight: 400;
+    }
+
+    .status-chip__dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--moss);
+      flex-shrink: 0;
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.45; }
+    }
+
+    .hero__avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid var(--bg-paper);
+      flex-shrink: 0;
+    }
+
+    .hero__title {
+      margin: 0 0 16px;
+      font-family: var(--font-display);
+      font-size: clamp(40px, 5.4vw, 68px);
+      line-height: 1.1;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .hero__title em {
+      font-style: italic;
+      color: var(--moss-deep);
+    }
+
+    .hero__subtitle {
+      margin: 0 0 20px;
+      max-width: 640px;
+      font-family: var(--font-body);
+      font-size: 18px;
+      line-height: 1.6;
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    /* 三标签：§3.1 指定 C3 eyebrow 规格 + --muted */
+    .hero__tags {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero__cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px 16px;
+    }
+
+    /* C2 · Pill Button */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: transform 200ms ease, box-shadow 200ms ease;
+    }
+
+    .btn--primary {
+      background-color: var(--moss);
+      color: var(--bg-primary);
+    }
+
+    .btn--secondary {
+      background-color: transparent;
+      color: var(--moss);
+      border: 1.5px solid var(--moss);
+      padding: calc(14px - 1.5px) calc(28px - 1.5px);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero__cta-link {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--moss);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-color: rgba(93, 112, 82, 0.35);
+      transition: color 200ms ease, text-decoration-color 200ms ease;
+    }
+
+    .hero__cta-link:hover {
+      color: var(--moss-deep);
+      text-decoration-color: var(--moss-deep);
+    }
+
+    /* 右列视觉 */
+    .hero__visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      justify-self: end;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .hero__glow {
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(93, 112, 82, 0.16) 0%, transparent 70%);
+      pointer-events: none;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .hero__photo {
+      position: relative;
+      z-index: 1;
+      width: 320px;
+      max-width: 100%;
+      border-radius: 16px;
+      object-fit: cover;
+      aspect-ratio: 320 / 400;
+    }
+
+    /* 进场动画：fadeUp 16px，600ms */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .anim {
+      opacity: 0;
+      animation: fadeUp 600ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    .anim--chip { animation-delay: 0.1s; }
+    .anim--avatar { animation-delay: 0.15s; }
+    .anim--h1 { animation-delay: 0.25s; }
+    .anim--sub { animation-delay: 0.4s; }
+    .anim--tags { animation-delay: 0.5s; }
+    .anim--cta { animation-delay: 0.6s; }
+    .anim--visual { animation-delay: 0.3s; }
+
+    /* ========== §3.2 Research Focus ========== */
+    .research {
+      padding-top: clamp(64px, 8vh, 96px);
+      padding-bottom: clamp(64px, 8vh, 96px);
+    }
+
+    .section-head {
+      margin-bottom: 32px;
+    }
+
+    /* C3 · Eyebrow Tag */
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 12px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rust);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 24px;
+      height: 2px;
+      background-color: currentColor;
+      flex-shrink: 0;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.15;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+
+    .research__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .focus-card {
+      padding: 32px;
+      background-color: var(--bg-paper);
+      border-radius: 0;
+      border: none;
+      transition: transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
+                  box-shadow 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .focus-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(31, 37, 34, 0.08);
+    }
+
+    .focus-card h3 {
+      margin: 0 0 12px;
+      font-family: var(--font-body);
+      font-size: 22px;
+      line-height: 1.3;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .focus-card p {
+      margin: 0 0 16px;
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    .focus-card__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .focus-card__tag {
+      display: inline-block;
+      padding: 6px 10px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.5;
+      font-weight: 400;
+      color: var(--moss);
+      background-color: rgba(93, 112, 82, 0.08);
+    }
+
+    @media (max-width: 900px) {
+      .hero__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero__visual {
+        justify-self: center;
+        order: 1;
+      }
+
+      .hero__left {
+        order: 0;
+      }
+
+      .research__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero" aria-label="首屏介绍">
+    <div class="container hero__grid">
+      <div class="hero__left">
+        <div class="hero__row-top">
+          <img class="hero__avatar anim anim--avatar" src="./profile-56.jpg" width="56" height="56" alt="郑宁宁">
+          <div class="status-chip anim anim--chip" role="status">
+            <span class="status-chip__dot" aria-hidden="true"></span>
+            <span>Open to Work · Hangzhou · 寻找 AI 行业研究 / 产品策略全职机会</span>
+          </div>
+        </div>
+
+        <h1 class="hero__title anim anim--h1">
+          我是郑宁宁，关注 <em>AI 行业研究</em>、产品策略与智能体产品化。
+        </h1>
+
+        <p class="hero__subtitle anim anim--sub">
+          我曾参与低空经济、AI 产品体系规划和电信行业情报体系搭建，擅长把复杂行业信息整理成可判断、可传播、可落地的分析框架。
+        </p>
+
+        <div class="hero__tags anim anim--tags" aria-label="能力标签">
+          <span>Industry Research</span>
+          <span>AI Product Systems</span>
+          <span>Market Intelligence</span>
+        </div>
+
+        <div class="hero__cta-row anim anim--cta">
+          <a class="btn btn--primary" href="#works">查看代表作品 →</a>
+          <a class="btn btn--secondary" href="#writing">阅读我的 AI 行业分析</a>
+          <a class="hero__cta-link" href="#contact">联系我</a>
+        </div>
+      </div>
+
+      <div class="hero__visual anim anim--visual" aria-hidden="false">
+        <div class="hero__glow" aria-hidden="true"></div>
+        <img class="hero__photo" src="./profile-320.jpg" width="320" height="400" alt="郑宁宁职业照">
+      </div>
+    </div>
+  </section>
+
+  <section class="research" id="research-focus" aria-labelledby="research-heading">
+    <div class="container">
+      <header class="section-head">
+        <p class="eyebrow">Research Focus · 当前关注的研究问题</p>
+        <h2 id="research-heading">我在系统研究什么</h2>
+      </header>
+
+      <div class="research__grid">
+        <article class="focus-card">
+          <h3>AI 产品与智能体产品化</h3>
+          <p>关注智能体如何从能力集合，变成可理解、可管理、可发布、可运营的产品体系。</p>
+          <div class="focus-card__tags" aria-label="关键词">
+            <span class="focus-card__tag">Agent</span>
+            <span class="focus-card__tag">产品体系</span>
+            <span class="focus-card__tag">产品发布</span>
+            <span class="focus-card__tag">运营</span>
+          </div>
+        </article>
+
+        <article class="focus-card">
+          <h3>AI 行业研究与商业化判断</h3>
+          <p>关注大模型商业化、Agent 产品化、AI 应用落地和企业付费意愿等议题，并通过公开文章持续补齐 AI 行业判断。</p>
+          <div class="focus-card__tags" aria-label="关键词">
+            <span class="focus-card__tag">大模型商业化</span>
+            <span class="focus-card__tag">Agent</span>
+            <span class="focus-card__tag">企业付费</span>
+            <span class="focus-card__tag">行业判断</span>
+          </div>
+        </article>
+
+        <article class="focus-card">
+          <h3>情报体系与 AI 工作流</h3>
+          <p>关注如何把电信行业情报体系搭建经验迁移到 AI 行业，用 AI 工具提升信息采集、资料整理、分析写作和内部分享效率。</p>
+          <div class="focus-card__tags" aria-label="关键词">
+            <span class="focus-card__tag">情报体系</span>
+            <span class="focus-card__tag">AI 工作流</span>
+            <span class="focus-card__tag">信息采集</span>
+            <span class="focus-card__tag">研究方法</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

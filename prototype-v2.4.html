@@ -1,0 +1,1840 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>郑宁宁 · 个人网站 v2.4 原型（Hero + Research Focus）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* ===== Colors ===== */
+  --bg-primary: #FBF7EE;
+  --bg-secondary: #F5F0E3;
+  --bg-paper: #FFFDF7;
+  --ink: #1F2522;
+  --muted: #687168;
+  --moss: #5D7052;
+  --moss-deep: #3D6B54;
+  --rust: #C18C5D;
+  --amber: #D4A574;
+  --line: #E5DFD0;
+  --line-strong: #CFC5B7;
+
+  /* ===== Radius ===== */
+  --r-pill: 999px;
+  --r-card-lg: 24px;
+  --r-card: 18px;
+  --r-img: 20px;
+  --r-sm: 12px;
+
+  /* ===== Shadows ===== */
+  --shadow-sm: 0 2px 8px rgba(31, 37, 34, 0.04);
+  --shadow-md: 0 8px 24px rgba(31, 37, 34, 0.08);
+  --shadow-lg: 0 18px 46px rgba(31, 37, 34, 0.10);
+  --shadow-hover: 0 14px 32px rgba(31, 37, 34, 0.12);
+
+  /* ===== Fonts ===== */
+  --font-display: "Fraunces", "Noto Serif SC", "Songti SC", serif;
+  --font-body: "Inter", "PingFang SC", -apple-system, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* ============================================
+   Cursor halo (v2.2 保留 · 全局氛围)
+============================================ */
+.cursor-halo {
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 165, 116, 0.16), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  mix-blend-mode: multiply;
+}
+
+/* ============================================
+   C0 · Sticky Navigation Pill (v2.3 新增)
+============================================ */
+.nav-wrapper {
+  position: sticky;
+  top: 16px;
+  z-index: 100;
+  padding: 0 16px;
+  margin-top: 16px;
+}
+
+.nav {
+  max-width: min(760px, 92vw);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 24px 10px 14px;
+  border-radius: var(--r-pill);
+  background: rgba(255, 253, 247, 0.82);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--moss);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bg-primary);
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.nav-name {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.nav-name-en {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.nav-name-cn {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.nav-links {
+  display: flex;
+  gap: 26px;
+}
+
+.nav-link {
+  font-size: 14px;
+  color: var(--muted);
+  transition: color 200ms;
+  position: relative;
+  padding: 4px 0;
+}
+
+.nav-link:hover { color: var(--ink); }
+
+.nav-link.active {
+  color: var(--moss-deep);
+  font-weight: 500;
+}
+
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--moss-deep);
+  border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+  .nav-links { gap: 14px; }
+  .nav-link { font-size: 13px; }
+  .nav-name-en { font-size: 13px; }
+  .nav-name-cn { font-size: 11px; }
+}
+
+/* ============================================
+   Hero Section (v2.4 排版重做)
+============================================ */
+.hero {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(80px, 12vh, 140px) clamp(24px, 4vw, 48px);
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 56px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 968px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: clamp(56px, 9vh, 88px) clamp(24px, 4vw, 48px);
+  }
+}
+
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  align-self: start;
+}
+
+.hero-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.hero-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--bg-paper) url('个人AI头像设计/Gemini生成4.jpg') center center / cover no-repeat;
+  border: 1.5px solid var(--bg-paper);
+  box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
+}
+
+/* C1 Status Chip */
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: rgba(93, 112, 82, 0.12);
+  border-radius: var(--r-pill);
+  color: var(--moss);
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: var(--shadow-sm);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--moss);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.65; transform: scale(0.85); }
+}
+
+/* === Hero h1 v2.4.1 · 双行节奏 · 缩小字号 === */
+.hero-headline {
+  font-family: var(--font-display);
+  color: var(--ink);
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hero-headline-l1 {
+  font-size: clamp(32px, 3.8vw, 48px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.hero-headline-l2 {
+  font-size: clamp(22px, 2.4vw, 32px);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  color: rgba(31, 37, 34, 0.88);
+}
+
+.hero-headline em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--moss-deep);
+  font-feature-settings: 'kern', 'liga';
+}
+
+.hero-subtitle {
+  font-size: 17px;
+  line-height: 1.7;
+  color: rgba(31, 37, 34, 0.82);
+  max-width: 600px;
+}
+
+.hero-tags {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  align-items: center;
+}
+
+.hero-tag-sep {
+  color: var(--line-strong);
+  letter-spacing: 0;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 30px;
+  border-radius: var(--r-pill);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.btn-primary {
+  background: var(--moss);
+  color: var(--bg-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--moss);
+  border: 1.5px solid var(--moss);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  background: rgba(93, 112, 82, 0.06);
+}
+
+.btn-tertiary {
+  background: transparent;
+  color: var(--ink);
+  padding: 14px 4px;
+  font-weight: 500;
+}
+
+.btn-tertiary:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+
+/* Hero right column */
+.hero-right {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  align-self: end;
+  min-height: 440px;
+}
+
+.hero-blob {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(93, 112, 82, 0.20), rgba(93, 112, 82, 0.04) 50%, transparent 70%);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+  z-index: 0;
+  filter: blur(2px);
+}
+
+.hero-blob-amber {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  bottom: 20px;
+  right: 0;
+  background: radial-gradient(circle, rgba(212, 165, 116, 0.18), transparent 65%);
+  border-radius: 50%;
+  z-index: 0;
+  filter: blur(2px);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.hero-photo {
+  width: clamp(280px, 30vw, 360px);
+  aspect-ratio: 4 / 5;
+  border-radius: var(--r-img);
+  box-shadow: var(--shadow-lg);
+  background: url('郑宁宁证件照.PNG') center 20% / cover no-repeat;
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+   Research Focus Section (v2.4 字体升级)
+============================================ */
+.research {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(64px, 8vh, 96px) clamp(24px, 4vw, 48px);
+  position: relative;
+  z-index: 1;
+}
+
+.section-header {
+  margin-bottom: 56px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--rust);
+  margin-bottom: 20px;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--rust);
+}
+
+.section-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.4vw, 40px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  max-width: 700px;
+}
+
+.section-h2 em {
+  font-style: italic;
+  color: var(--moss-deep);
+  font-weight: 500;
+}
+
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 968px) {
+  .research-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+.research-card {
+  background: var(--bg-paper);
+  padding: 32px 32px 28px;
+  border-radius: 28px;
+  box-shadow: var(--shadow-md);
+  transition: all 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.research-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* === Card eyebrow pill · v2.4.1 顶部主题徽章 === */
+.card-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  padding: 6px 14px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  background: rgba(93, 112, 82, 0.12);
+  color: var(--moss);
+  border-radius: var(--r-pill);
+  letter-spacing: 0.02em;
+  margin-bottom: 2px;
+}
+
+/* === Card h3 v2.4.1 · 字号加大、加粗 === */
+.card-h3 {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.card-h3 em {
+  font-style: italic;
+  font-weight: 600;
+  color: var(--moss-deep);
+}
+
+.card-body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.75;
+  color: rgba(31, 37, 34, 0.85);
+  flex: 1;
+}
+
+.card-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+  margin-top: 4px;
+}
+
+/* === Keyword tag v2.4.1 · 米沙色（参考新截图） === */
+.tag {
+  display: inline-block;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--font-body);
+  background: rgba(207, 197, 183, 0.55);
+  color: rgba(31, 37, 34, 0.78);
+  border-radius: var(--r-pill);
+  transition: all 200ms;
+  white-space: nowrap;
+}
+
+.tag:hover {
+  background: rgba(193, 140, 93, 0.22);
+  color: var(--moss-deep);
+}
+
+/* ============================================
+   数字 Bar · 4 个量化锚（§3.3 · v2.4.6 条带高度缩短约 ¼）
+   对齐 PRD §3.3：可信度锚；背景用 --moss 与上方米白内容区形成明确区隔
+============================================ */
+.stats {
+  background: var(--moss);
+  padding: clamp(21px, 3vh, 33px) 0;
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid rgba(45, 58, 42, 0.22);
+  border-bottom: 1px solid rgba(45, 58, 42, 0.18);
+}
+
+.stats-inner {
+  /* 略加宽 + 列间距，避免四列挤在中间、两侧过空 */
+  max-width: min(960px, 96vw);
+  margin: 0 auto;
+  padding: 0 clamp(16px, 3vw, 36px);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: clamp(20px, 3.5vw, 44px);
+}
+
+.stat {
+  padding: 1px clamp(8px, 1vw, 12px);
+  border-right: 1px solid rgba(255, 253, 247, 0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 5px;
+}
+
+.stat:first-child { padding-left: 0; }
+.stat:last-child {
+  padding-right: 0;
+  border-right: none;
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  align-content: flex-end;
+  justify-content: center;
+  gap: 4px 5px;
+  color: #fff;
+  line-height: 1;
+  /* 与「数字 + 单位」行同高（整体高度缩短约 ¼ 后仍保留 TMF 与副文对齐） */
+  min-height: clamp(39px, 5.1vw, 50px);
+}
+
+/* 主数字与英文字母：高对比 Fraunces、纯白（对齐截图主行） */
+.stat-num {
+  font-size: clamp(28px, 3.4vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  font-feature-settings: 'onum', 'lnum';
+  color: #fff;
+}
+
+.stat-num-text {
+  font-size: clamp(24px, 2.95vw, 38px);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+/* 「+」与数字同组、同色（截图中为大号衬线的一部分） */
+.stat-plus {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.6vw, 34px);
+  font-weight: 700;
+  color: #fff;
+  margin-left: -2px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.stat-unit {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 253, 247, 0.72);
+  letter-spacing: 0.02em;
+  margin-left: 2px;
+}
+
+/* 下方说明：双行、略浅于主数字的米白字 */
+.stat-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  max-width: 11.5em;
+}
+
+.stat-label-line {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1.35;
+  color: rgba(255, 253, 247, 0.72);
+}
+
+.stat-label-line:first-child {
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: rgba(255, 253, 247, 0.88);
+}
+
+@media (max-width: 768px) {
+  .stats-inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 14px;
+  }
+  .stat {
+    padding: 0;
+    border-right: none;
+  }
+}
+
+/* ============================================
+   §3.4 Selected Works · 3 张项目卡（zig-zag）
+   默认排序：C 情报 → A 低空 → B 智能体（PRD §3.4）
+============================================ */
+.works {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(64px, 8vh, 100px) clamp(24px, 4vw, 48px) clamp(72px, 9vh, 112px);
+  position: relative;
+  z-index: 1;
+  scroll-margin-top: 96px;
+}
+
+.works-header {
+  margin-bottom: clamp(40px, 5vh, 56px);
+  max-width: 720px;
+}
+
+.works-lede {
+  margin-top: 18px;
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 680px;
+}
+
+.works-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 48px);
+  align-items: center;
+  margin-bottom: clamp(48px, 6vh, 80px);
+}
+
+.works-row:last-of-type {
+  margin-bottom: 0;
+}
+
+#work-telecom-intelligence,
+#work-low-altitude,
+#work-ai-agent {
+  scroll-margin-top: 96px;
+}
+
+@media (max-width: 900px) {
+  .works-row {
+    grid-template-columns: 1fr;
+  }
+
+  .works-row .works-media {
+    order: -1;
+  }
+}
+
+.works-media {
+  display: flex;
+  align-items: stretch;
+  border-radius: var(--r-card-lg);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-md);
+  aspect-ratio: 5 / 3;
+  background: var(--bg-paper);
+  transition: transform 280ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 280ms ease;
+}
+
+.works-media:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+}
+
+.works-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 无本地 Evidence 图时：苔藓 / 蓝灰渐变占位（可换 <img>） */
+.works-figure-placeholder {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 16px 18px;
+  background: linear-gradient(145deg, rgba(93, 112, 82, 0.18) 0%, rgba(255, 253, 247, 0.96) 48%, rgba(212, 165, 116, 0.12) 100%);
+}
+
+.works-figure-placeholder--agents {
+  background: linear-gradient(205deg, rgba(47, 95, 127, 0.2) 0%, rgba(255, 253, 247, 0.96) 52%, rgba(93, 112, 82, 0.1) 100%);
+}
+
+.works-figure-note {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(31, 37, 34, 0.45);
+  line-height: 1.35;
+  max-width: 14em;
+}
+
+.works-copy {
+  min-width: 0;
+}
+
+.works-card-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 12px;
+  font-family: var(--font-body);
+}
+
+.works-card-eyebrow::before {
+  content: "";
+  width: 24px;
+  height: 2px;
+  background: var(--rust);
+}
+
+.works-card-title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 600;
+  line-height: 1.28;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+
+.works-card-title em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--moss-deep);
+}
+
+.works-card-body {
+  font-size: 15px;
+  line-height: 1.72;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+.works-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.works-tag {
+  display: inline-block;
+  padding: 7px 14px;
+  font-size: 12.5px;
+  font-weight: 500;
+  font-family: var(--font-body);
+  border-radius: var(--r-pill);
+  background: rgba(93, 112, 82, 0.1);
+  color: var(--moss-deep);
+  border: 1px solid rgba(93, 112, 82, 0.22);
+}
+
+.works-cta {
+  display: inline-flex;
+}
+
+/* ============================================
+   AI JD Match · Hero 内嵌 demo
+============================================ */
+.jd-match {
+  margin-top: 0;
+  padding: 16px 22px 18px;
+  background: rgba(255, 253, 247, 0.55);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-sm);
+  max-width: 580px;
+  width: 100%;
+}
+
+.jd-match-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--rust);
+  margin-bottom: 6px;
+}
+
+.jd-match-eyebrow span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--rust);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.jd-match-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  margin-bottom: 2px;
+  display: inline;
+}
+
+.jd-match-title em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--moss-deep);
+}
+
+.jd-match-subtitle {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin-bottom: 10px;
+  margin-top: 2px;
+}
+
+.jd-match-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.jd-match-input {
+  flex: 1;
+  padding: 9px 16px;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  background: var(--bg-paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  color: var(--ink);
+  transition: all 200ms;
+  min-width: 0;
+}
+
+.jd-match-input:focus {
+  outline: none;
+  border-color: var(--moss);
+  background: var(--bg-primary);
+  box-shadow: 0 0 0 3px rgba(93, 112, 82, 0.10);
+}
+
+.jd-match-input::placeholder {
+  color: var(--muted);
+}
+
+.jd-match-submit {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--moss);
+  color: var(--bg-primary);
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.jd-match-submit:hover {
+  background: var(--moss-deep);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.jd-match-examples {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.jd-example {
+  padding: 6px 12px;
+  font-size: 12.5px;
+  font-family: var(--font-body);
+  background: transparent;
+  color: var(--moss);
+  border: 1px solid rgba(93, 112, 82, 0.40);
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  transition: all 200ms;
+}
+
+.jd-example:hover {
+  background: var(--moss);
+  color: var(--bg-primary);
+  border-color: var(--moss);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ============================================
+   JD Modal · 匹配报告弹窗
+============================================ */
+.jd-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.jd-modal.open {
+  display: flex;
+}
+
+.jd-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(31, 37, 34, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: backdropIn 240ms ease;
+}
+
+@keyframes backdropIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.jd-modal-panel {
+  position: relative;
+  max-width: 720px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  background: var(--bg-paper);
+  border-radius: var(--r-card-lg);
+  box-shadow: 0 32px 80px rgba(31, 37, 34, 0.28);
+  padding: 48px;
+  animation: modalIn 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.jd-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 200ms;
+  line-height: 1;
+}
+
+.jd-modal-close:hover {
+  background: var(--bg-secondary);
+  color: var(--ink);
+}
+
+.jd-modal-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--rust);
+  margin-bottom: 12px;
+}
+
+.jd-modal-eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--rust);
+}
+
+.jd-modal-title {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.4vw, 30px);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 28px;
+}
+
+.jd-modal-title em {
+  font-style: italic;
+  color: var(--moss-deep);
+  font-weight: 500;
+}
+
+.jd-modal-score-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(93, 112, 82, 0.10), rgba(212, 165, 116, 0.08));
+  border-radius: var(--r-card);
+  margin-bottom: 32px;
+}
+
+.jd-modal-score-circle {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: var(--bg-paper);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  flex-shrink: 0;
+}
+
+.jd-modal-score-num {
+  font-family: var(--font-display);
+  font-size: 38px;
+  font-weight: 600;
+  color: var(--moss-deep);
+  line-height: 1;
+}
+
+.jd-modal-score-label {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+  letter-spacing: 0.08em;
+}
+
+.jd-modal-score-text {
+  flex: 1;
+}
+
+.jd-modal-score-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.jd-modal-score-verdict {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.jd-modal-section {
+  margin-bottom: 28px;
+}
+
+.jd-modal-h3 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: 0.01em;
+}
+
+.jd-modal-h3::before {
+  content: "";
+  width: 3px;
+  height: 14px;
+  background: var(--moss);
+  border-radius: 2px;
+}
+
+.jd-matrix {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.jd-matrix-row {
+  display: grid;
+  grid-template-columns: 150px 1fr 44px;
+  gap: 16px;
+  align-items: center;
+}
+
+.jd-matrix-label {
+  font-size: 13.5px;
+  color: var(--ink);
+}
+
+.jd-matrix-bar {
+  height: 8px;
+  background: var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.jd-matrix-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--moss), var(--moss-deep));
+  border-radius: 4px;
+  width: 0%;
+  transition: width 900ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.jd-matrix-score {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--moss-deep);
+  text-align: right;
+}
+
+.jd-highlights {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.jd-highlights li {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink);
+  padding: 12px 16px;
+  background: rgba(93, 112, 82, 0.06);
+  border-left: 3px solid var(--moss);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+}
+
+.jd-highlights li strong {
+  color: var(--moss-deep);
+  font-weight: 600;
+}
+
+.jd-summary {
+  font-size: 15px;
+  line-height: 1.75;
+  color: rgba(31, 37, 34, 0.88);
+}
+
+.jd-modal-footer {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.jd-modal-footer p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.jd-modal-footer a {
+  color: var(--moss);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 500;
+}
+
+@media (max-width: 640px) {
+  .jd-modal-panel {
+    padding: 32px 24px;
+  }
+  .jd-modal-score-row {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+    padding: 20px;
+  }
+  .jd-matrix-row {
+    grid-template-columns: 100px 1fr 36px;
+    gap: 10px;
+  }
+  .jd-matrix-label,
+  .jd-matrix-score {
+    font-size: 12.5px;
+  }
+}
+
+/* ============================================
+   Prototype banner (移除上线版本时删掉)
+============================================ */
+.proto-banner {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 200;
+  padding: 8px 14px;
+  background: rgba(31, 37, 34, 0.85);
+  color: var(--bg-primary);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  border-radius: var(--r-pill);
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ============================================
+   Entry animations
+============================================ */
+.fade-up {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fadeUp 600ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.delay-1 { animation-delay: 100ms; }
+.delay-2 { animation-delay: 200ms; }
+.delay-3 { animation-delay: 350ms; }
+.delay-4 { animation-delay: 450ms; }
+.delay-5 { animation-delay: 550ms; }
+.delay-6 { animation-delay: 650ms; }
+</style>
+</head>
+<body>
+
+<!-- 全局光斑 -->
+<div class="cursor-halo" id="halo"></div>
+
+<!-- C0 · Sticky Navigation Pill -->
+<div class="nav-wrapper">
+  <nav class="nav">
+    <div class="nav-left">
+      <div class="nav-logo">宁</div>
+      <div class="nav-name">
+        <span class="nav-name-en">Ningning Zheng</span>
+        <span class="nav-name-cn">郑宁宁</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#hero" class="nav-link active">Home</a>
+      <a href="#research" class="nav-link">Research</a>
+      <a href="#works" class="nav-link">Works</a>
+      <a href="#writings" class="nav-link">Writings</a>
+      <a href="#about" class="nav-link">About</a>
+    </div>
+  </nav>
+</div>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero-left">
+    <div class="hero-meta-row fade-up delay-1">
+      <div class="hero-avatar"></div>
+      <div class="status-chip">
+        <span class="status-dot"></span>
+        <span>Open to Work · Hangzhou · 寻找 AI 行业研究 / 产品策略全职机会</span>
+      </div>
+    </div>
+
+    <h1 class="hero-headline fade-up delay-2">
+      <span class="hero-headline-l1">我是郑宁宁，</span>
+      <span class="hero-headline-l2">关注 <em>AI 行业研究</em>、产品策略与 <em>智能体产品化</em>。</span>
+    </h1>
+
+    <p class="hero-subtitle fade-up delay-3">
+      我曾参与低空经济、AI 产品体系规划和电信行业情报体系搭建，擅长把复杂行业信息整理成可判断、可传播、可落地的分析框架。
+    </p>
+
+    <div class="hero-tags fade-up delay-4">
+      <span>Industry Research</span>
+      <span class="hero-tag-sep">·</span>
+      <span>AI Product Systems</span>
+      <span class="hero-tag-sep">·</span>
+      <span>Market Intelligence</span>
+    </div>
+
+    <div class="hero-ctas fade-up delay-5">
+      <a href="#works" class="btn btn-primary">查看代表作品 →</a>
+      <a href="#writings" class="btn btn-secondary">阅读我的 AI 行业分析</a>
+      <a href="#contact" class="btn btn-tertiary">联系我</a>
+    </div>
+
+    <!-- AI JD Match · Hero 内嵌 demo -->
+    <div class="jd-match fade-up delay-6">
+      <h3 class="jd-match-title">想看我和这个岗位的<em>匹配度</em>？</h3>
+      <p class="jd-match-subtitle">贴 JD 或选下方示例，30 秒内告诉你。</p>
+
+      <div class="jd-match-row">
+        <input type="text" class="jd-match-input" id="jd-input" placeholder="粘贴 JD 关键词，或直接选示例…" autocomplete="off">
+        <button class="jd-match-submit" id="jd-submit" aria-label="查看匹配度">→</button>
+      </div>
+
+      <div class="jd-match-examples">
+        <button class="jd-example" data-report="ai-researcher">AI 行业研究员</button>
+        <button class="jd-example" data-report="ai-pm">AI 产品经理</button>
+        <button class="jd-example" data-report="strategist">战略分析师</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right fade-up delay-2">
+    <div class="hero-blob"></div>
+    <div class="hero-blob-amber"></div>
+    <div class="hero-photo"></div>
+  </div>
+</section>
+
+<!-- Research Focus -->
+<section class="research" id="research">
+  <div class="section-header">
+    <div class="eyebrow">RESEARCH FOCUS · 当前关注的研究问题</div>
+    <h2 class="section-h2">我在 <em>系统研究</em> 以下内容</h2>
+  </div>
+
+  <div class="research-grid">
+
+    <article class="research-card">
+      <h3 class="card-h3">AI 产品与 <em>智能体产品化</em></h3>
+      <p class="card-body">关注智能体如何从能力集合，变成可理解、可管理、可发布、可运营的产品体系。</p>
+      <div class="card-tags">
+        <span class="tag">Agent</span>
+        <span class="tag">产品体系</span>
+        <span class="tag">产品运营</span>
+      </div>
+    </article>
+
+    <article class="research-card">
+      <h3 class="card-h3"><em>AI 行业研究</em> 与商业化判断</h3>
+      <p class="card-body">关注大模型商业化、Agent 产品化、AI 应用落地和企业付费意愿等议题，并通过公开文章持续补齐 AI 行业判断。</p>
+      <div class="card-tags">
+        <span class="tag">LLM 商业化</span>
+        <span class="tag">企业付费</span>
+        <span class="tag">行业判断</span>
+      </div>
+    </article>
+
+    <article class="research-card">
+      <h3 class="card-h3">情报体系 与 <em>AI 工作流</em></h3>
+      <p class="card-body">关注如何把电信行业情报体系搭建经验迁移到 AI 行业，用 AI 工具提升信息采集、资料整理、分析写作和内部分享效率。</p>
+      <div class="card-tags">
+        <span class="tag">情报体系</span>
+        <span class="tag">AI 工作流</span>
+        <span class="tag">研究方法</span>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- 数字 Bar · 4 个量化锚 -->
+<section class="stats">
+  <div class="stats-inner">
+    <div class="stat">
+      <div class="stat-value">
+        <span class="stat-num" data-target="2">2</span>
+        <span class="stat-unit">部</span>
+      </div>
+      <div class="stat-label">
+        <span class="stat-label-line">对外发布白皮书</span>
+        <span class="stat-label-line">低空经济 · AI 产品</span>
+      </div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">
+        <span class="stat-num" data-target="170">170</span><span class="stat-plus">+</span>
+        <span class="stat-unit">个</span>
+      </div>
+      <div class="stat-label">
+        <span class="stat-label-line">智能体产品分类管理</span>
+        <span class="stat-label-line">覆盖研发全线产出</span>
+      </div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">
+        <span class="stat-num" data-target="31">31</span>
+        <span class="stat-unit">省</span>
+      </div>
+      <div class="stat-label">
+        <span class="stat-label-line">运营商市场调研覆盖</span>
+        <span class="stat-label-line">赋能全国销售团队</span>
+      </div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">
+        <span class="stat-num stat-num-text">TMF</span>
+      </div>
+      <div class="stat-label">
+        <span class="stat-label-line">全球峰会 · 丹麦</span>
+        <span class="stat-label-line">Catalyst 英文路演</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §3.4 Selected Works · 3 张项目卡（默认 C → A → B） -->
+<section class="works" id="works" aria-labelledby="works-heading">
+  <div class="works-header">
+    <div class="eyebrow">Selected Works · 代表项目</div>
+    <h2 class="section-h2" id="works-heading">我的主要工作产出</h2>
+    <p class="works-lede">从 0 到 1 搭建情报机制 · 推动公司第一部白皮书 · 把 170+ 智能体翻译成产品。</p>
+  </div>
+
+  <!-- Card 1 · 情报体系（图左文右） -->
+  <article class="works-row works-row--img-left" id="work-telecom-intelligence">
+    <a class="works-media" href="./情报体系产出/portfolio-work-telecom-intelligence-v4.html" aria-label="查看电信行业情报体系作品详情">
+      <img src="./情报体系产出/情报体系详情图.png" width="2376" height="1308" alt="电信行业情报体系搭建：信源结构与机制示意" loading="lazy">
+    </a>
+    <div class="works-copy">
+      <div class="works-card-eyebrow">Work 01 · Market Intelligence</div>
+      <h3 class="works-card-title">电信行业情报体系 · <em>从 0 到 1</em> 的研究机制</h3>
+      <p class="works-card-body">从 0 到 1 搭建公司电信行业情报体系，覆盖宏观政策、标准组织、四大运营商客户和竞争对手四类维度，并形成每周行业信息采集、整理和内部分享机制。</p>
+      <div class="works-tags">
+        <span class="works-tag">市场分析</span>
+        <span class="works-tag">竞争情报</span>
+        <span class="works-tag">信息体系</span>
+        <span class="works-tag">持续研究机制</span>
+      </div>
+      <a class="btn btn-primary works-cta" href="./情报体系产出/portfolio-work-telecom-intelligence-v4.html">查看详情 →</a>
+    </div>
+  </article>
+
+  <!-- Card 2 · 低空经济（文左图右） -->
+  <article class="works-row works-row--img-right" id="work-low-altitude">
+    <div class="works-copy">
+      <div class="works-card-eyebrow">Work 02 · Industry Research</div>
+      <h3 class="works-card-title">从 0 到 1 推动 <em>低空经济</em> 创新项目</h3>
+      <p class="works-card-body">参与低空经济项目从 0 到 1 立项推动，完成前期行业研究、业务研究、系统架构相关内容参与、白皮书撰写，并在展会上进行产品演讲推广。</p>
+      <div class="works-tags">
+        <span class="works-tag">产业研究</span>
+        <span class="works-tag">创新项目策划</span>
+        <span class="works-tag">白皮书</span>
+        <span class="works-tag">展会推广</span>
+      </div>
+      <a class="btn btn-primary works-cta" href="./低空经济产出/portfolio-work-low-altitude-v1.html">查看详情 →</a>
+    </div>
+    <a class="works-media" href="./低空经济产出/portfolio-work-low-altitude-v1.html" aria-label="查看低空经济创新项目作品详情">
+      <img src="./低空经济产出/assets/whitepaper_05.png" width="1600" height="960" alt="低空经济白皮书相关示意图" loading="lazy">
+    </a>
+  </article>
+
+  <!-- Card 3 · 智能体（图左文右） -->
+  <article class="works-row works-row--img-left" id="work-ai-agent">
+    <a class="works-media" href="./智能体产出/portfolio-work-ai-agent-portal-v1.html" aria-label="查看 AI 产品体系规划作品详情">
+      <img src="./智能体产出/智能体产出代表图片.png" width="1200" height="750" alt="智能体产品体系与门户规划代表图" loading="lazy">
+    </a>
+    <div class="works-copy">
+      <div class="works-card-eyebrow">Work 03 · AI Product Systems</div>
+      <h3 class="works-card-title">基于 <em>170+ 智能体</em> 的 AI 产品体系规划</h3>
+      <p class="works-card-body">基于公司已有 170+ 智能体，参与智能体产品体系分类、门户规划设计、产品发布直播策划与脚本策划，并承担 AI 产品白皮书框架搭建、第二章节撰写与全文整合工作。</p>
+      <div class="works-tags">
+        <span class="works-tag">AI 产品体系</span>
+        <span class="works-tag">智能体分类</span>
+        <span class="works-tag">产品发布运营</span>
+        <span class="works-tag">白皮书</span>
+      </div>
+      <a class="btn btn-primary works-cta" href="./智能体产出/portfolio-work-ai-agent-portal-v1.html">查看详情 →</a>
+    </div>
+  </article>
+</section>
+
+<!-- JD Match · Modal -->
+<div class="jd-modal" id="jdModal" aria-hidden="true">
+  <div class="jd-modal-backdrop" data-close></div>
+  <div class="jd-modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="jd-modal-close" data-close aria-label="关闭">×</button>
+
+    <div class="jd-modal-eyebrow">JD MATCH REPORT · 匹配报告</div>
+    <h2 class="jd-modal-title" id="modal-title">…</h2>
+
+    <div class="jd-modal-score-row">
+      <div class="jd-modal-score-circle">
+        <div class="jd-modal-score-num" id="modal-score">--</div>
+        <div class="jd-modal-score-label">/ 100</div>
+      </div>
+      <div class="jd-modal-score-text">
+        <div class="jd-modal-score-eyebrow">综合匹配分</div>
+        <div class="jd-modal-score-verdict" id="modal-verdict">—</div>
+      </div>
+    </div>
+
+    <div class="jd-modal-section">
+      <h3 class="jd-modal-h3">匹配矩阵</h3>
+      <div class="jd-matrix" id="modal-matrix"></div>
+    </div>
+
+    <div class="jd-modal-section">
+      <h3 class="jd-modal-h3">匹配亮点</h3>
+      <ul class="jd-highlights" id="modal-highlights"></ul>
+    </div>
+
+    <div class="jd-modal-section">
+      <h3 class="jd-modal-h3">综合判断</h3>
+      <p class="jd-summary" id="modal-summary"></p>
+    </div>
+
+    <div class="jd-modal-footer">
+      <p>本报告为预设示例，用于演示匹配框架与判断维度。如需针对具体岗位的真实匹配分析，欢迎<a href="#contact">邮件联系</a>。</p>
+    </div>
+  </div>
+</div>
+
+<div class="proto-banner">v2.4 PROTOTYPE · Hero + Research + Stats + Selected Works (§3.4) + JD Match</div>
+
+<script>
+// 全局光斑跟随
+const halo = document.getElementById('halo');
+window.addEventListener('mousemove', e => {
+  halo.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+});
+
+// 导航激活状态跟随滚动
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('section[id]');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${id}`) {
+          link.classList.add('active');
+        }
+      });
+    }
+  });
+}, { rootMargin: '-30% 0px -50% 0px' });
+
+sections.forEach(s => observer.observe(s));
+
+// ============================================
+// AI JD Match · 3 份预设报告 + Modal 逻辑
+// ============================================
+const reports = {
+  'ai-researcher': {
+    title: '<em>AI 行业研究员</em> · 匹配报告',
+    score: 92,
+    verdict: '高度匹配',
+    matrix: [
+      ['学历背景', 95],
+      ['行业研究方法论', 92],
+      ['AI 领域 know-how', 88],
+      ['内容产出能力', 90],
+      ['战略与商业判断', 90]
+    ],
+    highlights: [
+      '<strong>JD 要求</strong>能独立完成行业研究报告 → 候选人主笔《思特奇低空经济白皮书》61 页 8 章，并获 CEO 高度评价。',
+      '<strong>JD 要求</strong>熟悉 AI 产业链 → 候选人系统梳理 AI 产业链结构、商业模式与技术演进，持续运营小红书"100 个 AI 使用场景"系列。',
+      '<strong>JD 要求</strong>能从 0 到 1 搭建情报体系 → 候选人在思特奇从 0 到 1 搭建电信行业情报体系（5 类信源 / 82 个长期跟踪源 / 72 期周度速递）。'
+    ],
+    summary: '候选人具备扎实的行业研究方法论、AI 领域系统认知，以及把电信情报体系迁移到 AI 行业研究的明确路径。从研究到产品落地的完整经验（白皮书 → 庆阳方案）是特别加分项。建议补强：AI 行业大厂背景偏少，新行业语境融入预计需要 1–2 个月。'
+  },
+  'ai-pm': {
+    title: '<em>AI 产品经理</em> · 匹配报告',
+    score: 86,
+    verdict: '匹配良好',
+    matrix: [
+      ['AI 产品体系认知', 92],
+      ['产品分类与发布', 95],
+      ['跨部门协作', 88],
+      ['用户与场景视角', 80],
+      ['数据驱动决策', 78]
+    ],
+    highlights: [
+      '<strong>JD 要求</strong>能设计 AI 产品体系 → 候选人主导 170+ 智能体的产品分类、门户规划与发布策略。',
+      '<strong>JD 要求</strong>能策划产品发布 → 候选人承担《AI 产品白皮书》核心章节撰写 + 产品直播脚本策划。',
+      '<strong>JD 要求</strong>能把复杂技术翻译成产品语言 → 候选人擅长把研发逻辑"翻译"成客户和销售能理解的产品表达。'
+    ],
+    summary: '候选人在 AI 产品体系化与产品发布运营上有完整一线经验，特别擅长把复杂能力转化为可被客户和销售理解的产品表达。建议补强：toC 产品、用户访谈与定量数据分析经验相对有限，可在面试中重点了解数据敏感度。'
+  },
+  'strategist': {
+    title: '<em>战略分析师</em> · 匹配报告',
+    score: 90,
+    verdict: '高度匹配',
+    matrix: [
+      ['战略分析框架', 95],
+      ['行业 / 产业研究', 92],
+      ['商业判断能力', 88],
+      ['信息整合与可视化', 92],
+      ['跨学科与跨语种', 90]
+    ],
+    highlights: [
+      '<strong>JD 要求</strong>掌握 PEST / SWOT / 波特五力等分析框架 → 候选人这些都是日常研究工具。',
+      '<strong>JD 要求</strong>能搭建情报体系 → 候选人从 0 到 1 搭建电信行业情报体系（覆盖政策 / 标准 / 运营商 / 竞品四维度）。',
+      '<strong>JD 要求</strong>能在管理层会议输出 → 候选人随 CEO 出访 TM Forum 丹麦峰会做全英文路演，主笔季度 Newsletter。'
+    ],
+    summary: '候选人具备完整的"战略框架 → 情报体系 → 业务落地"全链路经验，是少见的"既能搭框架又能动手执行"的复合型研究人才。建议补强：行业聚焦在电信 / 低空 / AI 垂直领域，跨行业切换预计需要 1–2 个月适应期。'
+  }
+};
+
+const modal = document.getElementById('jdModal');
+const modalTitle = document.getElementById('modal-title');
+const modalScore = document.getElementById('modal-score');
+const modalVerdict = document.getElementById('modal-verdict');
+const modalMatrix = document.getElementById('modal-matrix');
+const modalHighlights = document.getElementById('modal-highlights');
+const modalSummary = document.getElementById('modal-summary');
+
+function showReport(report) {
+  modalTitle.innerHTML = report.title;
+  modalScore.textContent = report.score;
+  modalVerdict.textContent = report.verdict;
+
+  modalMatrix.innerHTML = report.matrix.map(([label]) => `
+    <div class="jd-matrix-row">
+      <div class="jd-matrix-label">${label}</div>
+      <div class="jd-matrix-bar"><div class="jd-matrix-bar-fill"></div></div>
+      <div class="jd-matrix-score">--</div>
+    </div>
+  `).join('');
+
+  modalHighlights.innerHTML = report.highlights.map(h => `<li>${h}</li>`).join('');
+  modalSummary.textContent = report.summary;
+
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+
+  // 进场动画：先 0 → 数字递增 + bar 填充
+  setTimeout(() => {
+    const bars = modalMatrix.querySelectorAll('.jd-matrix-bar-fill');
+    const scores = modalMatrix.querySelectorAll('.jd-matrix-score');
+    report.matrix.forEach(([_, score], i) => {
+      bars[i].style.width = score + '%';
+      // 数字递增动画
+      let current = 0;
+      const step = score / 30;
+      const interval = setInterval(() => {
+        current += step;
+        if (current >= score) {
+          current = score;
+          clearInterval(interval);
+        }
+        scores[i].textContent = Math.round(current);
+      }, 25);
+    });
+  }, 120);
+}
+
+function closeModal() {
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.jd-example').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const key = btn.dataset.report;
+    showReport(reports[key]);
+  });
+});
+
+document.querySelectorAll('[data-close]').forEach(el => {
+  el.addEventListener('click', closeModal);
+});
+
+const jdInput = document.getElementById('jd-input');
+const jdSubmit = document.getElementById('jd-submit');
+
+function handleSubmit() {
+  const val = jdInput.value.trim();
+  if (!val) {
+    jdInput.focus();
+    return;
+  }
+  // Demo 模式：根据关键词猜测目标岗位，没匹配上就展示 ai-researcher
+  let key = 'ai-researcher';
+  const lower = val.toLowerCase();
+  if (lower.match(/产品|pm|product/)) key = 'ai-pm';
+  else if (lower.match(/战略|strategy|strategist|分析师/)) key = 'strategist';
+  else if (lower.match(/研究|research|industry|analyst|情报|市场/)) key = 'ai-researcher';
+  showReport(reports[key]);
+}
+
+jdSubmit.addEventListener('click', handleSubmit);
+jdInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter') handleSubmit();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+});
+
+// ============================================
+// 数字 Bar · 计数动画（滚到视口时从 0 → 目标值）
+// ============================================
+const statsSection = document.querySelector('.stats');
+if (statsSection) {
+  const statsObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const nums = entry.target.querySelectorAll('.stat-num:not(.stat-num-text)');
+        nums.forEach(num => {
+          const target = parseInt(num.dataset.target);
+          if (isNaN(target)) return;
+          const duration = 1200;
+          const startTime = performance.now();
+          const animate = (now) => {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // easeOutCubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = Math.floor(target * eased);
+            num.textContent = current;
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            } else {
+              num.textContent = target;
+            }
+          };
+          // 起始设为 0 再开始计数
+          num.textContent = '0';
+          requestAnimationFrame(animate);
+        });
+        statsObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  statsObs.observe(statsSection);
+}
+</script>
+</body>
+</html>

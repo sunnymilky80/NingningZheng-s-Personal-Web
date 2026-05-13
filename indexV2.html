@@ -1,0 +1,1851 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>郑宁宁｜AI 行业研究与产品策略作品集</title>
+  <meta name="description" content="郑宁宁，关注 AI 行业研究、产品策略与智能体产品化。展示研究方向、代表项目与 AI 行业分析。">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Nunito:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* 本站：静态 HTML + CSS（无 Tailwind）。颜色保留原 v2 token，并叠加 Organic 设计系统 DNA。 */
+    :root {
+      --bg-primary: #fdfcf8;
+      --bg-secondary: #f5f0e3;
+      --bg-paper: #fefefa;
+      --ink: #2c2c24;
+      --muted: #78786c;
+      --moss: #5d7052;
+      --moss-deep: #3d6b54;
+      --rust: #c18c5d;
+      --amber: #d4a574;
+      --line: #ded8cf;
+      --line-strong: #cfc5b7;
+
+      --ds-primary-fg: #f3f4f1;
+      --ds-accent: #e6dccd;
+      --ds-accent-fg: #4a4a40;
+      --ds-muted-bg: #f0ebe5;
+
+      --r-pill: 999px;
+      --r-card-lg: 32px;
+      --r-card: 18px;
+      --r-sm: 12px;
+      --r-img: 20px;
+
+      --shadow-soft: 0 4px 20px -2px rgba(93, 112, 82, 0.15);
+      --shadow-float: 0 10px 40px -10px rgba(193, 140, 93, 0.2);
+      --shadow-sm: 0 2px 8px rgba(44, 44, 36, 0.06);
+      --shadow-md: var(--shadow-soft);
+      --shadow-lg: 0 12px 36px -8px rgba(93, 112, 82, 0.18);
+      --shadow-hover: 0 20px 40px -10px rgba(93, 112, 82, 0.15);
+
+      --font-display: "Fraunces", "Noto Serif SC", "Songti SC", serif;
+      --font-body: "Nunito", "PingFang SC", -apple-system, system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+      --container-max: 1200px;
+      --container-pad-x: clamp(24px, 4vw, 48px);
+      --ink-85: rgba(44, 44, 36, 0.85);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Organic：全局纸张颗粒（multiply · 低透明度） */
+    html::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.045;
+      mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+    }
+
+    body {
+      margin: 0;
+      position: relative;
+      isolation: isolate;
+      background-color: var(--bg-primary);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.65;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: var(--container-max);
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: var(--container-pad-x);
+      padding-right: var(--container-pad-x);
+    }
+
+    /* ========== C0 · 全站导航胶囊 §1.4 ========== */
+    .site-nav-wrap {
+      position: sticky;
+      top: 16px;
+      z-index: 120;
+      display: flex;
+      justify-content: center;
+      padding: 0 var(--container-pad-x);
+      pointer-events: none;
+    }
+
+    .site-nav-wrap > * {
+      pointer-events: auto;
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: min(720px, 92vw);
+      min-height: 56px;
+      padding: 8px 24px;
+      border-radius: var(--r-pill);
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(16px) saturate(160%);
+      -webkit-backdrop-filter: blur(16px) saturate(160%);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(222, 216, 207, 0.5);
+      transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .site-nav--at-top {
+      transform: scale(0.96);
+    }
+
+    .site-nav__brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .site-nav__logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--moss);
+      color: var(--ds-primary-fg);
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 36px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .site-nav__names span {
+      display: block;
+    }
+
+    .site-nav__names span:first-child {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+
+    .site-nav__names span:last-child {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--muted);
+      line-height: 1.2;
+      margin-top: 2px;
+    }
+
+    .site-nav__links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .site-nav__links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      position: relative;
+      padding: 8px 0;
+      transition: color 300ms ease;
+    }
+
+    .site-nav__links a:focus-visible {
+      outline: 2px solid rgba(93, 112, 82, 0.35);
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
+
+    .site-nav__links a:hover {
+      color: var(--ink);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .site-nav__links a.is-active {
+      color: var(--moss-deep);
+    }
+
+    .site-nav__links a.is-active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 2px;
+      height: 2px;
+      background: var(--moss-deep);
+      border-radius: 1px;
+    }
+
+    .site-nav__toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+      border-radius: var(--r-pill);
+    }
+
+    .site-nav__toggle:focus-visible {
+      outline: 2px solid var(--moss);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 767px) {
+      .site-nav__links {
+        display: none;
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 12px 0;
+        border-radius: var(--r-card-lg);
+        background: rgba(255, 255, 255, 0.96);
+        box-shadow: var(--shadow-soft);
+        border: 1px solid rgba(222, 216, 207, 0.5);
+      }
+
+      .site-nav--open .site-nav__links {
+        display: flex;
+      }
+
+      .site-nav__links a {
+        padding: 14px 20px;
+      }
+
+      .site-nav__toggle {
+        display: flex;
+      }
+
+      .site-nav {
+        position: relative;
+      }
+    }
+
+    /* ========== §3.1 Hero ========== */
+    .hero {
+      position: relative;
+      z-index: 2;
+      padding-top: clamp(96px, 14vh, 160px);
+      padding-bottom: clamp(96px, 14vh, 160px);
+      scroll-margin-top: 96px;
+      /* 与右侧职业照同宽上限，供 JD 模块对齐 */
+      --hero-visual-max: min(400px, 100%);
+    }
+
+    .hero__grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      align-items: stretch;
+      gap: clamp(28px, 4vw, 48px);
+    }
+
+    .hero__left {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .hero__row-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    /* C1 · Status Chip */
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: var(--r-pill);
+      background-color: rgba(240, 235, 229, 0.85);
+      color: var(--moss);
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.5;
+      font-weight: 500;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(222, 216, 207, 0.45);
+    }
+
+    .status-chip__dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--moss);
+      flex-shrink: 0;
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.45; }
+    }
+
+    .hero__avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid var(--bg-paper);
+      flex-shrink: 0;
+    }
+
+    /* Hero 主标题：双行（参考截图 · 整体比 v2.4 再缩小） */
+    .hero__title {
+      margin: 0 0 14px;
+      font-family: "Noto Serif SC", "Songti SC", serif;
+      letter-spacing: -0.01em;
+      color: var(--moss-deep);
+    }
+
+    .hero__title-l1 {
+      display: block;
+      font-size: clamp(26px, 3vw, 38px);
+      line-height: 1.25;
+      font-weight: 700;
+    }
+
+    .hero__title-l2 {
+      display: block;
+      margin-top: 6px;
+      font-size: clamp(18px, 2.2vw, 26px);
+      line-height: 1.35;
+      font-weight: 600;
+      color: var(--moss-deep);
+    }
+
+    .hero__title-l2 em {
+      font-family: "Fraunces", "Noto Serif SC", serif;
+      font-style: italic;
+      font-weight: 500;
+      color: var(--moss-deep);
+    }
+
+    /* Lead 17px · ink 85% */
+    .hero__subtitle {
+      margin: 0 0 20px;
+      max-width: 640px;
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.75;
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    /* 三标签：C3 规格 + --muted + 0.16em */
+    .hero__tags {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero__cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px 16px;
+    }
+
+    /* C2 · Pill Button */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 36px;
+      border-radius: var(--r-pill);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1),
+                  box-shadow 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .btn--primary {
+      background-color: var(--moss);
+      color: var(--ds-primary-fg);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn--secondary {
+      background-color: transparent;
+      color: var(--rust);
+      border: 2px solid var(--rust);
+      padding: 0 calc(36px - 2px);
+      box-shadow: none;
+    }
+
+    .btn:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 24px -4px rgba(93, 112, 82, 0.25);
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .btn--secondary:hover {
+      box-shadow: var(--shadow-float);
+    }
+
+    /* C2 Tertiary */
+    .hero__cta-link {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--moss);
+      text-decoration: none;
+      border-radius: var(--r-pill);
+      padding: 12px 16px;
+      transition: background-color 300ms ease, color 300ms ease;
+    }
+
+    .hero__cta-link:hover {
+      background-color: rgba(93, 112, 82, 0.1);
+      color: var(--moss-deep);
+    }
+
+    .hero__cta-link:focus-visible {
+      outline: 2px solid rgba(93, 112, 82, 0.35);
+      outline-offset: 4px;
+    }
+
+    .hero__visual {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      justify-self: stretch;
+      width: 100%;
+    }
+
+    .hero__glow {
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(93, 112, 82, 0.16) 0%, transparent 70%);
+      pointer-events: none;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* 职业照：保持接近原图比例的长方形 + 统一圆角（非椭圆 / 非 blob） */
+    .hero__photo-frame {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: var(--hero-visual-max);
+      border-radius: var(--r-img);
+      overflow: hidden;
+      box-shadow: var(--shadow-float);
+      line-height: 0;
+      border: 3px solid rgba(255, 255, 255, 0.85);
+    }
+
+    .hero__photo {
+      display: block;
+      width: 100%;
+      height: auto;
+      vertical-align: top;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .anim {
+      opacity: 0;
+      animation: fadeUp 600ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    .anim--chip { animation-delay: 0.1s; }
+    .anim--avatar { animation-delay: 0.15s; }
+    .anim--h1 { animation-delay: 0.25s; }
+    .anim--sub { animation-delay: 0.4s; }
+    .anim--tags { animation-delay: 0.5s; }
+    .anim--cta { animation-delay: 0.6s; }
+    .anim--visual { animation-delay: 0.3s; }
+    .anim--jd-target { animation-delay: 0.68s; }
+    .anim--jd { animation-delay: 0.76s; }
+
+    /* 求职目标 + JD Match：宽度与职业照一致；底部伸缩条与右栏等高 */
+    .hero__trail {
+      flex: 1 1 auto;
+      min-height: 12px;
+    }
+
+    .hero__targets {
+      margin-top: 22px;
+      width: 100%;
+      max-width: var(--hero-visual-max);
+    }
+
+    .hero__targets-label {
+      margin: 0 0 8px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--rust);
+    }
+
+    .hero__targets-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.55;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .hero__targets-list li {
+      position: relative;
+      padding-left: 14px;
+      margin-bottom: 6px;
+    }
+
+    .hero__targets-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .hero__targets-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--moss);
+      opacity: 0.75;
+    }
+
+    .jd-match {
+      margin-top: 14px;
+      width: 100%;
+      max-width: var(--hero-visual-max);
+      padding: 20px 22px;
+      background: rgba(254, 254, 250, 0.92);
+      border: 1px solid rgba(222, 216, 207, 0.55);
+      border-radius: var(--r-card-lg);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .jd-match-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--rust);
+      margin-bottom: 10px;
+      font-family: var(--font-body);
+    }
+
+    .jd-match-eyebrow span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--rust);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .jd-match-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.05rem, 0.35rem + 1.8vw, 1.25rem);
+      font-weight: 600;
+      line-height: 1.35;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin: 0 0 6px;
+    }
+
+    .jd-match-title em {
+      font-style: italic;
+      font-weight: 500;
+      color: var(--moss-deep);
+    }
+
+    .jd-match-subtitle {
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--muted);
+      margin: 0 0 14px;
+      font-family: var(--font-body);
+    }
+
+    .jd-match-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .jd-match-input {
+      flex: 1;
+      min-width: 0;
+      min-height: 48px;
+      padding: 0 18px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid var(--line);
+      border-radius: var(--r-pill);
+      color: var(--ink);
+      transition: border-color 200ms ease, box-shadow 200ms ease, background 200ms ease;
+    }
+
+    .jd-match-input:focus {
+      outline: none;
+      border-color: var(--moss);
+      background: var(--bg-primary);
+      box-shadow: 0 0 0 3px rgba(93, 112, 82, 0.12);
+    }
+
+    .jd-match-input::placeholder {
+      color: var(--muted);
+    }
+
+    .jd-match-submit {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--moss);
+      color: var(--ds-primary-fg);
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-soft);
+      transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1),
+                  background 200ms ease,
+                  box-shadow 200ms ease;
+    }
+
+    .jd-match-submit:hover {
+      background: var(--moss-deep);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px -4px rgba(93, 112, 82, 0.22);
+    }
+
+    .jd-match-submit:focus-visible {
+      outline: 2px solid rgba(93, 112, 82, 0.35);
+      outline-offset: 3px;
+    }
+
+    .jd-match-examples {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .jd-example {
+      padding: 6px 13px;
+      font-size: 12.5px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      background: transparent;
+      color: var(--moss);
+      border: 1px solid rgba(93, 112, 82, 0.38);
+      border-radius: var(--r-pill);
+      cursor: pointer;
+      transition: background 200ms ease, color 200ms ease, border-color 200ms ease,
+                  transform 200ms ease;
+    }
+
+    .jd-example:hover {
+      background: var(--moss);
+      color: var(--ds-primary-fg);
+      border-color: var(--moss);
+      transform: translateY(-1px);
+    }
+
+    .jd-example:focus-visible {
+      outline: 2px solid rgba(93, 112, 82, 0.35);
+      outline-offset: 2px;
+    }
+
+    /* JD 匹配报告弹窗 */
+    .jd-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .jd-modal.open {
+      display: flex;
+    }
+
+    .jd-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(44, 44, 36, 0.42);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .jd-modal-panel {
+      position: relative;
+      max-width: 720px;
+      width: 100%;
+      max-height: 88vh;
+      overflow-y: auto;
+      background: var(--bg-paper);
+      border-radius: var(--r-card-lg);
+      box-shadow: 0 32px 80px rgba(44, 44, 36, 0.22);
+      padding: 44px 40px 36px;
+      border: 1px solid rgba(222, 216, 207, 0.5);
+    }
+
+    .jd-modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: transparent;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 200ms ease, color 200ms ease;
+      line-height: 1;
+    }
+
+    .jd-modal-close:hover {
+      background: var(--ds-muted-bg);
+      color: var(--ink);
+    }
+
+    .jd-modal-close:focus-visible {
+      outline: 2px solid rgba(93, 112, 82, 0.35);
+      outline-offset: 2px;
+    }
+
+    .jd-modal-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--rust);
+      margin-bottom: 10px;
+      font-family: var(--font-body);
+    }
+
+    .jd-modal-eyebrow::before {
+      content: "";
+      width: 24px;
+      height: 2px;
+      background: var(--rust);
+    }
+
+    .jd-modal-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.25rem, 0.5rem + 2vw, 1.75rem);
+      font-weight: 600;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin: 0 0 24px;
+    }
+
+    .jd-modal-title em {
+      font-style: italic;
+      color: var(--moss-deep);
+      font-weight: 500;
+    }
+
+    .jd-modal-score-row {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      padding: 22px;
+      background: linear-gradient(135deg, rgba(93, 112, 82, 0.1), rgba(212, 165, 116, 0.08));
+      border-radius: var(--r-card);
+      margin-bottom: 28px;
+    }
+
+    .jd-modal-score-circle {
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      background: var(--bg-paper);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-soft);
+      flex-shrink: 0;
+    }
+
+    .jd-modal-score-num {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 600;
+      color: var(--moss-deep);
+      line-height: 1;
+    }
+
+    .jd-modal-score-label {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+      letter-spacing: 0.08em;
+    }
+
+    .jd-modal-score-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .jd-modal-score-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .jd-modal-score-verdict {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .jd-modal-section {
+      margin-bottom: 24px;
+    }
+
+    .jd-modal-h3 {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 0 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .jd-modal-h3::before {
+      content: "";
+      width: 3px;
+      height: 14px;
+      background: var(--moss);
+      border-radius: 2px;
+    }
+
+    .jd-matrix {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .jd-matrix-row {
+      display: grid;
+      grid-template-columns: minmax(0, 150px) 1fr 44px;
+      gap: 12px 16px;
+      align-items: center;
+    }
+
+    .jd-matrix-label {
+      font-size: 13px;
+      color: var(--ink);
+      font-family: var(--font-body);
+    }
+
+    .jd-matrix-bar {
+      height: 8px;
+      background: var(--line);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .jd-matrix-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--moss), var(--moss-deep));
+      border-radius: 4px;
+      width: 0%;
+      transition: width 900ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .jd-matrix-score {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--moss-deep);
+      text-align: right;
+    }
+
+    .jd-highlights {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .jd-highlights li {
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: var(--ink);
+      padding: 11px 14px;
+      background: rgba(93, 112, 82, 0.06);
+      border-left: 3px solid var(--moss);
+      border-radius: 0 var(--r-sm) var(--r-sm) 0;
+      font-family: var(--font-body);
+    }
+
+    .jd-highlights li strong {
+      color: var(--moss-deep);
+      font-weight: 600;
+    }
+
+    .jd-summary {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--ink-85);
+      margin: 0;
+      font-family: var(--font-body);
+    }
+
+    .jd-modal-footer {
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .jd-modal-footer p {
+      font-size: 12.5px;
+      line-height: 1.65;
+      color: var(--muted);
+      margin: 0;
+      font-family: var(--font-body);
+    }
+
+    .jd-modal-footer a {
+      color: var(--moss);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 640px) {
+      .jd-modal-panel {
+        padding: 36px 22px 28px;
+      }
+
+      .jd-modal-score-row {
+        flex-direction: column;
+        text-align: center;
+        gap: 14px;
+        padding: 18px;
+      }
+
+      .jd-matrix-row {
+        grid-template-columns: minmax(0, 100px) 1fr 36px;
+        gap: 8px 10px;
+      }
+
+      .jd-matrix-label,
+      .jd-matrix-score {
+        font-size: 12px;
+      }
+    }
+
+    /* ========== §3.2 Research Focus ========== */
+    .research {
+      position: relative;
+      z-index: 2;
+      padding-top: clamp(64px, 8vh, 96px);
+      padding-bottom: clamp(64px, 8vh, 96px);
+      scroll-margin-top: 96px;
+      background: rgba(240, 235, 229, 0.35);
+    }
+
+    .section-head {
+      margin-bottom: 32px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 12px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--rust);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 24px;
+      height: 2px;
+      background-color: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* Section h2：Organic 主标题感（Fraunces 600） */
+    .section-head h2 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(26px, 3.2vw, 38px);
+      line-height: 1.2;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+
+    .research__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .focus-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 28px;
+      background-color: var(--bg-paper);
+      border: 1px solid rgba(222, 216, 207, 0.5);
+      box-shadow: var(--shadow-soft);
+      transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1),
+                  box-shadow 400ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .focus-card:nth-child(1) {
+      border-radius: 2rem 2.75rem 2rem 2.25rem;
+    }
+
+    .focus-card:nth-child(2) {
+      border-radius: 2.5rem 2rem 2.35rem 2.1rem;
+    }
+
+    .focus-card:nth-child(3) {
+      border-radius: 2rem 2.2rem 2.85rem 2.15rem;
+    }
+
+    .focus-card:hover {
+      transform: translateY(-4px) rotate(0.4deg);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .focus-card h3 {
+      flex-shrink: 0;
+      margin: 0 0 10px;
+      font-family: var(--font-display);
+      font-size: clamp(1.125rem, 0.55rem + 1.35vw, 1.375rem);
+      line-height: 1.32;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      min-height: calc(1.32em * 3);
+    }
+
+    .focus-card__body {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    .focus-card__body p {
+      margin: 0;
+      font-family: var(--font-body);
+      font-size: 13px;
+      line-height: 1.65;
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    .focus-card__tags {
+      flex-shrink: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 16px;
+    }
+
+    .focus-card__tag {
+      display: inline-block;
+      padding: 5px 11px;
+      border-radius: var(--r-pill);
+      font-family: var(--font-body);
+      font-size: 11.5px;
+      line-height: 1.35;
+      font-weight: 600;
+      color: var(--ds-accent-fg);
+      background-color: var(--ds-accent);
+    }
+
+    /* ========== §3.4 代表作品（双卡 · 栅格对齐） ========== */
+    .works-preview {
+      position: relative;
+      z-index: 2;
+      padding-top: clamp(64px, 8vh, 96px);
+      padding-bottom: clamp(64px, 8vh, 96px);
+      scroll-margin-top: 96px;
+      background-color: var(--bg-primary);
+    }
+
+    .work-card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .work-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 24px 26px 22px;
+      background-color: var(--bg-paper);
+      border: 1px solid rgba(222, 216, 207, 0.5);
+      box-shadow: var(--shadow-soft);
+      border-radius: 2.25rem 0.85rem 2.25rem 0.85rem;
+      transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1),
+                  box-shadow 400ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .work-card:nth-child(2) {
+      border-radius: 0.85rem 2.25rem 0.85rem 2.25rem;
+    }
+
+    .work-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .work-card__cat {
+      flex-shrink: 0;
+      align-self: flex-start;
+      margin: 0 0 10px;
+      padding: 5px 11px;
+      border-radius: var(--r-pill);
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      background: rgba(240, 235, 229, 0.65);
+      border: 1px solid rgba(222, 216, 207, 0.45);
+    }
+
+    .work-card__title {
+      flex-shrink: 0;
+      margin: 0 0 10px;
+      font-family: var(--font-body);
+      font-size: 1.0625rem;
+      line-height: 1.35;
+      font-weight: 700;
+      color: var(--ink);
+      min-height: calc(1.35em * 3);
+    }
+
+    .work-card__body {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    .work-card__body p {
+      margin: 0;
+      font-family: var(--font-body);
+      font-size: 13px;
+      line-height: 1.65;
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    .work-card__tags {
+      flex-shrink: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+
+    .work-card__tag {
+      display: inline-block;
+      padding: 5px 11px;
+      border-radius: var(--r-pill);
+      font-family: var(--font-body);
+      font-size: 11.5px;
+      line-height: 1.35;
+      font-weight: 600;
+      color: var(--ds-accent-fg);
+      background-color: var(--ds-accent);
+    }
+
+    .work-card__outcome {
+      flex-shrink: 0;
+      margin-top: 14px;
+      padding: 12px 14px 12px 16px;
+      border-left: 4px solid var(--moss);
+      border-radius: 0 var(--r-sm) var(--r-sm) 0;
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: var(--ink-85);
+      background: rgba(93, 112, 82, 0.06);
+    }
+
+    .work-card__outcome strong {
+      color: var(--moss-deep);
+      font-weight: 700;
+    }
+
+    /* 占位：供导航锚点与滚动高亮（后续板块替换） */
+    .nav-stub {
+      height: 1px;
+      scroll-margin-top: 100px;
+      pointer-events: none;
+    }
+
+    @media (max-width: 900px) {
+      .hero__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero__visual {
+        justify-self: center;
+        order: 1;
+        min-height: 0;
+      }
+
+      .hero__photo-frame {
+        max-width: min(360px, 88vw);
+      }
+
+      .hero__photo {
+        max-height: 70vh;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+      }
+
+      .hero__left {
+        order: 0;
+      }
+
+      .research__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .focus-card h3 {
+        min-height: 0;
+      }
+
+      .work-card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .work-card__title {
+        min-height: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="site-nav-wrap">
+    <nav class="site-nav" id="site-nav" aria-label="全站导航">
+      <div class="site-nav__brand">
+        <div class="site-nav__logo" aria-hidden="true">宁</div>
+        <div class="site-nav__names">
+          <span>Ningning Zheng</span>
+          <span>郑宁宁</span>
+        </div>
+      </div>
+      <button type="button" class="site-nav__toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="打开菜单">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+      <div class="site-nav__links" id="nav-links">
+        <a href="#home" data-nav="home">Home</a>
+        <a href="#works" data-nav="works">Works</a>
+        <a href="#writing" data-nav="writing">Writings</a>
+        <a href="#about" data-nav="about">About</a>
+        <a href="#contact" data-nav="contact">Contact</a>
+      </div>
+    </nav>
+  </div>
+
+  <section class="hero" id="home" aria-label="首屏介绍">
+    <div class="container hero__grid">
+      <div class="hero__left">
+        <div class="hero__row-top">
+          <img class="hero__avatar anim anim--avatar" src="./profile-56.jpg" width="56" height="56" alt="郑宁宁">
+          <div class="status-chip anim anim--chip" role="status">
+            <span class="status-chip__dot" aria-hidden="true"></span>
+            <span>Open to Work · Hangzhou · 寻找 AI 行业研究 / 产品策略全职机会</span>
+          </div>
+        </div>
+
+        <h1 class="hero__title anim anim--h1">
+          <span class="hero__title-l1">我是郑宁宁</span>
+          <span class="hero__title-l2">关注 <em>AI 行业研究</em>、产品策略与智能体产品化。</span>
+        </h1>
+
+        <p class="hero__subtitle anim anim--sub">
+          我曾参与低空经济、AI 产品体系规划和电信行业情报体系搭建，擅长把复杂行业信息整理成可判断、可传播、可落地的分析框架。
+        </p>
+
+        <div class="hero__tags anim anim--tags" aria-label="能力标签">
+          <span>Industry Research</span>
+          <span>AI Product Systems</span>
+          <span>Market Intelligence</span>
+        </div>
+
+        <div class="hero__cta-row anim anim--cta">
+          <a class="btn btn--primary" href="#works">查看代表作品 →</a>
+          <a class="btn btn--secondary" href="#writing">阅读我的 AI 行业分析</a>
+          <a class="hero__cta-link" href="#contact">联系我</a>
+        </div>
+
+        <div class="hero__targets anim anim--jd-target" aria-labelledby="hero-targets-heading">
+          <p class="hero__targets-label" id="hero-targets-heading">求职目标岗位</p>
+          <ul class="hero__targets-list">
+            <li>AI 行业研究 / 市场分析</li>
+            <li>AI 产品策略 / 产品运营</li>
+          </ul>
+        </div>
+
+        <div class="jd-match anim anim--jd" aria-labelledby="jd-match-title">
+          <div class="jd-match-eyebrow"><span aria-hidden="true"></span>For recruiters · 给招聘方</div>
+          <h3 class="jd-match-title" id="jd-match-title">想看我和这个岗位的<em>匹配度</em>？</h3>
+          <p class="jd-match-subtitle">粘贴 JD 关键词或点击下方示例，查看预设匹配维度演示（非真实打分）。</p>
+          <div class="jd-match-row">
+            <input type="text" class="jd-match-input" id="jd-input" placeholder="粘贴 JD 关键词，或直接选示例…" autocomplete="off">
+            <button type="button" class="jd-match-submit" id="jd-submit" aria-label="查看匹配度">→</button>
+          </div>
+          <div class="jd-match-examples">
+            <button type="button" class="jd-example" data-report="ai-researcher">AI 行业研究员</button>
+            <button type="button" class="jd-example" data-report="ai-pm">AI 产品经理</button>
+            <button type="button" class="jd-example" data-report="strategist">战略分析师</button>
+          </div>
+        </div>
+
+        <div class="hero__trail" aria-hidden="true"></div>
+      </div>
+
+      <div class="hero__visual anim anim--visual">
+        <div class="hero__glow" aria-hidden="true"></div>
+        <div class="hero__photo-frame">
+          <img class="hero__photo" src="./profile-320.jpg" width="320" height="400" alt="郑宁宁职业照">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="jd-modal" id="jd-modal" aria-hidden="true">
+    <div class="jd-modal-backdrop" data-jd-close></div>
+    <div class="jd-modal-panel" role="dialog" aria-modal="true" aria-labelledby="jd-modal-dialog-title">
+      <button type="button" class="jd-modal-close" data-jd-close aria-label="关闭">×</button>
+      <div class="jd-modal-eyebrow">JD match report · 匹配报告</div>
+      <h2 class="jd-modal-title" id="jd-modal-dialog-title">…</h2>
+      <div class="jd-modal-score-row">
+        <div class="jd-modal-score-circle">
+          <div class="jd-modal-score-num" id="jd-modal-score">--</div>
+          <div class="jd-modal-score-label">/ 100</div>
+        </div>
+        <div class="jd-modal-score-text">
+          <div class="jd-modal-score-eyebrow">综合匹配分</div>
+          <div class="jd-modal-score-verdict" id="jd-modal-verdict">—</div>
+        </div>
+      </div>
+      <div class="jd-modal-section">
+        <h3 class="jd-modal-h3">匹配矩阵</h3>
+        <div class="jd-matrix" id="jd-modal-matrix"></div>
+      </div>
+      <div class="jd-modal-section">
+        <h3 class="jd-modal-h3">匹配亮点</h3>
+        <ul class="jd-highlights" id="jd-modal-highlights"></ul>
+      </div>
+      <div class="jd-modal-section">
+        <h3 class="jd-modal-h3">综合判断</h3>
+        <p class="jd-summary" id="jd-modal-summary"></p>
+      </div>
+      <div class="jd-modal-footer">
+        <p>本报告为预设示例，用于演示匹配框架与判断维度。如需针对具体岗位的真实匹配分析，欢迎<a href="#contact">邮件联系</a>。</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="research" id="research-focus" aria-labelledby="research-heading">
+    <div class="container">
+      <header class="section-head">
+        <p class="eyebrow">Research Focus · 当前关注的研究问题</p>
+        <h2 id="research-heading">我在系统研究什么</h2>
+      </header>
+
+      <div class="research__grid">
+        <article class="focus-card">
+          <h3>AI 产品与智能体产品化</h3>
+          <div class="focus-card__body">
+            <p>关注智能体如何从能力集合，变成可理解、可管理、可发布、可运营的产品体系。</p>
+          </div>
+          <div class="focus-card__tags" aria-label="关键词">
+            <span class="focus-card__tag">Agent</span>
+            <span class="focus-card__tag">产品体系</span>
+            <span class="focus-card__tag">产品发布</span>
+            <span class="focus-card__tag">运营</span>
+          </div>
+        </article>
+
+        <article class="focus-card">
+          <h3>AI 行业研究与商业化判断</h3>
+          <div class="focus-card__body">
+            <p>关注大模型商业化、Agent 产品化、AI 应用落地和企业付费意愿等议题，并通过公开文章持续补齐 AI 行业判断。</p>
+          </div>
+          <div class="focus-card__tags" aria-label="关键词">
+            <span class="focus-card__tag">大模型商业化</span>
+            <span class="focus-card__tag">Agent</span>
+            <span class="focus-card__tag">企业付费</span>
+            <span class="focus-card__tag">行业判断</span>
+          </div>
+        </article>
+
+        <article class="focus-card">
+          <h3>情报体系与 AI 工作流</h3>
+          <div class="focus-card__body">
+            <p>关注如何把电信行业情报体系搭建经验迁移到 AI 行业，用 AI 工具提升信息采集、资料整理、分析写作和内部分享效率。</p>
+          </div>
+          <div class="focus-card__tags" aria-label="关键词">
+            <span class="focus-card__tag">情报体系</span>
+            <span class="focus-card__tag">AI 工作流</span>
+            <span class="focus-card__tag">信息采集</span>
+            <span class="focus-card__tag">研究方法</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="works-preview" id="works" aria-labelledby="works-heading">
+    <div class="container">
+      <header class="section-head">
+        <p class="eyebrow">Selected Works · 代表作品</p>
+        <h2 id="works-heading">研究与产品化交叉的代表项目</h2>
+      </header>
+
+      <div class="work-card-grid">
+        <article class="work-card">
+          <span class="work-card__cat">AI 产品规划</span>
+          <h3 class="work-card__title">智能体体系规划与《AI 产品白皮书》统筹</h3>
+          <div class="work-card__body">
+            <p>围绕公司智能体矩阵与对外产品叙事，梳理角色、场景、业务价值与发布节奏，把研发成果转译成可传播、可销售、可复用的产品体系表达。</p>
+          </div>
+          <div class="work-card__tags" aria-label="项目标签">
+            <span class="work-card__tag">白皮书主笔</span>
+            <span class="work-card__tag">智能体矩阵</span>
+            <span class="work-card__tag">MVP 首发策划</span>
+          </div>
+          <div class="work-card__outcome">
+            <strong>成果：</strong>白皮书获 CEO 高度评价；推动多个商务机会孵化与产品系统设计。
+          </div>
+        </article>
+
+        <article class="work-card">
+          <span class="work-card__cat">战略研究</span>
+          <h3 class="work-card__title">低空经济战略研究与商机落地支撑</h3>
+          <div class="work-card__body">
+            <p>从案头研究到行业图谱与白皮书输出，支撑销售与解决方案团队对外沟通，把研究结论落到商机线索、客户对话与立项材料中，缩短「研究—商机」路径。</p>
+          </div>
+          <div class="work-card__tags" aria-label="项目标签">
+            <span class="work-card__tag">行业白皮书</span>
+            <span class="work-card__tag">低空经济</span>
+            <span class="work-card__tag">销售赋能</span>
+            <span class="work-card__tag">商机孵化</span>
+          </div>
+          <div class="work-card__outcome">
+            <strong>成果：</strong>研究材料直接支撑重点客户方案与内部立项评审，形成可复用的行业叙事包。
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div id="writing" class="nav-stub" aria-hidden="true"></div>
+  <div id="about" class="nav-stub" aria-hidden="true"></div>
+  <div id="contact" class="nav-stub" aria-hidden="true"></div>
+
+  <script>
+    /* §1.5 全局光斑（暖琥珀） */
+    (function () {
+      const halo = document.createElement("div");
+      halo.setAttribute("aria-hidden", "true");
+      halo.style.cssText = [
+        "position:fixed",
+        "width:600px",
+        "height:600px",
+        "border-radius:50%",
+        "background:radial-gradient(circle, rgba(212, 165, 116, 0.16), transparent 60%)",
+        "pointer-events:none",
+        "z-index:2",
+        "transform:translate(-50%, -50%)",
+        "transition:transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1)",
+        "mix-blend-mode:multiply",
+        "top:0",
+        "left:0"
+      ].join(";");
+      document.body.insertBefore(halo, document.body.firstChild);
+      window.addEventListener("mousemove", function (e) {
+        halo.style.transform =
+          "translate(" + e.clientX + "px, " + e.clientY + "px) translate(-50%, -50%)";
+      });
+    })();
+
+    /* C0：滚动顶部胶囊 scale + 导航高亮（简化版，后续有真实 section 再收紧） */
+    (function () {
+      const nav = document.getElementById("site-nav");
+      const links = Array.prototype.slice.call(
+        document.querySelectorAll(".site-nav__links a[data-nav]")
+      );
+      const home = document.getElementById("home");
+      const research = document.getElementById("research-focus");
+      const works = document.getElementById("works");
+
+      function setActive(key) {
+        links.forEach(function (a) {
+          a.classList.toggle("is-active", a.getAttribute("data-nav") === key);
+        });
+      }
+
+      function onScroll() {
+        if (window.scrollY < 8) {
+          nav.classList.add("site-nav--at-top");
+        } else {
+          nav.classList.remove("site-nav--at-top");
+        }
+
+        const y = window.scrollY + 120;
+        const hRect = home.getBoundingClientRect();
+        const heroBottom = window.scrollY + hRect.bottom;
+        const rRect = research.getBoundingClientRect();
+        const researchBottom = window.scrollY + rRect.bottom;
+        var worksBottom = researchBottom;
+        if (works) {
+          const wRect = works.getBoundingClientRect();
+          worksBottom = window.scrollY + wRect.bottom;
+        }
+
+        if (y < heroBottom - 40) {
+          setActive("home");
+        } else if (y < researchBottom - 40) {
+          setActive("home");
+        } else if (works && y < worksBottom - 40) {
+          setActive("works");
+        } else {
+          setActive("works");
+        }
+      }
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+
+      var toggle = document.getElementById("nav-toggle");
+      if (toggle) {
+        toggle.addEventListener("click", function () {
+          var open = nav.classList.toggle("site-nav--open");
+          toggle.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+      }
+
+      links.forEach(function (a) {
+        a.addEventListener("click", function () {
+          nav.classList.remove("site-nav--open");
+          if (toggle) toggle.setAttribute("aria-expanded", "false");
+        });
+      });
+    })();
+
+    /* AI JD Match：预设报告 + 弹窗 */
+    (function () {
+      var reports = {
+        "ai-researcher": {
+          title: "<em>AI 行业研究员</em> · 匹配报告",
+          score: 92,
+          verdict: "高度匹配",
+          matrix: [
+            ["学历背景", 95],
+            ["行业研究方法论", 92],
+            ["AI 领域 know-how", 88],
+            ["内容产出能力", 90],
+            ["战略与商业判断", 90]
+          ],
+          highlights: [
+            "<strong>JD 要求</strong>能独立完成行业研究报告 → 候选人主笔《思特奇低空经济白皮书》61 页 8 章，并获 CEO 高度评价。",
+            "<strong>JD 要求</strong>熟悉 AI 产业链 → 候选人系统梳理 AI 产业链结构、商业模式与技术演进，持续输出 AI 行业观察。",
+            "<strong>JD 要求</strong>能从 0 到 1 搭建情报体系 → 候选人在思特奇从 0 到 1 搭建电信行业情报体系（多类信源 / 长期跟踪 / 周度速递）。"
+          ],
+          summary:
+            "候选人具备扎实的行业研究方法论、AI 领域系统认知，以及把电信情报体系迁移到 AI 行业研究的明确路径。从研究到产品落地的完整经验是特别加分项。建议补强：AI 行业大厂背景偏少，新行业语境融入预计需要 1–2 个月。"
+        },
+        "ai-pm": {
+          title: "<em>AI 产品经理</em> · 匹配报告",
+          score: 86,
+          verdict: "匹配良好",
+          matrix: [
+            ["AI 产品体系认知", 92],
+            ["产品分类与发布", 95],
+            ["跨部门协作", 88],
+            ["用户与场景视角", 80],
+            ["数据驱动决策", 78]
+          ],
+          highlights: [
+            "<strong>JD 要求</strong>能设计 AI 产品体系 → 候选人主导大量智能体的产品分类、门户规划与发布策略。",
+            "<strong>JD 要求</strong>能策划产品发布 → 候选人承担《AI 产品白皮书》核心章节撰写与发布表达。",
+            "<strong>JD 要求</strong>能把复杂技术翻译成产品语言 → 候选人擅长把研发逻辑「翻译」成客户和销售能理解的产品表达。"
+          ],
+          summary:
+            "候选人在 AI 产品体系化与产品发布运营上有完整一线经验，特别擅长把复杂能力转化为可被客户和销售理解的产品表达。建议补强：toC 产品、用户访谈与定量数据分析经验相对有限，可在面试中重点了解数据敏感度。"
+        },
+        strategist: {
+          title: "<em>战略分析师</em> · 匹配报告",
+          score: 90,
+          verdict: "高度匹配",
+          matrix: [
+            ["战略分析框架", 95],
+            ["行业 / 产业研究", 92],
+            ["商业判断能力", 88],
+            ["信息整合与可视化", 92],
+            ["跨学科与跨语种", 90]
+          ],
+          highlights: [
+            "<strong>JD 要求</strong>掌握 PEST / SWOT / 波特五力等分析框架 → 候选人这些都是日常研究工具。",
+            "<strong>JD 要求</strong>能搭建情报体系 → 候选人从 0 到 1 搭建电信行业情报体系（覆盖政策 / 标准 / 运营商 / 竞品等维度）。",
+            "<strong>JD 要求</strong>能在管理层会议输出 → 候选人具备面向管理层与对外的研究材料与路演输出经验。"
+          ],
+          summary:
+            "候选人具备完整的「战略框架 → 情报体系 → 业务落地」全链路经验，是少见的既能搭框架又能动手执行的复合型研究人才。建议补强：行业聚焦在电信 / 低空 / AI 垂直领域，跨行业切换预计需要 1–2 个月适应期。"
+        }
+      };
+
+      var modal = document.getElementById("jd-modal");
+      if (!modal) return;
+
+      var modalTitle = document.getElementById("jd-modal-dialog-title");
+      var modalScore = document.getElementById("jd-modal-score");
+      var modalVerdict = document.getElementById("jd-modal-verdict");
+      var modalMatrix = document.getElementById("jd-modal-matrix");
+      var modalHighlights = document.getElementById("jd-modal-highlights");
+      var modalSummary = document.getElementById("jd-modal-summary");
+      var jdInput = document.getElementById("jd-input");
+      var jdSubmit = document.getElementById("jd-submit");
+
+      function closeModal() {
+        modal.classList.remove("open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+      }
+
+      function openModal() {
+        modal.classList.add("open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      }
+
+      function showReport(key) {
+        var report = reports[key];
+        if (!report) return;
+
+        modalTitle.innerHTML = report.title;
+        modalScore.textContent = report.score;
+        modalVerdict.textContent = report.verdict;
+
+        var matrixHtml = "";
+        for (var m = 0; m < report.matrix.length; m++) {
+          matrixHtml +=
+            '<div class="jd-matrix-row"><div class="jd-matrix-label">' +
+            report.matrix[m][0] +
+            '</div><div class="jd-matrix-bar"><div class="jd-matrix-bar-fill"></div></div><div class="jd-matrix-score">--</div></div>';
+        }
+        modalMatrix.innerHTML = matrixHtml;
+
+        var hi = "";
+        for (var h = 0; h < report.highlights.length; h++) {
+          hi += "<li>" + report.highlights[h] + "</li>";
+        }
+        modalHighlights.innerHTML = hi;
+        modalSummary.textContent = report.summary;
+
+        openModal();
+
+        setTimeout(function () {
+          var bars = modalMatrix.querySelectorAll(".jd-matrix-bar-fill");
+          var scoreEls = modalMatrix.querySelectorAll(".jd-matrix-score");
+          for (var i = 0; i < report.matrix.length; i++) {
+            (function (idx, score) {
+              bars[idx].style.width = score + "%";
+              var current = 0;
+              var step = Math.max(1, score / 28);
+              var interval = window.setInterval(function () {
+                current += step;
+                if (current >= score) {
+                  current = score;
+                  window.clearInterval(interval);
+                }
+                scoreEls[idx].textContent = String(Math.round(current));
+              }, 25);
+            })(i, report.matrix[i][1]);
+          }
+        }, 120);
+      }
+
+      var closeEls = modal.querySelectorAll("[data-jd-close]");
+      for (var c = 0; c < closeEls.length; c++) {
+        closeEls[c].addEventListener("click", closeModal);
+      }
+
+      var examples = document.querySelectorAll(".jd-example");
+      for (var e = 0; e < examples.length; e++) {
+        examples[e].addEventListener("click", function () {
+          var key = this.getAttribute("data-report");
+          showReport(key);
+        });
+      }
+
+      function handleSubmit() {
+        if (!jdInput) return;
+        var val = jdInput.value.trim();
+        if (!val) {
+          jdInput.focus();
+          return;
+        }
+        var key = "ai-researcher";
+        var lower = val.toLowerCase();
+        if (/产品|pm|product/.test(lower)) key = "ai-pm";
+        else if (/战略|strategy|strategist|分析师/.test(lower)) key = "strategist";
+        else if (/研究|research|industry|analyst|情报|市场/.test(lower)) key = "ai-researcher";
+        showReport(key);
+      }
+
+      if (jdSubmit) jdSubmit.addEventListener("click", handleSubmit);
+      if (jdInput) {
+        jdInput.addEventListener("keydown", function (ev) {
+          if (ev.key === "Enter") handleSubmit();
+        });
+      }
+
+      document.addEventListener("keydown", function (ev) {
+        if (ev.key === "Escape" && modal.classList.contains("open")) closeModal();
+      });
+    })();
+  </script>
+</body>
+</html>
