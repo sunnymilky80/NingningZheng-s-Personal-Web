@@ -1487,152 +1487,116 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* ============================================
-   §3.10 Writings · 公开写作
+   §3.5 Featured Writing · 主打文章（设计系统 v2.0 §3.5 + C9）
 ============================================ */
-.writings {
+.featured-writing {
   max-width: 1200px;
   margin: 0 auto;
-  padding: clamp(56px, 7vh, 88px) clamp(24px, 4vw, 48px) clamp(64px, 8vh, 96px);
+  padding: clamp(64px, 8vh, 96px) clamp(24px, 4vw, 48px);
   position: relative;
   z-index: 1;
   scroll-margin-top: 96px;
 }
 
-.writings-header {
-  margin-bottom: clamp(32px, 4vh, 44px);
-  max-width: 720px;
+.featured-writing-inner {
+  max-width: 880px;
+  margin: 0 auto;
 }
 
-.writings-lede {
-  margin-top: 16px;
-  font-size: 16px;
-  line-height: 1.72;
-  color: var(--muted);
-  max-width: 680px;
+.fw-card {
+  margin-top: 28px;
+  padding: 48px;
+  background: var(--bg-paper);
+  border-radius: var(--r-card-lg);
+  box-shadow: var(--shadow-md);
+  transition: transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 200ms ease;
 }
 
-.writings-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+.fw-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
 }
 
-.writings-item {
-  border-top: 1px solid var(--line);
-}
-
-.writings-item:last-child {
-  border-bottom: 1px solid var(--line);
-}
-
-.writings-link {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 12px 20px;
-  align-items: baseline;
-  padding: clamp(18px, 2.2vh, 24px) 4px;
-  text-decoration: none;
-  color: inherit;
-  border-radius: 12px;
-  margin: 0 -4px;
-  transition: background 180ms ease, box-shadow 180ms ease;
-}
-
-.writings-link:hover {
-  background: rgba(93, 112, 82, 0.06);
-  box-shadow: 0 12px 32px rgba(31, 37, 34, 0.04);
-}
-
-.writings-main {
-  min-width: 0;
-}
-
-.writings-meta {
-  display: flex;
-  flex-wrap: wrap;
+/* C9：分类标签（胶囊，与 §3.2 关键词 tag 系出同门） */
+.fw-pill {
+  display: inline-flex;
   align-items: center;
-  gap: 8px 12px;
-  margin-bottom: 8px;
-}
-
-.writings-channel {
-  font-family: var(--font-body);
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--rust);
-}
-
-.writings-date {
+  padding: 6px 14px;
   font-family: var(--font-body);
   font-size: 12px;
-  font-weight: 500;
-  color: var(--muted);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--moss);
+  background: rgba(93, 112, 82, 0.1);
+  border-radius: var(--r-pill);
 }
 
-.writings-title {
-  margin: 0;
+/* Card h3：§1.2 阶梯「20–22px · display · 600」 */
+.fw-title {
+  margin: 18px 0 0;
   font-family: var(--font-display);
-  font-size: clamp(17px, 1.6vw, 20px);
+  font-size: clamp(20px, 1.65vw, 22px);
   font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.35;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
   color: var(--ink);
 }
 
-.writings-link:hover .writings-title {
-  color: var(--moss-deep);
+/* C9：日期 + 阅读时间 + 体裁说明 · Small 13px */
+.fw-meta {
+  margin: 12px 0 0;
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--muted);
 }
 
-.writings-excerpt {
-  margin: 8px 0 0;
+.fw-takeaway {
+  margin: 24px 0 0;
+  padding: 18px 20px 20px 22px;
+  border-left: 3px solid var(--moss);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  background: rgba(93, 112, 82, 0.06);
+}
+
+.fw-takeaway p {
+  margin: 0;
   font-family: var(--font-body);
-  font-size: 14px;
-  line-height: 1.65;
-  color: rgba(31, 37, 34, 0.68);
+  font-size: 15px;
+  line-height: 1.7;
+  font-weight: 400;
+  color: rgba(31, 37, 34, 0.85);
+}
+
+.fw-footnote {
+  margin-top: 24px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
   max-width: 52em;
 }
 
-.writings-arrow {
-  font-family: var(--font-body);
-  font-size: 18px;
-  font-weight: 500;
-  color: rgba(193, 140, 93, 0.75);
-  line-height: 1;
-  flex-shrink: 0;
-  align-self: center;
-  transition: transform 180ms ease, color 180ms ease;
-}
-
-.writings-link:hover .writings-arrow {
-  transform: translateX(3px);
+.fw-footnote a {
   color: var(--moss-deep);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
-.writings-static {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 12px;
-  padding: clamp(18px, 2.2vh, 24px) 4px;
-  margin: 0 -4px;
-  border-radius: 12px;
+.fw-footnote a:hover {
+  color: var(--ink);
 }
 
-.writings-static .writings-title {
-  color: rgba(31, 37, 34, 0.88);
-}
-
-.writings-note {
+.fw-cta {
   margin-top: 28px;
-  font-family: var(--font-body);
-  font-size: 13px;
-  line-height: 1.65;
-  color: var(--muted);
-  max-width: 640px;
+}
+
+@media (max-width: 640px) {
+  .fw-card {
+    padding: 28px 22px;
+  }
 }
 
 .site-about-sep {
@@ -1702,24 +1666,6 @@ a { text-decoration: none; color: inherit; }
   color: var(--ink);
 }
 
-@media (max-width: 560px) {
-  .writings-link {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
-  }
-
-  .writings-arrow {
-    justify-self: end;
-    grid-row: 1;
-    grid-column: 1;
-    align-self: start;
-    margin-top: 2px;
-  }
-}
-
-/* ============================================
-   AI JD Match · Hero 内嵌 demo
-============================================ */
 .jd-match {
   margin-top: 0;
   padding: 16px 22px 18px;
@@ -2216,7 +2162,7 @@ a { text-decoration: none; color: inherit; }
       <a href="#research" class="nav-link">Research</a>
       <a href="#works" class="nav-link">Works</a>
       <a href="#toolkit" class="nav-link">AI Workflow</a>
-      <a href="#writings" class="nav-link">Writings</a>
+      <a href="#writing" class="nav-link">Writings</a>
       <a href="#about" class="nav-link">About</a>
     </div>
   </nav>
@@ -2655,56 +2601,21 @@ a { text-decoration: none; color: inherit; }
   </div>
 </section>
 
-<!-- §3.10 Writings · 公开写作 -->
-<section class="writings" id="writings" aria-labelledby="writings-heading">
-  <div class="writings-header">
-    <div class="eyebrow">WRITINGS · 写作与观点</div>
-    <h2 class="section-h2" id="writings-heading">公开写作与<em>行业笔记</em></h2>
-    <p class="writings-lede">把研究里反复出现的判断，整理成可阅读、可引用的长文与笔记；覆盖 AI 商业化、Coding Agent、产品化路径等主题。外链与日期会随发布持续更新。</p>
-  </div>
-
-  <ul class="writings-list">
-    <li class="writings-item">
-      <a class="writings-link" href="./writing-ai-coding-agent.html">
-        <div class="writings-main">
-          <div class="writings-meta">
-            <span class="writings-channel">站内长文</span>
-            <span class="writings-date">独立页面</span>
-          </div>
-          <h3 class="writings-title">为什么 AI Coding Agent 是 Agent 商业化的第一站？</h3>
-          <p class="writings-excerpt">从市场支出、开发者采用、SWE-bench、GitHub Copilot、OpenAI Codex、Claude Code 与商业模式切入，说明为何 Coding 场景会成为 Agent 商业化的第一站。</p>
-        </div>
-        <span class="writings-arrow" aria-hidden="true">→</span>
-      </a>
-    </li>
-    <li class="writings-item">
-      <a class="writings-link" href="https://www.xiaohongshu.com/user/profile/5b2bb04b4eacab34445c76e1" target="_blank" rel="noopener noreferrer">
-        <div class="writings-main">
-          <div class="writings-meta">
-            <span class="writings-channel">小红书</span>
-            <span class="writings-date">专栏入口</span>
-          </div>
-          <h3 class="writings-title">100 个 AI 使用场景 · 系列笔记</h3>
-          <p class="writings-excerpt">每个场景一次实测 + 复盘：把模型能力翻译成「普通人能不能用、值不值得用」的判断框架。</p>
-        </div>
-        <span class="writings-arrow" aria-hidden="true">↗</span>
-      </a>
-    </li>
-    <li class="writings-item">
-      <div class="writings-static">
-        <div class="writings-main">
-          <div class="writings-meta">
-            <span class="writings-channel">微信公众号</span>
-            <span class="writings-date">近期更新</span>
-          </div>
-          <h3 class="writings-title">行业研究与产品化随笔</h3>
-          <p class="writings-excerpt">公众号长文外链上架后，将在此条补齐标题、摘要与链接；当前占位便于你先确认版式与信息层级。</p>
-        </div>
+<!-- §3.5 Featured Writing · 主打文章（设计系统 v2.0 §3.5 · v2.1 无区块 h2） -->
+<section class="featured-writing" id="writing" aria-label="Featured Writing">
+  <div class="featured-writing-inner">
+    <div class="eyebrow">FEATURED WRITING · 主打文章</div>
+    <article class="fw-card">
+      <span class="fw-pill">AI 行业判断 · 商业化分析</span>
+      <h3 class="fw-title">《为什么 AI Coding Agent 是 Agent 商业化的第一站？》</h3>
+      <p class="fw-meta">2026-05-14 · 约 12 分钟阅读 · 含玩家对比 + 商业模式拆解</p>
+      <div class="fw-takeaway">
+        <p>Agent 概念很热，但多数场景仍面临 ROI 不清晰、流程难闭环、评测困难等问题。Coding 是少数同时具备高频、刚需、付费意愿强、结果可评测、工作流闭环清晰的场景，因此更可能成为 Agent 商业化的第一站。</p>
       </div>
-    </li>
-  </ul>
-
-  <p class="writings-note">若你希望按「AI 商业化 / 智能体 / 低空与电信」分栏展示，或要接入 RSS / Substack 等第二信源，可以下一步再改结构。</p>
+      <a class="btn btn-secondary fw-cta" href="./writing-ai-coding-agent.html">继续阅读全文 →</a>
+    </article>
+    <p class="fw-footnote">更多短内容入口见页面底部 <a href="#about">Contact</a>。</p>
+  </div>
 </section>
 
 <!-- About · Contact -->
@@ -2768,7 +2679,7 @@ a { text-decoration: none; color: inherit; }
   </div>
 </div>
 
-<div class="proto-banner">v2.4 PROTOTYPE · Hero + Research + Stats + Works + AI Workflow + Writings + About / JD Match</div>
+<div class="proto-banner">v2.4 PROTOTYPE · Hero + Research + Stats + Works + AI Workflow + Featured Writing + About / JD Match</div>
 
 <script>
 // 全局光斑跟随
