@@ -38,6 +38,7 @@
   /* ===== Fonts ===== */
   --font-display: "Fraunces", "Noto Serif SC", "Songti SC", serif;
   --font-body: "Inter", "PingFang SC", -apple-system, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -859,6 +860,492 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* ============================================
+   §3.9 我的 AI 工作流 · Skills + 工作流图 + Vibe Coding
+============================================ */
+.toolkit {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(64px, 8vh, 100px) clamp(24px, 4vw, 48px) clamp(72px, 9vh, 112px);
+  position: relative;
+  z-index: 1;
+  scroll-margin-top: 96px;
+}
+
+.toolkit-header {
+  margin-bottom: clamp(40px, 5vh, 56px);
+  max-width: 760px;
+}
+
+.toolkit-lede {
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.72;
+  color: var(--muted);
+  max-width: 660px;
+}
+
+.toolkit-block {
+  margin-bottom: clamp(40px, 5vh, 64px);
+}
+
+.toolkit-block:last-child {
+  margin-bottom: 0;
+}
+
+.toolkit-block-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.toolkit-block-title {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 1.8vw, 22px);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+}
+
+.toolkit-block-meta {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+/* ---------- §3.9.a · 三列并排类目卡（subgrid 同步每排 skill 行高 · 小屏单列） ---------- */
+.category-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 18px;
+  width: 100%;
+  align-items: stretch;
+}
+
+.category-card {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  /* 垂直方向约 ×5/6，整体卡片高度缩短约六分之一 */
+  padding: 22px 18px 18px;
+  background: var(--bg-paper);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.category-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--rust);
+  opacity: 0;
+  transition: opacity 220ms;
+}
+
+.category-card[data-group="thinking"]::before { background: var(--moss); }
+.category-card[data-group="engineering"]::before { background: var(--moss-deep); }
+
+.category-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(93, 112, 82, 0.28);
+}
+
+.category-card:hover::before {
+  opacity: 1;
+}
+
+.category-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid var(--line);
+}
+
+.category-title::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--rust);
+  flex-shrink: 0;
+}
+
+.category-card[data-group="thinking"] .category-title::before { background: var(--moss); }
+.category-card[data-group="engineering"] .category-title::before { background: var(--moss-deep); }
+
+.category-skills {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 1px;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.skill-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 5px;
+  padding: 10px 7px;
+  margin: 0 -7px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: background 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+  position: relative;
+  flex: 0 0 auto;
+  min-height: 0;
+  box-sizing: border-box;
+}
+
+.skill-item::after {
+  content: "↗";
+  position: absolute;
+  top: 11px;
+  right: 7px;
+  font-size: 12px;
+  color: var(--muted);
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition: all 180ms ease;
+}
+
+.skill-item:hover {
+  background: rgba(93, 112, 82, 0.07);
+  transform: translateX(2px) translateY(-1px);
+  box-shadow: 0 10px 26px rgba(31, 37, 34, 0.06);
+}
+
+.skill-item:hover .skill-item-name {
+  background: rgba(93, 112, 82, 0.14);
+  transform: translateY(-1px);
+}
+
+.skill-item:hover::after {
+  opacity: 1;
+  transform: translate(0, 0);
+  color: var(--moss-deep);
+}
+
+.skill-item:focus-visible {
+  outline: 2px solid var(--moss);
+  outline-offset: 2px;
+}
+
+.skill-item-name {
+  display: inline-flex;
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--moss-deep);
+  background: rgba(93, 112, 82, 0.08);
+  padding: 2px 7px;
+  border-radius: var(--r-sm);
+  letter-spacing: 0;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.skill-item-desc {
+  font-family: var(--font-body);
+  font-size: 12.25px;
+  line-height: 1.5;
+  color: rgba(31, 37, 34, 0.72);
+  padding-right: 14px;
+  flex: 0 1 auto;
+}
+
+.skill-item-desc strong { color: var(--ink); font-weight: 600; }
+.skill-item-desc em {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--moss-deep);
+}
+
+/* 桌面：三列共享 4 行轨道，每排 skill 整行等高；名称区统一 min-height 避免换行参差不齐 */
+@supports (grid-template-rows: subgrid) {
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(4, auto);
+    column-gap: 18px;
+    row-gap: 7px;
+    align-items: stretch;
+  }
+
+  .category-card {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: 1 / span 4;
+    flex: unset;
+  }
+
+  .category-card:nth-child(1) { grid-column: 1; }
+  .category-card:nth-child(2) { grid-column: 2; }
+  .category-card:nth-child(3) { grid-column: 3; }
+
+  .category-skills {
+    display: contents;
+  }
+
+  .skill-item {
+    align-self: stretch;
+    min-height: 0;
+  }
+
+  .skill-item-desc {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  .skill-item-name {
+    min-height: 2.3rem;
+    align-items: center;
+    line-height: 1.32;
+    word-break: break-word;
+  }
+}
+
+@media (max-width: 640px) {
+  .category-grid {
+    display: flex !important;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 18px;
+  }
+
+  .category-card {
+    display: flex !important;
+    flex-direction: column;
+    flex: 1 1 auto;
+    width: 100%;
+    grid-column: unset !important;
+    grid-row: unset !important;
+  }
+
+  .category-skills {
+    display: flex !important;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .skill-item-desc {
+    flex: 0 1 auto !important;
+  }
+
+  .skill-item-name {
+    min-height: 0 !important;
+  }
+}
+/* ---------- §3.9.b · AI 工作流（2 张图占位） ---------- */
+.workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.workflow-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 28px;
+  background: linear-gradient(135deg, rgba(255, 253, 247, 1) 0%, rgba(245, 240, 227, 0.5) 100%);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  transition: all 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.workflow-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(193, 140, 93, 0.32);
+  box-shadow: var(--shadow-md);
+}
+
+.workflow-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.workflow-card-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+}
+
+.workflow-card-sub {
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--rust);
+}
+
+.workflow-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 14px;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent 0,
+      transparent 14px,
+      rgba(93, 112, 82, 0.06) 14px,
+      rgba(93, 112, 82, 0.06) 15px
+    ),
+    linear-gradient(135deg, rgba(245, 240, 227, 0.8), rgba(255, 253, 247, 0.95));
+  border: 1px dashed rgba(193, 140, 93, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--muted);
+  text-align: center;
+  padding: 16px;
+}
+
+.workflow-image-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(193, 140, 93, 0.85);
+}
+
+.workflow-image-hint {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 280px;
+}
+
+.workflow-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.workflow-tool {
+  display: inline-flex;
+  padding: 5px 11px;
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 500;
+  color: rgba(31, 37, 34, 0.72);
+  background: rgba(207, 197, 183, 0.42);
+  border-radius: var(--r-pill);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 720px) {
+  .workflow-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- §3.9.c · Vibe Coding 小项目（3 张卡占位） ---------- */
+.vibe-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.vibe-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 22px;
+  background: var(--bg-paper);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  transition: all 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.vibe-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(93, 112, 82, 0.28);
+}
+
+.vibe-preview {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 12px;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      transparent 0,
+      transparent 14px,
+      rgba(93, 112, 82, 0.05) 14px,
+      rgba(93, 112, 82, 0.05) 15px
+    ),
+    linear-gradient(135deg, rgba(245, 240, 227, 0.7), rgba(255, 253, 247, 0.92));
+  border: 1px dashed rgba(93, 112, 82, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.vibe-card-name {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.vibe-card-desc {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  .vibe-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .vibe-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================
    AI JD Match · Hero 内嵌 demo
 ============================================ */
 .jd-match {
@@ -1356,7 +1843,7 @@ a { text-decoration: none; color: inherit; }
       <a href="#hero" class="nav-link active">Home</a>
       <a href="#research" class="nav-link">Research</a>
       <a href="#works" class="nav-link">Works</a>
-      <a href="#writings" class="nav-link">Writings</a>
+      <a href="#toolkit" class="nav-link">AI Workflow</a>
       <a href="#about" class="nav-link">About</a>
     </div>
   </nav>
@@ -1392,7 +1879,7 @@ a { text-decoration: none; color: inherit; }
 
     <div class="hero-ctas fade-up delay-5">
       <a href="#works" class="btn btn-primary">查看代表作品 →</a>
-      <a href="#writings" class="btn btn-secondary">阅读我的 AI 行业分析</a>
+      <a href="#toolkit" class="btn btn-secondary">看看我的 AI 工作流</a>
       <a href="#contact" class="btn btn-tertiary">联系我</a>
     </div>
 
@@ -1574,6 +2061,156 @@ a { text-decoration: none; color: inherit; }
   </article>
 </section>
 
+<!-- §3.9 我的 AI 工作流 · Skills + 工作流图 + Vibe Coding 项目 -->
+<section class="toolkit" id="toolkit" aria-labelledby="toolkit-heading">
+  <div class="toolkit-header">
+    <div class="eyebrow">AI Workflow · AI 工作流</div>
+    <h2 class="section-h2" id="toolkit-heading">我的<em>AI 工作流</em></h2>
+    <p class="toolkit-lede">用 AI 重构从信息输入、逻辑推演到前端落地的全链路工作流。</p>
+  </div>
+
+  <!-- §3.9.a · 三列横排类目卡 -->
+  <div class="toolkit-block">
+    <div class="toolkit-block-head">
+      <h3 class="toolkit-block-title">AI 技术栈 · Claude Code skills</h3>
+      <span class="toolkit-block-meta">点击 skill 链接跳转安装 / 仓库</span>
+    </div>
+    <div class="category-grid">
+
+      <article class="category-card" data-group="research">
+        <h4 class="category-title">研究 · 信息</h4>
+        <div class="category-skills">
+          <a class="skill-item" href="https://aihot.virxact.com/agent" target="_blank" rel="noopener noreferrer">
+            <code class="skill-item-name">aihot</code>
+            <p class="skill-item-desc">每天追 AI 圈最新动态——<strong>OpenAI / Anthropic / Google</strong> 等公司发布、新模型、新产品。</p>
+          </a>
+          <a class="skill-item" href="https://github.com/zarazhangrui/follow-builders" target="_blank" rel="noopener noreferrer">
+            <code class="skill-item-name">follow-builders</code>
+            <p class="skill-item-desc">配合 <strong>Obsidian + Codex</strong> 工作流：每天定时抓 AI builders 的 X / YouTube 内容，再用 Codex 做深度分析。</p>
+          </a>
+          <a class="skill-item" href="https://github.com/KKKKhazix/khazix-skills/tree/main/khazix-writer" target="_blank" rel="noopener noreferrer">
+            <code class="skill-item-name">khazix-writer</code>
+            <p class="skill-item-desc">适用需要撰写公众号文章、写稿子、续写文章、根据素材产出长文时使用。</p>
+          </a>
+        </div>
+      </article>
+
+      <article class="category-card" data-group="thinking">
+        <h4 class="category-title">思考 · 表达</h4>
+        <div class="category-skills">
+          <a class="skill-item" href="https://claude.com/plugins/superpowers" target="_blank" rel="noopener noreferrer">
+            <code class="skill-item-name">using-superpowers</code>
+            <p class="skill-item-desc">复杂推理、决策、跨技能协作的入口；Superpowers 插件自带的一键纪律。</p>
+          </a>
+          <a class="skill-item" href="https://github.com/sunnymilky80/claude-skills-open" target="_blank" rel="noopener noreferrer">
+            <code class="skill-item-name">spec-generator</code>
+            <p class="skill-item-desc">日常 PRD 都用它：<strong>7 阶段流水线</strong>，product brief → PRD → architecture → epics → issues。</p>
+          </a>
+          <a class="skill-item" href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/frontend-design" target="_blank" rel="noopener noreferrer">
+            <code class="skill-item-name">frontend-design</code>
+            <p class="skill-item-desc"><em>Vibe Coding</em> 实现前端——这个个人网站就是产物。</p>
+          </a>
+        </div>
+      </article>
+
+      <article class="category-card" data-group="engineering">
+        <h4 class="category-title">AI 工程化</h4>
+        <div class="category-skills">
+          <a class="skill-item" href="https://github.com/sunnymilky80/claude-skills-open" target="_blank" rel="noopener noreferrer">
+            <code class="skill-item-name">ccw-chain</code>
+            <p class="skill-item-desc"><strong>CCW 框架</strong>——Chain-based workflow orchestrator，调度 <em>Codex + Gemini + Claude</em> 三智能体协同。</p>
+          </a>
+          <a class="skill-item" href="https://github.com/anthropics/skills/tree/main/skills/skill-creator" target="_blank" rel="noopener noreferrer">
+            <code class="skill-item-name">skill-creator</code>
+            <p class="skill-item-desc">把「一次性 prompt」沉淀成可复用 Skill：创建、迭代、评测（Anthropic <code>skills</code> 仓库路径）。</p>
+          </a>
+          <a class="skill-item" href="https://github.com/derek-larson14/obsidian-claude-sidebar" target="_blank" rel="noopener noreferrer">
+            <code class="skill-item-name">obsidian-claude-sidebar</code>
+            <p class="skill-item-desc">在 Obsidian 侧边栏中运行 Claude 代码，提升知识管理效率。</p>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- §3.9.b · 核心 AI 工作流（面向招聘 · 图示待补） -->
+  <div class="toolkit-block">
+    <div class="toolkit-block-head">
+      <h3 class="toolkit-block-title">核心 AI 工作流</h3>
+      <span class="toolkit-block-meta">受众：招聘方 · 案例 01 个人网站 · 02 近期公众号长文 · 工具保留英文原名</span>
+    </div>
+    <div class="workflow-grid">
+
+      <article class="workflow-card">
+        <div class="workflow-card-head">
+          <h4 class="workflow-card-title">Vibe Coding 项目工作流</h4>
+          <span class="workflow-card-sub">Case 01 · 个人网站</span>
+        </div>
+        <div class="workflow-image">
+          <span class="workflow-image-label">Workflow Diagram · 待导出为图</span>
+          <span class="workflow-image-hint">给招聘方看的「可还原路径」：Brief → spec-generator → frontend-design → Cursor / Claude Code → 可点击原型（本页 v2.4 站点）。图中工具标签请用英文原名。</span>
+        </div>
+        <div class="workflow-tools">
+          <span class="workflow-tool">spec-generator</span>
+          <span class="workflow-tool">frontend-design</span>
+          <span class="workflow-tool">Cursor</span>
+          <span class="workflow-tool">Claude Code</span>
+        </div>
+      </article>
+
+      <article class="workflow-card">
+        <div class="workflow-card-head">
+          <h4 class="workflow-card-title">研究行业工作流</h4>
+          <span class="workflow-card-sub">Case 02 · 公众号新文</span>
+        </div>
+        <div class="workflow-image">
+          <span class="workflow-image-label">Workflow Diagram · 待导出为图</span>
+          <span class="workflow-image-hint">给招聘方看的「从信号到成稿」：aihot / follow-builders → Obsidian → Gemini / Codex → khazix-writer 定稿（替换为你最新一篇公众号的标题或首屏截图）。图中工具标签请用英文原名。</span>
+        </div>
+        <div class="workflow-tools">
+          <span class="workflow-tool">aihot</span>
+          <span class="workflow-tool">follow-builders</span>
+          <span class="workflow-tool">Obsidian</span>
+          <span class="workflow-tool">Gemini</span>
+          <span class="workflow-tool">Codex</span>
+          <span class="workflow-tool">khazix-writer</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- §3.9.c · Vibe Coding 小项目（占位卡） -->
+  <div class="toolkit-block">
+    <div class="toolkit-block-head">
+      <h3 class="toolkit-block-title">Vibe Coding 小项目</h3>
+      <span class="toolkit-block-meta">原型录屏 / 短视频 · 待补素材</span>
+    </div>
+    <div class="vibe-grid">
+
+      <article class="vibe-card">
+        <div class="vibe-preview">原型 / 视频 · 占位</div>
+        <h4 class="vibe-card-name">个人网站 v0</h4>
+        <p class="vibe-card-desc">你正在看的这个网站，完全用 Vibe Coding 搭建。</p>
+      </article>
+
+      <article class="vibe-card">
+        <div class="vibe-preview">原型 / 视频 · 占位</div>
+        <h4 class="vibe-card-name">AI 信息聚合器</h4>
+        <p class="vibe-card-desc">把电信情报体系方法迁移到 AI 行业的自动化追踪工具（搭建中）。</p>
+      </article>
+
+      <article class="vibe-card">
+        <div class="vibe-preview">原型 / 视频 · 占位</div>
+        <h4 class="vibe-card-name">100 个 AI 场景</h4>
+        <p class="vibe-card-desc">小红书 AI 使用场景探索系列，每个场景实测 + 复盘。</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
 <!-- JD Match · Modal -->
 <div class="jd-modal" id="jdModal" aria-hidden="true">
   <div class="jd-modal-backdrop" data-close></div>
@@ -1615,7 +2252,7 @@ a { text-decoration: none; color: inherit; }
   </div>
 </div>
 
-<div class="proto-banner">v2.4 PROTOTYPE · Hero + Research + Stats + Selected Works (§3.4) + JD Match</div>
+<div class="proto-banner">v2.4 PROTOTYPE · Hero + Research + Stats + Works + AI Workflow（招聘向 · Skills 三列 + 2 Workflows + Vibe Projects）+ JD Match</div>
 
 <script>
 // 全局光斑跟随
