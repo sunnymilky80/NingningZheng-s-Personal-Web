@@ -1218,6 +1218,7 @@ a { text-decoration: none; color: inherit; }
   background: linear-gradient(160deg, rgba(255, 253, 247, 0.96) 0%, rgba(245, 240, 227, 0.55) 100%);
   padding: 12px 12px 10px;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .workflow-diagram--vibe {
@@ -1289,6 +1290,7 @@ a { text-decoration: none; color: inherit; }
   padding-bottom: 4px;
   scrollbar-width: thin;
   -webkit-overflow-scrolling: touch;
+  max-width: 100%;
 }
 
 .workflow-stage {
@@ -1335,6 +1337,7 @@ a { text-decoration: none; color: inherit; }
   align-items: center;
   gap: 4px;
   margin-top: auto;
+  min-width: 0;
 }
 
 .workflow-stage-note {
@@ -1355,7 +1358,10 @@ a { text-decoration: none; color: inherit; }
   background: rgba(93, 112, 82, 0.1);
   border-radius: 5px;
   letter-spacing: 0;
-  white-space: nowrap;
+  white-space: normal;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .wf-tool-pair {
@@ -1499,81 +1505,143 @@ a { text-decoration: none; color: inherit; }
 }
 
 .featured-writing-inner {
-  max-width: 880px;
+  max-width: 1080px;
   margin: 0 auto;
 }
 
-.fw-card {
-  margin-top: 28px;
-  padding: 48px;
-  background: var(--bg-paper);
-  border-radius: var(--r-card-lg);
-  box-shadow: var(--shadow-md);
-  transition: transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 200ms ease;
+.fw-header {
+  margin-bottom: clamp(36px, 4.5vh, 48px);
+  max-width: 760px;
 }
 
-.fw-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-hover);
+.fw-lede {
+  margin-top: 16px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.72;
+  color: var(--muted);
+  max-width: 680px;
 }
 
-/* C9：分类标签（胶囊，与 §3.2 关键词 tag 系出同门） */
-.fw-pill {
+.fw-list {
+  border-top: 1px solid var(--line-strong);
+  margin-top: clamp(20px, 3vh, 28px);
+}
+
+.fw-item {
+  display: grid;
+  grid-template-columns: minmax(170px, 0.22fr) minmax(0, 1fr) auto;
+  gap: clamp(20px, 3vw, 48px);
+  padding: 28px 4px 30px;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+  transition: all 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  align-items: center;
+  position: relative;
+}
+
+.fw-item:hover {
+  background: linear-gradient(90deg, rgba(93, 112, 82, 0.05), transparent 75%);
+  padding-left: 16px;
+}
+
+.fw-item-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-self: center;
+}
+
+.fw-channel {
   display: inline-flex;
   align-items: center;
-  padding: 6px 14px;
+  gap: 8px;
   font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: var(--moss);
-  background: rgba(93, 112, 82, 0.1);
-  border-radius: var(--r-pill);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rust);
 }
 
-/* Card h3：§1.2 阶梯「20–22px · display · 600」 */
-.fw-title {
-  margin: 18px 0 0;
+.fw-channel::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: currentColor;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.fw-item[data-channel="redbook"] .fw-channel { color: #c4576e; }
+.fw-item[data-channel="wechat"] .fw-channel { color: var(--moss); }
+
+.fw-status {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.01em;
+}
+
+.fw-item-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.fw-item-title {
+  margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(20px, 1.65vw, 22px);
+  font-size: clamp(20px, 2vw, 26px);
   font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: -0.015em;
+  line-height: 1.32;
+  letter-spacing: -0.01em;
   color: var(--ink);
 }
 
-/* C9：日期 + 阅读时间 + 体裁说明 · Small 13px */
-.fw-meta {
-  margin: 12px 0 0;
-  font-family: var(--font-body);
-  font-size: 13px;
-  line-height: 1.5;
-  font-weight: 400;
-  color: var(--muted);
+.fw-item-title em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--moss-deep);
 }
 
-.fw-takeaway {
-  margin: 24px 0 0;
-  padding: 18px 20px 20px 22px;
-  border-left: 3px solid var(--moss);
-  border-radius: 0 var(--r-sm) var(--r-sm) 0;
-  background: rgba(93, 112, 82, 0.06);
-}
-
-.fw-takeaway p {
+.fw-item-desc {
   margin: 0;
   font-family: var(--font-body);
-  font-size: 15px;
-  line-height: 1.7;
+  font-size: 14.5px;
+  line-height: 1.68;
+  color: var(--muted);
+  max-width: 760px;
+}
+
+.fw-arrow {
+  font-family: var(--font-display);
+  font-size: 26px;
   font-weight: 400;
-  color: rgba(31, 37, 34, 0.85);
+  color: var(--moss);
+  transition: all 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  flex-shrink: 0;
+  align-self: center;
+  line-height: 1;
+}
+
+.fw-item:hover .fw-arrow {
+  color: var(--moss-deep);
+  transform: translateX(6px);
+}
+
+.fw-item[data-external="true"]:hover .fw-arrow {
+  transform: translate(4px, -4px);
 }
 
 .fw-footnote {
-  margin-top: 24px;
+  margin-top: clamp(28px, 3.5vh, 36px);
   font-family: var(--font-body);
   font-size: 13px;
-  line-height: 1.6;
+  line-height: 1.65;
   color: var(--muted);
   max-width: 52em;
 }
@@ -1589,81 +1657,201 @@ a { text-decoration: none; color: inherit; }
   color: var(--ink);
 }
 
-.fw-cta {
-  margin-top: 28px;
-}
-
-@media (max-width: 640px) {
-  .fw-card {
-    padding: 28px 22px;
+@media (max-width: 768px) {
+  .fw-item {
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    padding: 22px 4px 24px;
+  }
+  .fw-item-meta {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    gap: 14px;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  .fw-item:hover {
+    padding-left: 10px;
   }
 }
 
-.site-about-sep {
-  color: var(--line);
-  user-select: none;
-}
-
-/* About + Contact（导航 About / 按钮 #contact） */
-.site-about {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: clamp(40px, 5vh, 56px) clamp(24px, 4vw, 48px) clamp(72px, 9vh, 100px);
+/* §3.11 Contact · 全宽深色版（v2.4.7 · 显化绿调，深森林 + 暖橘光晕） */
+.site-contact {
+  position: relative;
+  width: 100%;
+  margin-top: clamp(40px, 5vh, 64px);
+  padding: clamp(40px, 6vh, 64px) 0 clamp(22px, 3.5vh, 36px);
+  background:
+    radial-gradient(ellipse 110% 80% at 92% -5%, rgba(212, 165, 116, 0.28), transparent 55%),
+    radial-gradient(ellipse 65% 55% at 8% 110%, rgba(93, 112, 82, 0.20), transparent 65%),
+    linear-gradient(160deg, #2e3d2c 0%, #263626 55%, #1f2c1e 100%);
+  color: rgba(255, 253, 247, 0.92);
+  overflow: hidden;
   scroll-margin-top: 96px;
 }
 
-.site-about-inner {
-  padding: clamp(28px, 3.5vh, 40px) clamp(22px, 3vw, 36px);
-  border-radius: 22px;
-  border: 1px solid var(--line);
-  background: linear-gradient(135deg, rgba(255, 253, 247, 0.96) 0%, rgba(245, 240, 227, 0.45) 100%);
+.site-contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 4vw, 56px);
 }
 
-.site-about-eyebrow {
+.site-contact-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
   font-family: var(--font-body);
   font-size: 10.5px;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--rust);
-  margin-bottom: 10px;
+  color: rgba(212, 165, 116, 1);
+  margin-bottom: 12px;
 }
 
-.site-about-title {
+.site-contact-eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: rgba(212, 165, 116, 1);
+}
+
+.site-contact-title {
   margin: 0 0 12px;
   font-family: var(--font-display);
-  font-size: clamp(20px, 2vw, 24px);
+  font-size: clamp(24px, 3vw, 36px);
   font-weight: 600;
-  letter-spacing: -0.02em;
-  color: var(--ink);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: rgba(255, 253, 247, 0.96);
 }
 
-.site-about-lede {
-  margin: 0 0 22px;
-  font-size: 15px;
-  line-height: 1.7;
-  color: rgba(31, 37, 34, 0.72);
-  max-width: 52em;
+.site-contact-title em {
+  font-style: italic;
+  font-weight: 500;
+  color: rgba(212, 165, 116, 1);
 }
 
-.site-about-links {
+.site-contact-lede {
+  margin: 0 0 24px;
+  font-family: var(--font-body);
+  font-size: clamp(13.5px, 1.4vw, 15px);
+  line-height: 1.65;
+  color: rgba(255, 253, 247, 0.70);
+  max-width: 580px;
+}
+
+.site-contact-lede em {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  color: rgba(212, 165, 116, 1);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 12px 14px;
+  background: rgba(255, 253, 247, 0.04);
+  border: 1px solid rgba(255, 253, 247, 0.10);
+  border-radius: 10px;
+  text-decoration: none;
+  color: rgba(255, 253, 247, 0.90);
+  transition: all 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  min-width: 0;
+}
+
+.contact-card:hover {
+  background: rgba(255, 253, 247, 0.08);
+  border-color: rgba(212, 165, 116, 0.45);
+  transform: translateY(-2px);
+}
+
+.contact-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 7px;
+  background: rgba(212, 165, 116, 0.14);
+  color: rgba(212, 165, 116, 1);
+}
+
+.contact-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.contact-text {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 968px) {
+  .contact-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contact-social {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px 14px;
   align-items: center;
-}
-
-.site-about-links a {
+  gap: 10px;
+  margin-bottom: 18px;
   font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--moss-deep);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  font-size: 12px;
+  color: rgba(255, 253, 247, 0.50);
 }
 
-.site-about-links a:hover {
-  color: var(--ink);
+.contact-social a {
+  color: rgba(255, 253, 247, 0.88);
+  text-decoration: none;
+  font-weight: 500;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(255, 253, 247, 0.25);
+  transition: all 200ms;
+}
+
+.contact-social a:hover {
+  color: rgba(212, 165, 116, 1);
+  border-color: rgba(212, 165, 116, 1);
+}
+
+.contact-social .dot {
+  color: rgba(255, 253, 247, 0.30);
+}
+
+.site-contact-footer {
+  margin: 0;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 253, 247, 0.12);
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+  color: rgba(255, 253, 247, 0.42);
 }
 
 .jd-match {
@@ -2163,7 +2351,7 @@ a { text-decoration: none; color: inherit; }
       <a href="#works" class="nav-link">Works</a>
       <a href="#toolkit" class="nav-link">AI Workflow</a>
       <a href="#writing" class="nav-link">Writings</a>
-      <a href="#about" class="nav-link">About</a>
+      <a href="#contact" class="nav-link">Contact</a>
     </div>
   </nav>
 </div>
@@ -2601,40 +2789,120 @@ a { text-decoration: none; color: inherit; }
   </div>
 </section>
 
-<!-- §3.5 Featured Writing · 主打文章（设计系统 v2.0 §3.5 · v2.1 无区块 h2） -->
-<section class="featured-writing" id="writing" aria-label="Featured Writing">
+<!-- §3.5 Writings · 写作与观点（v2.4.2 列表式 · 截图二布局 + 截图一精致度） -->
+<section class="featured-writing" id="writing" aria-labelledby="writings-heading">
   <div class="featured-writing-inner">
-    <div class="eyebrow">FEATURED WRITING · 主打文章</div>
-    <article class="fw-card">
-      <span class="fw-pill">AI 行业判断 · 商业化分析</span>
-      <h3 class="fw-title">《为什么 AI Coding Agent 是 Agent 商业化的第一站？》</h3>
-      <p class="fw-meta">2026-05-14 · 约 12 分钟阅读 · 含玩家对比 + 商业模式拆解</p>
-      <div class="fw-takeaway">
-        <p>Agent 概念很热，但多数场景仍面临 ROI 不清晰、流程难闭环、评测困难等问题。Coding 是少数同时具备高频、刚需、付费意愿强、结果可评测、工作流闭环清晰的场景，因此更可能成为 Agent 商业化的第一站。</p>
-      </div>
-      <a class="btn btn-secondary fw-cta" href="./writing-ai-coding-agent.html">继续阅读全文 →</a>
-    </article>
-    <p class="fw-footnote">更多短内容入口见页面底部 <a href="#about">Contact</a>。</p>
+    <div class="fw-header">
+      <div class="eyebrow">WRITINGS · 写作与观点</div>
+      <h2 class="section-h2" id="writings-heading">公开写作与 <em>行业笔记</em></h2>
+      <p class="fw-lede">把研究里反复出现的判断，整理成可阅读、可引用的长文与笔记；覆盖 AI 商业化、Coding Agent、产品化路径等主题。外链与日期会随发布持续更新。</p>
+    </div>
+
+    <div class="fw-list">
+
+      <!-- 1 · 站内长文（主打） -->
+      <a class="fw-item" href="./writing-ai-coding-agent.html" data-channel="internal">
+        <div class="fw-item-meta">
+          <span class="fw-channel">站内长文</span>
+          <span class="fw-status">独立页面 · 2026-05-14</span>
+        </div>
+        <div class="fw-item-body">
+          <h3 class="fw-item-title">为什么 <em>AI Coding Agent</em> 是 Agent 商业化的第一站？</h3>
+          <p class="fw-item-desc">从市场支出、开发者采用、SWE-bench、GitHub Copilot、OpenAI Codex、Claude Code 与商业模式切入，说明为何 Coding 场景会成为 Agent 商业化的第一站。</p>
+        </div>
+        <span class="fw-arrow" aria-hidden="true">→</span>
+      </a>
+
+      <!-- 2 · 小红书 -->
+      <a class="fw-item" href="https://www.xiaohongshu.com/user/profile/5b2bb04b4eacab34445c76e1" target="_blank" rel="noopener noreferrer" data-channel="redbook" data-external="true">
+        <div class="fw-item-meta">
+          <span class="fw-channel">小红书</span>
+          <span class="fw-status">专栏入口 · 持续更新</span>
+        </div>
+        <div class="fw-item-body">
+          <h3 class="fw-item-title">100 个 <em>AI 使用场景</em> · 系列笔记</h3>
+          <p class="fw-item-desc">每个场景一次实测 + 复盘：把模型能力翻译成「普通人能不能用、值不值得用」的判断框架。</p>
+        </div>
+        <span class="fw-arrow" aria-hidden="true">↗</span>
+      </a>
+
+      <!-- 3 · 微信公众号（占位） -->
+      <a class="fw-item" href="#" data-channel="wechat">
+        <div class="fw-item-meta">
+          <span class="fw-channel">微信公众号</span>
+          <span class="fw-status">近期更新 · 占位</span>
+        </div>
+        <div class="fw-item-body">
+          <h3 class="fw-item-title">行业研究与产品化随笔</h3>
+          <p class="fw-item-desc">公众号长文外链上架后，将在此条补齐标题、摘要与链接；当前占位便于你先确认版式与信息层级。</p>
+        </div>
+        <span class="fw-arrow" aria-hidden="true">→</span>
+      </a>
+
+    </div>
+
+    <p class="fw-footnote">更多短内容入口见页面底部 <a href="#contact">Contact</a>。</p>
   </div>
 </section>
 
-<!-- About · Contact -->
-<section class="site-about" id="about" aria-labelledby="about-heading">
-  <div class="site-about-inner" id="contact">
-    <div class="site-about-eyebrow">ABOUT · 联系</div>
-    <h2 class="site-about-title" id="about-heading">合作与机会</h2>
-    <p class="site-about-lede">欢迎就 AI 行业研究、产品策略、情报体系或本页作品来信；邮件通常会在 1–2 个工作日内回复。</p>
-    <div class="site-about-links">
-      <a href="mailto:ningningzheng325@163.com">ningningzheng325@163.com</a>
-      <span class="site-about-sep">·</span>
-      <a href="https://linkedin.com/in/ningning-zheng-580408240" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <span class="site-about-sep">·</span>
-      <a href="https://github.com/sunnymilky80" target="_blank" rel="noopener noreferrer">GitHub</a>
-      <span class="site-about-sep">·</span>
+<!-- §3.11 Contact · 全宽深色版（v2.4.7 · 4 卡横排 + SVG 图标） -->
+<section class="site-contact" id="contact" aria-labelledby="contact-heading">
+  <div class="site-contact-inner">
+    <div class="site-contact-eyebrow">GET IN TOUCH · 联系</div>
+    <h2 class="site-contact-title" id="contact-heading">联系 <em>我</em></h2>
+    <p class="site-contact-lede">如果你正在寻找 <em>AI 产品、行业研究或产品策略</em> 方向的人选，欢迎联系我。期待和你聊聊行业判断、产品落地，或我搭建的自动化 Agent。</p>
+
+    <div class="contact-grid">
+
+      <a href="./简历文件/zhengnn_resume_19700792498.pdf" target="_blank" rel="noopener noreferrer" class="contact-card">
+        <span class="contact-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
+            <path d="M14 3v5h5"/>
+            <path d="M12 11v6m-3-3l3 3 3-3"/>
+          </svg>
+        </span>
+        <span class="contact-text">下载简历 PDF</span>
+      </a>
+
+      <a href="mailto:ningningzheng325@163.com" class="contact-card">
+        <span class="contact-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="5" width="18" height="14" rx="2"/>
+            <path d="M3 7l9 6 9-6"/>
+          </svg>
+        </span>
+        <span class="contact-text">ningningzheng325@163.com</span>
+      </a>
+
+      <a href="https://linkedin.com/in/ningning-zheng-580408240" target="_blank" rel="noopener noreferrer" class="contact-card">
+        <span class="contact-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM8.5 17H6V9.5h2.5V17zM7.25 8.42a1.46 1.46 0 1 1 0-2.92 1.46 1.46 0 0 1 0 2.92zM18 17h-2.5v-4.16c0-1.07-.44-1.41-1.16-1.41-.76 0-1.34.5-1.34 1.5V17h-2.5V9.5h2.4v1.06c.4-.63 1.18-1.06 2.1-1.06 1.78 0 2.83.94 2.83 3V17z"/>
+          </svg>
+        </span>
+        <span class="contact-text">LinkedIn · ningning-zheng</span>
+      </a>
+
+      <a href="https://github.com/sunnymilky80" target="_blank" rel="noopener noreferrer" class="contact-card">
+        <span class="contact-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.05-.02-2.06-3.34.72-4.05-1.61-4.05-1.61-.54-1.4-1.34-1.77-1.34-1.77-1.09-.74.08-.73.08-.73 1.21.08 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.77.42-1.3.76-1.6-2.66-.3-5.46-1.33-5.46-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.53.12-3.18 0 0 1.01-.32 3.3 1.23.96-.27 1.99-.4 3.01-.41 1.02.01 2.05.14 3.01.41 2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.24 2.87.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.63-5.47 5.92.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.29 0 .32.22.69.83.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+        </span>
+        <span class="contact-text">GitHub · sunnymilky80</span>
+      </a>
+
+    </div>
+
+    <div class="contact-social">
+      <span>也在这些平台：</span>
       <a href="https://www.xiaohongshu.com/user/profile/5b2bb04b4eacab34445c76e1" target="_blank" rel="noopener noreferrer">小红书</a>
-      <span class="site-about-sep">·</span>
+      <span class="dot">·</span>
       <a href="https://okjk.co/NTIcUn" target="_blank" rel="noopener noreferrer">即刻</a>
     </div>
+
+    <p class="site-contact-footer">© 2026 Ningning Zheng · Vibe-coded with Claude · Last updated 2026-05-15</p>
   </div>
 </section>
 
