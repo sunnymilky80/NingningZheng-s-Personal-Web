@@ -1,500 +1,4981 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>郑宁宁｜AI 行业研究与产品策略作品集</title>
-  <meta name="description" content="郑宁宁，关注 AI 行业研究、产品策略与智能体产品化。展示研究方向、代表项目与 AI 行业分析。">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="./assets/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+<meta name="description" content="郑宁宁 · AI 行业研究、产品策略与智能体产品化。参与低空经济白皮书、170+ 智能体产品体系与电信行业情报体系搭建。">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="郑宁宁 · AI 行业研究 / 产品策略">
+<meta property="og:description" content="AI 行业研究 · 产品策略 · 智能体产品化 — Industry Research · AI Product Systems · Market Intelligence">
+<meta property="og:image" content="https://sunnymilky80.github.io/NingningZheng-s-Personal-Web/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="郑宁宁个人网站 — AI 行业研究、产品策略与智能体产品化">
+<meta property="og:url" content="https://sunnymilky80.github.io/NingningZheng-s-Personal-Web/">
+<meta property="og:site_name" content="Ningning Zheng">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="郑宁宁 · AI 行业研究 / 产品策略">
+<meta name="twitter:description" content="AI 行业研究 · 产品策略 · 智能体产品化">
+<meta name="twitter:image" content="https://sunnymilky80.github.io/NingningZheng-s-Personal-Web/assets/og-image.png">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>郑宁宁｜AI 行业研究与产品策略作品集</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* ===== Colors ===== */
+  --bg-primary: #FBF7EE;
+  --bg-secondary: #F5F0E3;
+  --bg-paper: #FFFDF7;
+  --ink: #1F2522;
+  --muted: #687168;
+  --moss: #5D7052;
+  --moss-deep: #3D6B54;
+  --rust: #C18C5D;
+  --amber: #D4A574;
+  --line: #E5DFD0;
+  --line-strong: #CFC5B7;
 
-  <style>
-    /* §1.1 颜色 Token（精确十六进制，禁止改动） */
-    :root {
-      --bg-primary: #FBF7EE;
-      --bg-secondary: #F5F0E3;
-      --bg-paper: #FFFDF7;
-      --ink: #1F2522;
-      --muted: #687168;
-      --moss: #5D7052;
-      --moss-deep: #3D6B54;
-      --rust: #C18C5D;
-      --amber: #D4A574;
-      --line: #E5DFD0;
-      --line-strong: #CFC5B7;
+  /* ===== Radius ===== */
+  --r-pill: 999px;
+  --r-card-lg: 24px;
+  --r-card: 18px;
+  --r-img: 20px;
+  --r-sm: 12px;
 
-      --font-display: "Fraunces", "Noto Serif SC", "Songti SC", serif;
-      --font-body: "Inter", "PingFang SC", -apple-system, system-ui, sans-serif;
-      --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  /* ===== Shadows ===== */
+  --shadow-sm: 0 2px 8px rgba(31, 37, 34, 0.04);
+  --shadow-md: 0 8px 24px rgba(31, 37, 34, 0.08);
+  --shadow-lg: 0 18px 46px rgba(31, 37, 34, 0.10);
+  --shadow-hover: 0 14px 32px rgba(31, 37, 34, 0.12);
 
-      --container-max: 1200px;
-      --container-pad-x: clamp(24px, 4vw, 48px);
-    }
+  /* ===== Fonts ===== */
+  --font-display: "Fraunces", "Noto Serif SC", "Songti SC", serif;
+  --font-body: "Inter", "PingFang SC", -apple-system, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
 
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-    }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+body {
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-    body {
-      margin: 0;
-      background-color: var(--bg-primary);
-      color: var(--ink);
-      font-family: var(--font-body);
-      font-size: 16px;
-      line-height: 1.7;
-      font-weight: 400;
-      -webkit-font-smoothing: antialiased;
-    }
+a { text-decoration: none; color: inherit; }
 
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
+/* ============================================
+   Cursor halo (v2.2 保留 · 全局氛围)
+============================================ */
+.cursor-halo {
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 165, 116, 0.16), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  mix-blend-mode: multiply;
+}
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+/* ============================================
+   C0 · Sticky Navigation Pill (v2.3 新增)
+============================================ */
+.nav-wrapper {
+  position: sticky;
+  top: 16px;
+  z-index: 100;
+  padding: 0 16px;
+  margin-top: 16px;
+}
 
-    /* §1.3 容器 */
-    .container {
-      max-width: var(--container-max);
-      margin-left: auto;
-      margin-right: auto;
-      padding-left: var(--container-pad-x);
-      padding-right: var(--container-pad-x);
-    }
+.nav {
+  max-width: min(760px, 92vw);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 24px 10px 14px;
+  border-radius: var(--r-pill);
+  background: rgba(255, 253, 247, 0.82);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
 
-    /* ========== §3.1 Hero ========== */
-    .hero {
-      padding-top: clamp(96px, 14vh, 160px);
-      padding-bottom: clamp(96px, 14vh, 160px);
-    }
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
-    .hero__grid {
-      display: grid;
-      grid-template-columns: 3fr 2fr;
-      align-items: center;
-      gap: clamp(32px, 5vw, 64px);
-    }
+.nav-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--moss);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bg-primary);
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+}
 
-    .hero__left {
-      min-width: 0;
-    }
+.nav-name {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
 
-    .hero__row-top {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
+.nav-name-en {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
 
-    /* C1 · Status Chip */
-    .status-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background-color: rgba(93, 112, 82, 0.12);
-      color: var(--moss);
-      font-family: var(--font-body);
-      font-size: 14px;
-      line-height: 1.5;
-      font-weight: 400;
-    }
+.nav-name-cn {
+  font-size: 12px;
+  color: var(--muted);
+}
 
-    .status-chip__dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background-color: var(--moss);
-      flex-shrink: 0;
-      animation: pulse 2.4s ease-in-out infinite;
-    }
+.nav-links {
+  display: flex;
+  gap: 26px;
+}
 
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.45; }
-    }
+.nav-link {
+  font-size: 14px;
+  color: var(--muted);
+  transition: color 200ms;
+  position: relative;
+  padding: 4px 0;
+}
 
-    .hero__avatar {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 1.5px solid var(--bg-paper);
-      flex-shrink: 0;
-    }
+.nav-link:hover { color: var(--ink); }
 
-    .hero__title {
-      margin: 0 0 16px;
-      font-family: var(--font-display);
-      font-size: clamp(40px, 5.4vw, 68px);
-      line-height: 1.1;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--ink);
-    }
+.nav-link.active {
+  color: var(--moss-deep);
+  font-weight: 500;
+}
 
-    .hero__title em {
-      font-style: italic;
-      color: var(--moss-deep);
-    }
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--moss-deep);
+  border-radius: 2px;
+}
 
-    .hero__subtitle {
-      margin: 0 0 20px;
-      max-width: 640px;
-      font-family: var(--font-body);
-      font-size: 18px;
-      line-height: 1.6;
-      font-weight: 400;
-      color: var(--muted);
-    }
+@media (max-width: 768px) {
+  .nav-links { gap: 14px; }
+  .nav-link { font-size: 13px; }
+  .nav-name-en { font-size: 13px; }
+  .nav-name-cn { font-size: 11px; }
+}
 
-    /* 三标签：§3.1 指定 C3 eyebrow 规格 + --muted */
-    .hero__tags {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 28px;
-      font-family: var(--font-body);
-      font-size: 11px;
-      line-height: 1;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
+/* ============================================
+   Hero Section (v2.4 排版重做)
+============================================ */
+.hero {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(80px, 12vh, 140px) clamp(24px, 4vw, 48px);
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 56px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
 
-    .hero__cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 12px 16px;
-    }
+@media (max-width: 968px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: clamp(56px, 9vh, 88px) clamp(24px, 4vw, 48px);
+  }
+}
 
-    /* C2 · Pill Button */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 14px 28px;
-      border-radius: 999px;
-      font-family: var(--font-body);
-      font-size: 15px;
-      line-height: 1;
-      font-weight: 500;
-      cursor: pointer;
-      border: none;
-      transition: transform 200ms ease, box-shadow 200ms ease;
-    }
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  align-self: start;
+}
 
-    .btn--primary {
-      background-color: var(--moss);
-      color: var(--bg-primary);
-    }
+.hero-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
 
-    .btn--secondary {
-      background-color: transparent;
-      color: var(--moss);
-      border: 1.5px solid var(--moss);
-      padding: calc(14px - 1.5px) calc(28px - 1.5px);
-    }
+.hero-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--bg-paper) url('个人AI头像设计/Gemini生成4.jpg') center center / cover no-repeat;
+  border: 1.5px solid var(--bg-paper);
+  box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
+}
 
-    .btn:hover {
-      transform: translateY(-2px);
-    }
+/* C1 Status Chip */
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: rgba(93, 112, 82, 0.12);
+  border-radius: var(--r-pill);
+  color: var(--moss);
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: var(--shadow-sm);
+}
 
-    .hero__cta-link {
-      font-family: var(--font-body);
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--moss);
-      text-decoration: underline;
-      text-underline-offset: 4px;
-      text-decoration-color: rgba(93, 112, 82, 0.35);
-      transition: color 200ms ease, text-decoration-color 200ms ease;
-    }
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--moss);
+  animation: pulse 2s ease-in-out infinite;
+}
 
-    .hero__cta-link:hover {
-      color: var(--moss-deep);
-      text-decoration-color: var(--moss-deep);
-    }
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.65; transform: scale(0.85); }
+}
 
-    /* 右列视觉 */
-    .hero__visual {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      justify-self: end;
-      width: 100%;
-      max-width: 400px;
-    }
+/* === Hero h1 v2.4.1 · 双行节奏 · 缩小字号 === */
+.hero-headline {
+  font-family: var(--font-display);
+  color: var(--ink);
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
 
-    .hero__glow {
-      position: absolute;
-      width: 480px;
-      height: 480px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(93, 112, 82, 0.16) 0%, transparent 70%);
-      pointer-events: none;
-      animation: float 6s ease-in-out infinite;
-    }
+.hero-headline-l1 {
+  font-size: clamp(32px, 3.8vw, 48px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
+.hero-headline-l2 {
+  font-size: clamp(22px, 2.4vw, 32px);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  color: rgba(31, 37, 34, 0.88);
+}
 
-    .hero__photo {
-      position: relative;
-      z-index: 1;
-      width: 320px;
-      max-width: 100%;
-      border-radius: 16px;
-      object-fit: cover;
-      aspect-ratio: 320 / 400;
-    }
+.hero-headline em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--moss-deep);
+  font-feature-settings: 'kern', 'liga';
+}
 
-    /* 进场动画：fadeUp 16px，600ms */
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(16px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+.hero-subtitle {
+  font-size: 17px;
+  line-height: 1.7;
+  color: rgba(31, 37, 34, 0.82);
+  max-width: 600px;
+}
 
-    .anim {
-      opacity: 0;
-      animation: fadeUp 600ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-    }
+.hero-tags {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  align-items: center;
+}
 
-    .anim--chip { animation-delay: 0.1s; }
-    .anim--avatar { animation-delay: 0.15s; }
-    .anim--h1 { animation-delay: 0.25s; }
-    .anim--sub { animation-delay: 0.4s; }
-    .anim--tags { animation-delay: 0.5s; }
-    .anim--cta { animation-delay: 0.6s; }
-    .anim--visual { animation-delay: 0.3s; }
+.hero-tag-sep {
+  color: var(--line-strong);
+  letter-spacing: 0;
+}
 
-    /* ========== §3.2 Research Focus ========== */
-    .research {
-      padding-top: clamp(64px, 8vh, 96px);
-      padding-bottom: clamp(64px, 8vh, 96px);
-    }
+.hero-ctas {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
 
-    .section-head {
-      margin-bottom: 32px;
-    }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 30px;
+  border-radius: var(--r-pill);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+}
 
-    /* C3 · Eyebrow Tag */
-    .eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin: 0 0 12px;
-      font-family: var(--font-body);
-      font-size: 11px;
-      line-height: 1;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--rust);
-    }
+.btn-primary {
+  background: var(--moss);
+  color: var(--bg-primary);
+  box-shadow: var(--shadow-md);
+}
 
-    .eyebrow::before {
-      content: "";
-      width: 24px;
-      height: 2px;
-      background-color: currentColor;
-      flex-shrink: 0;
-    }
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
 
-    .section-head h2 {
-      margin: 0;
-      font-family: var(--font-display);
-      font-size: clamp(32px, 4vw, 48px);
-      line-height: 1.15;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      color: var(--ink);
-    }
+.btn-secondary {
+  background: transparent;
+  color: var(--moss);
+  border: 1.5px solid var(--moss);
+}
 
-    .research__grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  background: rgba(93, 112, 82, 0.06);
+}
 
-    .focus-card {
-      padding: 32px;
-      background-color: var(--bg-paper);
-      border-radius: 0;
-      border: none;
-      transition: transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
-                  box-shadow 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
+.btn-tertiary {
+  background: transparent;
+  color: var(--ink);
+  padding: 14px 4px;
+  font-weight: 500;
+}
 
-    .focus-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 48px rgba(31, 37, 34, 0.08);
-    }
+.btn-tertiary:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
 
-    .focus-card h3 {
-      margin: 0 0 12px;
-      font-family: var(--font-body);
-      font-size: 22px;
-      line-height: 1.3;
-      font-weight: 600;
-      color: var(--ink);
-    }
+/* Hero right column */
+.hero-right {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  align-self: end;
+  min-height: 440px;
+}
 
-    .focus-card p {
-      margin: 0 0 16px;
-      font-family: var(--font-body);
-      font-size: 16px;
-      line-height: 1.7;
-      font-weight: 400;
-      color: var(--ink);
-    }
+.hero-blob {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(93, 112, 82, 0.20), rgba(93, 112, 82, 0.04) 50%, transparent 70%);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+  z-index: 0;
+  filter: blur(2px);
+}
 
-    .focus-card__tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
+.hero-blob-amber {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  bottom: 20px;
+  right: 0;
+  background: radial-gradient(circle, rgba(212, 165, 116, 0.18), transparent 65%);
+  border-radius: 50%;
+  z-index: 0;
+  filter: blur(2px);
+}
 
-    .focus-card__tag {
-      display: inline-block;
-      padding: 6px 10px;
-      font-family: var(--font-body);
-      font-size: 14px;
-      line-height: 1.5;
-      font-weight: 400;
-      color: var(--moss);
-      background-color: rgba(93, 112, 82, 0.08);
-    }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
 
-    @media (max-width: 900px) {
-      .hero__grid {
-        grid-template-columns: 1fr;
-      }
+.hero-photo {
+  width: clamp(280px, 30vw, 360px);
+  aspect-ratio: 4 / 5;
+  border-radius: var(--r-img);
+  box-shadow: var(--shadow-lg);
+  background: url('郑宁宁证件照.PNG') center 20% / cover no-repeat;
+  position: relative;
+  z-index: 1;
+}
 
-      .hero__visual {
-        justify-self: center;
-        order: 1;
-      }
+/* ============================================
+   Research Focus Section (v2.4 字体升级)
+============================================ */
+.research {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(64px, 8vh, 96px) clamp(24px, 4vw, 48px);
+  position: relative;
+  z-index: 1;
+}
 
-      .hero__left {
-        order: 0;
-      }
+.section-header {
+  margin-bottom: 56px;
+}
 
-      .research__grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--rust);
+  margin-bottom: 20px;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--rust);
+}
+
+.section-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.4vw, 40px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  max-width: 700px;
+}
+
+.section-h2 em {
+  font-style: italic;
+  color: var(--moss-deep);
+  font-weight: 500;
+}
+
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 968px) {
+  .research-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+.research-card {
+  background: var(--bg-paper);
+  padding: 32px 32px 28px;
+  border-radius: 28px;
+  box-shadow: var(--shadow-md);
+  transition: all 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.research-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* === Card eyebrow pill · v2.4.1 顶部主题徽章 === */
+.card-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  padding: 6px 14px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  background: rgba(93, 112, 82, 0.12);
+  color: var(--moss);
+  border-radius: var(--r-pill);
+  letter-spacing: 0.02em;
+  margin-bottom: 2px;
+}
+
+/* === Card h3 v2.4.1 · 字号加大、加粗 === */
+.card-h3 {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.card-h3 em {
+  font-style: italic;
+  font-weight: 600;
+  color: var(--moss-deep);
+}
+
+.card-body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.75;
+  color: rgba(31, 37, 34, 0.85);
+  flex: 1;
+}
+
+.card-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+  margin-top: 4px;
+}
+
+/* === Keyword tag v2.4.1 · 米沙色（参考新截图） === */
+.tag {
+  display: inline-block;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--font-body);
+  background: rgba(207, 197, 183, 0.55);
+  color: rgba(31, 37, 34, 0.78);
+  border-radius: var(--r-pill);
+  transition: all 200ms;
+  white-space: nowrap;
+}
+
+.tag:hover {
+  background: rgba(193, 140, 93, 0.22);
+  color: var(--moss-deep);
+}
+
+/* ============================================
+   数字 Bar · 4 个量化锚（§3.3 · v2.4.6 条带高度缩短约 ¼）
+   对齐 PRD §3.3：可信度锚；背景用 --moss 与上方米白内容区形成明确区隔
+============================================ */
+.stats {
+  background: var(--moss);
+  padding: clamp(21px, 3vh, 33px) 0;
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid rgba(45, 58, 42, 0.22);
+  border-bottom: 1px solid rgba(45, 58, 42, 0.18);
+}
+
+/* §3.6 Manifesto · 与数字 Bar 同形态（stat-value + stat-label） */
+.stats--manifesto .stats-inner {
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: clamp(28px, 5vw, 56px);
+}
+.stats--manifesto .stat-label {
+  max-width: 20em;
+}
+.stats--manifesto .stat-em {
+  font-style: italic;
+  color: var(--amber);
+  font-weight: 600;
+}
+@media (max-width: 720px) {
+  .stats--manifesto .stats-inner {
+    grid-template-columns: 1fr;
+    row-gap: 14px;
+  }
+  .stats--manifesto .stat {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 253, 247, 0.18);
+    padding-bottom: 14px;
+  }
+  .stats--manifesto .stat:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+.stats-inner {
+  /* 略加宽 + 列间距，避免四列挤在中间、两侧过空 */
+  max-width: min(960px, 96vw);
+  margin: 0 auto;
+  padding: 0 clamp(16px, 3vw, 36px);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: clamp(20px, 3.5vw, 44px);
+}
+
+.stat {
+  padding: 1px clamp(8px, 1vw, 12px);
+  border-right: 1px solid rgba(255, 253, 247, 0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 5px;
+}
+
+.stat:first-child { padding-left: 0; }
+.stat:last-child {
+  padding-right: 0;
+  border-right: none;
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  align-content: flex-end;
+  justify-content: center;
+  gap: 4px 5px;
+  color: #fff;
+  line-height: 1;
+  /* 与「数字 + 单位」行同高（整体高度缩短约 ¼ 后仍保留 TMF 与副文对齐） */
+  min-height: clamp(39px, 5.1vw, 50px);
+}
+
+/* 主数字与英文字母：高对比 Fraunces、纯白（对齐截图主行） */
+.stat-num {
+  font-size: clamp(28px, 3.4vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  font-feature-settings: 'onum', 'lnum';
+  color: #fff;
+}
+
+.stat-num-text {
+  font-size: clamp(24px, 2.95vw, 38px);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+/* 「+」与数字同组、同色（截图中为大号衬线的一部分） */
+.stat-plus {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.6vw, 34px);
+  font-weight: 700;
+  color: #fff;
+  margin-left: -2px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.stat-unit {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 253, 247, 0.72);
+  letter-spacing: 0.02em;
+  margin-left: 2px;
+}
+
+/* 下方说明：双行、略浅于主数字的米白字 */
+.stat-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  max-width: 11.5em;
+}
+
+.stat-label-line {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1.35;
+  color: rgba(255, 253, 247, 0.72);
+}
+
+.stat-label-line:first-child {
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: rgba(255, 253, 247, 0.88);
+}
+
+@media (max-width: 768px) {
+  .stats-inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 14px;
+  }
+  .stat {
+    padding: 0;
+    border-right: none;
+  }
+}
+
+/* ============================================
+   §3.4 Selected Works · 3 张项目卡（zig-zag）
+   默认排序：C 情报 → A 低空 → B 智能体（PRD §3.4）
+============================================ */
+.works {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(64px, 8vh, 100px) clamp(24px, 4vw, 48px) clamp(72px, 9vh, 112px);
+  position: relative;
+  z-index: 1;
+  scroll-margin-top: 96px;
+}
+
+.works-header {
+  margin-bottom: clamp(40px, 5vh, 56px);
+  max-width: 720px;
+}
+
+.works-lede {
+  margin-top: 18px;
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 680px;
+}
+
+.works-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 48px);
+  align-items: center;
+  margin-bottom: clamp(48px, 6vh, 80px);
+}
+
+.works-row:last-of-type {
+  margin-bottom: 0;
+}
+
+#work-telecom-intelligence,
+#work-low-altitude,
+#work-ai-agent {
+  scroll-margin-top: 96px;
+}
+
+@media (max-width: 900px) {
+  .works-row {
+    grid-template-columns: 1fr;
+  }
+
+  .works-row .works-media {
+    order: -1;
+  }
+}
+
+.works-media {
+  display: flex;
+  align-items: stretch;
+  border-radius: var(--r-card-lg);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-md);
+  aspect-ratio: 5 / 3;
+  background: var(--bg-paper);
+  transition: transform 280ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 280ms ease;
+}
+
+.works-media:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+}
+
+.works-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 无本地 Evidence 图时：苔藓 / 蓝灰渐变占位（可换 <img>） */
+.works-figure-placeholder {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 16px 18px;
+  background: linear-gradient(145deg, rgba(93, 112, 82, 0.18) 0%, rgba(255, 253, 247, 0.96) 48%, rgba(212, 165, 116, 0.12) 100%);
+}
+
+.works-figure-placeholder--agents {
+  background: linear-gradient(205deg, rgba(47, 95, 127, 0.2) 0%, rgba(255, 253, 247, 0.96) 52%, rgba(93, 112, 82, 0.1) 100%);
+}
+
+.works-figure-note {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(31, 37, 34, 0.45);
+  line-height: 1.35;
+  max-width: 14em;
+}
+
+.works-copy {
+  min-width: 0;
+}
+
+.works-card-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 12px;
+  font-family: var(--font-body);
+}
+
+.works-card-eyebrow::before {
+  content: "";
+  width: 24px;
+  height: 2px;
+  background: var(--rust);
+}
+
+.works-card-title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 600;
+  line-height: 1.28;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+
+.works-card-title em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--moss-deep);
+}
+
+.works-card-body {
+  font-size: 15px;
+  line-height: 1.72;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+.works-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.works-tag {
+  display: inline-block;
+  padding: 7px 14px;
+  font-size: 12.5px;
+  font-weight: 500;
+  font-family: var(--font-body);
+  border-radius: var(--r-pill);
+  background: rgba(93, 112, 82, 0.1);
+  color: var(--moss-deep);
+  border: 1px solid rgba(93, 112, 82, 0.22);
+}
+
+.works-cta {
+  display: inline-flex;
+}
+
+/* ============================================
+   §3.9 我的 AI 工作流 · Skills + 工作流图 + Vibe Coding
+============================================ */
+.toolkit {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(64px, 8vh, 100px) clamp(24px, 4vw, 48px) clamp(72px, 9vh, 112px);
+  position: relative;
+  z-index: 1;
+  scroll-margin-top: 96px;
+}
+
+.toolkit-header {
+  margin-bottom: clamp(40px, 5vh, 56px);
+  max-width: 760px;
+}
+
+.toolkit-lede {
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.72;
+  color: var(--muted);
+  max-width: 660px;
+}
+
+.toolkit-block {
+  margin-bottom: clamp(40px, 5vh, 64px);
+}
+
+.toolkit-block:last-child {
+  margin-bottom: 0;
+}
+
+.toolkit-block-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.toolkit-block-title {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 1.8vw, 22px);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+}
+
+.toolkit-block-meta {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+/* ---------- §3.9.a · 三列并排类目卡（subgrid 同步每排 skill 行高 · 小屏单列） ---------- */
+.category-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 18px;
+  width: 100%;
+  align-items: stretch;
+}
+
+.category-card {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  /* 垂直方向约 ×5/6，整体卡片高度缩短约六分之一 */
+  padding: 22px 18px 18px;
+  background: var(--bg-paper);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.category-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--rust);
+  opacity: 0;
+  transition: opacity 220ms;
+}
+
+.category-card[data-group="thinking"]::before { background: var(--moss); }
+.category-card[data-group="engineering"]::before { background: var(--moss-deep); }
+
+.category-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(93, 112, 82, 0.28);
+}
+
+.category-card:hover::before {
+  opacity: 1;
+}
+
+.category-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid var(--line);
+}
+
+.category-title::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--rust);
+  flex-shrink: 0;
+}
+
+.category-card[data-group="thinking"] .category-title::before { background: var(--moss); }
+.category-card[data-group="engineering"] .category-title::before { background: var(--moss-deep); }
+
+.category-skills {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 1px;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.skill-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 5px;
+  padding: 10px 7px;
+  margin: 0 -7px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: background 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+  position: relative;
+  flex: 0 0 auto;
+  min-height: 0;
+  box-sizing: border-box;
+}
+
+.skill-item::after {
+  content: "↗";
+  position: absolute;
+  top: 11px;
+  right: 7px;
+  font-size: 12px;
+  color: var(--muted);
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition: all 180ms ease;
+}
+
+.skill-item:hover {
+  background: rgba(93, 112, 82, 0.07);
+  transform: translateX(2px) translateY(-1px);
+  box-shadow: 0 10px 26px rgba(31, 37, 34, 0.06);
+}
+
+.skill-item:hover .skill-item-name {
+  background: rgba(93, 112, 82, 0.14);
+  transform: translateY(-1px);
+}
+
+.skill-item:hover::after {
+  opacity: 1;
+  transform: translate(0, 0);
+  color: var(--moss-deep);
+}
+
+.skill-item:focus-visible {
+  outline: 2px solid var(--moss);
+  outline-offset: 2px;
+}
+
+.skill-item-name {
+  display: inline-flex;
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--moss-deep);
+  background: rgba(93, 112, 82, 0.08);
+  padding: 2px 7px;
+  border-radius: var(--r-sm);
+  letter-spacing: 0;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.skill-item-desc {
+  font-family: var(--font-body);
+  font-size: 12.25px;
+  line-height: 1.5;
+  color: rgba(31, 37, 34, 0.72);
+  padding-right: 14px;
+  flex: 0 1 auto;
+}
+
+.skill-item-desc strong { color: var(--ink); font-weight: 600; }
+.skill-item-desc em {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--moss-deep);
+}
+
+/* 桌面：三列共享 4 行轨道，每排 skill 整行等高；名称区统一 min-height 避免换行参差不齐 */
+@supports (grid-template-rows: subgrid) {
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(4, auto);
+    column-gap: 18px;
+    row-gap: 7px;
+    align-items: stretch;
+  }
+
+  .category-card {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: 1 / span 4;
+    flex: unset;
+  }
+
+  .category-card:nth-child(1) { grid-column: 1; }
+  .category-card:nth-child(2) { grid-column: 2; }
+  .category-card:nth-child(3) { grid-column: 3; }
+
+  .category-skills {
+    display: contents;
+  }
+
+  .skill-item {
+    align-self: stretch;
+    min-height: 0;
+  }
+
+  .skill-item-desc {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  .skill-item-name {
+    min-height: 2.3rem;
+    align-items: center;
+    line-height: 1.32;
+    word-break: break-word;
+  }
+}
+
+@media (max-width: 640px) {
+  .category-grid {
+    display: flex !important;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 18px;
+  }
+
+  .category-card {
+    display: flex !important;
+    flex-direction: column;
+    flex: 1 1 auto;
+    width: 100%;
+    grid-column: unset !important;
+    grid-row: unset !important;
+  }
+
+  .category-skills {
+    display: flex !important;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .skill-item-desc {
+    flex: 0 1 auto !important;
+  }
+
+  .skill-item-name {
+    min-height: 0 !important;
+  }
+}
+/* ---------- §3.9.b · 核心 AI 工作流（Outcome + 步骤内工具 + 底部工具栈） ---------- */
+.workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: stretch;
+}
+
+.workflow-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  padding: 18px 18px 16px;
+  background: linear-gradient(135deg, rgba(255, 253, 247, 1) 0%, rgba(245, 240, 227, 0.45) 100%);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.workflow-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(193, 140, 93, 0.28);
+  box-shadow: var(--shadow-md);
+}
+
+.workflow-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.workflow-card-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.workflow-card-sub {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--rust);
+  white-space: nowrap;
+}
+
+.workflow-diagram {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  padding: 10px;
+  border-radius: var(--r-sm);
+  border: 1px solid rgba(193, 140, 93, 0.2);
+  background: linear-gradient(160deg, rgba(255, 253, 247, 0.96) 0%, rgba(245, 240, 227, 0.5) 100%);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* outcome 已删除，两个 diagram 变成单列，pipeline 撑满整宽 */
+.workflow-diagram--vibe,
+.workflow-diagram--research {
+  display: block;
+}
+
+.workflow-copy {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: rgba(255, 253, 247, 0.94);
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+/* outcome 已删除，行业研究的复制按钮跟 Vibe 一样统一放在右上角 */
+
+.workflow-copy:hover {
+  color: var(--ink);
+  border-color: rgba(93, 112, 82, 0.35);
+}
+
+.workflow-copy:focus-visible {
+  outline: 2px solid var(--moss);
+  outline-offset: 2px;
+}
+
+.workflow-copy svg {
+  width: 13px;
+  height: 13px;
+  display: block;
+}
+
+.workflow-copy.is-copied {
+  color: var(--moss-deep);
+}
+
+.workflow-outcome {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-height: 0;
+}
+
+.workflow-outcome-label {
+  font-family: var(--font-body);
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(193, 140, 93, 0.88);
+}
+
+.workflow-outcome-frame {
+  flex: 1;
+  min-height: 132px;
+  border-radius: 8px;
+  border: 1px dashed rgba(93, 112, 82, 0.26);
+  background:
+    linear-gradient(145deg, rgba(93, 112, 82, 0.08) 0%, rgba(255, 253, 247, 0.55) 45%, rgba(193, 140, 93, 0.06) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6px 4px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  line-height: 1.4;
+  font-weight: 600;
+  color: rgba(31, 37, 34, 0.52);
+}
+
+.workflow-outcome-frame small {
+  display: block;
+  margin-top: 3px;
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+/* Outcome 填充版（去虚线，换实体 mock） */
+.workflow-outcome-frame--filled {
+  border: 1px solid var(--line);
+  background: var(--bg-paper);
+  background-image: none;
+  padding: 10px 10px;
+  align-items: stretch;
+  justify-content: flex-start;
+  text-align: left;
+  gap: 5px;
+  font-weight: 400;
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+/* —— site mock (Vibe Coding workflow outcome) —— */
+.wf-out-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(93, 112, 82, 0.14);
+  color: var(--moss);
+  font-size: 7.5px;
+  font-weight: 500;
+  align-self: flex-start;
+  white-space: nowrap;
+}
+.wf-out-chip::before {
+  content: "";
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--moss);
+}
+.wf-out-h1 {
+  font-family: var(--font-display);
+  font-size: 10.5px;
+  line-height: 1.28;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-top: 3px;
+}
+.wf-out-h1 em {
+  font-style: italic;
+  color: var(--moss-deep);
+  font-weight: 600;
+}
+.wf-out-tags {
+  font-family: var(--font-body);
+  font-size: 6.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.wf-out-cta {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 7.5px;
+  font-weight: 600;
+  color: var(--bg-primary);
+  background: var(--moss);
+  padding: 3px 8px;
+  border-radius: 999px;
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+/* —— WeChat mock (Research workflow outcome) —— */
+.wf-out-pub {
+  font-family: var(--font-body);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--moss-deep);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.wf-out-pub::before {
+  content: "";
+  width: 11px; height: 11px;
+  border-radius: 2px;
+  background: linear-gradient(135deg, #4CB35E, #2E8A45);
+  display: inline-block;
+  flex-shrink: 0;
+  position: relative;
+}
+.wf-out-title {
+  font-family: var(--font-display);
+  font-size: 10.5px;
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-top: 3px;
+}
+.wf-out-title em {
+  font-style: italic;
+  color: var(--moss-deep);
+  font-weight: 600;
+}
+.wf-out-meta {
+  font-family: var(--font-body);
+  font-size: 6.5px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  margin-top: 1px;
+}
+.wf-out-excerpt {
+  font-family: var(--font-body);
+  font-size: 7.5px;
+  line-height: 1.55;
+  color: var(--muted);
+  margin-top: auto;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.workflow-pipeline {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 3px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 2px;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.workflow-stage {
+  flex: 0 0 auto;
+  width: 94px;
+  min-width: 88px;
+  padding: 7px 6px 8px;
+  border-radius: 8px;
+  background: rgba(255, 253, 247, 0.94);
+  border: 1px solid rgba(207, 197, 183, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-sizing: border-box;
+}
+
+.workflow-stage--wide {
+  width: 104px;
+  min-width: 98px;
+}
+
+.workflow-stage-zh {
+  font-family: var(--font-display);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.workflow-stage-en {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--muted);
+  line-height: 1.25;
+}
+
+.workflow-stage-out {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 9.5px;
+  line-height: 1.38;
+  color: rgba(31, 37, 34, 0.6);
+}
+
+.workflow-stage-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 3px;
+  margin-top: auto;
+  min-width: 0;
+}
+
+.wf-tool {
+  display: inline-flex;
+  padding: 2px 5px;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 500;
+  color: var(--moss-deep);
+  background: rgba(93, 112, 82, 0.1);
+  border-radius: 4px;
+  line-height: 1.25;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.workflow-pipe {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(193, 140, 93, 0.75);
+  line-height: 1;
+}
+
+.workflow-stack {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+
+.workflow-stack-label {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.workflow-app-icons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.wf-app-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  width: auto;
+  min-width: 28px;
+  padding: 0 5px;
+  border-radius: 8px;
+  border: 1px solid rgba(207, 197, 183, 0.65);
+  background: rgba(255, 253, 247, 0.96);
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.wf-app-icon img,
+.wf-app-icon svg {
+  display: block;
+  height: 18px;
+  width: auto;
+  max-height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.wf-app-icon--square {
+  width: 28px;
+  min-width: 28px;
+  padding: 0;
+}
+
+.wf-app-icon--codex {
+  width: 28px;
+  min-width: 28px;
+  padding: 4px;
+  background: #fff;
+}
+
+.wf-app-icon--codex img {
+  width: 20px;
+  height: 20px;
+  max-height: 20px;
+}
+
+.wf-app-icon--aihot {
+  padding: 0 7px;
+  min-width: auto;
+  background: #1a2332;
+  border-color: rgba(26, 35, 50, 0.45);
+}
+
+.wf-app-icon--aihot svg {
+  height: 14px;
+  width: auto;
+}
+
+@media (max-width: 900px) {
+  .workflow-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .workflow-stage {
+    min-width: 84px;
+  }
+}
+
+/* ---------- §3.9.c · Vibe Coding 小项目（v2 · 设备框 mockup 卡） ---------- */
+.vibe-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.vibe-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-paper);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: all 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
+}
+.vibe-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+/* 公共 preview 容器（带顶部 chrome 栏） */
+.vibe-preview {
+  aspect-ratio: 4 / 3;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(140deg, #EFE9D7 0%, #FBF7EE 60%, #F6EFDD 100%);
+  display: block;
+  text-decoration: none;
+}
+.vibe-chrome {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 22px;
+  background: rgba(255, 253, 247, 0.82);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  gap: 8px;
+  z-index: 2;
+}
+.vibe-dots {
+  display: inline-flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.vibe-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.vibe-dot:nth-child(1) { background: #E5805E; }
+.vibe-dot:nth-child(2) { background: #E5B85E; }
+.vibe-dot:nth-child(3) { background: #7DAE7D; }
+.vibe-url {
+  flex: 1;
+  min-width: 0;
+  height: 13px;
+  border-radius: 999px;
+  background: rgba(245, 240, 227, 0.92);
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.vibe-screen {
+  position: absolute;
+  top: 22px; left: 0; right: 0; bottom: 0;
+  overflow: hidden;
+}
+
+/* ----- Card 1：浏览器（个人站） ----- */
+.vibe-preview--browser .vibe-screen {
+  background: linear-gradient(180deg, #FBF7EE 0%, #F5F0E3 100%);
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.vibe-chip-mini {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(93, 112, 82, 0.14);
+  color: var(--moss);
+  font-size: 8.5px;
+  font-weight: 500;
+  align-self: flex-start;
+  font-family: var(--font-body);
+}
+.vibe-chip-mini::before {
+  content: "";
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--moss);
+}
+.vibe-mini-h1 {
+  font-family: var(--font-display);
+  font-size: 13px;
+  line-height: 1.28;
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.vibe-mini-h1 em {
+  font-style: italic;
+  color: var(--moss-deep);
+  font-weight: 600;
+}
+.vibe-mini-tags {
+  display: flex;
+  gap: 6px;
+  margin-top: auto;
+  font-family: var(--font-body);
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* JD Match mini mock（补充个人站卡中部 ） */
+.vibe-jd-match {
+  margin-top: 2px;
+  padding: 8px 10px;
+  background: rgba(255, 253, 247, 0.78);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  box-shadow: var(--shadow-sm);
+}
+.vibe-jd-eyebrow {
+  font-family: var(--font-body);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rust);
+}
+.vibe-jd-input {
+  font-family: var(--font-mono);
+  font-size: 7.5px;
+  color: var(--muted);
+  padding: 4px 7px;
+  background: rgba(245, 240, 227, 0.7);
+  border-radius: 4px;
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.vibe-jd-input::before {
+  content: "›";
+  margin-right: 4px;
+  color: var(--moss);
+  font-weight: 700;
+  font-style: normal;
+}
+.vibe-jd-examples {
+  display: flex;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+.vibe-jd-chip {
+  font-family: var(--font-body);
+  font-size: 6.5px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(93, 112, 82, 0.12);
+  color: var(--moss);
+  font-weight: 600;
+}
+.vibe-here-badge {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--moss-deep);
+  color: var(--bg-primary);
+  box-shadow: var(--shadow-md);
+  z-index: 3;
+}
+
+/* ----- Card 2：Obsidian × Codex 协同（左编辑器 + 右 Codex 侧栏） ----- */
+.vibe-preview--editor .vibe-screen {
+  background: linear-gradient(180deg, #FBF7EE 0%, #F8F2E3 100%);
+  display: grid;
+  grid-template-columns: 1fr 44%;
+}
+.vibe-editor-content {
+  padding: 10px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow: hidden;
+  border-right: 1px solid var(--line);
+}
+.vibe-breadcrumb {
+  font-family: var(--font-mono);
+  font-size: 6.5px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.vibe-md-h {
+  font-family: var(--font-display);
+  font-size: 11px;
+  color: var(--ink);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+.vibe-tag-row {
+  display: flex;
+  gap: 3px;
+  margin: 2px 0 3px;
+}
+.vibe-mini-tag {
+  font-family: var(--font-mono);
+  font-size: 6.5px;
+  padding: 1px 5px;
+  border-radius: 999px;
+  background: rgba(212, 165, 116, 0.22);
+  color: var(--rust);
+  font-weight: 600;
+}
+.vibe-info-row {
+  display: flex;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 7.5px;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+}
+.vibe-info-row .key {
+  color: var(--rust);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.vibe-info-row .val {
+  opacity: 0.78;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vibe-codex {
+  background: #1F2522;
+  color: #C5BFA8;
+  padding: 9px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow: hidden;
+  font-family: var(--font-mono);
+}
+.vibe-codex-head {
+  font-size: 7px;
+  color: #D4A574;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.vibe-codex-head::before {
+  content: ">_";
+  color: #7DAE7D;
+  font-weight: 700;
+}
+.vibe-codex-model {
+  color: #C5BFA8;
+  opacity: 0.6;
+  font-size: 6px;
+  letter-spacing: 0;
+}
+.vibe-codex-prompt {
+  background: rgba(212, 165, 116, 0.10);
+  border-left: 1.5px solid var(--rust);
+  padding: 4px 6px;
+  border-radius: 0 3px 3px 0;
+  font-family: var(--font-body);
+  font-size: 7.5px;
+  color: #FBF7EE;
+  line-height: 1.45;
+}
+.vibe-codex-prompt::before {
+  content: "▸ ";
+  color: var(--rust);
+}
+.vibe-codex-resp {
+  font-size: 7px;
+  color: #C5BFA8;
+  line-height: 1.5;
+  opacity: 0.85;
+}
+.vibe-codex-resp .out { color: #7DAE7D; font-weight: 700; }
+.vibe-codex-cursor {
+  font-size: 7px;
+  color: #D4A574;
+  margin-top: auto;
+  animation: vibeBlink 1.1s steps(2) infinite;
+}
+@keyframes vibeBlink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
+
+/* ----- Card 3：手机（Oral English Trainer） ----- */
+.vibe-preview--phone {
+  background:
+    radial-gradient(ellipse at 30% 30%, rgba(93,112,82,0.12), transparent 60%),
+    radial-gradient(ellipse at 75% 80%, rgba(212,165,116,0.10), transparent 65%),
+    linear-gradient(140deg, #EFE9D7 0%, #F8F2E3 100%);
+}
+.vibe-preview--phone .vibe-screen { padding: 0; }
+.vibe-phone {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) rotate(-5deg);
+  width: 52%;
+  aspect-ratio: 9 / 19;
+  background: #1F2522;
+  border-radius: 18px;
+  padding: 4px 4px 6px;
+  box-shadow: 0 12px 28px rgba(31, 37, 34, 0.22);
+  display: flex;
+  flex-direction: column;
+}
+.vibe-phone-notch {
+  width: 34%;
+  height: 4px;
+  background: #1F2522;
+  border-radius: 0 0 4px 4px;
+  margin: 0 auto 3px;
+  position: relative;
+  z-index: 2;
+}
+.vibe-phone-screen {
+  flex: 1;
+  background: linear-gradient(180deg, #FBF7EE 0%, #F5F0E3 100%);
+  border-radius: 12px;
+  padding: 6px 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5px;
+  overflow: hidden;
+}
+.vibe-phone-title {
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 6.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--ink);
+}
+.vibe-phone-sub {
+  text-align: center;
+  font-size: 4.5px;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  font-weight: 600;
+  margin-top: -1px;
+}
+.vibe-phone-tabs {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2px;
+  margin-top: 2px;
+}
+.vibe-phone-tab {
+  height: 10px;
+  background: rgba(255,253,247,0.75);
+  border-radius: 3px;
+}
+.vibe-phone-tab.is-active { background: rgba(93,112,82,0.22); }
+.vibe-phone-day {
+  font-family: var(--font-body);
+  font-size: 4.5px;
+  font-weight: 700;
+  color: var(--rust);
+  letter-spacing: 0.14em;
+  margin-top: 2px;
+}
+.vibe-phone-card {
+  background: rgba(255,253,247,0.85);
+  border-radius: 5px;
+  padding: 4px 5px;
+  font-family: var(--font-display);
+  font-size: 6px;
+  color: var(--ink);
+  font-weight: 600;
+  line-height: 1.2;
+}
+.vibe-phone-card-row {
+  display: flex;
+  gap: 3px;
+  justify-content: space-between;
+  font-family: var(--font-body);
+  font-size: 4px;
+  color: var(--muted);
+  margin-top: 2px;
+  font-weight: 500;
+}
+.vibe-phone-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+.vibe-phone-pill {
+  font-family: var(--font-body);
+  font-size: 4px;
+  padding: 1.5px 4px;
+  border-radius: 999px;
+  background: rgba(193,140,93,0.20);
+  color: var(--rust);
+  font-weight: 500;
+}
+
+/* ----- 卡片信息区 ----- */
+.vibe-meta {
+  padding: 18px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+.vibe-slug {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--moss);
+  letter-spacing: 0.04em;
+}
+.vibe-card-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.vibe-card-name em {
+  font-style: italic;
+  color: var(--moss-deep);
+  font-weight: 600;
+}
+.vibe-card-desc {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.vibe-capability {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.vibe-capability strong {
+  color: var(--moss-deep);
+  font-weight: 600;
+}
+.vibe-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 2px;
+}
+.vibe-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(93, 112, 82, 0.08);
+  color: var(--moss);
+}
+.vibe-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.vibe-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.vibe-status::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--line-strong);
+}
+.vibe-status--live { color: var(--moss-deep); }
+.vibe-status--live::before { background: var(--moss); animation: pulse 2.4s ease-in-out infinite; }
+.vibe-status--lab { color: var(--rust); }
+.vibe-status--lab::before { background: var(--rust); }
+.vibe-cta {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--moss-deep);
+  text-decoration: none;
+  border-bottom: 1px solid var(--moss);
+  padding-bottom: 1px;
+  transition: all 200ms ease;
+}
+.vibe-cta:hover {
+  color: var(--moss);
+  transform: translateX(2px);
+}
+.vibe-cta--mute {
+  color: var(--muted);
+  border-bottom: none;
+  font-weight: 500;
+  cursor: default;
+}
+.vibe-cta--mute:hover { color: var(--muted); transform: none; }
+
+@media (max-width: 900px) {
+  .vibe-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .vibe-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================
+   §3.5 Featured Writing · 主打文章（设计系统 v2.0 §3.5 + C9）
+============================================ */
+.featured-writing {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(64px, 8vh, 96px) clamp(24px, 4vw, 48px);
+  position: relative;
+  z-index: 1;
+  scroll-margin-top: 96px;
+}
+
+.featured-writing-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.fw-header {
+  margin-bottom: clamp(36px, 4.5vh, 48px);
+  max-width: 760px;
+}
+
+.fw-lede {
+  margin-top: 16px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.72;
+  color: var(--muted);
+  max-width: 680px;
+}
+
+.fw-list {
+  border-top: 1px solid var(--line-strong);
+  margin-top: clamp(20px, 3vh, 28px);
+}
+
+.fw-item {
+  display: grid;
+  grid-template-columns: minmax(170px, 0.22fr) minmax(0, 1fr) auto;
+  gap: clamp(20px, 3vw, 48px);
+  padding: 28px 4px 30px;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+  transition: all 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  align-items: center;
+  position: relative;
+}
+
+.fw-item:hover {
+  background: linear-gradient(90deg, rgba(93, 112, 82, 0.05), transparent 75%);
+  padding-left: 16px;
+}
+
+.fw-item-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-self: center;
+}
+
+.fw-channel {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rust);
+}
+
+.fw-channel::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: currentColor;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.fw-item[data-channel="redbook"] .fw-channel { color: #c4576e; }
+.fw-item[data-channel="wechat"] .fw-channel { color: var(--moss); }
+
+.fw-status {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.01em;
+}
+
+.fw-item-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.fw-item-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: 600;
+  line-height: 1.32;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.fw-item-title em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--moss-deep);
+}
+
+.fw-item-desc {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  line-height: 1.68;
+  color: var(--muted);
+  max-width: 760px;
+}
+
+.fw-arrow {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--moss);
+  transition: all 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  flex-shrink: 0;
+  align-self: center;
+  line-height: 1;
+}
+
+.fw-item:hover .fw-arrow {
+  color: var(--moss-deep);
+  transform: translateX(6px);
+}
+
+.fw-item[data-external="true"]:hover .fw-arrow {
+  transform: translate(4px, -4px);
+}
+
+.fw-footnote {
+  margin-top: clamp(28px, 3.5vh, 36px);
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--muted);
+  max-width: 52em;
+}
+
+.fw-footnote a {
+  color: var(--moss-deep);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.fw-footnote a:hover {
+  color: var(--ink);
+}
+
+@media (max-width: 768px) {
+  .fw-item {
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    padding: 22px 4px 24px;
+  }
+  .fw-item-meta {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    gap: 14px;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  .fw-item:hover {
+    padding-left: 10px;
+  }
+}
+
+/* §3.11 Contact · 全宽深色版（v2.4.7 · 显化绿调，深森林 + 暖橘光晕） */
+.site-contact {
+  position: relative;
+  width: 100%;
+  margin-top: clamp(40px, 5vh, 64px);
+  padding: clamp(40px, 6vh, 64px) 0 clamp(22px, 3.5vh, 36px);
+  background:
+    radial-gradient(ellipse 110% 80% at 92% -5%, rgba(212, 165, 116, 0.28), transparent 55%),
+    radial-gradient(ellipse 65% 55% at 8% 110%, rgba(93, 112, 82, 0.20), transparent 65%),
+    linear-gradient(160deg, #2e3d2c 0%, #263626 55%, #1f2c1e 100%);
+  color: rgba(255, 253, 247, 0.92);
+  overflow: hidden;
+  scroll-margin-top: 96px;
+}
+
+.site-contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 4vw, 56px);
+}
+
+.site-contact-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(212, 165, 116, 1);
+  margin-bottom: 12px;
+}
+
+.site-contact-eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: rgba(212, 165, 116, 1);
+}
+
+.site-contact-title {
+  margin: 0 0 12px;
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: rgba(255, 253, 247, 0.96);
+}
+
+.site-contact-title em {
+  font-style: italic;
+  font-weight: 500;
+  color: rgba(212, 165, 116, 1);
+}
+
+.site-contact-lede {
+  margin: 0 0 24px;
+  font-family: var(--font-body);
+  font-size: clamp(13.5px, 1.4vw, 15px);
+  line-height: 1.65;
+  color: rgba(255, 253, 247, 0.70);
+  max-width: 580px;
+}
+
+.site-contact-lede em {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  color: rgba(212, 165, 116, 1);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 12px 14px;
+  background: rgba(255, 253, 247, 0.04);
+  border: 1px solid rgba(255, 253, 247, 0.10);
+  border-radius: 10px;
+  text-decoration: none;
+  color: rgba(255, 253, 247, 0.90);
+  transition: all 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  min-width: 0;
+}
+
+.contact-card:hover {
+  background: rgba(255, 253, 247, 0.08);
+  border-color: rgba(212, 165, 116, 0.45);
+  transform: translateY(-2px);
+}
+
+.contact-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 7px;
+  background: rgba(212, 165, 116, 0.14);
+  color: rgba(212, 165, 116, 1);
+}
+
+.contact-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.contact-text {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 968px) {
+  .contact-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contact-social {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: rgba(255, 253, 247, 0.50);
+}
+
+.contact-social a {
+  color: rgba(255, 253, 247, 0.88);
+  text-decoration: none;
+  font-weight: 500;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(255, 253, 247, 0.25);
+  transition: all 200ms;
+}
+
+.contact-social a:hover {
+  color: rgba(212, 165, 116, 1);
+  border-color: rgba(212, 165, 116, 1);
+}
+
+.contact-social .dot {
+  color: rgba(255, 253, 247, 0.30);
+}
+
+.site-contact-footer {
+  margin: 0;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 253, 247, 0.12);
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+  color: rgba(255, 253, 247, 0.42);
+}
+
+.jd-match {
+  margin-top: 0;
+  padding: 16px 22px 18px;
+  background: rgba(255, 253, 247, 0.55);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-sm);
+  max-width: 580px;
+  width: 100%;
+}
+
+.jd-match-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--rust);
+  margin-bottom: 6px;
+}
+
+.jd-match-eyebrow span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--rust);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.jd-match-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  margin-bottom: 2px;
+  display: inline;
+}
+
+.jd-match-title em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--moss-deep);
+}
+
+.jd-match-subtitle {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin-bottom: 10px;
+  margin-top: 2px;
+}
+
+.jd-match-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.jd-match-input {
+  flex: 1;
+  padding: 9px 16px;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  background: var(--bg-paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  color: var(--ink);
+  transition: all 200ms;
+  min-width: 0;
+}
+
+.jd-match-input:focus {
+  outline: none;
+  border-color: var(--moss);
+  background: var(--bg-primary);
+  box-shadow: 0 0 0 3px rgba(93, 112, 82, 0.10);
+}
+
+.jd-match-input::placeholder {
+  color: var(--muted);
+}
+
+.jd-match-submit {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--moss);
+  color: var(--bg-primary);
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.jd-match-submit:hover {
+  background: var(--moss-deep);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.jd-match-examples {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.jd-example {
+  padding: 6px 12px;
+  font-size: 12.5px;
+  font-family: var(--font-body);
+  background: transparent;
+  color: var(--moss);
+  border: 1px solid rgba(93, 112, 82, 0.40);
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  transition: all 200ms;
+}
+
+.jd-example:hover {
+  background: var(--moss);
+  color: var(--bg-primary);
+  border-color: var(--moss);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ============================================
+   JD Modal · 匹配报告弹窗
+============================================ */
+.jd-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.jd-modal.open {
+  display: flex;
+}
+
+.jd-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(31, 37, 34, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: backdropIn 240ms ease;
+}
+
+@keyframes backdropIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.jd-modal-panel {
+  position: relative;
+  max-width: 720px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  background: var(--bg-paper);
+  border-radius: var(--r-card-lg);
+  box-shadow: 0 32px 80px rgba(31, 37, 34, 0.28);
+  padding: 48px;
+  animation: modalIn 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.jd-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 200ms;
+  line-height: 1;
+}
+
+.jd-modal-close:hover {
+  background: var(--bg-secondary);
+  color: var(--ink);
+}
+
+.jd-modal-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--rust);
+  margin-bottom: 12px;
+}
+
+.jd-modal-eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--rust);
+}
+
+.jd-modal-title {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.4vw, 30px);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 28px;
+}
+
+.jd-modal-title em {
+  font-style: italic;
+  color: var(--moss-deep);
+  font-weight: 500;
+}
+
+.jd-modal-score-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(93, 112, 82, 0.10), rgba(212, 165, 116, 0.08));
+  border-radius: var(--r-card);
+  margin-bottom: 32px;
+}
+
+.jd-modal-score-circle {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: var(--bg-paper);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  flex-shrink: 0;
+}
+
+.jd-modal-score-num {
+  font-family: var(--font-display);
+  font-size: 38px;
+  font-weight: 600;
+  color: var(--moss-deep);
+  line-height: 1;
+}
+
+.jd-modal-score-label {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+  letter-spacing: 0.08em;
+}
+
+.jd-modal-score-text {
+  flex: 1;
+}
+
+.jd-modal-score-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.jd-modal-score-verdict {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.jd-modal-section {
+  margin-bottom: 28px;
+}
+
+.jd-modal-h3 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: 0.01em;
+}
+
+.jd-modal-h3::before {
+  content: "";
+  width: 3px;
+  height: 14px;
+  background: var(--moss);
+  border-radius: 2px;
+}
+
+.jd-matrix {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.jd-matrix-row {
+  display: grid;
+  grid-template-columns: 150px 1fr 44px;
+  gap: 16px;
+  align-items: center;
+}
+
+.jd-matrix-label {
+  font-size: 13.5px;
+  color: var(--ink);
+}
+
+.jd-matrix-bar {
+  height: 8px;
+  background: var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.jd-matrix-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--moss), var(--moss-deep));
+  border-radius: 4px;
+  width: 0%;
+  transition: width 900ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.jd-matrix-score {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--moss-deep);
+  text-align: right;
+}
+
+.jd-highlights {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.jd-highlights li {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink);
+  padding: 12px 16px;
+  background: rgba(93, 112, 82, 0.06);
+  border-left: 3px solid var(--moss);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+}
+
+.jd-highlights li strong {
+  color: var(--moss-deep);
+  font-weight: 600;
+}
+
+.jd-summary {
+  font-size: 15px;
+  line-height: 1.75;
+  color: rgba(31, 37, 34, 0.88);
+}
+
+.jd-modal-footer {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.jd-modal-footer p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.jd-modal-footer a {
+  color: var(--moss);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 500;
+}
+
+@media (max-width: 640px) {
+  .jd-modal-panel {
+    padding: 32px 24px;
+  }
+  .jd-modal-score-row {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+    padding: 20px;
+  }
+  .jd-matrix-row {
+    grid-template-columns: 100px 1fr 36px;
+    gap: 10px;
+  }
+  .jd-matrix-label,
+  .jd-matrix-score {
+    font-size: 12.5px;
+  }
+}
+
+/* ============================================
+   Prototype banner (移除上线版本时删掉)
+============================================ */
+.proto-banner {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 200;
+  padding: 8px 14px;
+  background: rgba(31, 37, 34, 0.85);
+  color: var(--bg-primary);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  border-radius: var(--r-pill);
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ============================================
+   Entry animations
+============================================ */
+.fade-up {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fadeUp 600ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.delay-1 { animation-delay: 100ms; }
+.delay-2 { animation-delay: 200ms; }
+.delay-3 { animation-delay: 350ms; }
+.delay-4 { animation-delay: 450ms; }
+.delay-5 { animation-delay: 550ms; }
+.delay-6 { animation-delay: 650ms; }
+
+/* ============================================
+   §3.10 About Me · 左 Timeline + 右 翻开的书（v2 · 无边框 + 双页 spread）
+============================================ */
+.about-me {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(64px, 8vh, 96px) clamp(24px, 4vw, 48px);
+  position: relative;
+  z-index: 1;
+  scroll-margin-top: 96px;
+}
+
+.am-inner { max-width: 1080px; margin: 0 auto; }
+
+.am-header {
+  margin-bottom: clamp(36px, 4.5vh, 48px);
+  max-width: 760px;
+}
+.am-lede {
+  margin-top: 16px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.72;
+  color: var(--muted);
+  max-width: 680px;
+}
+
+.am-grid {
+  display: grid;
+  /* v3：把书略微缩小（page-w 270，open 540）+ 翻页按钮内收（-16 各 = 32），
+     右列锁到 572px 即可容下；左列因此回收 ~52px 给 timeline，能保证
+     "管理科学与工程 硕士（创新管理方向）" 这类长 role 单行不换。 */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 572px);
+  gap: clamp(28px, 3.5vw, 44px);
+  align-items: start;
+}
+
+/* ----- 左侧 Timeline（无边框无背景） ----- */
+.am-timeline { position: relative; padding-left: 18px; }
+.am-timeline::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 8px;
+  bottom: 8px;
+  width: 1.5px;
+  background: var(--moss);
+  opacity: 0.35;
+}
+.am-tl-item {
+  position: relative;
+  padding-bottom: 30px;
+}
+.am-tl-item:last-child { padding-bottom: 0; }
+.am-tl-item::before {
+  content: "";
+  position: absolute;
+  left: -18px;
+  top: 8px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--moss);
+  box-shadow: 0 0 0 3px var(--bg-primary);
+}
+.am-tl-item.is-edu::before { background: var(--rust); }
+
+.am-tl-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 4px;
+}
+.am-tl-role {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.35;
+  flex: 1;
+}
+.am-tl-date {
+  flex-shrink: 0;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+  background: rgba(193, 140, 93, 0.14);
+  font-feature-settings: 'tnum';
+  white-space: nowrap;
+}
+.am-tl-org {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--moss-deep);
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+.am-tl-desc {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* ----- 右侧 Book ----- */
+.am-book-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+}
+.am-book-hint {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* 舞台：闭合时只露封面 + 左页（被封面盖住），打开时右页通过 clip 壳从 0 → page-w 展开 */
+.am-book-stage {
+  --book-h: 460px;
+  --page-w: 270px;
+  position: relative;
+  display: flex;
+  height: var(--book-h);
+  perspective: 2000px;
+  perspective-origin: 100% 50%;
+  margin: 0 auto;
+}
+
+/* 右页剪裁壳：闭合时 width 0 把右页藏掉，打开时展开到 page-w */
+.am-page-right-clip {
+  width: 0;
+  height: var(--book-h);
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: width 1100ms cubic-bezier(0.86, 0, 0.07, 1);
+}
+.am-book-stage.is-open .am-page-right-clip {
+  width: var(--page-w);
+}
+
+/* 柔光 halo */
+.am-book-halo {
+  position: absolute;
+  inset: -50px;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(212, 165, 116, 0.28), transparent 65%),
+    radial-gradient(ellipse at 70% 60%, rgba(93, 112, 82, 0.18), transparent 65%);
+  filter: blur(28px);
+  z-index: 0;
+  pointer-events: none;
+  animation: amHaloFloat 7s ease-in-out infinite;
+}
+@keyframes amHaloFloat {
+  0%, 100% { opacity: 0.7; transform: scale(1) translate(0, 0); }
+  33% { opacity: 1; transform: scale(1.06) translate(-4px, -6px); }
+  66% { opacity: 0.85; transform: scale(1.03) translate(6px, 4px); }
+}
+.am-book-stage.is-open .am-book-halo {
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(212, 165, 116, 0.32), transparent 65%),
+    radial-gradient(ellipse at 70% 60%, rgba(93, 112, 82, 0.22), transparent 65%);
+}
+
+/* 漂浮的小光点 */
+.am-book-sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 12px rgba(212, 165, 116, 0.8);
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+  animation: amSparkle 5s ease-in-out infinite;
+}
+.am-book-sparkle.s1 { top: 14%; left: -30px; animation-delay: 0s; }
+.am-book-sparkle.s2 { top: 60%; right: -36px; animation-delay: 1.6s; width: 5px; height: 5px; }
+.am-book-sparkle.s3 { bottom: 8%; left: 20%; animation-delay: 3.2s; width: 4px; height: 4px; background: var(--moss); box-shadow: 0 0 10px rgba(93,112,82,0.7); }
+@keyframes amSparkle {
+  0%, 100% { opacity: 0; transform: translateY(0) scale(0.7); }
+  20% { opacity: 0.9; transform: translateY(-6px) scale(1); }
+  50% { opacity: 0.55; transform: translateY(-14px) scale(0.9); }
+  80% { opacity: 0; transform: translateY(-22px) scale(0.6); }
+}
+
+/* 左右两个页面容器 */
+.am-page {
+  width: var(--page-w);
+  height: var(--book-h);
+  position: relative;
+  background: linear-gradient(to right, #FAF4E5, #FFFDF7);
+  flex-shrink: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+.am-page--right {
+  background: linear-gradient(to left, #FAF4E5, #FFFDF7);
+  box-shadow: inset 4px 0 14px -8px rgba(31, 37, 34, 0.18);
+}
+.am-page--left {
+  box-shadow: inset -4px 0 14px -8px rgba(31, 37, 34, 0.18);
+  border-radius: 6px 0 0 6px;
+}
+.am-book-stage.is-open .am-page--left { border-radius: 6px 0 0 6px; }
+.am-page--right { border-radius: 0 12px 12px 0; }
+
+/* spread 内容（每页内部 absolute 叠层） */
+.am-spread-pane {
+  position: absolute;
+  inset: 0;
+  padding: 32px 26px;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 360ms ease, transform 360ms ease;
+  pointer-events: none;
+}
+.am-spread-pane.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition-delay: 200ms;
+}
+
+/* 左页：编号 + 大标题 + lead */
+.am-pane-num {
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  color: var(--moss);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.am-pane-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.18;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-bottom: 14px;
+}
+.am-pane-title em {
+  font-style: italic;
+  color: var(--moss-deep);
+}
+.am-pane-lead {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.72;
+  color: var(--muted);
+}
+.am-pane-anchor {
+  margin-top: auto;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--moss-deep);
+  padding-top: 16px;
+  border-top: 1px dashed var(--line-strong);
+}
+
+/* 右页：正文。v3 改 overflow:hidden，目标一页排满不出滚动条 */
+.am-spread-pane--right { padding: 22px 20px; }
+.am-pane-body {
+  overflow: hidden;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 8px;
+}
+.am-pane-body p {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--ink);
+  margin: 0;
+}
+.am-pane-body p strong { color: var(--moss-deep); font-weight: 600; }
+.am-pane-body ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 6px;
+  margin: 0;
+  flex: 1;
+  min-height: 0;
+}
+.am-pane-body li {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--ink);
+  padding-left: 12px;
+  position: relative;
+}
+
+/* spread 04（信念）/ 05（GAP 期）正文内容比 hobby 短，
+   space-around 会把段间距撑得过大，改成居中聚拢 + 固定 gap */
+.am-spread-pane[data-spread="belief"] .am-pane-body,
+.am-spread-pane[data-spread="learning"] .am-pane-body {
+  justify-content: center;
+  gap: 16px;
+}
+.am-spread-pane[data-spread="learning"] .am-pane-body ul {
+  justify-content: center;
+  gap: 10px;
+}
+
+/* spread 01（reading）/ 02（hobby）/ 03（podcast）：段间距缩短约 1/3。
+   原 space-around 把可用空隙全部均分，反而显得稀疏；换成 center + 固定 gap。 */
+.am-spread-pane[data-spread="reading"] .am-pane-body {
+  justify-content: center;
+  gap: 28px;
+}
+.am-spread-pane[data-spread="hobby"] .am-pane-body {
+  justify-content: center;
+  gap: 8px;
+}
+.am-spread-pane[data-spread="podcast"] .am-pane-body ul {
+  justify-content: center;
+  gap: 22px;
+}
+
+/* spread 01 / 02 / 03 也从 space-around 切到 center 聚拢，
+   inter-paragraph 间距按用户要求缩短三分之一 */
+.am-spread-pane[data-spread="reading"] .am-pane-body,
+.am-spread-pane[data-spread="hobby"] .am-pane-body {
+  justify-content: center;
+  gap: 18px;
+}
+.am-spread-pane[data-spread="hobby"] .am-pane-body { gap: 10px; }
+.am-spread-pane[data-spread="podcast"] .am-pane-body ul {
+  justify-content: center;
+  gap: 14px;
+}
+.am-pane-body li::before {
+  content: "·";
+  position: absolute;
+  left: 0;
+  top: -2px;
+  color: var(--moss);
+  font-weight: 700;
+}
+.am-pane-body li strong { color: var(--moss-deep); font-weight: 600; }
+.am-pane-body .anchor-line {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--moss-deep);
+  text-align: center;
+  margin: 4px 0 14px;
+  padding: 10px 6px;
+  border-top: 1px dashed var(--line-strong);
+  border-bottom: 1px dashed var(--line-strong);
+}
+
+/* 封面（覆盖在左页之上） */
+.am-book-cover {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--page-w);
+  height: var(--book-h);
+  z-index: 5;
+  border-radius: 6px 12px 12px 6px;
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(255, 253, 247, 0.12), transparent 60%),
+    linear-gradient(135deg, #3D6B54 0%, #2E5340 100%);
+  color: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px 26px 26px;
+  cursor: pointer;
+  transform-origin: left center;
+  transform: rotateY(0deg);
+  transition: transform 1200ms cubic-bezier(0.86, 0, 0.07, 1),
+              box-shadow 400ms ease;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow:
+    inset 12px 0 22px -14px rgba(0, 0, 0, 0.4),
+    var(--shadow-lg);
+  overflow: hidden;
+}
+.am-book-cover::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 14px;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.45), transparent);
+  border-radius: 4px 0 0 4px;
+  pointer-events: none;
+}
+.am-book-cover:hover { box-shadow: inset 12px 0 22px -14px rgba(0, 0, 0, 0.4), var(--shadow-hover); }
+.am-book-cover:hover .am-cover-cta {
+  border-color: var(--amber);
+  color: var(--amber);
+}
+.am-book-stage.is-open .am-book-cover {
+  transform: rotateY(-172deg);
+  cursor: default;
+}
+
+.am-cover-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+}
+.am-cover-eyebrow {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(251, 247, 238, 0.65);
+}
+
+.am-cover-avatar {
+  position: relative;
+  z-index: 1;
+  margin: 6px auto 0;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background: rgba(255, 253, 247, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 6px rgba(212, 165, 116, 0.30),
+    0 0 36px rgba(212, 165, 116, 0.35);
+}
+.am-cover-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.am-cover-bottom {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+.am-cover-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+.am-cover-title em {
+  font-style: italic;
+  color: var(--amber);
+  font-weight: 400;
+}
+.am-cover-author {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 13px;
+  color: rgba(251, 247, 238, 0.85);
+  margin-bottom: 16px;
+}
+.am-cover-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 7px 16px;
+  border-radius: var(--r-pill);
+  border: 1px solid rgba(251, 247, 238, 0.45);
+  color: rgba(251, 247, 238, 0.9);
+  transition: all 220ms ease;
+}
+
+/* 翻页按钮（书打开时显示） */
+.am-book-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 253, 247, 0.95);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms ease, background 200ms ease, transform 200ms ease, color 200ms ease;
+  z-index: 8;
+}
+.am-book-stage.is-open .am-book-nav {
+  opacity: 1;
+  pointer-events: auto;
+}
+.am-book-nav:hover {
+  background: var(--moss);
+  color: var(--bg-primary);
+  border-color: var(--moss);
+}
+.am-book-nav--prev { left: -16px; }
+.am-book-nav--next { right: -16px; }
+
+/* 合上按钮 */
+.am-book-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 7;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: rgba(255, 253, 247, 0.92);
+  color: var(--muted);
+  font-size: 16px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: color 180ms ease, transform 180ms ease;
+}
+.am-book-close:hover { color: var(--ink); transform: scale(1.08); }
+.am-book-stage.is-open .am-book-close { display: flex; }
+
+/* 页码点 */
+.am-book-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 18px;
+  margin-top: 8px;
+  opacity: 0.45;
+  transition: opacity 400ms ease;
+}
+.am-book-side.is-open-side .am-book-dots { opacity: 1; }
+
+/* 书下方常驻引言 */
+.am-book-quote {
+  margin: 14px 0 0;
+  max-width: 280px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+.am-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--line-strong);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 220ms ease;
+}
+.am-dot.is-active {
+  background: var(--moss-deep);
+  transform: scale(1.4);
+}
+
+.am-book-pager {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  font-weight: 600;
+  margin-left: 10px;
+  font-feature-settings: 'tnum';
+}
+
+/* 移动端 */
+@media (max-width: 960px) {
+  .am-grid { grid-template-columns: 1fr; gap: 56px; }
+  .am-book-side { order: 2; }
+  .am-timeline { order: 1; }
+}
+@media (max-width: 640px) {
+  .am-book-stage { --page-w: 260px; --book-h: 420px; }
+  .am-cover-avatar { width: 140px; height: 140px; }
+  .am-cover-title { font-size: 26px; }
+}
+@media (max-width: 540px) {
+  .am-book-stage { --page-w: 230px; --book-h: 380px; }
+  .am-book-nav--prev { left: -14px; }
+  .am-book-nav--next { right: -14px; }
+  .am-tl-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+}
+</style>
 </head>
 <body>
 
-  <section class="hero" aria-label="首屏介绍">
-    <div class="container hero__grid">
-      <div class="hero__left">
-        <div class="hero__row-top">
-          <img class="hero__avatar anim anim--avatar" src="./profile-56.jpg" width="56" height="56" alt="郑宁宁">
-          <div class="status-chip anim anim--chip" role="status">
-            <span class="status-chip__dot" aria-hidden="true"></span>
-            <span>Open to Work · Hangzhou · 寻找 AI 行业研究 / 产品策略全职机会</span>
+<!-- 全局光斑 -->
+<div class="cursor-halo" id="halo"></div>
+
+<!-- C0 · Sticky Navigation Pill -->
+<div class="nav-wrapper">
+  <nav class="nav">
+    <div class="nav-left">
+      <div class="nav-logo">宁</div>
+      <div class="nav-name">
+        <span class="nav-name-en">Ningning Zheng</span>
+        <span class="nav-name-cn">郑宁宁</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#hero" class="nav-link active">Home</a>
+      <a href="#research" class="nav-link">Research</a>
+      <a href="#works" class="nav-link">Works</a>
+      <a href="#toolkit" class="nav-link">AI Workflow</a>
+      <a href="#writing" class="nav-link">Writings</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
+  </nav>
+</div>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero-left">
+    <div class="hero-meta-row fade-up delay-1">
+      <div class="hero-avatar"></div>
+      <div class="status-chip">
+        <span class="status-dot"></span>
+        <span>Open to Work · Hangzhou · 寻找 AI 行业研究 / 产品策略全职机会</span>
+      </div>
+    </div>
+
+    <h1 class="hero-headline fade-up delay-2">
+      <span class="hero-headline-l1">我是郑宁宁，</span>
+      <span class="hero-headline-l2">关注 <em>AI 行业研究</em>、产品策略与 <em>智能体产品化</em>。</span>
+    </h1>
+
+    <p class="hero-subtitle fade-up delay-3">
+      我曾参与低空经济、AI 产品体系规划和电信行业情报体系搭建，擅长把复杂行业信息整理成可判断、可传播、可落地的分析框架。
+    </p>
+
+    <div class="hero-tags fade-up delay-4">
+      <span>Industry Research</span>
+      <span class="hero-tag-sep">·</span>
+      <span>AI Product Systems</span>
+      <span class="hero-tag-sep">·</span>
+      <span>Market Intelligence</span>
+    </div>
+
+    <div class="hero-ctas fade-up delay-5">
+      <a href="#works" class="btn btn-primary">查看代表作品 →</a>
+      <a href="#toolkit" class="btn btn-secondary">看看我的 AI 工作流</a>
+      <a href="#contact" class="btn btn-tertiary">联系我</a>
+    </div>
+
+    <!-- AI JD Match · Hero 内嵌 demo -->
+    <div class="jd-match fade-up delay-6">
+      <h3 class="jd-match-title">想看我和这个岗位的<em>匹配度</em>？</h3>
+      <p class="jd-match-subtitle">贴 JD 或选下方示例，30 秒内告诉你。</p>
+
+      <div class="jd-match-row">
+        <input type="text" class="jd-match-input" id="jd-input" placeholder="粘贴 JD 关键词，或直接选示例…" autocomplete="off">
+        <button class="jd-match-submit" id="jd-submit" aria-label="查看匹配度">→</button>
+      </div>
+
+      <div class="jd-match-examples">
+        <button class="jd-example" data-report="ai-researcher">AI 行业研究员</button>
+        <button class="jd-example" data-report="ai-pm">AI 产品经理</button>
+        <button class="jd-example" data-report="strategist">战略分析师</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right fade-up delay-2">
+    <div class="hero-blob"></div>
+    <div class="hero-blob-amber"></div>
+    <div class="hero-photo"></div>
+  </div>
+</section>
+
+<!-- Research Focus -->
+<section class="research" id="research">
+  <div class="section-header">
+    <div class="eyebrow">RESEARCH FOCUS · 当前关注的研究问题</div>
+    <h2 class="section-h2">我在 <em>系统研究</em> 以下内容</h2>
+  </div>
+
+  <div class="research-grid">
+
+    <article class="research-card">
+      <h3 class="card-h3">AI 产品与 <em>智能体产品化</em></h3>
+      <p class="card-body">关注智能体如何从能力集合，变成可理解、可管理、可发布、可运营的产品体系。</p>
+      <div class="card-tags">
+        <span class="tag">Agent</span>
+        <span class="tag">产品体系</span>
+        <span class="tag">产品运营</span>
+      </div>
+    </article>
+
+    <article class="research-card">
+      <h3 class="card-h3"><em>AI 行业研究</em> 与商业化判断</h3>
+      <p class="card-body">关注大模型商业化、Agent 产品化、AI 应用落地和企业付费意愿等议题，并通过公开文章持续补齐 AI 行业判断。</p>
+      <div class="card-tags">
+        <span class="tag">LLM 商业化</span>
+        <span class="tag">企业付费</span>
+        <span class="tag">行业判断</span>
+      </div>
+    </article>
+
+    <article class="research-card">
+      <h3 class="card-h3">情报体系 与 <em>AI 工作流</em></h3>
+      <p class="card-body">关注如何把电信行业情报体系搭建经验迁移到 AI 行业，用 AI 工具提升信息采集、资料整理、分析写作和内部分享效率。</p>
+      <div class="card-tags">
+        <span class="tag">情报体系</span>
+        <span class="tag">AI 工作流</span>
+        <span class="tag">研究方法</span>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- 数字 Bar · 4 个量化锚 -->
+<section class="stats">
+  <div class="stats-inner">
+    <div class="stat">
+      <div class="stat-value">
+        <span class="stat-num" data-target="2">2</span>
+        <span class="stat-unit">部</span>
+      </div>
+      <div class="stat-label">
+        <span class="stat-label-line">对外发布白皮书</span>
+        <span class="stat-label-line">低空经济 · AI 产品</span>
+      </div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">
+        <span class="stat-num" data-target="170">170</span><span class="stat-plus">+</span>
+        <span class="stat-unit">个</span>
+      </div>
+      <div class="stat-label">
+        <span class="stat-label-line">智能体产品分类管理</span>
+        <span class="stat-label-line">覆盖研发全线产出</span>
+      </div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">
+        <span class="stat-num" data-target="31">31</span>
+        <span class="stat-unit">省</span>
+      </div>
+      <div class="stat-label">
+        <span class="stat-label-line">运营商市场调研覆盖</span>
+        <span class="stat-label-line">赋能全国销售团队</span>
+      </div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">
+        <span class="stat-num stat-num-text">TMF</span>
+      </div>
+      <div class="stat-label">
+        <span class="stat-label-line">全球峰会 · 丹麦</span>
+        <span class="stat-label-line">Catalyst 英文路演</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §3.4 Selected Works · 3 张项目卡（默认 C → A → B） -->
+<section class="works" id="works" aria-labelledby="works-heading">
+  <div class="works-header">
+    <div class="eyebrow">Selected Works · 代表项目</div>
+    <h2 class="section-h2" id="works-heading">我的主要工作产出</h2>
+    <p class="works-lede">从 0 到 1 搭建情报机制 · 推动公司第一部白皮书 · 把 170+ 智能体翻译成产品。</p>
+  </div>
+
+  <!-- Card 1 · 情报体系（图左文右） -->
+  <article class="works-row works-row--img-left" id="work-telecom-intelligence">
+    <a class="works-media" href="./情报体系产出/portfolio-work-telecom-intelligence-v4.html" aria-label="查看电信行业情报体系作品详情">
+      <img src="./情报体系产出/情报体系详情图.png" width="2376" height="1308" alt="电信行业情报体系搭建：信源结构与机制示意" loading="lazy">
+    </a>
+    <div class="works-copy">
+      <div class="works-card-eyebrow">Work 01 · Market Intelligence</div>
+      <h3 class="works-card-title">电信行业情报体系 · <em>从 0 到 1</em> 的研究机制</h3>
+      <p class="works-card-body">从 0 到 1 搭建公司电信行业情报体系，覆盖宏观政策、标准组织、四大运营商客户和竞争对手四类维度，并形成每周行业信息采集、整理和内部分享机制。</p>
+      <div class="works-tags">
+        <span class="works-tag">市场分析</span>
+        <span class="works-tag">竞争情报</span>
+        <span class="works-tag">信息体系</span>
+        <span class="works-tag">持续研究机制</span>
+      </div>
+      <a class="btn btn-primary works-cta" href="./情报体系产出/portfolio-work-telecom-intelligence-v4.html">查看详情 →</a>
+    </div>
+  </article>
+
+  <!-- Card 2 · 低空经济（文左图右） -->
+  <article class="works-row works-row--img-right" id="work-low-altitude">
+    <div class="works-copy">
+      <div class="works-card-eyebrow">Work 02 · Industry Research</div>
+      <h3 class="works-card-title">从 0 到 1 推动 <em>低空经济</em> 创新项目</h3>
+      <p class="works-card-body">参与低空经济项目从 0 到 1 立项推动，完成前期行业研究、业务研究、系统架构相关内容参与、白皮书撰写，并在展会上进行产品演讲推广。</p>
+      <div class="works-tags">
+        <span class="works-tag">产业研究</span>
+        <span class="works-tag">创新项目策划</span>
+        <span class="works-tag">白皮书</span>
+        <span class="works-tag">展会推广</span>
+      </div>
+      <a class="btn btn-primary works-cta" href="./低空经济产出/portfolio-work-low-altitude-v1.html">查看详情 →</a>
+    </div>
+    <a class="works-media" href="./低空经济产出/portfolio-work-low-altitude-v1.html" aria-label="查看低空经济创新项目作品详情">
+      <img src="./低空经济产出/assets/whitepaper_05.png" width="1600" height="960" alt="低空经济白皮书相关示意图" loading="lazy">
+    </a>
+  </article>
+
+  <!-- Card 3 · 智能体（图左文右） -->
+  <article class="works-row works-row--img-left" id="work-ai-agent">
+    <a class="works-media" href="./智能体产出/portfolio-work-ai-agent-portal-v1.html" aria-label="查看 AI 产品体系规划作品详情">
+      <img src="./智能体产出/智能体产出代表图片.png" width="1200" height="750" alt="智能体产品体系与门户规划代表图" loading="lazy">
+    </a>
+    <div class="works-copy">
+      <div class="works-card-eyebrow">Work 03 · AI Product Systems</div>
+      <h3 class="works-card-title">基于 <em>170+ 智能体</em> 的 AI 产品体系规划</h3>
+      <p class="works-card-body">基于公司已有 170+ 智能体，参与智能体产品体系分类、门户规划设计、产品发布直播策划与脚本策划，并承担 AI 产品白皮书框架搭建、第二章节撰写与全文整合工作。</p>
+      <div class="works-tags">
+        <span class="works-tag">AI 产品体系</span>
+        <span class="works-tag">智能体分类</span>
+        <span class="works-tag">产品发布运营</span>
+        <span class="works-tag">白皮书</span>
+      </div>
+      <a class="btn btn-primary works-cta" href="./智能体产出/portfolio-work-ai-agent-portal-v1.html">查看详情 →</a>
+    </div>
+  </article>
+</section>
+
+<!-- §3.9 我的 AI 工作流 · Skills + 工作流图 + Vibe Coding 项目 -->
+<section class="toolkit" id="toolkit" aria-labelledby="toolkit-heading">
+  <div class="toolkit-header">
+    <div class="eyebrow">AI Workflow · AI 工作流</div>
+    <h2 class="section-h2" id="toolkit-heading">我的<em>AI 工作流</em></h2>
+    <p class="toolkit-lede">用 AI 重构从信息输入、逻辑推演到前端落地的全链路工作流。</p>
+  </div>
+
+  <!-- §3.9.a · 三列横排类目卡 -->
+  <div class="toolkit-block">
+    <div class="toolkit-block-head">
+      <h3 class="toolkit-block-title">AI 技术栈 · Claude Code skills</h3>
+      <span class="toolkit-block-meta">点击 skill 链接跳转安装 / 仓库</span>
+    </div>
+    <div class="category-grid">
+
+      <article class="category-card" data-group="research">
+        <h4 class="category-title">研究 · 信息</h4>
+        <div class="category-skills">
+          <a class="skill-item" href="https://aihot.virxact.com/agent" target="_blank" rel="noopener noreferrer">
+            <code class="skill-item-name">aihot</code>
+            <p class="skill-item-desc">每天追 AI 圈最新动态——<strong>OpenAI / Anthropic / Google</strong> 等公司发布、新模型、新产品。</p>
+          </a>
+          <a class="skill-item" href="https://github.com/zarazhangrui/follow-builders" target="_blank" rel="noopener noreferrer">
+            <code class="skill-item-name">follow-builders</code>
+            <p class="skill-item-desc">配合 <strong>Obsidian + Codex</strong> 工作流：每天定时抓 AI builders 的 X / YouTube 内容，再用 Codex 做深度分析。</p>
+          </a>
+          <a class="skill-item" href="https://github.com/KKKKhazix/khazix-skills/tree/main/khazix-writer" target="_blank" rel="noopener noreferrer">
+            <code class="skill-item-name">khazix-writer</code>
+            <p class="skill-item-desc">适用需要撰写公众号文章、写稿子、续写文章、根据素材产出长文时使用。</p>
+          </a>
+        </div>
+      </article>
+
+      <article class="category-card" data-group="thinking">
+        <h4 class="category-title">思考 · 表达</h4>
+        <div class="category-skills">
+          <a class="skill-item" href="https://claude.com/plugins/superpowers" target="_blank" rel="noopener noreferrer">
+            <code class="skill-item-name">using-superpowers</code>
+            <p class="skill-item-desc">复杂推理、决策、跨技能协作的入口；Superpowers 插件自带的一键纪律。</p>
+          </a>
+          <a class="skill-item" href="https://github.com/sunnymilky80/claude-skills-open" target="_blank" rel="noopener noreferrer">
+            <code class="skill-item-name">spec-generator</code>
+            <p class="skill-item-desc">日常 PRD 都用它：<strong>7 阶段流水线</strong>，product brief → PRD → architecture → epics → issues。</p>
+          </a>
+          <a class="skill-item" href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/frontend-design" target="_blank" rel="noopener noreferrer">
+            <code class="skill-item-name">frontend-design</code>
+            <p class="skill-item-desc"><em>Vibe Coding</em> 实现前端——这个个人网站就是产物。</p>
+          </a>
+        </div>
+      </article>
+
+      <article class="category-card" data-group="engineering">
+        <h4 class="category-title">AI 工程化</h4>
+        <div class="category-skills">
+          <a class="skill-item" href="https://github.com/sunnymilky80/claude-skills-open" target="_blank" rel="noopener noreferrer">
+            <code class="skill-item-name">ccw-chain</code>
+            <p class="skill-item-desc"><strong>CCW 框架</strong>——Chain-based workflow orchestrator，调度 <em>Codex + Gemini + Claude</em> 三智能体协同。</p>
+          </a>
+          <a class="skill-item" href="https://github.com/anthropics/skills/tree/main/skills/skill-creator" target="_blank" rel="noopener noreferrer">
+            <code class="skill-item-name">skill-creator</code>
+            <p class="skill-item-desc">把「一次性 prompt」沉淀成可复用 Skill：创建、迭代、评测（Anthropic <code>skills</code> 仓库路径）。</p>
+          </a>
+          <a class="skill-item" href="https://github.com/derek-larson14/obsidian-claude-sidebar" target="_blank" rel="noopener noreferrer">
+            <code class="skill-item-name">obsidian-claude-sidebar</code>
+            <p class="skill-item-desc">在 Obsidian 侧边栏中运行 Claude 代码，提升知识管理效率。</p>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- §3.9.b · 核心 AI 工作流 -->
+  <div class="toolkit-block">
+    <div class="toolkit-block-head">
+      <h3 class="toolkit-block-title">核心 AI 工作流</h3>
+      <span class="toolkit-block-meta">日常核心工作流</span>
+    </div>
+    <div class="workflow-grid">
+
+      <article class="workflow-card">
+        <div class="workflow-card-head">
+          <h4 class="workflow-card-title">Vibe Coding 项目工作流</h4>
+          <span class="workflow-card-sub">从想法到可点原型站</span>
+        </div>
+        <div class="workflow-diagram workflow-diagram--vibe" role="group" aria-label="Vibe Coding 四步工作流">
+          <button type="button" class="workflow-copy" data-workflow="vibe" aria-label="复制 Vibe Coding 工作流文本"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+          <div class="workflow-pipeline">
+            <div class="workflow-stage">
+              <div class="workflow-stage-zh">构想</div>
+              <div class="workflow-stage-en">Brain</div>
+              <p class="workflow-stage-out">内容 + 架构</p>
+              <div class="workflow-stage-tools"><span class="wf-tool">using-superpowers</span><span class="wf-tool">brainstorm</span></div>
+            </div>            <span class="workflow-pipe" aria-hidden="true">→</span>            <div class="workflow-stage">
+              <div class="workflow-stage-zh">找参考</div>
+              <div class="workflow-stage-en">Extract Spec / Design</div>
+              <p class="workflow-stage-out">风格规范</p>
+              <div class="workflow-stage-tools"><span class="wf-tool">design-extractor</span></div>
+            </div>            <span class="workflow-pipe" aria-hidden="true">→</span>            <div class="workflow-stage">
+              <div class="workflow-stage-zh">写 PRD</div>
+              <div class="workflow-stage-en">PRD</div>
+              <p class="workflow-stage-out">PRD 文档</p>
+              <div class="workflow-stage-tools"><span class="wf-tool">spec-generator</span><span class="wf-tool">using-superpowers</span></div>
+            </div>            <span class="workflow-pipe" aria-hidden="true">→</span>            <div class="workflow-stage workflow-stage--wide">
+              <div class="workflow-stage-zh">实现 & 部署</div>
+              <div class="workflow-stage-en">Build & Ship</div>
+              <p class="workflow-stage-out">上线网站</p>
+              <div class="workflow-stage-tools"><span class="wf-tool">Codex</span><span class="wf-tool">Cursor</span><span class="wf-tool">Claude Code</span><span class="wf-tool">frontend-design</span></div>
+            </div>
           </div>
         </div>
+        <div class="workflow-stack">
+          <span class="workflow-stack-label">日常工具栈</span>
+          <div class="workflow-app-icons" aria-label="Vibe Coding 常用工具">
+            <span class="wf-app-icon wf-app-icon--square" title="Claude Code" aria-label="Claude Code"><img src="https://www.google.com/s2/favicons?domain=claude.ai&amp;sz=128" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="ChatGPT" aria-label="ChatGPT"><img src="https://www.google.com/s2/favicons?domain=chatgpt.com&amp;sz=128" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Gemini" aria-label="Gemini"><img src="https://www.google.com/s2/favicons?domain=gemini.google.com&amp;sz=128" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Cursor" aria-label="Cursor"><img src="https://www.google.com/s2/favicons?domain=cursor.com&amp;sz=128" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--codex" title="Codex" aria-label="Codex"><img src="./assets/codex-app-icon.png" alt="" width="20" height="20" loading="lazy"></span><span class="wf-app-icon wf-app-icon--square" title="Replit" aria-label="Replit"><img src="https://www.google.com/s2/favicons?domain=replit.com&amp;sz=128" alt="" loading="lazy" decoding="async"></span>
+          </div>
+        </div>
+      </article>
 
-        <h1 class="hero__title anim anim--h1">
-          我是郑宁宁，关注 <em>AI 行业研究</em>、产品策略与智能体产品化。
-        </h1>
+      <article class="workflow-card">
+        <div class="workflow-card-head">
+          <h4 class="workflow-card-title">行业研究工作流</h4>
+          <span class="workflow-card-sub">从信息流到公众号成稿</span>
+        </div>
+        <div class="workflow-diagram workflow-diagram--research" role="group" aria-label="行业研究四步工作流">
+          <button type="button" class="workflow-copy" data-workflow="research" aria-label="复制行业研究工作流文本"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+          <div class="workflow-pipeline">
+            <div class="workflow-stage">
+              <div class="workflow-stage-zh">抓信号</div>
+              <div class="workflow-stage-en">Capture</div>
+              <p class="workflow-stage-out">原始信息</p>
+              <div class="workflow-stage-tools"><span class="wf-tool">aihot</span><span class="wf-tool">follow-builders</span></div>
+            </div>            <span class="workflow-pipe" aria-hidden="true">→</span>            <div class="workflow-stage workflow-stage--wide">
+              <div class="workflow-stage-zh">沉淀分析</div>
+              <div class="workflow-stage-en">Synthesize</div>
+              <p class="workflow-stage-out">结构化笔记</p>
+              <div class="workflow-stage-tools"><span class="wf-tool">Obsidian</span><span class="wf-tool">obsidian-claude-sidebar</span></div>
+            </div>            <span class="workflow-pipe" aria-hidden="true">→</span>            <div class="workflow-stage workflow-stage--wide">
+              <div class="workflow-stage-zh">起稿审改</div>
+              <div class="workflow-stage-en">Draft</div>
+              <p class="workflow-stage-out">长文初稿 v0.5</p>
+              <div class="workflow-stage-tools"><span class="wf-tool">Codex</span><span class="wf-tool">Claude Code</span><span class="wf-tool">khazix-writer</span></div>
+            </div>            <span class="workflow-pipe" aria-hidden="true">→</span>            <div class="workflow-stage">
+              <div class="workflow-stage-zh">人工发布</div>
+              <div class="workflow-stage-en">Publish</div>
+              <p class="workflow-stage-out">已发布长文</p>
+              <div class="workflow-stage-tools"><span class="wf-tool">人工审改</span><span class="wf-tool">公众号</span><span class="wf-tool">小红书</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="workflow-stack">
+          <span class="workflow-stack-label">日常工具栈</span>
+          <div class="workflow-app-icons" aria-label="行业研究常用工具">
+            <span class="wf-app-icon wf-app-icon--aihot" title="AI HOT" aria-label="AI HOT"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 18" aria-hidden="true"><rect width="56" height="18" rx="4.5" fill="#1a2332"/><text x="6" y="12.8" fill="#ffffff" font-family="Inter,system-ui,sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.02em">AI</text><circle cx="27" cy="9" r="4.6" fill="none" stroke="#2dd4bf" stroke-width="1.35"/><line x1="24.2" y1="11.5" x2="29.8" y2="6.5" stroke="#2dd4bf" stroke-width="1.1" stroke-linecap="round"/><circle cx="27" cy="9" r="1.1" fill="#2dd4bf"/><text x="33" y="12.8" fill="#38bdf8" font-family="Inter,system-ui,sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.02em">HOT</text></svg></span><span class="wf-app-icon wf-app-icon--square" title="X" aria-label="X"><img src="https://www.google.com/s2/favicons?domain=x.com&amp;sz=128" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Obsidian" aria-label="Obsidian"><img src="https://www.google.com/s2/favicons?domain=obsidian.md&amp;sz=128" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--codex" title="Codex" aria-label="Codex"><img src="./assets/codex-app-icon.png" alt="" width="20" height="20" loading="lazy"></span><span class="wf-app-icon wf-app-icon--square" title="ChatGPT" aria-label="ChatGPT"><img src="https://www.google.com/s2/favicons?domain=chatgpt.com&amp;sz=128" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Claude" aria-label="Claude"><img src="https://www.google.com/s2/favicons?domain=claude.ai&amp;sz=128" alt="" loading="lazy" decoding="async"></span>
+          </div>
+        </div>
+      </article>
 
-        <p class="hero__subtitle anim anim--sub">
-          我曾参与低空经济、AI 产品体系规划和电信行业情报体系搭建，擅长把复杂行业信息整理成可判断、可传播、可落地的分析框架。
+    </div>
+  </div>
+
+  <!-- §3.9.c · Vibe Coding 小项目（占位卡） -->
+  <div class="toolkit-block">
+    <div class="toolkit-block-head">
+      <h3 class="toolkit-block-title">Vibe Coding 小项目</h3>
+      <span class="toolkit-block-meta">AI 信息聚合器项目搭建中</span>
+    </div>
+    <div class="vibe-grid">
+
+      <!-- Card 1：个人网站（浏览器框 + You are here） -->
+      <article class="vibe-card">
+        <a class="vibe-preview vibe-preview--browser" href="#hero" aria-label="滚回本站顶部">
+          <div class="vibe-chrome">
+            <span class="vibe-dots"><span class="vibe-dot"></span><span class="vibe-dot"></span><span class="vibe-dot"></span></span>
+            <span class="vibe-url">ningningzheng · vibe-coded</span>
+          </div>
+          <div class="vibe-screen">
+            <span class="vibe-chip-mini">Open to Work · Hangzhou</span>
+            <div class="vibe-mini-h1">我是郑宁宁，关注 <em>AI 行业研究</em>、产品策略与智能体产品化。</div>
+            <div class="vibe-jd-match">
+              <div class="vibe-jd-eyebrow">JD MATCH · 看匹配度</div>
+              <div class="vibe-jd-input">粘贴 JD 链接 / 文本…</div>
+              <div class="vibe-jd-examples">
+                <span class="vibe-jd-chip">AI 行业研究员</span>
+                <span class="vibe-jd-chip">AI 产品策略</span>
+                <span class="vibe-jd-chip">战略分析师</span>
+              </div>
+            </div>
+            <div class="vibe-mini-tags">Industry Research · AI Product</div>
+          </div>
+          <span class="vibe-here-badge">← You are here</span>
+        </a>
+        <div class="vibe-meta">
+          <span class="vibe-slug">personal-site-v0</span>
+          <h4 class="vibe-card-name">这个 <em>网站</em> 本身</h4>
+          <p class="vibe-card-desc">你正在看的这个站点，完全用 Claude Code + Vibe Coding 搭建——设计系统、动效、3D 翻书都是手搓。</p>
+          <p class="vibe-capability"><strong>编辑式设计系统的落地实现</strong>。</p>
+          <div class="vibe-tags">
+            <span class="vibe-tag">HTML / CSS</span>
+            <span class="vibe-tag">Claude Code</span>
+            <span class="vibe-tag">Vibe Coding</span>
+          </div>
+          <div class="vibe-foot">
+            <span class="vibe-status vibe-status--live">Live</span>
+            <a class="vibe-cta" href="#hero">滚回顶部 →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2：Obsidian × Codex 协同（编辑器框 + Codex 侧栏） -->
+      <article class="vibe-card">
+        <div class="vibe-preview vibe-preview--editor">
+          <div class="vibe-chrome">
+            <span class="vibe-dots"><span class="vibe-dot"></span><span class="vibe-dot"></span><span class="vibe-dot"></span></span>
+            <span class="vibe-url">obsidian · 小郑求职记</span>
+          </div>
+          <div class="vibe-screen">
+            <div class="vibe-editor-content">
+              <span class="vibe-breadcrumb">D.小郑求职记 / 01-岗位JD / AI公司</span>
+              <span class="vibe-md-h">「AI 战略和行研专家」</span>
+              <div class="vibe-tag-row">
+                <span class="vibe-mini-tag">求职/JD</span>
+              </div>
+              <div class="vibe-info-row"><span class="key">公司</span><span class="val">某 500 强上市公司</span></div>
+              <div class="vibe-info-row"><span class="key">城市</span><span class="val">杭州</span></div>
+              <div class="vibe-info-row"><span class="key">薪资</span><span class="val">35-55K · 16 薪</span></div>
+              <div class="vibe-info-row"><span class="key">经验</span><span class="val">3-5 年</span></div>
+            </div>
+            <div class="vibe-codex">
+              <div class="vibe-codex-head">OpenAI Codex <span class="vibe-codex-model">v0.128</span></div>
+              <div class="vibe-codex-prompt">帮我看看我和这个岗位的匹配度</div>
+              <div class="vibe-codex-resp"><span class="out">▸</span> 读取 02-简历 / 岗位 JD…</div>
+              <div class="vibe-codex-cursor">▮</div>
+            </div>
+          </div>
+        </div>
+        <div class="vibe-meta">
+          <span class="vibe-slug">notes-with-codex</span>
+          <h4 class="vibe-card-name"><em>Obsidian × Codex</em> 协同</h4>
+          <p class="vibe-card-desc">在 Obsidian 里嵌一个 Codex CLI 侧栏：Web Clip 一键剪 JD / 文章 / 财报，Codex 实时整理分析。</p>
+          <p class="vibe-capability"><strong>把 AI 工具内嵌进日常研究流程</strong>。</p>
+          <div class="vibe-tags">
+            <span class="vibe-tag">Obsidian</span>
+            <span class="vibe-tag">Codex CLI</span>
+            <span class="vibe-tag">Web Clipper</span>
+          </div>
+          <div class="vibe-foot">
+            <span class="vibe-status vibe-status--lab">自用</span>
+            <span class="vibe-cta vibe-cta--mute">持续迭代</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3：Oral English Trainer（手机框，倾斜 -5°） -->
+      <article class="vibe-card">
+        <a class="vibe-preview vibe-preview--phone" href="https://oral-english-trainer.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="打开 Oral English Trainer">
+          <div class="vibe-chrome">
+            <span class="vibe-dots"><span class="vibe-dot"></span><span class="vibe-dot"></span><span class="vibe-dot"></span></span>
+            <span class="vibe-url">oral-english-trainer.vercel.app</span>
+          </div>
+          <div class="vibe-screen">
+            <div class="vibe-phone">
+              <div class="vibe-phone-notch"></div>
+              <div class="vibe-phone-screen">
+                <div class="vibe-phone-title">ORAL ENGLISH</div>
+                <div class="vibe-phone-sub">30-DAY CHALLENGE</div>
+                <div class="vibe-phone-tabs">
+                  <span class="vibe-phone-tab is-active"></span>
+                  <span class="vibe-phone-tab"></span>
+                  <span class="vibe-phone-tab"></span>
+                  <span class="vibe-phone-tab"></span>
+                  <span class="vibe-phone-tab"></span>
+                  <span class="vibe-phone-tab"></span>
+                </div>
+                <div class="vibe-phone-day">DAY 6 · WEEK 1</div>
+                <div class="vibe-phone-card">
+                  Tell Me About a Challenge
+                  <div class="vibe-phone-card-row"><span>影子 20</span><span>模拟 30</span><span>复盘 10</span></div>
+                </div>
+                <div class="vibe-phone-pill-row">
+                  <span class="vibe-phone-pill">navigated ambiguity</span>
+                  <span class="vibe-phone-pill">pivoted the approach</span>
+                  <span class="vibe-phone-pill">tight deadlines</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+        <div class="vibe-meta">
+          <span class="vibe-slug">oral-english-trainer</span>
+          <h4 class="vibe-card-name">30-Day <em>Oral English</em> Trainer</h4>
+          <p class="vibe-card-desc">给自己写的英文口语训练器：30 天 AI 行研场景陪练，跨设备同步进度。</p>
+          <p class="vibe-capability"><strong>全栈 Vibe Coding · 自定义学习场景设计</strong>。</p>
+          <div class="vibe-tags">
+            <span class="vibe-tag">Next.js</span>
+            <span class="vibe-tag">Vercel</span>
+            <span class="vibe-tag">OpenAI</span>
+            <span class="vibe-tag">Gemini</span>
+          </div>
+          <div class="vibe-foot">
+            <span class="vibe-status vibe-status--live">Live</span>
+            <a class="vibe-cta" href="https://oral-english-trainer.vercel.app/" target="_blank" rel="noopener noreferrer">打开 ↗</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- §3.5 Writings · 写作与观点（v2.4.2 列表式 · 截图二布局 + 截图一精致度） -->
+<section class="featured-writing" id="writing" aria-labelledby="writings-heading">
+  <div class="featured-writing-inner">
+    <div class="fw-header">
+      <div class="eyebrow">WRITINGS · 写作与观点</div>
+      <h2 class="section-h2" id="writings-heading">公开写作与 <em>行业笔记</em></h2>
+      <p class="fw-lede">把研究里反复出现的判断，整理成可阅读、可引用的长文与笔记；覆盖 AI 商业化、Coding Agent、产品化路径等主题。外链与日期会随发布持续更新。</p>
+    </div>
+
+    <div class="fw-list">
+
+      <!-- 1 · 站内长文（主打） -->
+      <a class="fw-item" href="./writing-ai-coding-agent.html" data-channel="internal">
+        <div class="fw-item-meta">
+          <span class="fw-channel">站内长文</span>
+          <span class="fw-status">2026-04 · 约 18 分钟阅读</span>
+        </div>
+        <div class="fw-item-body">
+          <h3 class="fw-item-title">为什么 <em>AI Coding Agent</em> 是 Agent 商业化的第一站？</h3>
+          <p class="fw-item-desc">技术层 + 商业基础设施层 + 产品工程层三层叠加的解读：含 5 维度商业化框架、5 场景对比矩阵，以及反面约束与行业判断。</p>
+        </div>
+        <span class="fw-arrow" aria-hidden="true">→</span>
+      </a>
+
+      <!-- 2 · 小红书 -->
+      <a class="fw-item" href="https://www.xiaohongshu.com/user/profile/5b2bb04b4eacab34445c76e1" target="_blank" rel="noopener noreferrer" data-channel="redbook" data-external="true">
+        <div class="fw-item-meta">
+          <span class="fw-channel">小红书</span>
+          <span class="fw-status">专栏入口 · 持续更新</span>
+        </div>
+        <div class="fw-item-body">
+          <h3 class="fw-item-title">100 个 <em>AI 使用场景</em> · 系列笔记</h3>
+          <p class="fw-item-desc">每个场景一次实测 + 复盘：把模型能力翻译成「普通人能不能用、值不值得用」的判断框架。</p>
+        </div>
+        <span class="fw-arrow" aria-hidden="true">↗</span>
+      </a>
+
+      <!-- 3 · 微信公众号（占位） -->
+      <a class="fw-item" href="#" data-channel="wechat">
+        <div class="fw-item-meta">
+          <span class="fw-channel">微信公众号</span>
+          <span class="fw-status">近期更新 · 占位</span>
+        </div>
+        <div class="fw-item-body">
+          <h3 class="fw-item-title">行业研究与产品化随笔</h3>
+          <p class="fw-item-desc">公众号长文外链上架后，将在此条补齐标题、摘要与链接；当前占位便于你先确认版式与信息层级。</p>
+        </div>
+        <span class="fw-arrow" aria-hidden="true">→</span>
+      </a>
+
+    </div>
+
+    <p class="fw-footnote">更多短内容入口见页面底部 <a href="#contact">Contact</a>。</p>
+  </div>
+</section>
+
+
+<!-- §3.6 Manifesto · 与数字 Bar 同形态（stat-value + stat-label 双列） -->
+<section class="stats stats--manifesto" aria-label="信念">
+  <div class="stats-inner">
+    <div class="stat">
+      <div class="stat-value">
+        <span class="stat-num-text">判断力</span>
+      </div>
+      <div class="stat-label">
+        <span class="stat-label-line">我相信，AI 让实现变得更便宜，</span>
+        <span class="stat-label-line">但 <em class="stat-em">判断力依旧是核心竞争力</em>。</span>
+      </div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">
+        <span class="stat-num-text">决策</span>
+      </div>
+      <div class="stat-label">
+        <span class="stat-label-line">对产品和研究岗位来说，更重要的问题不是"会不会使用工具"，</span>
+        <span class="stat-label-line">而是<em class="stat-em">能不能定义问题、判断价值、设计路径，并把复杂信息转化为可行动的决策</em>。</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §3.10 About Me · 左 Timeline + 右 Book（v2 · 无边框 + 双页 spread + AI 头像封面） -->
+<section class="about-me" id="about" aria-labelledby="about-heading">
+  <div class="am-inner">
+
+    <div class="am-header">
+      <div class="eyebrow">ABOUT · 关于我</div>
+      <h2 class="section-h2" id="about-heading">职业 <em>轨迹</em>，与生活 <em>切面</em></h2>
+      <p class="am-lede">从研究、产品、白皮书到商业化支持，是我的工作轨迹；从阅读、运动到随手记录，是我的生活切面。</p>
+    </div>
+
+    <div class="am-grid">
+
+      <!-- 左：Timeline（无边框，按截图样式） -->
+      <ol class="am-timeline">
+
+        <li class="am-tl-item">
+          <div class="am-tl-row">
+            <div class="am-tl-role">业务研究工程师 / 战略分析师</div>
+            <div class="am-tl-date">2024.07 – 2026.03</div>
+          </div>
+          <div class="am-tl-org">北京思特奇信息技术股份有限公司 · 产品需求委员会</div>
+          <p class="am-tl-desc">负责低空经济、AI 智能体产品、Web3+Telco 等前沿领域的战略规划、市场洞察及商业化落地支持，实现从研究分析到产品宣发与市场商机孵化的全链路闭环。</p>
+        </li>
+
+        <li class="am-tl-item">
+          <div class="am-tl-row">
+            <div class="am-tl-role">创新顾问助理（实习）</div>
+            <div class="am-tl-date">2023.06 – 2023.09</div>
+          </div>
+          <div class="am-tl-org">北京因维管理咨询</div>
+          <p class="am-tl-desc">深度参与京东零售战略咨询项目，通过高管访谈梳理业务逻辑，构建商业模式沙盘；主笔美团、小米造车等 10 余个标杆案例的商业模式拆解分析。</p>
+        </li>
+
+        <li class="am-tl-item">
+          <div class="am-tl-row">
+            <div class="am-tl-role">战略新业务部实习生</div>
+            <div class="am-tl-date">2022.07 – 2022.10</div>
+          </div>
+          <div class="am-tl-org">蔚来（NIO）</div>
+          <p class="am-tl-desc">负责 NIO Phone 及智能硬件周边市场可行性分析与用户洞察；独立完成蓝牙耳机从 0 到 1 全项战略汇报，助力新产品线成功立项。</p>
+        </li>
+
+        <li class="am-tl-item is-edu">
+          <div class="am-tl-row">
+            <div class="am-tl-role">管理科学与工程 硕士（创新管理方向）</div>
+            <div class="am-tl-date">2021.09 – 2024.06</div>
+          </div>
+          <div class="am-tl-org">中国科学院大学 · 联培：丹麦奥尔堡大学</div>
+          <p class="am-tl-desc">GPA: 3.84 / 4.00。相关课程：产品设计、创新体系、区块链金融等。</p>
+        </li>
+
+        <li class="am-tl-item is-edu">
+          <div class="am-tl-row">
+            <div class="am-tl-role">经济学 本科</div>
+            <div class="am-tl-date">2017.09 – 2021.06</div>
+          </div>
+          <div class="am-tl-org">中国传媒大学 · 经济与管理学院</div>
+          <p class="am-tl-desc">GPA: 3.88，专业排名第一（1/25）。相关课程：计量经济学、金融学、传播学等。</p>
+        </li>
+
+      </ol>
+
+      <!-- 右：Book -->
+      <div class="am-book-side" id="amBookSide">
+        <div class="am-book-hint">A Field Notebook · 点击翻开</div>
+
+        <div class="am-book-stage" id="amBookStage">
+
+          <!-- 柔光 halo + sparkles -->
+          <div class="am-book-halo" aria-hidden="true"></div>
+          <span class="am-book-sparkle s1" aria-hidden="true"></span>
+          <span class="am-book-sparkle s2" aria-hidden="true"></span>
+          <span class="am-book-sparkle s3" aria-hidden="true"></span>
+
+          <!-- 左页 -->
+          <div class="am-page am-page--left">
+            <div class="am-spread-pane is-active" data-pane="left" data-spread="reading">
+              <div class="am-pane-num">01 / Reading</div>
+              <div class="am-pane-title">最近在读的 <em>三类书</em></div>
+              <p class="am-pane-lead">小说让我看见人性的褶皱，社会哲学让我搞清楚自己为什么这样想，行业书提醒我研究方法还可以再迭代。</p>
+              <div class="am-pane-anchor">"人性在每一个幽微时刻的真实样子。"</div>
+            </div>
+            <div class="am-spread-pane" data-pane="left" data-spread="hobby">
+              <div class="am-pane-num">02 / Off-work</div>
+              <div class="am-pane-title">下班之后 <em>怎么过</em></div>
+              <p class="am-pane-lead">跳舞、普拉提、徒步、旅行、摄影——五件让我从工作里走出来、重新感觉到身体和世界的事。</p>
+              <div class="am-pane-anchor">"徒步是行走的冥想。"</div>
+            </div>
+            <div class="am-spread-pane" data-pane="left" data-spread="podcast">
+              <div class="am-pane-num">03 / Podcasts</div>
+              <div class="am-pane-title">我在收听的 <em>播客</em></div>
+              <p class="am-pane-lead">商业、女性主义、哲学、运动——同时订阅 20+ 档，挑了 6 档最常打开的，按内容密度排。</p>
+              <div class="am-pane-anchor">"通勤路上的另一种课堂。"</div>
+            </div>
+            <div class="am-spread-pane" data-pane="left" data-spread="belief">
+              <div class="am-pane-num">04 / Beliefs</div>
+              <div class="am-pane-title">我相信的 <em>几件事</em></div>
+              <p class="am-pane-lead">三件最底层的原则——支撑我在不确定里做选择，也支撑我和过去的自己和解。</p>
+              <div class="am-pane-anchor">"人是流动的。"</div>
+            </div>
+            <div class="am-spread-pane" data-pane="left" data-spread="learning">
+              <div class="am-pane-num">05 / Learning</div>
+              <div class="am-pane-title">我的 <em>GAP 期</em></div>
+              <p class="am-pane-lead">身体、语言、专业、爱好——五条平行学习线，组合起来才是一个完整的"在成长"的人。</p>
+              <div class="am-pane-anchor">"GAP 期不是停滞期。"</div>
+            </div>
+          </div>
+
+          <!-- 右页（套在 clip 壳里：闭合时 width:0 隐藏；打开时展开到 page-w） -->
+          <div class="am-page-right-clip">
+          <div class="am-page am-page--right">
+            <div class="am-spread-pane am-spread-pane--right is-active" data-pane="right" data-spread="reading">
+              <div class="am-pane-body">
+                <p><strong>小说类</strong>：金爱烂《滔滔生活》《外面是夏天》——她总能用极细的笔触描写人性在每一个幽微时刻的真实样子。《滔滔生活》和《口水连连》两篇感受最深。</p>
+                <p><strong>社会哲学</strong>：在看迈克尔·桑德尔《精英的傲慢》——想搞清楚优绩主义为什么这么深刻地影响了我。刚读完赫尔曼·黑塞《荒原狼》，主人公在市民阶级和哲学家两种身份之间切换、撕裂的感受我时常也会有；在啃贝克尔《死亡否认》。</p>
+                <p><strong>行业 & 人物</strong>：《如何快速了解一个行业》——想看看自己的研究方法论还有没有可以改进的地方；《黄仁勋：英伟达之芯片》看了一小半。</p>
+              </div>
+            </div>
+            <div class="am-spread-pane am-spread-pane--right" data-pane="right" data-spread="hobby">
+              <div class="am-pane-body">
+                <p><strong>跳舞</strong>：爵士、韩舞、中国舞都跳。音乐响起，我能很快进入心流——就算动作不完美，扭起来就快乐。</p>
+                <p><strong>普拉提</strong>：大学练过 1.5 年垫上普拉提，现在系统学器械。让我对呼吸模式和腰部柔软度有了完全不同的认知。</p>
+                <p><strong>徒步</strong>：西湖龙路线 26km、北京野长城、香山、香港麦理浩径一段。一边亲近自然，一边和自己对话。</p>
+                <p><strong>旅行</strong>：去过 8 个国家。最在意的不是景点，是当地人怎么说话、吃饭、坐地铁。</p>
+                <p><strong>摄影</strong>：喜欢拍真实的人文，不爱摆拍。相机、Pocket 3、胶片机、拍立得都有，但用得最多的还是手机。</p>
+              </div>
+            </div>
+            <div class="am-spread-pane am-spread-pane--right" data-pane="right" data-spread="podcast">
+              <div class="am-pane-body">
+                <ul>
+                  <li><strong>张小珺商业访谈录</strong>——深度对谈，最近嘉宾 Manus 联合创始人 Peak，听到很多 AI 行业洞察。</li>
+                  <li><strong>西西弗高速</strong>——主持人 J 和小康，女性主义与公共议题的日常观察。</li>
+                  <li><strong>岩中花述</strong>——鲁豫采访的每一位女性都很有力量。</li>
+                  <li><strong>知行小酒馆</strong>——名义讲金融，实则人文关怀。特别喜欢雨白的声音。</li>
+                  <li><strong>Blow Your Mind</strong>——Bro 峰和简里里，对谈像和朋友闲聊一样舒服。</li>
+                  <li><strong>独树不成林</strong>——主播仲树，爱运动的哲学博士。</li>
+                </ul>
+              </div>
+            </div>
+            <div class="am-spread-pane am-spread-pane--right" data-pane="right" data-spread="belief">
+              <div class="am-pane-body">
+                <div class="anchor-line">"人是流动的。"</div>
+                <p>不同的年龄、不同的状态下，想法一定会变。我不会因为过去那样想、现在不这么想了，就责怪自己——只要不停学习、不停输入，我会和自己达成最圆满的和解。</p>
+                <p><strong>Karma 是真的。</strong>我没有宗教信仰，但始终相信因果。这是我做选择最底层的原则。</p>
+                <p><strong>为每一个进步欢呼雀跃。</strong>工作上的、关系上的、生活上的——很小的进步也值得自己跟自己鼓掌。</p>
+              </div>
+            </div>
+            <div class="am-spread-pane am-spread-pane--right" data-pane="right" data-spread="learning">
+              <div class="am-pane-body">
+                <ul>
+                  <li><strong>普拉提（器械）</strong>——把垫上基础迁移到器械，重新理解呼吸与发力。</li>
+                  <li><strong>职业英语</strong>——保持雅思 7.5 的底子，打磨求职语境里的表达。</li>
+                  <li><strong>爵士舞</strong>——把进度推到能稳定跟下中级编舞。</li>
+                  <li><strong>AI 专业知识</strong>——大模型、Agent、商业化，持续读论文、看财报、做实测。</li>
+                  <li><strong>Vibe Coding</strong>——探索各种自己感兴趣的项目，手搓知识管理库、行业聚合器、个人网站等。</li>
+                  <li><strong>韩语</strong>——自学中，目标是看综艺不靠字幕。</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          </div>
+
+          <!-- 封面（覆盖左页） -->
+          <div class="am-book-cover" id="amBookCover" role="button" tabindex="0" aria-label="点击翻开这本书">
+            <div class="am-cover-top">
+              <div class="am-cover-eyebrow">A Field Notebook</div>
+              <div class="am-cover-eyebrow">'26</div>
+            </div>
+            <div class="am-cover-avatar">
+              <img src="./个人AI头像设计/GPT生成1.png" alt="郑宁宁 AI 头像" />
+            </div>
+            <div class="am-cover-bottom">
+              <div class="am-cover-title">工作之外的 <em>我</em></div>
+              <div class="am-cover-author">Ningning Zheng · Hangzhou</div>
+              <span class="am-cover-cta">Open →</span>
+            </div>
+          </div>
+
+          <!-- 合上按钮 + 翻页按钮 -->
+          <button class="am-book-close" id="amBookClose" aria-label="合上书">×</button>
+          <button class="am-book-nav am-book-nav--prev" id="amBookPrev" aria-label="上一页">‹</button>
+          <button class="am-book-nav am-book-nav--next" id="amBookNext" aria-label="下一页">›</button>
+        </div>
+
+        <!-- 页码点 -->
+        <div class="am-book-dots" id="amBookDots">
+          <button class="am-dot is-active" data-spread="reading" aria-label="第 1 页 · 阅读"></button>
+          <button class="am-dot" data-spread="hobby" aria-label="第 2 页 · 爱好"></button>
+          <button class="am-dot" data-spread="podcast" aria-label="第 3 页 · 播客"></button>
+          <button class="am-dot" data-spread="belief" aria-label="第 4 页 · 信念"></button>
+          <button class="am-dot" data-spread="learning" aria-label="第 5 页 · 在学"></button>
+          <span class="am-book-pager" id="amBookPager">01 / 05</span>
+        </div>
+
+        <p class="am-book-quote">
+          "你来了，很高兴认识你。<br/>
+          听完我的故事，我也想听听你的。"
         </p>
-
-        <div class="hero__tags anim anim--tags" aria-label="能力标签">
-          <span>Industry Research</span>
-          <span>AI Product Systems</span>
-          <span>Market Intelligence</span>
-        </div>
-
-        <div class="hero__cta-row anim anim--cta">
-          <a class="btn btn--primary" href="#works">查看代表作品 →</a>
-          <a class="btn btn--secondary" href="#writing">阅读我的 AI 行业分析</a>
-          <a class="hero__cta-link" href="#contact">联系我</a>
-        </div>
       </div>
 
-      <div class="hero__visual anim anim--visual" aria-hidden="false">
-        <div class="hero__glow" aria-hidden="true"></div>
-        <img class="hero__photo" src="./profile-320.jpg" width="320" height="400" alt="郑宁宁职业照">
+    </div>
+  </div>
+</section>
+
+<!-- §3.11 Contact · 全宽深色版（v2.4.7 · 4 卡横排 + SVG 图标） -->
+<section class="site-contact" id="contact" aria-labelledby="contact-heading">
+  <div class="site-contact-inner">
+    <div class="site-contact-eyebrow">GET IN TOUCH · 联系</div>
+    <h2 class="site-contact-title" id="contact-heading">联系 <em>我</em></h2>
+    <p class="site-contact-lede">如果你正在寻找 <em>AI 产品、行业研究或产品策略</em> 方向的人选，欢迎联系我。期待和你聊聊行业判断、产品落地，或我搭建的自动化 Agent。</p>
+
+    <div class="contact-grid">
+
+      <a href="./简历文件/zhengnn_resume_19700792498.pdf" target="_blank" rel="noopener noreferrer" class="contact-card">
+        <span class="contact-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
+            <path d="M14 3v5h5"/>
+            <path d="M12 11v6m-3-3l3 3 3-3"/>
+          </svg>
+        </span>
+        <span class="contact-text">下载简历 PDF</span>
+      </a>
+
+      <a href="mailto:ningningzheng325@163.com" class="contact-card">
+        <span class="contact-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="5" width="18" height="14" rx="2"/>
+            <path d="M3 7l9 6 9-6"/>
+          </svg>
+        </span>
+        <span class="contact-text">ningningzheng325@163.com</span>
+      </a>
+
+      <a href="https://linkedin.com/in/ningning-zheng-580408240" target="_blank" rel="noopener noreferrer" class="contact-card">
+        <span class="contact-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM8.5 17H6V9.5h2.5V17zM7.25 8.42a1.46 1.46 0 1 1 0-2.92 1.46 1.46 0 0 1 0 2.92zM18 17h-2.5v-4.16c0-1.07-.44-1.41-1.16-1.41-.76 0-1.34.5-1.34 1.5V17h-2.5V9.5h2.4v1.06c.4-.63 1.18-1.06 2.1-1.06 1.78 0 2.83.94 2.83 3V17z"/>
+          </svg>
+        </span>
+        <span class="contact-text">LinkedIn · ningning-zheng</span>
+      </a>
+
+      <a href="https://github.com/sunnymilky80" target="_blank" rel="noopener noreferrer" class="contact-card">
+        <span class="contact-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.05-.02-2.06-3.34.72-4.05-1.61-4.05-1.61-.54-1.4-1.34-1.77-1.34-1.77-1.09-.74.08-.73.08-.73 1.21.08 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.77.42-1.3.76-1.6-2.66-.3-5.46-1.33-5.46-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.53.12-3.18 0 0 1.01-.32 3.3 1.23.96-.27 1.99-.4 3.01-.41 1.02.01 2.05.14 3.01.41 2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.24 2.87.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.63-5.47 5.92.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.29 0 .32.22.69.83.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+        </span>
+        <span class="contact-text">GitHub · sunnymilky80</span>
+      </a>
+
+    </div>
+
+    <div class="contact-social">
+      <span>也在这些平台：</span>
+      <a href="https://www.xiaohongshu.com/user/profile/5b2bb04b4eacab34445c76e1" target="_blank" rel="noopener noreferrer">小红书</a>
+      <span class="dot">·</span>
+      <a href="https://okjk.co/NTIcUn" target="_blank" rel="noopener noreferrer">即刻</a>
+    </div>
+
+    <p class="site-contact-footer">© 2026 Ningning Zheng · Personal site · Last updated 2026-05-19</p>
+  </div>
+</section>
+
+<!-- JD Match · Modal -->
+<div class="jd-modal" id="jdModal" aria-hidden="true">
+  <div class="jd-modal-backdrop" data-close></div>
+  <div class="jd-modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="jd-modal-close" data-close aria-label="关闭">×</button>
+
+    <div class="jd-modal-eyebrow">JD MATCH REPORT · 匹配报告</div>
+    <h2 class="jd-modal-title" id="modal-title">…</h2>
+
+    <div class="jd-modal-score-row">
+      <div class="jd-modal-score-circle">
+        <div class="jd-modal-score-num" id="modal-score">--</div>
+        <div class="jd-modal-score-label">/ 100</div>
+      </div>
+      <div class="jd-modal-score-text">
+        <div class="jd-modal-score-eyebrow">综合匹配分</div>
+        <div class="jd-modal-score-verdict" id="modal-verdict">—</div>
       </div>
     </div>
-  </section>
 
-  <section class="research" id="research-focus" aria-labelledby="research-heading">
-    <div class="container">
-      <header class="section-head">
-        <p class="eyebrow">Research Focus · 当前关注的研究问题</p>
-        <h2 id="research-heading">我在系统研究什么</h2>
-      </header>
-
-      <div class="research__grid">
-        <article class="focus-card">
-          <h3>AI 产品与智能体产品化</h3>
-          <p>关注智能体如何从能力集合，变成可理解、可管理、可发布、可运营的产品体系。</p>
-          <div class="focus-card__tags" aria-label="关键词">
-            <span class="focus-card__tag">Agent</span>
-            <span class="focus-card__tag">产品体系</span>
-            <span class="focus-card__tag">产品发布</span>
-            <span class="focus-card__tag">运营</span>
-          </div>
-        </article>
-
-        <article class="focus-card">
-          <h3>AI 行业研究与商业化判断</h3>
-          <p>关注大模型商业化、Agent 产品化、AI 应用落地和企业付费意愿等议题，并通过公开文章持续补齐 AI 行业判断。</p>
-          <div class="focus-card__tags" aria-label="关键词">
-            <span class="focus-card__tag">大模型商业化</span>
-            <span class="focus-card__tag">Agent</span>
-            <span class="focus-card__tag">企业付费</span>
-            <span class="focus-card__tag">行业判断</span>
-          </div>
-        </article>
-
-        <article class="focus-card">
-          <h3>情报体系与 AI 工作流</h3>
-          <p>关注如何把电信行业情报体系搭建经验迁移到 AI 行业，用 AI 工具提升信息采集、资料整理、分析写作和内部分享效率。</p>
-          <div class="focus-card__tags" aria-label="关键词">
-            <span class="focus-card__tag">情报体系</span>
-            <span class="focus-card__tag">AI 工作流</span>
-            <span class="focus-card__tag">信息采集</span>
-            <span class="focus-card__tag">研究方法</span>
-          </div>
-        </article>
-      </div>
+    <div class="jd-modal-section">
+      <h3 class="jd-modal-h3">匹配矩阵</h3>
+      <div class="jd-matrix" id="modal-matrix"></div>
     </div>
-  </section>
 
+    <div class="jd-modal-section">
+      <h3 class="jd-modal-h3">匹配亮点</h3>
+      <ul class="jd-highlights" id="modal-highlights"></ul>
+    </div>
+
+    <div class="jd-modal-section">
+      <h3 class="jd-modal-h3">综合判断</h3>
+      <p class="jd-summary" id="modal-summary"></p>
+    </div>
+
+    <div class="jd-modal-footer">
+      <p>本报告为预设示例，用于演示匹配框架与判断维度。如需针对具体岗位的真实匹配分析，欢迎<a href="#contact">邮件联系</a>。</p>
+    </div>
+  </div>
+</div>
+
+<div class="proto-banner">v2.4 PROTOTYPE · Hero + Research + Stats + Works + AI Workflow + Featured Writing + About / JD Match</div>
+
+<script>
+// 全局光斑跟随
+const halo = document.getElementById('halo');
+window.addEventListener('mousemove', e => {
+  halo.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+});
+
+// 导航激活状态跟随滚动
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('section[id]');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${id}`) {
+          link.classList.add('active');
+        }
+      });
+    }
+  });
+}, { rootMargin: '-30% 0px -50% 0px' });
+
+sections.forEach(s => observer.observe(s));
+
+// ============================================
+// AI JD Match · 3 份预设报告 + Modal 逻辑
+// ============================================
+const reports = {
+  'ai-researcher': {
+    title: '<em>AI 行业研究员</em> · 匹配报告',
+    score: 92,
+    verdict: '高度匹配',
+    matrix: [
+      ['学历背景', 95],
+      ['行业研究方法论', 92],
+      ['AI 领域 know-how', 88],
+      ['内容产出能力', 90],
+      ['战略与商业判断', 90]
+    ],
+    highlights: [
+      '<strong>JD 要求</strong>能独立完成行业研究报告 → 候选人主笔《思特奇低空经济白皮书》61 页 8 章，并获 CEO 高度评价。',
+      '<strong>JD 要求</strong>熟悉 AI 产业链 → 候选人系统梳理 AI 产业链结构、商业模式与技术演进，持续运营小红书"100 个 AI 使用场景"系列。',
+      '<strong>JD 要求</strong>能从 0 到 1 搭建情报体系 → 候选人在思特奇从 0 到 1 搭建电信行业情报体系（5 类信源 / 82 个长期跟踪源 / 72 期周度速递）。'
+    ],
+    summary: '候选人具备扎实的行业研究方法论、AI 领域系统认知，以及把电信情报体系迁移到 AI 行业研究的明确路径。从研究到产品落地的完整经验（白皮书 → 庆阳方案）是特别加分项。建议补强：AI 行业大厂背景偏少，新行业语境融入预计需要 1–2 个月。'
+  },
+  'ai-pm': {
+    title: '<em>AI 产品经理</em> · 匹配报告',
+    score: 86,
+    verdict: '匹配良好',
+    matrix: [
+      ['AI 产品体系认知', 92],
+      ['产品分类与发布', 95],
+      ['跨部门协作', 88],
+      ['用户与场景视角', 80],
+      ['数据驱动决策', 78]
+    ],
+    highlights: [
+      '<strong>JD 要求</strong>能设计 AI 产品体系 → 候选人主导 170+ 智能体的产品分类、门户规划与发布策略。',
+      '<strong>JD 要求</strong>能策划产品发布 → 候选人承担《AI 产品白皮书》核心章节撰写 + 产品直播脚本策划。',
+      '<strong>JD 要求</strong>能把复杂技术翻译成产品语言 → 候选人擅长把研发逻辑"翻译"成客户和销售能理解的产品表达。'
+    ],
+    summary: '候选人在 AI 产品体系化与产品发布运营上有完整一线经验，特别擅长把复杂能力转化为可被客户和销售理解的产品表达。建议补强：toC 产品、用户访谈与定量数据分析经验相对有限，可在面试中重点了解数据敏感度。'
+  },
+  'strategist': {
+    title: '<em>战略分析师</em> · 匹配报告',
+    score: 90,
+    verdict: '高度匹配',
+    matrix: [
+      ['战略分析框架', 95],
+      ['行业 / 产业研究', 92],
+      ['商业判断能力', 88],
+      ['信息整合与可视化', 92],
+      ['跨学科与跨语种', 90]
+    ],
+    highlights: [
+      '<strong>JD 要求</strong>掌握 PEST / SWOT / 波特五力等分析框架 → 候选人这些都是日常研究工具。',
+      '<strong>JD 要求</strong>能搭建情报体系 → 候选人从 0 到 1 搭建电信行业情报体系（覆盖政策 / 标准 / 运营商 / 竞品四维度）。',
+      '<strong>JD 要求</strong>能在管理层会议输出 → 候选人随 CEO 出访 TM Forum 丹麦峰会做全英文路演，主笔季度 Newsletter。'
+    ],
+    summary: '候选人具备完整的"战略框架 → 情报体系 → 业务落地"全链路经验，是少见的"既能搭框架又能动手执行"的复合型研究人才。建议补强：行业聚焦在电信 / 低空 / AI 垂直领域，跨行业切换预计需要 1–2 个月适应期。'
+  }
+};
+
+const modal = document.getElementById('jdModal');
+const modalTitle = document.getElementById('modal-title');
+const modalScore = document.getElementById('modal-score');
+const modalVerdict = document.getElementById('modal-verdict');
+const modalMatrix = document.getElementById('modal-matrix');
+const modalHighlights = document.getElementById('modal-highlights');
+const modalSummary = document.getElementById('modal-summary');
+
+function showReport(report) {
+  modalTitle.innerHTML = report.title;
+  modalScore.textContent = report.score;
+  modalVerdict.textContent = report.verdict;
+
+  modalMatrix.innerHTML = report.matrix.map(([label]) => `
+    <div class="jd-matrix-row">
+      <div class="jd-matrix-label">${label}</div>
+      <div class="jd-matrix-bar"><div class="jd-matrix-bar-fill"></div></div>
+      <div class="jd-matrix-score">--</div>
+    </div>
+  `).join('');
+
+  modalHighlights.innerHTML = report.highlights.map(h => `<li>${h}</li>`).join('');
+  modalSummary.textContent = report.summary;
+
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+
+  // 进场动画：先 0 → 数字递增 + bar 填充
+  setTimeout(() => {
+    const bars = modalMatrix.querySelectorAll('.jd-matrix-bar-fill');
+    const scores = modalMatrix.querySelectorAll('.jd-matrix-score');
+    report.matrix.forEach(([_, score], i) => {
+      bars[i].style.width = score + '%';
+      // 数字递增动画
+      let current = 0;
+      const step = score / 30;
+      const interval = setInterval(() => {
+        current += step;
+        if (current >= score) {
+          current = score;
+          clearInterval(interval);
+        }
+        scores[i].textContent = Math.round(current);
+      }, 25);
+    });
+  }, 120);
+}
+
+function closeModal() {
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.jd-example').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const key = btn.dataset.report;
+    showReport(reports[key]);
+  });
+});
+
+document.querySelectorAll('[data-close]').forEach(el => {
+  el.addEventListener('click', closeModal);
+});
+
+const jdInput = document.getElementById('jd-input');
+const jdSubmit = document.getElementById('jd-submit');
+
+function handleSubmit() {
+  const val = jdInput.value.trim();
+  if (!val) {
+    jdInput.focus();
+    return;
+  }
+  // Demo 模式：根据关键词猜测目标岗位，没匹配上就展示 ai-researcher
+  let key = 'ai-researcher';
+  const lower = val.toLowerCase();
+  if (lower.match(/产品|pm|product/)) key = 'ai-pm';
+  else if (lower.match(/战略|strategy|strategist|分析师/)) key = 'strategist';
+  else if (lower.match(/研究|research|industry|analyst|情报|市场/)) key = 'ai-researcher';
+  showReport(reports[key]);
+}
+
+jdSubmit.addEventListener('click', handleSubmit);
+jdInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter') handleSubmit();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+});
+
+// ============================================
+// 数字 Bar · 计数动画（滚到视口时从 0 → 目标值）
+// ============================================
+const statsSection = document.querySelector('.stats');
+if (statsSection) {
+  const statsObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const nums = entry.target.querySelectorAll('.stat-num:not(.stat-num-text)');
+        nums.forEach(num => {
+          const target = parseInt(num.dataset.target);
+          if (isNaN(target)) return;
+          const duration = 1200;
+          const startTime = performance.now();
+          const animate = (now) => {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // easeOutCubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = Math.floor(target * eased);
+            num.textContent = current;
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            } else {
+              num.textContent = target;
+            }
+          };
+          // 起始设为 0 再开始计数
+          num.textContent = '0';
+          requestAnimationFrame(animate);
+        });
+        statsObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  statsObs.observe(statsSection);
+}
+
+// §3.9.b · 工作流复制
+const WORKFLOW_COPY = {
+  vibe: `Vibe Coding 项目工作流 · 从想法到可点原型站
+01 构想 Brain → 内容 + 架构
+02 找参考 Extract Spec / Design → 风格规范
+03 写 PRD PRD → PRD 文档
+04 实现 & 部署 Build & Ship → 上线网站`,
+  research: `行业研究工作流 · 从信息流到公众号成稿
+01 抓信号 Capture → 原始信息
+02 沉淀分析 Synthesize → 结构化笔记片段
+03 起稿审改 Draft → 长文初稿 v0.5
+04 人工发布 Publish → 已发布长文`
+};
+
+document.querySelectorAll('.workflow-copy').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const key = btn.dataset.workflow;
+    const copyText = WORKFLOW_COPY[key];
+    if (!copyText) return;
+    try {
+      await navigator.clipboard.writeText(copyText);
+    } catch {
+      const ta = document.createElement('textarea');
+      ta.value = copyText;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
+    btn.classList.add('is-copied');
+    const defaultLabel = key === 'vibe' ? '复制 Vibe Coding 工作流文本' : '复制行业研究工作流文本';
+    btn.setAttribute('aria-label', '已复制');
+    window.setTimeout(() => {
+      btn.classList.remove('is-copied');
+      btn.setAttribute('aria-label', defaultLabel);
+    }, 1600);
+  });
+});
+
+/* ============================================
+   §3.10 About Me · Book 翻页 + Spread 切换（v2）
+============================================ */
+(function () {
+  const stage = document.getElementById('amBookStage');
+  const side = document.getElementById('amBookSide');
+  const cover = document.getElementById('amBookCover');
+  const closeBtn = document.getElementById('amBookClose');
+  const prevBtn = document.getElementById('amBookPrev');
+  const nextBtn = document.getElementById('amBookNext');
+  const dotsWrap = document.getElementById('amBookDots');
+  const pager = document.getElementById('amBookPager');
+  if (!stage || !cover) return;
+
+  const spreads = ['reading', 'hobby', 'podcast', 'belief', 'learning'];
+  let idx = 0;
+
+  const setSpread = (newIdx) => {
+    idx = (newIdx + spreads.length) % spreads.length;
+    const key = spreads[idx];
+    stage.querySelectorAll('.am-spread-pane').forEach(el => {
+      el.classList.toggle('is-active', el.dataset.spread === key);
+    });
+    if (dotsWrap) {
+      dotsWrap.querySelectorAll('.am-dot').forEach(d => {
+        d.classList.toggle('is-active', d.dataset.spread === key);
+      });
+    }
+    if (pager) pager.textContent = String(idx + 1).padStart(2, '0') + ' / 0' + spreads.length;
+  };
+
+  const openBook = () => {
+    stage.classList.add('is-open');
+    if (side) side.classList.add('is-open-side');
+  };
+  const closeBook = () => {
+    stage.classList.remove('is-open');
+    if (side) side.classList.remove('is-open-side');
+  };
+
+  /* 点击封面翻开 */
+  cover.addEventListener('click', openBook);
+  cover.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openBook(); }
+  });
+
+  /* 关闭 */
+  if (closeBtn) closeBtn.addEventListener('click', (e) => { e.stopPropagation(); closeBook(); });
+
+  /* 翻页 */
+  if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); setSpread(idx - 1); });
+  if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); setSpread(idx + 1); });
+
+  /* 点 */
+  if (dotsWrap) {
+    dotsWrap.querySelectorAll('.am-dot').forEach((dot, i) => {
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (!stage.classList.contains('is-open')) openBook();
+        setSpread(i);
+      });
+    });
+  }
+
+  /* 键盘导航：书打开时左右箭头翻页，Esc 合上 */
+  document.addEventListener('keydown', (e) => {
+    if (!stage.classList.contains('is-open')) return;
+    if (e.key === 'ArrowLeft') setSpread(idx - 1);
+    else if (e.key === 'ArrowRight') setSpread(idx + 1);
+    else if (e.key === 'Escape') closeBook();
+  });
+})();
+</script>
 </body>
 </html>
