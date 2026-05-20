@@ -2290,6 +2290,21 @@ a { text-decoration: none; color: inherit; }
   padding-left: 16px;
 }
 
+.fw-item--soon {
+  cursor: default;
+}
+.fw-item--soon:hover {
+  background: none;
+  padding-left: 4px;
+}
+.fw-item--soon .fw-arrow {
+  opacity: 0.4;
+}
+.fw-item--soon:hover .fw-arrow {
+  color: var(--muted);
+  transform: none;
+}
+
 .fw-item-meta {
   display: flex;
   flex-direction: column;
@@ -4272,18 +4287,18 @@ a { text-decoration: none; color: inherit; }
         <span class="fw-arrow" aria-hidden="true">↗</span>
       </a>
 
-      <!-- 3 · 微信公众号（占位） -->
-      <a class="fw-item" href="#" data-channel="wechat">
+      <!-- 3 · 微信公众号（未上线 · 不可点击） -->
+      <div class="fw-item fw-item--soon" data-channel="wechat" aria-disabled="true">
         <div class="fw-item-meta">
           <span class="fw-channel">微信公众号</span>
-          <span class="fw-status">近期更新 · 占位</span>
+          <span class="fw-status">等公众号上线后回来填</span>
         </div>
         <div class="fw-item-body">
           <h3 class="fw-item-title">行业研究与产品化随笔</h3>
-          <p class="fw-item-desc">公众号长文外链上架后，将在此条补齐标题、摘要与链接；当前占位便于你先确认版式与信息层级。</p>
+          <p class="fw-item-desc">行业研究与产品化方向的长期随笔；链接与摘要将在公众号正式运营后更新。</p>
         </div>
-        <span class="fw-arrow" aria-hidden="true">→</span>
-      </a>
+        <span class="fw-arrow" aria-hidden="true">—</span>
+      </div>
 
     </div>
 
