@@ -2448,6 +2448,608 @@ a { text-decoration: none; color: inherit; }
 .delay-4 { animation-delay: 450ms; }
 .delay-5 { animation-delay: 550ms; }
 .delay-6 { animation-delay: 650ms; }
+
+/* ============================================
+   §3.10 About Me · 左 Timeline + 右 翻开的书（v2 · 无边框 + 双页 spread）
+============================================ */
+.about-me {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(64px, 8vh, 96px) clamp(24px, 4vw, 48px);
+  position: relative;
+  z-index: 1;
+  scroll-margin-top: 96px;
+}
+
+.am-inner { max-width: 1080px; margin: 0 auto; }
+
+.am-header {
+  margin-bottom: clamp(36px, 4.5vh, 48px);
+  max-width: 760px;
+}
+.am-lede {
+  margin-top: 16px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.72;
+  color: var(--muted);
+  max-width: 680px;
+}
+
+.am-grid {
+  display: grid;
+  /* v3：把书略微缩小（page-w 270，open 540）+ 翻页按钮内收（-16 各 = 32），
+     右列锁到 572px 即可容下；左列因此回收 ~52px 给 timeline，能保证
+     "管理科学与工程 硕士（创新管理方向）" 这类长 role 单行不换。 */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 572px);
+  gap: clamp(28px, 3.5vw, 44px);
+  align-items: start;
+}
+
+/* ----- 左侧 Timeline（无边框无背景） ----- */
+.am-timeline { position: relative; padding-left: 18px; }
+.am-timeline::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 8px;
+  bottom: 8px;
+  width: 1.5px;
+  background: var(--moss);
+  opacity: 0.35;
+}
+.am-tl-item {
+  position: relative;
+  padding-bottom: 30px;
+}
+.am-tl-item:last-child { padding-bottom: 0; }
+.am-tl-item::before {
+  content: "";
+  position: absolute;
+  left: -18px;
+  top: 8px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--moss);
+  box-shadow: 0 0 0 3px var(--bg-primary);
+}
+.am-tl-item.is-edu::before { background: var(--rust); }
+
+.am-tl-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 4px;
+}
+.am-tl-role {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.35;
+  flex: 1;
+}
+.am-tl-date {
+  flex-shrink: 0;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+  background: rgba(193, 140, 93, 0.14);
+  font-feature-settings: 'tnum';
+  white-space: nowrap;
+}
+.am-tl-org {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--moss-deep);
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+.am-tl-desc {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* ----- 右侧 Book ----- */
+.am-book-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+}
+.am-book-hint {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* 舞台：闭合时只露封面 + 左页（被封面盖住），打开时右页通过 clip 壳从 0 → page-w 展开 */
+.am-book-stage {
+  --book-h: 460px;
+  --page-w: 270px;
+  position: relative;
+  display: flex;
+  height: var(--book-h);
+  perspective: 2000px;
+  perspective-origin: 100% 50%;
+  margin: 0 auto;
+}
+
+/* 右页剪裁壳：闭合时 width 0 把右页藏掉，打开时展开到 page-w */
+.am-page-right-clip {
+  width: 0;
+  height: var(--book-h);
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: width 1100ms cubic-bezier(0.86, 0, 0.07, 1);
+}
+.am-book-stage.is-open .am-page-right-clip {
+  width: var(--page-w);
+}
+
+/* 柔光 halo */
+.am-book-halo {
+  position: absolute;
+  inset: -50px;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(212, 165, 116, 0.28), transparent 65%),
+    radial-gradient(ellipse at 70% 60%, rgba(93, 112, 82, 0.18), transparent 65%);
+  filter: blur(28px);
+  z-index: 0;
+  pointer-events: none;
+  animation: amHaloFloat 7s ease-in-out infinite;
+}
+@keyframes amHaloFloat {
+  0%, 100% { opacity: 0.7; transform: scale(1) translate(0, 0); }
+  33% { opacity: 1; transform: scale(1.06) translate(-4px, -6px); }
+  66% { opacity: 0.85; transform: scale(1.03) translate(6px, 4px); }
+}
+.am-book-stage.is-open .am-book-halo {
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(212, 165, 116, 0.32), transparent 65%),
+    radial-gradient(ellipse at 70% 60%, rgba(93, 112, 82, 0.22), transparent 65%);
+}
+
+/* 漂浮的小光点 */
+.am-book-sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 12px rgba(212, 165, 116, 0.8);
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+  animation: amSparkle 5s ease-in-out infinite;
+}
+.am-book-sparkle.s1 { top: 14%; left: -30px; animation-delay: 0s; }
+.am-book-sparkle.s2 { top: 60%; right: -36px; animation-delay: 1.6s; width: 5px; height: 5px; }
+.am-book-sparkle.s3 { bottom: 8%; left: 20%; animation-delay: 3.2s; width: 4px; height: 4px; background: var(--moss); box-shadow: 0 0 10px rgba(93,112,82,0.7); }
+@keyframes amSparkle {
+  0%, 100% { opacity: 0; transform: translateY(0) scale(0.7); }
+  20% { opacity: 0.9; transform: translateY(-6px) scale(1); }
+  50% { opacity: 0.55; transform: translateY(-14px) scale(0.9); }
+  80% { opacity: 0; transform: translateY(-22px) scale(0.6); }
+}
+
+/* 左右两个页面容器 */
+.am-page {
+  width: var(--page-w);
+  height: var(--book-h);
+  position: relative;
+  background: linear-gradient(to right, #FAF4E5, #FFFDF7);
+  flex-shrink: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+.am-page--right {
+  background: linear-gradient(to left, #FAF4E5, #FFFDF7);
+  box-shadow: inset 4px 0 14px -8px rgba(31, 37, 34, 0.18);
+}
+.am-page--left {
+  box-shadow: inset -4px 0 14px -8px rgba(31, 37, 34, 0.18);
+  border-radius: 6px 0 0 6px;
+}
+.am-book-stage.is-open .am-page--left { border-radius: 6px 0 0 6px; }
+.am-page--right { border-radius: 0 12px 12px 0; }
+
+/* spread 内容（每页内部 absolute 叠层） */
+.am-spread-pane {
+  position: absolute;
+  inset: 0;
+  padding: 32px 26px;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 360ms ease, transform 360ms ease;
+  pointer-events: none;
+}
+.am-spread-pane.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition-delay: 200ms;
+}
+
+/* 左页：编号 + 大标题 + lead */
+.am-pane-num {
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  color: var(--moss);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.am-pane-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.18;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-bottom: 14px;
+}
+.am-pane-title em {
+  font-style: italic;
+  color: var(--moss-deep);
+}
+.am-pane-lead {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.72;
+  color: var(--muted);
+}
+.am-pane-anchor {
+  margin-top: auto;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--moss-deep);
+  padding-top: 16px;
+  border-top: 1px dashed var(--line-strong);
+}
+
+/* 右页：正文。v3 改 overflow:hidden，目标一页排满不出滚动条 */
+.am-spread-pane--right { padding: 22px 20px; }
+.am-pane-body {
+  overflow: hidden;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 8px;
+}
+.am-pane-body p {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--ink);
+  margin: 0;
+}
+.am-pane-body p strong { color: var(--moss-deep); font-weight: 600; }
+.am-pane-body ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 6px;
+  margin: 0;
+  flex: 1;
+  min-height: 0;
+}
+.am-pane-body li {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--ink);
+  padding-left: 12px;
+  position: relative;
+}
+
+/* spread 04（信念）/ 05（GAP 期）正文内容比 hobby 短，
+   space-around 会把段间距撑得过大，改成居中聚拢 + 固定 gap */
+.am-spread-pane[data-spread="belief"] .am-pane-body,
+.am-spread-pane[data-spread="learning"] .am-pane-body {
+  justify-content: center;
+  gap: 16px;
+}
+.am-spread-pane[data-spread="learning"] .am-pane-body ul {
+  justify-content: center;
+  gap: 10px;
+}
+.am-pane-body li::before {
+  content: "·";
+  position: absolute;
+  left: 0;
+  top: -2px;
+  color: var(--moss);
+  font-weight: 700;
+}
+.am-pane-body li strong { color: var(--moss-deep); font-weight: 600; }
+.am-pane-body .anchor-line {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--moss-deep);
+  text-align: center;
+  margin: 4px 0 14px;
+  padding: 10px 6px;
+  border-top: 1px dashed var(--line-strong);
+  border-bottom: 1px dashed var(--line-strong);
+}
+
+/* 封面（覆盖在左页之上） */
+.am-book-cover {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--page-w);
+  height: var(--book-h);
+  z-index: 5;
+  border-radius: 6px 12px 12px 6px;
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(255, 253, 247, 0.12), transparent 60%),
+    linear-gradient(135deg, #3D6B54 0%, #2E5340 100%);
+  color: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px 26px 26px;
+  cursor: pointer;
+  transform-origin: left center;
+  transform: rotateY(0deg);
+  transition: transform 1200ms cubic-bezier(0.86, 0, 0.07, 1),
+              box-shadow 400ms ease;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow:
+    inset 12px 0 22px -14px rgba(0, 0, 0, 0.4),
+    var(--shadow-lg);
+  overflow: hidden;
+}
+.am-book-cover::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 14px;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.45), transparent);
+  border-radius: 4px 0 0 4px;
+  pointer-events: none;
+}
+.am-book-cover:hover { box-shadow: inset 12px 0 22px -14px rgba(0, 0, 0, 0.4), var(--shadow-hover); }
+.am-book-cover:hover .am-cover-cta {
+  border-color: var(--amber);
+  color: var(--amber);
+}
+.am-book-stage.is-open .am-book-cover {
+  transform: rotateY(-172deg);
+  cursor: default;
+}
+
+.am-cover-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+}
+.am-cover-eyebrow {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(251, 247, 238, 0.65);
+}
+
+.am-cover-avatar {
+  position: relative;
+  z-index: 1;
+  margin: 6px auto 0;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background: rgba(255, 253, 247, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 6px rgba(212, 165, 116, 0.30),
+    0 0 36px rgba(212, 165, 116, 0.35);
+}
+.am-cover-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.am-cover-bottom {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+.am-cover-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+.am-cover-title em {
+  font-style: italic;
+  color: var(--amber);
+  font-weight: 400;
+}
+.am-cover-author {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 13px;
+  color: rgba(251, 247, 238, 0.85);
+  margin-bottom: 16px;
+}
+.am-cover-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 7px 16px;
+  border-radius: var(--r-pill);
+  border: 1px solid rgba(251, 247, 238, 0.45);
+  color: rgba(251, 247, 238, 0.9);
+  transition: all 220ms ease;
+}
+
+/* 翻页按钮（书打开时显示） */
+.am-book-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 253, 247, 0.95);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms ease, background 200ms ease, transform 200ms ease, color 200ms ease;
+  z-index: 8;
+}
+.am-book-stage.is-open .am-book-nav {
+  opacity: 1;
+  pointer-events: auto;
+}
+.am-book-nav:hover {
+  background: var(--moss);
+  color: var(--bg-primary);
+  border-color: var(--moss);
+}
+.am-book-nav--prev { left: -16px; }
+.am-book-nav--next { right: -16px; }
+
+/* 合上按钮 */
+.am-book-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 7;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: rgba(255, 253, 247, 0.92);
+  color: var(--muted);
+  font-size: 16px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: color 180ms ease, transform 180ms ease;
+}
+.am-book-close:hover { color: var(--ink); transform: scale(1.08); }
+.am-book-stage.is-open .am-book-close { display: flex; }
+
+/* 页码点 */
+.am-book-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 18px;
+  margin-top: 8px;
+  opacity: 0.45;
+  transition: opacity 400ms ease;
+}
+.am-book-side.is-open-side .am-book-dots { opacity: 1; }
+
+/* 书下方常驻引言 */
+.am-book-quote {
+  margin: 14px 0 0;
+  max-width: 280px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+.am-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--line-strong);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 220ms ease;
+}
+.am-dot.is-active {
+  background: var(--moss-deep);
+  transform: scale(1.4);
+}
+
+.am-book-pager {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  font-weight: 600;
+  margin-left: 10px;
+  font-feature-settings: 'tnum';
+}
+
+/* 移动端 */
+@media (max-width: 960px) {
+  .am-grid { grid-template-columns: 1fr; gap: 56px; }
+  .am-book-side { order: 2; }
+  .am-timeline { order: 1; }
+}
+@media (max-width: 640px) {
+  .am-book-stage { --page-w: 260px; --book-h: 420px; }
+  .am-cover-avatar { width: 140px; height: 140px; }
+  .am-cover-title { font-size: 26px; }
+}
+@media (max-width: 540px) {
+  .am-book-stage { --page-w: 230px; --book-h: 380px; }
+  .am-book-nav--prev { left: -14px; }
+  .am-book-nav--next { right: -14px; }
+  .am-tl-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+}
 </style>
 </head>
 <body>
@@ -2944,6 +3546,210 @@ a { text-decoration: none; color: inherit; }
   </div>
 </section>
 
+<!-- §3.10 About Me · 左 Timeline + 右 Book（v2 · 无边框 + 双页 spread + AI 头像封面） -->
+<section class="about-me" id="about" aria-labelledby="about-heading">
+  <div class="am-inner">
+
+    <div class="am-header">
+      <div class="eyebrow">ABOUT · 关于我</div>
+      <h2 class="section-h2" id="about-heading">职业 <em>轨迹</em>，与生活 <em>切面</em></h2>
+      <p class="am-lede">从研究、产品、白皮书到商业化支持，是我的工作轨迹；从阅读、运动到随手记录，是我的生活切面。</p>
+    </div>
+
+    <div class="am-grid">
+
+      <!-- 左：Timeline（无边框，按截图样式） -->
+      <ol class="am-timeline">
+
+        <li class="am-tl-item">
+          <div class="am-tl-row">
+            <div class="am-tl-role">业务研究工程师 / 战略分析师</div>
+            <div class="am-tl-date">2024.07 – 2026.03</div>
+          </div>
+          <div class="am-tl-org">北京思特奇信息技术股份有限公司 · 产品需求委员会</div>
+          <p class="am-tl-desc">负责低空经济、AI 智能体产品、Web3+Telco 等前沿领域的战略规划、市场洞察及商业化落地支持，实现从研究分析到产品宣发与市场商机孵化的全链路闭环。</p>
+        </li>
+
+        <li class="am-tl-item">
+          <div class="am-tl-row">
+            <div class="am-tl-role">创新顾问助理（实习）</div>
+            <div class="am-tl-date">2023.06 – 2023.09</div>
+          </div>
+          <div class="am-tl-org">北京因维管理咨询</div>
+          <p class="am-tl-desc">深度参与京东零售战略咨询项目，通过高管访谈梳理业务逻辑，构建商业模式沙盘；主笔美团、小米造车等 10 余个标杆案例的商业模式拆解分析。</p>
+        </li>
+
+        <li class="am-tl-item">
+          <div class="am-tl-row">
+            <div class="am-tl-role">战略新业务部实习生</div>
+            <div class="am-tl-date">2022.07 – 2022.10</div>
+          </div>
+          <div class="am-tl-org">蔚来（NIO）</div>
+          <p class="am-tl-desc">负责 NIO Phone 及智能硬件周边市场可行性分析与用户洞察；独立完成蓝牙耳机从 0 到 1 全项战略汇报，助力新产品线成功立项。</p>
+        </li>
+
+        <li class="am-tl-item is-edu">
+          <div class="am-tl-row">
+            <div class="am-tl-role">管理科学与工程 硕士（创新管理方向）</div>
+            <div class="am-tl-date">2021.09 – 2024.06</div>
+          </div>
+          <div class="am-tl-org">中国科学院大学 · 联培：丹麦奥尔堡大学</div>
+          <p class="am-tl-desc">GPA: 3.84 / 4.00。相关课程：产品设计、创新体系、区块链金融等。</p>
+        </li>
+
+        <li class="am-tl-item is-edu">
+          <div class="am-tl-row">
+            <div class="am-tl-role">经济学 本科</div>
+            <div class="am-tl-date">2017.09 – 2021.06</div>
+          </div>
+          <div class="am-tl-org">中国传媒大学 · 经济与管理学院</div>
+          <p class="am-tl-desc">GPA: 3.88，专业排名第一（1/25）。相关课程：计量经济学、金融学、传播学等。</p>
+        </li>
+
+      </ol>
+
+      <!-- 右：Book -->
+      <div class="am-book-side" id="amBookSide">
+        <div class="am-book-hint">A Field Notebook · 点击翻开</div>
+
+        <div class="am-book-stage" id="amBookStage">
+
+          <!-- 柔光 halo + sparkles -->
+          <div class="am-book-halo" aria-hidden="true"></div>
+          <span class="am-book-sparkle s1" aria-hidden="true"></span>
+          <span class="am-book-sparkle s2" aria-hidden="true"></span>
+          <span class="am-book-sparkle s3" aria-hidden="true"></span>
+
+          <!-- 左页 -->
+          <div class="am-page am-page--left">
+            <div class="am-spread-pane is-active" data-pane="left" data-spread="reading">
+              <div class="am-pane-num">01 / Reading</div>
+              <div class="am-pane-title">最近在读的 <em>三类书</em></div>
+              <p class="am-pane-lead">小说让我看见人性的褶皱，社会哲学让我搞清楚自己为什么这样想，行业书提醒我研究方法还可以再迭代。</p>
+              <div class="am-pane-anchor">"人性在每一个幽微时刻的真实样子。"</div>
+            </div>
+            <div class="am-spread-pane" data-pane="left" data-spread="hobby">
+              <div class="am-pane-num">02 / Off-work</div>
+              <div class="am-pane-title">下班之后 <em>怎么过</em></div>
+              <p class="am-pane-lead">跳舞、普拉提、徒步、旅行、摄影——五件让我从工作里走出来、重新感觉到身体和世界的事。</p>
+              <div class="am-pane-anchor">"徒步是行走的冥想。"</div>
+            </div>
+            <div class="am-spread-pane" data-pane="left" data-spread="podcast">
+              <div class="am-pane-num">03 / Podcasts</div>
+              <div class="am-pane-title">我在收听的 <em>播客</em></div>
+              <p class="am-pane-lead">商业、女性主义、哲学、运动——同时订阅 20+ 档，挑了 6 档最常打开的，按内容密度排。</p>
+              <div class="am-pane-anchor">"通勤路上的另一种课堂。"</div>
+            </div>
+            <div class="am-spread-pane" data-pane="left" data-spread="belief">
+              <div class="am-pane-num">04 / Beliefs</div>
+              <div class="am-pane-title">我相信的 <em>几件事</em></div>
+              <p class="am-pane-lead">三件最底层的原则——支撑我在不确定里做选择，也支撑我和过去的自己和解。</p>
+              <div class="am-pane-anchor">"人是流动的。"</div>
+            </div>
+            <div class="am-spread-pane" data-pane="left" data-spread="learning">
+              <div class="am-pane-num">05 / Learning</div>
+              <div class="am-pane-title">我的 <em>GAP 期</em></div>
+              <p class="am-pane-lead">身体、语言、专业、爱好——五条平行学习线，组合起来才是一个完整的"在成长"的人。</p>
+              <div class="am-pane-anchor">"GAP 期不是停滞期。"</div>
+            </div>
+          </div>
+
+          <!-- 右页（套在 clip 壳里：闭合时 width:0 隐藏；打开时展开到 page-w） -->
+          <div class="am-page-right-clip">
+          <div class="am-page am-page--right">
+            <div class="am-spread-pane am-spread-pane--right is-active" data-pane="right" data-spread="reading">
+              <div class="am-pane-body">
+                <p><strong>小说类</strong>：金爱烂《滔滔生活》《外面是夏天》——她总能用极细的笔触描写人性在每一个幽微时刻的真实样子。《滔滔生活》和《口水连连》两篇感受最深。</p>
+                <p><strong>社会哲学</strong>：在看迈克尔·桑德尔《精英的傲慢》——想搞清楚优绩主义为什么这么深刻地影响了我。刚读完赫尔曼·黑塞《荒原狼》，主人公在市民阶级和哲学家两种身份之间切换、撕裂的感受我时常也会有；在啃贝克尔《死亡否认》。</p>
+                <p><strong>行业 & 人物</strong>：《如何快速了解一个行业》——想看看自己的研究方法论还有没有可以改进的地方；《黄仁勋：英伟达之芯片》看了一小半。</p>
+              </div>
+            </div>
+            <div class="am-spread-pane am-spread-pane--right" data-pane="right" data-spread="hobby">
+              <div class="am-pane-body">
+                <p><strong>跳舞</strong>：爵士、韩舞、中国舞都跳。音乐响起，我能很快进入心流——就算动作不完美，扭起来就快乐。</p>
+                <p><strong>普拉提</strong>：大学练过 1.5 年垫上普拉提，现在系统学器械。让我对呼吸模式和腰部柔软度有了完全不同的认知。</p>
+                <p><strong>徒步</strong>：西湖龙路线 26km、北京野长城、香山、香港麦理浩径一段。一边亲近自然，一边和自己对话。</p>
+                <p><strong>旅行</strong>：去过 8 个国家。最在意的不是景点，是当地人怎么说话、吃饭、坐地铁。</p>
+                <p><strong>摄影</strong>：喜欢拍真实的人文，不爱摆拍。相机、Pocket 3、胶片机、拍立得都有，但用得最多的还是手机。</p>
+              </div>
+            </div>
+            <div class="am-spread-pane am-spread-pane--right" data-pane="right" data-spread="podcast">
+              <div class="am-pane-body">
+                <ul>
+                  <li><strong>张小珺商业访谈录</strong>——深度对谈，最近嘉宾 Manus 联合创始人 Peak，听到很多 AI 行业洞察。</li>
+                  <li><strong>西西弗高速</strong>——主持人 J 和小康，女性主义与公共议题的日常观察。</li>
+                  <li><strong>岩中花述</strong>——鲁豫采访的每一位女性都很有力量。</li>
+                  <li><strong>知行小酒馆</strong>——名义讲金融，实则人文关怀。特别喜欢雨白的声音。</li>
+                  <li><strong>Blow Your Mind</strong>——Bro 峰和简里里，对谈像和朋友闲聊一样舒服。</li>
+                  <li><strong>独树不成林</strong>——主播仲树，爱运动的哲学博士。</li>
+                </ul>
+              </div>
+            </div>
+            <div class="am-spread-pane am-spread-pane--right" data-pane="right" data-spread="belief">
+              <div class="am-pane-body">
+                <div class="anchor-line">"人是流动的。"</div>
+                <p>不同的年龄、不同的状态下，想法一定会变。我不会因为过去那样想、现在不这么想了，就责怪自己——只要不停学习、不停输入，我会和自己达成最圆满的和解。</p>
+                <p><strong>Karma 是真的。</strong>我没有宗教信仰，但始终相信因果。这是我做选择最底层的原则。</p>
+                <p><strong>为每一个进步欢呼雀跃。</strong>工作上的、关系上的、生活上的——很小的进步也值得自己跟自己鼓掌。</p>
+              </div>
+            </div>
+            <div class="am-spread-pane am-spread-pane--right" data-pane="right" data-spread="learning">
+              <div class="am-pane-body">
+                <ul>
+                  <li><strong>普拉提（器械）</strong>——把垫上基础迁移到器械，重新理解呼吸与发力。</li>
+                  <li><strong>职业英语</strong>——保持雅思 7.5 的底子，打磨求职语境里的表达。</li>
+                  <li><strong>爵士舞</strong>——把进度推到能稳定跟下中级编舞。</li>
+                  <li><strong>AI 专业知识</strong>——大模型、Agent、商业化，持续读论文、看财报、做实测。</li>
+                  <li><strong>Vibe Coding</strong>——探索各种自己感兴趣的项目，手搓知识管理库、行业聚合器、个人网站等。</li>
+                  <li><strong>韩语</strong>——自学中，目标是看综艺不靠字幕。</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          </div>
+
+          <!-- 封面（覆盖左页） -->
+          <div class="am-book-cover" id="amBookCover" role="button" tabindex="0" aria-label="点击翻开这本书">
+            <div class="am-cover-top">
+              <div class="am-cover-eyebrow">A Field Notebook</div>
+              <div class="am-cover-eyebrow">'26</div>
+            </div>
+            <div class="am-cover-avatar">
+              <img src="./个人AI头像设计/GPT生成1.png" alt="郑宁宁 AI 头像" />
+            </div>
+            <div class="am-cover-bottom">
+              <div class="am-cover-title">工作之外的 <em>我</em></div>
+              <div class="am-cover-author">Ningning Zheng · Hangzhou</div>
+              <span class="am-cover-cta">Open →</span>
+            </div>
+          </div>
+
+          <!-- 合上按钮 + 翻页按钮 -->
+          <button class="am-book-close" id="amBookClose" aria-label="合上书">×</button>
+          <button class="am-book-nav am-book-nav--prev" id="amBookPrev" aria-label="上一页">‹</button>
+          <button class="am-book-nav am-book-nav--next" id="amBookNext" aria-label="下一页">›</button>
+        </div>
+
+        <!-- 页码点 -->
+        <div class="am-book-dots" id="amBookDots">
+          <button class="am-dot is-active" data-spread="reading" aria-label="第 1 页 · 阅读"></button>
+          <button class="am-dot" data-spread="hobby" aria-label="第 2 页 · 爱好"></button>
+          <button class="am-dot" data-spread="podcast" aria-label="第 3 页 · 播客"></button>
+          <button class="am-dot" data-spread="belief" aria-label="第 4 页 · 信念"></button>
+          <button class="am-dot" data-spread="learning" aria-label="第 5 页 · 在学"></button>
+          <span class="am-book-pager" id="amBookPager">01 / 05</span>
+        </div>
+
+        <p class="am-book-quote">
+          "你来了，很高兴认识你。<br/>
+          听完我的故事，我也想听听你的。"
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- §3.11 Contact · 全宽深色版（v2.4.7 · 4 卡横排 + SVG 图标） -->
 <section class="site-contact" id="contact" aria-labelledby="contact-heading">
   <div class="site-contact-inner">
@@ -3308,6 +4114,79 @@ document.querySelectorAll('.workflow-copy').forEach(btn => {
     }, 1600);
   });
 });
+
+/* ============================================
+   §3.10 About Me · Book 翻页 + Spread 切换（v2）
+============================================ */
+(function () {
+  const stage = document.getElementById('amBookStage');
+  const side = document.getElementById('amBookSide');
+  const cover = document.getElementById('amBookCover');
+  const closeBtn = document.getElementById('amBookClose');
+  const prevBtn = document.getElementById('amBookPrev');
+  const nextBtn = document.getElementById('amBookNext');
+  const dotsWrap = document.getElementById('amBookDots');
+  const pager = document.getElementById('amBookPager');
+  if (!stage || !cover) return;
+
+  const spreads = ['reading', 'hobby', 'podcast', 'belief', 'learning'];
+  let idx = 0;
+
+  const setSpread = (newIdx) => {
+    idx = (newIdx + spreads.length) % spreads.length;
+    const key = spreads[idx];
+    stage.querySelectorAll('.am-spread-pane').forEach(el => {
+      el.classList.toggle('is-active', el.dataset.spread === key);
+    });
+    if (dotsWrap) {
+      dotsWrap.querySelectorAll('.am-dot').forEach(d => {
+        d.classList.toggle('is-active', d.dataset.spread === key);
+      });
+    }
+    if (pager) pager.textContent = String(idx + 1).padStart(2, '0') + ' / 0' + spreads.length;
+  };
+
+  const openBook = () => {
+    stage.classList.add('is-open');
+    if (side) side.classList.add('is-open-side');
+  };
+  const closeBook = () => {
+    stage.classList.remove('is-open');
+    if (side) side.classList.remove('is-open-side');
+  };
+
+  /* 点击封面翻开 */
+  cover.addEventListener('click', openBook);
+  cover.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openBook(); }
+  });
+
+  /* 关闭 */
+  if (closeBtn) closeBtn.addEventListener('click', (e) => { e.stopPropagation(); closeBook(); });
+
+  /* 翻页 */
+  if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); setSpread(idx - 1); });
+  if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); setSpread(idx + 1); });
+
+  /* 点 */
+  if (dotsWrap) {
+    dotsWrap.querySelectorAll('.am-dot').forEach((dot, i) => {
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (!stage.classList.contains('is-open')) openBook();
+        setSpread(i);
+      });
+    });
+  }
+
+  /* 键盘导航：书打开时左右箭头翻页，Esc 合上 */
+  document.addEventListener('keydown', (e) => {
+    if (!stage.classList.contains('is-open')) return;
+    if (e.key === 'ArrowLeft') setSpread(idx - 1);
+    else if (e.key === 'ArrowRight') setSpread(idx + 1);
+    else if (e.key === 'Escape') closeBook();
+  });
+})();
 </script>
 </body>
 </html>
