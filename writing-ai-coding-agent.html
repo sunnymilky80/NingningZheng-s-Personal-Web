@@ -1,308 +1,959 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>为什么 AI Coding Agent 是 Agent 商业化的第一站？｜郑宁宁</title>
-  <meta name="description" content="从市场支出、开发者采用、SWE-bench、GitHub Copilot、OpenAI Codex、Claude Code 和商业模式角度，分析为什么 AI Coding Agent 是 Agent 商业化的第一站。" />
-  <style>
-    :root {
-      --paper: #f7f1e6;
-      --paper-2: #fffaf1;
-      --ink: #202520;
-      --muted: #687168;
-      --line: #d9cfbf;
-      --green: #305d49;
-      --blue: #255978;
-      --teal: #14797b;
-      --orange: #c76536;
-      --yellow: #f1d36d;
-      --radius: 14px;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>为什么 AI Coding Agent 是 Agent 商业化的第一站？｜郑宁宁</title>
+<meta name="description" content="技术层、商业基础设施层、产品工程层三层叠加，解释为什么 Coding Agent 是 Agent 商业化的第一站；含 5 场景对比矩阵 + 反面约束 + 行业判断。" />
 
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      color: var(--ink);
-      background:
-        linear-gradient(90deg, rgba(48, 93, 73, 0.045) 1px, transparent 1px),
-        linear-gradient(rgba(37, 89, 120, 0.04) 1px, transparent 1px),
-        var(--paper);
-      background-size: 34px 34px;
-      font-family: "Avenir Next", "PingFang SC", "Microsoft YaHei", sans-serif;
-      line-height: 1.72;
-      -webkit-font-smoothing: antialiased;
-    }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    a { color: var(--blue); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+<style>
+:root {
+  --bg-primary: #FBF7EE;
+  --bg-secondary: #F5F0E3;
+  --bg-paper: #FFFDF7;
+  --ink: #1F2522;
+  --muted: #687168;
+  --moss: #5D7052;
+  --moss-deep: #3D6B54;
+  --rust: #C18C5D;
+  --amber: #D4A574;
+  --line: #E5DFD0;
+  --line-strong: #CFC5B7;
 
-    .shell {
-      width: min(900px, calc(100vw - 32px));
-      margin: 0 auto;
-    }
+  --r-pill: 999px;
+  --r-card-lg: 24px;
+  --r-card: 18px;
+  --r-img: 20px;
+  --r-sm: 12px;
 
-    .top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      min-height: 66px;
-      border-bottom: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 800;
-    }
+  --shadow-sm: 0 2px 8px rgba(31, 37, 34, 0.04);
+  --shadow-md: 0 8px 24px rgba(31, 37, 34, 0.08);
+  --shadow-lg: 0 18px 46px rgba(31, 37, 34, 0.10);
 
-    .top a { color: inherit; text-decoration: none; }
-    .top a:hover { color: var(--ink); }
+  --font-display: "Fraunces", "Noto Serif SC", "Songti SC", serif;
+  --font-body: "Inter", "PingFang SC", -apple-system, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
 
-    .hero {
-      padding: 60px 0 36px;
-      border-bottom: 2px solid var(--ink);
-    }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  color: var(--ink);
+  font-size: 16.5px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      margin-bottom: 15px;
-      color: var(--orange);
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
+a { color: inherit; text-decoration: none; }
 
-    .eyebrow::before {
-      content: "";
-      width: 28px;
-      height: 2px;
-      background: currentColor;
-    }
+/* ===== Cursor halo（沿用 prototype） ===== */
+.cursor-halo {
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 165, 116, 0.16), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  mix-blend-mode: multiply;
+}
 
-    h1 {
-      margin: 0;
-      max-width: 820px;
-      font-family: "Songti SC", "Noto Serif CJK SC", serif;
-      font-size: clamp(38px, 6vw, 68px);
-      line-height: 1.04;
-      letter-spacing: 0;
-    }
+/* ===== 阅读进度条 ===== */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: transparent;
+  z-index: 200;
+}
+.reading-progress__bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--moss), var(--moss-deep));
+  transition: width 80ms linear;
+}
 
-    .summary {
-      margin-top: 22px;
-      padding: 18px 20px;
-      border: 1px solid rgba(48, 93, 73, 0.24);
-      background: linear-gradient(135deg, rgba(48, 93, 73, 0.1), rgba(255, 250, 241, 0.88));
-    }
+/* ===== 顶部 sticky pill nav ===== */
+.nav-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 16px clamp(20px, 4vw, 48px) 0;
+  pointer-events: none;
+}
+.nav-pill {
+  pointer-events: auto;
+  max-width: min(720px, 92vw);
+  margin: 0 auto;
+  background: rgba(255, 253, 247, 0.85);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--r-pill);
+  padding: 10px 18px 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-logo {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--moss);
+  color: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+}
+.nav-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+.nav-brand-text strong {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.nav-brand-text span {
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  color: var(--muted);
+}
+.nav-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  padding: 6px 12px;
+  border-radius: var(--r-pill);
+  transition: color 200ms ease, background 200ms ease;
+}
+.nav-back:hover { color: var(--ink); background: rgba(93, 112, 82, 0.08); }
 
-    .summary b {
-      color: var(--green);
-    }
+@media (max-width: 600px) {
+  .nav-brand-text span { display: none; }
+}
 
-    .meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 800;
-    }
+/* ===== Shell ===== */
+.shell {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  padding: 0 clamp(24px, 4vw, 48px);
+  position: relative;
+  z-index: 1;
+}
 
-    .meta span {
-      padding: 5px 8px;
-      background: rgba(255, 250, 241, 0.8);
-      border: 1px solid var(--line);
-    }
+/* ===== Hero（现在嵌进 article-grid 左列，跟正文同宽） ===== */
+.article-hero {
+  padding-top: clamp(48px, 6vh, 72px);
+  padding-bottom: clamp(24px, 3vh, 36px);
+}
+.article-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 28px;
+}
+.article-eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 2px;
+  background: currentColor;
+}
+.article-h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(34px, 5.4vw, 56px);
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  max-width: 880px;
+}
+.article-h1 em {
+  font-style: italic;
+  color: var(--moss-deep);
+  font-weight: 600;
+}
+.article-meta {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.article-meta-chip {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 13px;
+  border-radius: var(--r-pill);
+  background: rgba(93, 112, 82, 0.10);
+  color: var(--moss-deep);
+}
+.article-meta-dot {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--muted);
+  padding: 5px 0;
+}
 
-    article {
-      padding: 34px 0 62px;
-      font-size: 16px;
-    }
+/* ===== Key Takeaway ===== */
+.takeaway {
+  margin-top: 36px;
+  padding: 28px 32px;
+  background: var(--bg-paper);
+  border-radius: var(--r-card);
+  border-left: 4px solid var(--moss-deep);
+  box-shadow: var(--shadow-sm);
+}
+.takeaway__label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 12px;
+}
+.takeaway p {
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  line-height: 1.78;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+.takeaway p:last-child { margin-bottom: 0; }
+.takeaway p strong { color: var(--moss-deep); font-weight: 600; }
+.takeaway em {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--moss-deep);
+  font-weight: 500;
+}
 
-    article h2 {
-      margin: 42px 0 12px;
-      font-family: "Songti SC", "Noto Serif CJK SC", serif;
-      font-size: 30px;
-      line-height: 1.18;
-      letter-spacing: 0;
-    }
+/* ===== Article layout（hero + 正文 同列 + 右侧 TOC） ===== */
+.article-wrap {
+  position: relative;
+  padding-bottom: clamp(72px, 8vh, 120px);
+}
+.article-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 720px) 200px;
+  gap: clamp(40px, 5vw, 72px);
+  max-width: 1080px;
+  margin: 0 auto;
+  align-items: start;
+}
+.article-main {
+  min-width: 0;
+}
+.article-body {
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--ink);
+}
+.article-body p {
+  margin-bottom: 18px;
+  font-family: var(--font-body);
+}
+.article-body p strong { color: var(--moss-deep); font-weight: 600; }
+.article-body em {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--moss-deep);
+  font-weight: 500;
+}
+.article-body a {
+  color: var(--moss-deep);
+  border-bottom: 1px solid rgba(61, 107, 84, 0.4);
+  transition: border-color 180ms ease, color 180ms ease;
+}
+.article-body a:hover {
+  color: var(--moss);
+  border-bottom-color: var(--moss);
+}
+.article-body h2 {
+  margin: 56px 0 18px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(22px, 2.6vw, 28px);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  scroll-margin-top: 100px;
+}
+.article-body h2 em {
+  font-style: italic;
+  color: var(--moss-deep);
+  font-weight: 600;
+}
+.article-body h2 .h2-num {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--rust);
+  font-weight: 500;
+  margin-right: 10px;
+  font-size: 0.85em;
+}
+.article-body ul,
+.article-body ol {
+  margin: 6px 0 18px 0;
+  padding-left: 24px;
+}
+.article-body li { margin-bottom: 8px; }
+.article-body li strong { color: var(--moss-deep); font-weight: 600; }
 
-    article p {
-      margin: 14px 0;
-    }
+.article-divider {
+  height: 1px;
+  background: var(--line);
+  margin: 44px 0;
+  border: 0;
+}
 
-    article strong {
-      color: var(--ink);
-    }
+/* Section pull quote / aside */
+.pull {
+  margin: 26px 0;
+  padding: 18px 22px;
+  background: rgba(193, 140, 93, 0.10);
+  border-left: 3px solid var(--rust);
+  border-radius: 0 12px 12px 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink);
+}
+.pull strong { font-style: normal; color: var(--moss-deep); }
 
-    .divider {
-      margin: 34px 0;
-      border: 0;
-      border-top: 1px solid var(--line);
-    }
+/* 5 维度框架表 */
+.framework-table {
+  margin: 28px 0;
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-body);
+  font-size: 14px;
+  background: var(--bg-paper);
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.framework-table thead th {
+  background: rgba(93, 112, 82, 0.10);
+  color: var(--moss-deep);
+  text-align: left;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+}
+.framework-table tbody td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+  line-height: 1.6;
+}
+.framework-table tbody tr:last-child td { border-bottom: none; }
+.framework-table tbody td:first-child {
+  color: var(--moss-deep);
+  font-weight: 600;
+  white-space: nowrap;
+  width: 24%;
+}
+.framework-table tbody td:nth-child(2) {
+  color: var(--muted);
+  width: 32%;
+}
 
-    .formula {
-      margin: 20px 0;
-      padding: 18px 20px;
-      border-left: 4px solid var(--orange);
-      background: rgba(255, 250, 241, 0.88);
-    }
+/* Matrix figure */
+.matrix-figure {
+  margin: 32px 0;
+  padding: 20px;
+  background: var(--bg-paper);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+.matrix-figure img {
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+.matrix-figure figcaption {
+  margin-top: 14px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-align: center;
+}
 
-    .formula ol {
-      margin: 0;
-      padding-left: 22px;
-    }
+/* Roles takeaway block */
+.role-block {
+  margin: 28px 0;
+  padding: 24px 26px;
+  background: var(--bg-paper);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-sm);
+}
+.role-block h3 {
+  margin: 0 0 16px;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.role-block ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.role-block li {
+  padding-left: 0;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.role-block li strong {
+  display: block;
+  font-family: var(--font-body);
+  color: var(--moss-deep);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
 
-    .formula li { margin: 4px 0; }
+/* Sources（去掉卡片框，内嵌到正文末尾，字号变小） */
+.sources {
+  margin-top: 56px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+.sources h2 {
+  margin: 0 0 12px !important;
+  font-family: var(--font-display);
+  font-size: 16px !important;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+.sources p {
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+.sources ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.sources li {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--muted);
+  padding-left: 14px;
+  position: relative;
+  margin: 0;
+}
+.sources li::before {
+  content: "·";
+  position: absolute;
+  left: 4px;
+  color: var(--moss);
+  font-weight: 700;
+}
+.sources .note {
+  font-size: 12.5px;
+  color: var(--muted);
+  font-style: italic;
+  margin: 0;
+  padding-top: 8px;
+}
 
-    .sources {
-      margin-top: 36px;
-      padding: 20px;
-      border: 1px solid var(--line);
-      background: rgba(255, 250, 241, 0.82);
-    }
+/* ===== TOC sidebar ===== */
+.article-toc {
+  position: sticky;
+  top: 92px;
+  align-self: start;
+  font-family: var(--font-body);
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.article-toc__label {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+.article-toc__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.article-toc__list a {
+  display: block;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--muted);
+  padding: 4px 0 4px 12px;
+  border-left: 2px solid transparent;
+  transition: color 180ms ease, border-color 180ms ease, padding-left 180ms ease;
+}
+.article-toc__list a:hover { color: var(--ink); }
+.article-toc__list a.is-active {
+  color: var(--moss-deep);
+  border-left-color: var(--moss-deep);
+  font-weight: 600;
+  padding-left: 14px;
+}
+.article-toc__list .toc-num {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--rust);
+  margin-right: 6px;
+}
 
-    .sources h2 {
-      margin-top: 0;
-      font-size: 24px;
-    }
+@media (max-width: 980px) {
+  .article-grid { grid-template-columns: 1fr; }
+  .article-toc { display: none; }
+}
 
-    .sources ol {
-      margin: 0;
-      padding-left: 21px;
-    }
+/* ===== Footer ===== */
+.article-footer {
+  border-top: 1px solid var(--line);
+  padding: 32px clamp(20px, 4vw, 48px) 48px;
+  text-align: center;
+  background: var(--bg-secondary);
+}
+.article-footer-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.article-footer-cta {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--ink);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+.article-footer-cta em {
+  color: var(--moss-deep);
+  font-weight: 600;
+}
+.article-footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.article-footer-links a {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--moss-deep);
+  padding: 8px 18px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--moss);
+  transition: all 200ms ease;
+}
+.article-footer-links a:hover {
+  background: var(--moss);
+  color: var(--bg-primary);
+  transform: translateY(-2px);
+}
+.article-footer-meta {
+  font-size: 12.5px;
+  color: var(--muted);
+}
 
-    .sources li { margin: 8px 0; }
-
-    footer {
-      padding: 26px 0 44px;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 12px;
-      text-align: center;
-    }
-
-    @media (max-width: 640px) {
-      .shell { width: min(100vw - 22px, 900px); }
-      .hero { padding-top: 42px; }
-      h1 { font-size: 38px; }
-      article { font-size: 15.5px; }
-      article h2 { font-size: 25px; }
-      .top { align-items: flex-start; flex-direction: column; justify-content: center; padding: 12px 0; }
-    }
-  </style>
+@media (max-width: 640px) {
+  .article-h1 { font-size: 34px; }
+  .takeaway, .role-block, .sources { padding: 22px; }
+  .framework-table { font-size: 13px; }
+  .framework-table thead th, .framework-table tbody td { padding: 10px 12px; }
+}
+</style>
 </head>
 <body>
-  <nav class="shell top">
-    <a href="index.html">← 返回首页</a>
-    <span>AI Commercialization Notes</span>
-  </nav>
 
-  <header class="shell hero">
-    <div class="eyebrow">Featured Writing</div>
-    <h1>为什么 AI Coding Agent 是 Agent 商业化的第一站？</h1>
-    <div class="summary">
-      <b>Key Takeaway：</b> AI Coding Agent 不是因为“写代码”这个场景最炫，而是因为软件开发同时具备 Agent 商业化最稀缺的五个条件：高频需求、数字化工作流、可验证结果、可量化 ROI、成熟付费路径。它不是 Agent 的终局，却很可能是 Agent 商业化的第一个稳定样板。
+<!-- 鼠标光斑 -->
+<div class="cursor-halo" id="halo" aria-hidden="true"></div>
+
+<!-- 阅读进度条 -->
+<div class="reading-progress"><div class="reading-progress__bar" id="readBar"></div></div>
+
+<!-- 顶部导航胶囊 -->
+<nav class="nav-wrapper">
+  <div class="nav-pill">
+    <a href="prototype-v2.4.html" class="nav-brand">
+      <span class="nav-logo">宁</span>
+      <span class="nav-brand-text">
+        <strong>Ningning Zheng</strong>
+        <span>郑宁宁</span>
+      </span>
+    </a>
+    <a href="prototype-v2.4.html#writing" class="nav-back">← Writings</a>
+  </div>
+</nav>
+
+<!-- Hero + 正文 + TOC（共享同一个 grid 列宽，视觉连贯） -->
+<div class="shell article-wrap">
+  <div class="article-grid">
+
+    <div class="article-main">
+
+      <!-- Hero -->
+      <header class="article-hero">
+        <div class="article-eyebrow">Featured Writing · 行业判断</div>
+        <h1 class="article-h1">为什么 <em>AI Coding Agent</em> 是 Agent 商业化的第一站？</h1>
+        <div class="article-meta">
+          <span class="article-meta-chip">AI Agent</span>
+          <span class="article-meta-chip">商业化分析</span>
+          <span class="article-meta-chip">行业研究</span>
+          <span class="article-meta-dot">· 2026-04 · 约 18 分钟阅读 · 含 5 场景对比矩阵</span>
+        </div>
+
+        <div class="takeaway">
+          <div class="takeaway__label">Key Takeaway</div>
+          <p>为什么 Coding Agent 先跑出来？流行的解释是"代码语言天然规范、好生成"——这是对的，但只回答了一半。它解释了 <strong>Coding Agent 能不能被做出来</strong>，没有回答 <strong>Coding Agent 能不能被卖出去、被部署、被衡量、被持续付费</strong>。</p>
+          <p>要回答商业化这一半，需要一个更系统的框架——5 个维度：<em>高频需求、数字化工作流、可验证结果（含错误可拦截）、可量化 ROI、成熟付费路径</em>。Coding 在这 5 项上几乎全部达标，而其他常被讨论的垂直场景普遍只满足 1–2 项。</p>
+          <p>而且 Coding Agent 还有一个其他场景几乎复制不来的<em>隐性优势</em>：做 Agent 的人本身就是工程师——他们既是 Coding Agent 的目标用户，也是它的产品经理和开发者。这种"用户 = 建造者"的统一，让产品力天然在线。</p>
+          <p><strong>所以 Coding Agent 的领先是三层叠加的结果：技术层（代码好生成）+ 商业基础设施层（5 维度全达标）+ 产品工程层（建造者就是用户）。三层缺一不可。</strong></p>
+        </div>
+      </header>
+
+      <article class="article-body">
+      <p>过去一年，关于 Agent 的讨论常常被一种宏大叙事包裹：AI 将拥有长期记忆、使用工具、规划任务、跨系统执行，最终成为"数字员工"。这个方向大概率是对的，但真正的问题不在于 Agent 能不能想象，而在于它能不能被购买、被部署、被信任、被衡量。</p>
+
+      <p>从这个标准看，<strong>AI Coding Agent 是目前最接近商业闭环的 Agent 形态</strong>。</p>
+
+      <p>原因很简单：软件开发不是一个普通的知识工作场景。它天然在线，天然结构化，天然有协作流程，也天然有验证机制。代码不是一段主观表达，它最终要被测试、运行、review、merge、上线。正是这些工程机制，让一个"不完全可靠"的 AI Agent 可以被放进一个相对可控的系统里，先创造价值，再逐步扩大自主性。</p>
+
+      <p>这就是为什么 Coding 会成为 Agent 商业化的第一站。</p>
+
+      <hr class="article-divider" />
+
+      <h2 id="sec-framework">评估框架：哪些场景适合 <em>Agent 商业化</em>？</h2>
+      <p>下文会按这 5 个维度逐项论证 Coding Agent 为什么达标，最后用一张矩阵把它和客服、法律、财务、市场研究 4 个常被讨论的场景做对比。</p>
+
+      <table class="framework-table">
+        <thead>
+          <tr>
+            <th>维度</th>
+            <th>问的问题</th>
+            <th>Coding 凭什么达标</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>高频需求</td><td>任务是否每天发生？</td><td>开发者每天都有大量可委派的代码任务</td></tr>
+          <tr><td>数字化工作流</td><td>任务系统是否在线？</td><td>issue / repo / PR / CI 全部已经在线化</td></tr>
+          <tr><td>可验证结果</td><td>结果对错能否被快速判定？错误能否被拦下来？</td><td>测试 + CI + review + 灰度发布提供机器 + 人类双重验证</td></tr>
+          <tr><td>可量化 ROI</td><td>价值能否落到具体指标？</td><td>交付速度、修复时间、迁移工期都可计量</td></tr>
+          <tr><td>成熟付费路径</td><td>是否有现成的购买路径？</td><td>DevTools 市场已经跑通 PLG → 团队 → 企业</td></tr>
+        </tbody>
+      </table>
+
+      <hr class="article-divider" />
+
+      <h2 id="sec-freq"><span class="h2-num">01</span>高频需求：开发者已经把 AI Coding 放进日常</h2>
+      <p>Agent 商业化首先需要一个足够高频的任务场景。低频任务即使能被 AI 自动化，也很难形成稳定使用习惯和持续付费。</p>
+      <p>软件开发恰好是高频任务密度极高的工作。开发者每天都在写代码、读代码、修 bug、补测试、改文档、查日志、处理 CI 失败、迁移依赖、理解旧系统、回复 review comment。这些任务不一定都复杂，但持续发生，且大量任务可以被拆成明确的输入和输出。</p>
+      <p>Stack Overflow 2025 开发者调查显示，<strong>84%</strong> 的受访者正在使用或计划使用 AI 工具，专业开发者中 <strong>51%</strong> 每天使用 AI 工具。来源：<a href="https://survey.stackoverflow.co/2025/ai/" target="_blank" rel="noopener noreferrer">Stack Overflow Developer Survey 2025</a></p>
+      <p>JetBrains 在 2025 年开发者生态报告中也披露，<strong>90%</strong> 开发者在工作中规律使用至少一种 AI coding / development 工具，<strong>74%</strong> 已采用专门的 AI 开发者工具。其中 GitHub Copilot 工作采用率为 <strong>29%</strong>，Claude Code 和 Cursor 均为 <strong>18%</strong>。来源：<a href="https://www.jetbrains.com/research/devecosystem-2025/ai/" target="_blank" rel="noopener noreferrer">JetBrains Developer Ecosystem Survey 2025 — AI</a></p>
+      <p>这些数据说明，AI Coding 已经越过"尝鲜"阶段，进入开发者日常工作流。</p>
+
+      <p>但<strong>高频使用 ≠ 盲目信任</strong>——这一区分恰好是理解 Coding Agent 商业化的关键。同一份 Stack Overflow 调查显示，<strong>46%</strong> 的开发者不信任 AI 输出准确性，只有 <strong>33%</strong> 表示信任，仅约 <strong>3%</strong> 高度信任。开发者最大的挫败感，是 AI 给出的答案"差一点对，但不完全对"。</p>
+
+      <div class="pull">这个"高频但不信任"的状态，对 Coding Agent 反而是利好——用户既愿意付费试用，又会自带审查机制兜底。<strong>如果开发者像信用卡用户信任银行那样信任 AI，反而危险。</strong></div>
+
+      <p>所以，Coding Agent 的第一层商业化基础，是开发者真的每天都有大量可委派任务——并且他们会一边用一边盯。</p>
+
+      <hr class="article-divider" />
+
+      <h2 id="sec-workflow"><span class="h2-num">02</span>数字化工作流：软件开发<em>天然适合</em>Agent 接入</h2>
+      <p>光有高频需求还不够。Agent 还需要进入用户已有的工作系统——这是绝大多数 Agent 产品最容易翻车的环节。</p>
+      <p>很多 Agent Demo 看起来强大，但用户真正使用时会遇到三个问题：我要去哪儿给它任务？它怎么访问我的业务系统？它做完以后，结果怎么进入我原来的流程？</p>
+      <p>Coding 场景的优势在于，这些问题已经有答案。软件开发有 issue、branch、commit、PR、review、CI/CD、merge、rollback。开发者的工作对象包括 repo、代码文件、依赖、测试、日志、错误堆栈、终端、IDE、文档和运行环境。这些对象大多已经在线化、结构化、可读取、可修改。</p>
+
+      <div class="pull"><strong>Agent 不需要发明新的协作协议，它只需要进入已有协议。</strong></div>
+
+      <p>GitHub Copilot coding agent 可以从 GitHub issue 被分配任务，完成后创建 pull request。GitHub 也强调，它会进入 draft PR、session logs、branch protection、人类审批和 CI/CD 流程，而不是绕过人类直接合并。来源：<a href="https://docs.github.com/en/copilot/concepts/coding-agent/about-copilot-coding-agent" target="_blank" rel="noopener noreferrer">GitHub Docs</a></p>
+      <p>OpenAI Codex 则被定义为 cloud-based software engineering agent，可以写功能、修 bug、回答代码库问题，并在独立 sandbox 中运行命令、测试、lint 和 type check。来源：<a href="https://openai.com/index/introducing-codex/" target="_blank" rel="noopener noreferrer">OpenAI Introducing Codex</a></p>
+      <p>Claude Code 也强调读取代码库、跨文件修改、运行测试和交付代码。来源：<a href="https://www.anthropic.com/product/claude-code" target="_blank" rel="noopener noreferrer">Claude Code</a></p>
+      <p>这一点对所有 Agent 商业化都有启发。真正可商业化的 Agent，不是"能做很多事"的 Agent，而是"能在某个既有工作流中稳定接收任务、执行动作、产出结果、接受审查"的 Agent。如果你打算做一个 Agent 产品，第一个该问的问题不是"模型能力够不够"，而是"<strong>用户当前用什么系统跑这件事？我能不能直接接进去？</strong>"</p>
+      <p>高频需求 + 数字化工作流，解决了"Agent 怎么进入工作"——但还没有回答"Agent 做完事之后怎么被信任"。这就要看下一节。</p>
+
+      <hr class="article-divider" />
+
+      <h2 id="sec-verify"><span class="h2-num">03</span>可验证结果：测试、PR 和 review 让 Agent <em>不必完全可靠</em>也能商业化</h2>
+      <p>Agent 商业化最难的，不是生成答案，而是<strong>证明自己完成了任务，以及在出错时能及时被拦下来</strong>。</p>
+      <p>软件开发的优势在于，它有一整套成熟的验证 + 拦截机制：</p>
+      <ul>
+        <li><strong>机器验证</strong>：lint、type check、unit test、integration test、E2E test、CI</li>
+        <li><strong>人类验证</strong>：code review、PR diff</li>
+        <li><strong>错误拦截</strong>：sandbox、权限控制、灰度发布、rollback、branch protection</li>
+      </ul>
+      <p>这并不意味着代码质量可以被完全自动判断。可维护性、架构合理性、业务语义、长期技术债，仍然需要人类判断。但相比很多知识工作，软件工程至少提供了<strong>大量可机器检查的反馈信号</strong>，并且<strong>有成熟的"踩刹车"机制</strong>。</p>
+
+      <p>这正是 SWE-bench 重要的原因。SWE-bench Verified 是一个经过人工验证的 500 个真实软件工程任务子集，用来评估 coding agents 和语言模型。它的任务来自真实代码库和真实 issue，要求系统理解问题、修改代码，并通过测试。来源：<a href="https://www.swebench.com/verified.html" target="_blank" rel="noopener noreferrer">SWE-bench Verified</a></p>
+      <p>这代表了 AI Coding 评测范式的变化：从"模型能不能写出一段代码"，转向"模型能不能在真实工程环境里解决问题"。商业化也在发生同样的变化。</p>
+
+      <p>早期 AI 编程工具的核心价值是<strong>补全</strong>：你写一半，它补一半。现在 Coding Agent 的价值开始转向<strong>执行</strong>：你描述一个问题，它读取代码库，定位文件，修改代码，运行测试，提交 PR，等待人类 review。</p>
+
+      <div class="pull">关键不是某个产品更强，而是产品形态正在收敛：<strong>Agent 不再只是给建议，而是进入任务系统；不再只是生成文本，而是交付可审查的工程改动。</strong></div>
+
+      <p>这解释了为什么 Coding Agent 可以比很多通用 Agent 更早商业化。一个商务 Agent 自动发错邮件，一个金融 Agent 错误解释数据，一个客服 Agent 错误承诺政策——后果可能要等到客户投诉、合同出问题、监管关注时才暴露。而 <strong>Coding Agent 的错误通常在测试、编译、代码审查、灰度发布中就被拦截了</strong>。</p>
+      <p>换句话说，Coding Agent 的商业化不是建立在"完全自主"之上，而是建立在"<em>受控自主</em>"之上。这是一个被低估的产品哲学：<strong>先在有刹车的场景里跑，再扩大自主性，比反过来更可行</strong>。</p>
+
+      <hr class="article-divider" />
+
+      <h2 id="sec-roi"><span class="h2-num">04</span>可量化 ROI：企业已经把研发效率<em>变成 AI 预算</em></h2>
+      <p>Agent 要商业化，不能只说"体验更好"，还要能回答一个很现实的问题：它到底帮企业省了多少钱，或者多创造了多少价值？</p>
+      <p>Coding Agent 在这一点上有天然优势。开发者时间昂贵，研发交付周期直接影响产品迭代速度。一个工具如果能缩短从 issue 到 PR、从 bug 到 fix、从需求到原型、从事故到定位的时间，管理层很容易理解它的经济价值。</p>
+
+      <p>Menlo Ventures 在《2025 State of Generative AI in the Enterprise》中估算，2025 年企业生成式 AI 总支出达到 <strong>370 亿美元</strong>，其中应用层支出为 <strong>190 亿美元</strong>。在按部门拆分的 Departmental AI 类别中，Coding 是最大单项，达到 <strong>40 亿美元</strong>，占该部门级类别支出的 <strong>55%</strong>。报告直接将 Coding 称为生成式 AI 的第一个 "killer use case"。来源：<a href="https://menlovc.com/perspective/2025-the-state-of-generative-ai-in-the-enterprise/" target="_blank" rel="noopener noreferrer">Menlo Ventures 2025 State of Generative AI in the Enterprise</a></p>
+
+      <p>这组数据的意义不只是"AI 写代码市场很大"，而是说明<strong>企业 AI 应用的第一批真实预算，正在流向软件开发生命周期</strong>。</p>
+
+      <p>Claude Code 的企业案例也在强化这个方向。Anthropic 官网案例称：Stripe 将 Claude Code 部署给 1,370 名工程师；某团队用 4 天完成原估算 10 engineer-weeks 的 Scala-to-Java 迁移；Ramp 将 incident investigation time 降低 80%。这些是<strong>厂商披露</strong>，不能当作完全中立的市场数据，但它们说明了企业愿意用什么指标衡量 Coding Agent：迁移工期、事故排查时间、工程师覆盖人数、研发吞吐量。来源：<a href="https://www.anthropic.com/product/claude-code" target="_blank" rel="noopener noreferrer">Claude Code</a></p>
+
+      <p>DORA 2025 的结论值得放进来做对照。Google Cloud DORA 把 AI 在软件开发中的角色称为 <em>amplifier</em>：它会放大组织原本的优点和缺陷。AI adoption 不自动等于业务价值，团队结构、平台工程、数据质量、治理流程会决定效果。来源：<a href="https://research.google/pubs/dora-2025-state-of-ai-assisted-software-development-report/" target="_blank" rel="noopener noreferrer">DORA 2025 State of AI-assisted Software Development Report</a></p>
+
+      <p>Coding Agent 的 ROI 不是"买了工具就自动产生"，而是取决于组织能否把它接进任务分发、代码审查、测试、部署和安全治理流程。这意味着真正能在 Coding Agent 上获利的企业，会是那些<strong>已经在 DevOps 和平台工程上投入到位</strong>的公司——这也是为什么 Stripe、Ramp 这类工程文化扎实的公司会率先成为标杆案例，而不是工程基础薄弱的公司。</p>
+      <p>具体到指标，Coding Agent 的 ROI 可以落到：issue 处理时间、PR 周期、bug 修复速度、测试覆盖率、incident investigation time、迁移和重构工期、工程师单位时间产出、技术债清理速度。这些都是 CTO 和工程 VP <strong>已经在跟踪的指标</strong>——Agent 不需要发明新的衡量体系。</p>
+
+      <hr class="article-divider" />
+
+      <h2 id="sec-payment"><span class="h2-num">05</span>成熟付费路径：DevTools 市场已经跑通的<em>飞轮</em></h2>
+      <p>Agent 商业化的另一个难点是定价。通用 Agent 很难定价，因为它的价值不稳定：今天帮你写邮件，明天帮你查资料，后天帮你订行程。用户很难判断该为它支付多少，企业也很难按部门预算归属。</p>
+      <p>Coding Agent 不同。它天然落在开发者工具预算、研发效率预算、工程平台预算之中。开发者工具本来就有成熟付费路径：个人订阅、团队版、企业版、seat-based pricing、usage-based pricing、云资源消耗、DevOps 平台、安全扫描、APM、CI/CD。<strong>AI Coding Agent 不是从零教育市场，而是在一个已有高付费习惯的开发者工具市场上升级。</strong></p>
+
+      <p>GitHub 官方披露，GitHub 拥有超过 <strong>1.5 亿</strong> 开发者，超过 <strong>90%</strong> 的 Fortune 100 公司使用 GitHub 协作，超过 <strong>7.7 万</strong> 组织采用 GitHub Copilot。来源：<a href="https://github.com/newsroom/press-releases/coding-agent-for-github-copilot" target="_blank" rel="noopener noreferrer">GitHub Newsroom</a></p>
+      <p>Cursor 则展现了典型的 Product-Led Growth 路径：个人开发者先试用和付费，工具进入日常开发习惯后，再扩散到团队和企业。Cursor 官方定价中，Pro 为每月 20 美元，Teams 为每用户每月 40 美元，Enterprise 为定制价格。来源：<a href="https://cursor.com/pricing" target="_blank" rel="noopener noreferrer">Cursor Pricing</a></p>
+      <p>Menlo Ventures 的报告也指出，AI 应用支出中 PLG 占比达到 <strong>27%</strong>，约为传统软件的近 4 倍；如果考虑员工使用个人信用卡购买 AI 工具等 shadow AI adoption，PLG 相关占比可能接近 <strong>40%</strong>。</p>
+
+      <div class="pull">开发者是最容易自下而上采用工具的人群之一——这是 Coding Agent 相比其他垂直 Agent 的<strong>决定性优势</strong>。律师、CFO 不会自己掏 20 美元订阅一个工具，但开发者会。</div>
+
+      <p>这意味着 Coding Agent 在企业销售周期还没启动之前，就已经能产生收入和数据，<strong>这是其他垂直 Agent 在可预见未来都不容易复制的飞轮</strong>。这条路径已经被开发者工具反复验证。AI Coding Agent 只是把它加速了。</p>
+
+      <hr class="article-divider" />
+
+      <h2 id="sec-builder"><span class="h2-num">06</span>被低估的隐性条件：<em>用户 = 建造者</em></h2>
+      <p>5 维度框架解释了 Coding Agent 在"商业化基础设施"层面的优势。但还有一个<strong>隐性条件</strong>，我认为它对解释"为什么是 Coding 先跑出来"同样关键——而且很少被说清楚。</p>
+
+      <div class="pull"><strong>做 AI Agent 的人，本身就是工程师。</strong></div>
+
+      <p>这件事在其他赛道意味不大，但放在 Coding Agent 上，意味着一个非常稀有的产品状态：<strong>产品的目标用户、产品经理、开发者，是同一群人。</strong></p>
+      <p>回想一下其他领域的 AI 产品是怎么被做出来的：</p>
+      <ul>
+        <li>做 <strong>艺术 / 设计 Agent</strong>：需要懂设计的 PM 把审美 taste 翻译成需求文档，工程师再去实现。但工程师本身大概率不是专业设计师，对"什么样算好设计"没有第一手判断。</li>
+        <li>做 <strong>教育 Agent</strong>：需要懂教学法的产品经理设计互动逻辑，工程师实现。但工程师不是教师，对"什么是好的学习体验"是隔了一层的。</li>
+        <li>做 <strong>法律 / 财务 / 医疗 Agent</strong>：需要更长的产品链——领域专家给出业务规则、PM 翻译成产品需求、工程师实现、再回到领域专家手里测试反馈。</li>
+      </ul>
+      <p>每多一层翻译，就多一层信息损耗——这是产品工程里最经典的"需求传递断层"问题。</p>
+      <p>而 Coding Agent 没有这个问题。<strong>做 Cursor 的人在用 Cursor 写 Cursor，做 Claude Code 的人在用 Claude Code 写 Claude Code，做 Codex 的人在用 Codex 写 Codex。</strong> 工程师对"我每天写代码到底卡在哪儿、什么样的辅助才真正解决问题"有第一性的判断，不需要任何中间翻译。这种 dogfooding 强度在其他垂直场景几乎不存在。</p>
+      <p>这条隐性优势带来的不只是"产品做得更对路"，更重要的是它影响<strong>迭代速度</strong>——任何一个团队成员都既是产品决策者又是用户，反馈循环可以在小时级而不是周级跑。这也解释了 Cursor、Claude Code、Codex、Trae 等产品近一年的迭代频率为什么远超传统 SaaS——它们的产品节奏不是被路线图决定的，是被工程师"今天用着不爽"决定的。</p>
+
+      <div class="pull">如果你正在评估某个垂直 Agent 赛道值不值得做，除了用 5 维度框架打分，可以再问一个问题：<strong>这个赛道的产品建造者，自己用得上自己做的产品吗？</strong></div>
+
+      <p>用得上 = 产品力 + 迭代速度同时拉满；用不上 = 永远要靠 PM 当翻译，反馈循环至少慢一个数量级。这条不在显性的 5 维度框架里，但它是 Coding Agent 比其他赛道<strong>多出来的一档加速器</strong>。</p>
+
+      <hr class="article-divider" />
+
+      <h2 id="sec-matrix"><span class="h2-num">07</span>为什么是 Coding，不是其他场景？<em>5 场景对比矩阵</em></h2>
+      <p>如果只看 Coding 一边的论证，很容易让人怀疑：是不是其他场景也能满足这 5 条？我把另外 4 个常被讨论的垂直 Agent 场景拉出来做对比。打分逻辑：✅ 满足、△ 部分满足、❌ 不满足。</p>
+
+      <figure class="matrix-figure">
+        <img src="./assets/coding-agent-matrix.svg" alt="Agent 商业化 5 维度 × 5 场景对比矩阵" />
+        <figcaption>5 维度 × 5 场景对比 · Coding 是唯一全勾的场景</figcaption>
+      </figure>
+
+      <p><strong>逐个解释打分逻辑：</strong></p>
+      <ul>
+        <li><strong>客服</strong>：高频、工作流在线（工单系统）、ROI 清晰（人均会话量、解决率）、付费成熟（已有客服 SaaS 市场）。<strong>唯一短板是"可验证"</strong>——客服回答对不对，往往要等用户投诉、NPS 下滑、退款发生时才知道，没有 CI 这种实时拦截机制。这就是为什么客服 Agent 出错代价更高、推进更谨慎。</li>
+        <li><strong>法律</strong>：合同审查、合规检查频次中等，工作流部分在线（很多文件还在邮件、PDF、本地 Word），结果验证依赖律师人工判断（没有"测试通过"这种二元信号），ROI 更隐性，付费习惯偏 top-down 大客户销售。<strong>5 项里基本只占 1.5–2 项</strong>。</li>
+        <li><strong>财务</strong>：高频、工作流在线（ERP、报表系统都在），ROI 看得见。但结果可验证性中等（数据对账可以验，分析判断不行），付费路径是企业采购为主，PLG 几乎走不通。</li>
+        <li><strong>市场研究</strong>：低频、信息源高度分散（很多还在 PDF / 网页 / 访谈记录里）、结果几乎无法机器验证（一份分析报告对不对，没有标准答案）、ROI 难量化、PLG 几乎不存在。<strong>5 项里只占 1 项左右——这是最不适合先商业化的场景之一</strong>。</li>
+      </ul>
+
+      <p>Coding 是这 5 个场景里<strong>唯一 5 项全勾</strong>的。客服虽然接近，但卡在"可验证"这一关——而这一关恰好是决定 Agent 能不能"放进流程跑"的最关键一项。这也解释了为什么客服 Agent 已经讨论了三年，但真正大规模替代人工的还很少。</p>
+
+      <div class="pull">把"5 维度评估框架"反过来用，它就是一个 <strong>Agent 创业 / 投资 checklist</strong>：盯一个新场景之前，先看它能勾几项。<em>少于 3 项的场景，不要做第一个吃螃蟹的人。</em></div>
+
+      <hr class="article-divider" />
+
+      <h2 id="sec-limit"><span class="h2-num">08</span>反面约束：为什么 Coding Agent <em>还不是自动程序员</em></h2>
+      <p>如果只写商业化优势，这篇文章会显得过度乐观。Coding Agent 的领先并不意味着它已经可以稳定替代工程师。</p>
+      <p>METR 2025 的随机对照实验很有提醒意义。研究让 16 位资深开源开发者在他们熟悉的代码库中处理 246 个真实 issue。结果显示，使用 AI 工具反而让他们慢了 <strong>19%</strong>；但开发者原本预期会快 <strong>24%</strong>，事后仍认为自己快了约 <strong>20%</strong>。来源：<a href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/" target="_blank" rel="noopener noreferrer">METR 2025 RCT</a></p>
+      <p>这个结果说明，AI coding 并不是在所有场景都提效。资深开发者在熟悉的大型代码库中，可能因为审查、修正、上下文对齐、隐性规范和维护风险而变慢。</p>
+      <p>这并不推翻 Coding Agent 的商业化逻辑，反而帮我们划清了"<strong>它适合落在哪些任务里</strong>"——边界清晰、测试充分、规范明确、可回滚、低到中等复杂度、重复性高、容易由人类 review 的任务。例如补测试、修小 bug、迁移依赖、改文档、生成脚手架、排查 CI、做初步重构。</p>
+
+      <p><strong>安全是另一个被低估的约束。</strong> 当 Agent 能读 repo、跑命令、访问网络、连接数据库、调用 MCP server，它就从"工具"变成了<strong>新的攻击面</strong>。Trail of Bits 对 prompt injection 到 RCE 的分析、OX Security 对 IDE extension 和 AI coding 工具链供应链风险的研究，都说明企业采购 Coding Agent 时，不只会问"谁写代码更强"，还会追问：能不能 sandbox？能不能限制网络访问？能不能最小权限？能不能隔离 worktree？能不能记录完整操作日志？能不能控制密钥和环境变量？能不能接入现有 CI/CD 和安全扫描？能不能做到人类审批后再执行高风险动作？来源：<a href="https://blog.trailofbits.com/2025/10/22/prompt-injection-to-rce-in-ai-agents/" target="_blank" rel="noopener noreferrer">Trail of Bits</a>、<a href="https://www.ox.security/blog/four-vulnerabilities-expose-a-massive-security-blind-spot-in-ide-extensions/" target="_blank" rel="noopener noreferrer">OX Security</a></p>
+
+      <div class="pull">这会把 Coding Agent 从"个人效率工具"推向 <strong>企业级 DevSecOps 基础设施</strong>。这意味着接下来 12–24 个月，最大的产品和岗位机会，可能不在"造一个更强的 Coding Agent"，而在它周围的 <em>治理、可观测、安全、合规</em> 配套层。</div>
+
+      <hr class="article-divider" />
+
+      <h2 id="sec-conclusion"><span class="h2-num">09</span>结论与判断：Agent 的第一站，是<em>闭环最完整</em>的场景</h2>
+      <p>AI Coding Agent 的商业化并不意味着程序员会被快速替代。相反，现阶段最成熟的产品形态，仍然是<strong>人类定义目标、Agent 执行部分任务、人类审查和合并结果</strong>。</p>
+      <p>真正发生变化的是：软件开发正在从"人手写每一行代码"，转向"人定义问题、拆分任务、审查结果、协调多个智能执行单元"。</p>
+      <p>这也是 Agent 商业化最现实的路径——不是一开始就追求完全自动化，而是在<strong>高价值、高频、可验证的工作流里，先成为一个可信的执行单元</strong>。</p>
+      <p>所以，AI Coding Agent 是 Agent 商业化的第一站，不是因为单一原因——而是<strong>三层叠加</strong>：代码语言天然规范让它能被做出来；软件工程的任务系统、工具链、验证机制、协作协议、付费路径让它能被卖出去和被衡量；开发者既是用户又是建造者，让它的产品力和迭代速度都被推到了其他赛道难以追赶的水平。任何一层缺失，Coding Agent 都不会是今天我们看到的样子。</p>
+
+      <div class="pull"><strong>Agent 的未来不会只停留在 Coding。但 Agent 的商业化，大概率会从 Coding 学会如何落地。</strong></div>
+
+      <section class="sources" id="sec-sources">
+        <h2>数据来源与时效说明</h2>
+        <p>本文数据更新至 2026 年 4 月。主要来源包括：</p>
+        <ul>
+          <li>Stack Overflow Developer Survey 2025</li>
+          <li>JetBrains Developer Ecosystem Survey 2025（AI 章节）</li>
+          <li>Menlo Ventures《2025 State of Generative AI in the Enterprise》</li>
+          <li>Google Cloud DORA 2025 State of AI-assisted Software Development Report</li>
+          <li>METR 2025 RCT（2025 年 7 月发布）</li>
+          <li>GitHub Newsroom、Anthropic、OpenAI、Cursor 等厂商公开披露</li>
+          <li>SWE-bench Verified、Trail of Bits、OX Security 公开研究</li>
+        </ul>
+        <p class="note">涉及厂商披露的数据（如 Stripe / Ramp 在 Anthropic 案例中的指标）已在文内明确标注为"厂商案例"，不作为中立市场数据使用。</p>
+      </section>
+
+    </article>
+
+    </div><!-- /.article-main -->
+
+    <!-- TOC -->
+    <aside class="article-toc" aria-label="文章目录">
+      <div class="article-toc__label">CONTENTS</div>
+      <ul class="article-toc__list">
+        <li><a href="#sec-framework" data-toc="sec-framework"><span class="toc-num">00</span>评估框架</a></li>
+        <li><a href="#sec-freq" data-toc="sec-freq"><span class="toc-num">01</span>高频需求</a></li>
+        <li><a href="#sec-workflow" data-toc="sec-workflow"><span class="toc-num">02</span>数字化工作流</a></li>
+        <li><a href="#sec-verify" data-toc="sec-verify"><span class="toc-num">03</span>可验证结果</a></li>
+        <li><a href="#sec-roi" data-toc="sec-roi"><span class="toc-num">04</span>可量化 ROI</a></li>
+        <li><a href="#sec-payment" data-toc="sec-payment"><span class="toc-num">05</span>成熟付费路径</a></li>
+        <li><a href="#sec-builder" data-toc="sec-builder"><span class="toc-num">06</span>用户 = 建造者</a></li>
+        <li><a href="#sec-matrix" data-toc="sec-matrix"><span class="toc-num">07</span>5 场景对比矩阵</a></li>
+        <li><a href="#sec-limit" data-toc="sec-limit"><span class="toc-num">08</span>反面约束</a></li>
+        <li><a href="#sec-conclusion" data-toc="sec-conclusion"><span class="toc-num">09</span>结论与判断</a></li>
+        <li><a href="#sec-sources" data-toc="sec-sources"><span class="toc-num">·</span>数据来源</a></li>
+      </ul>
+    </aside>
+
+  </div>
+</div>
+
+<footer class="article-footer">
+  <div class="article-footer-inner">
+    <p class="article-footer-cta">如果你正在寻找 <em>AI 行业研究 / 产品策略</em> 方向的人选，欢迎联系我。</p>
+    <div class="article-footer-links">
+      <a href="prototype-v2.4.html#writing">← 看更多写作</a>
+      <a href="prototype-v2.4.html#works">代表作品</a>
+      <a href="prototype-v2.4.html#contact">联系我</a>
     </div>
-    <div class="meta">
-      <span>AI Agent</span>
-      <span>AI Coding</span>
-      <span>Product Strategy</span>
-      <span>Market Analysis</span>
-    </div>
-  </header>
+    <div class="article-footer-meta">© 2026 Ningning Zheng · Vibe-coded with Claude · Last updated 2026-05-20</div>
+  </div>
+</footer>
 
-  <article class="shell">
-    <p>过去一年，关于 Agent 的讨论常常被一种宏大叙事包裹：AI 将拥有长期记忆、使用工具、规划任务、跨系统执行，最终成为“数字员工”。这个方向大概率是对的，但真正的问题不在于 Agent 能不能想象，而在于它能不能被购买、被部署、被信任、被衡量。</p>
-    <p>从这个标准看，AI Coding Agent 是目前最接近商业闭环的 Agent 形态。</p>
-    <p>原因很简单：软件开发不是一个普通知识工作场景。它天然在线，天然结构化，天然有协作流程，也天然有验证机制。代码不是一段主观表达，它最终要被测试、运行、review、merge、上线。正是这些工程机制，让一个“不完全可靠”的 AI Agent 可以被放进一个相对可控的系统里，先创造价值，再逐步扩大自主性。</p>
-    <p>这就是为什么 Coding 会成为 Agent 商业化的第一站。</p>
+<script>
+/* ===== 鼠标光斑 ===== */
+(function () {
+  if (window.matchMedia('(hover: none)').matches) return;
+  const halo = document.getElementById('halo');
+  if (!halo) return;
+  window.addEventListener('mousemove', (e) => {
+    halo.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+  });
+})();
 
-    <h2>一、市场已经先投票：Coding 是企业 AI 支出的突破口</h2>
-    <p>如果只看舆论，Agent 好像遍地开花；但如果看付费，市场其实非常克制。</p>
-    <p>Menlo Ventures 在《2025 State of Generative AI in the Enterprise》中估算，2025 年企业生成式 AI 支出达到 <strong>370 亿美元</strong>，其中应用层支出为 <strong>190 亿美元</strong>。在面向具体职能的 Departmental AI 中，Coding 是最大类别，达到 <strong>40 亿美元</strong>，占该类别支出的 <strong>55%</strong>。报告直接将 Coding 称为生成式 AI 的第一个 “killer use case”。来源：<a href="https://menlovc.com/perspective/2025-the-state-of-generative-ai-in-the-enterprise/" target="_blank" rel="noreferrer">Menlo Ventures</a></p>
-    <p>这组数据的意义不只是“AI 写代码市场很大”，而是说明企业 AI 应用的第一批真实预算，正在流向软件开发生命周期。</p>
-    <p>这很关键。很多 Agent 场景今天仍停留在 Demo：可以演示，但很难稳定采购；可以提升体验，但很难证明 ROI；可以自动执行，但一旦出错责任边界模糊。Coding 不一样。软件开发本来就是企业最愿意为效率付费的场景之一。开发者时间昂贵，研发交付周期直接影响产品迭代速度，任何能够缩短从 issue 到 PR、从 bug 到 fix、从需求到原型的工具，都有清晰的经济价值。</p>
-    <p>所以，AI Coding Agent 的商业化不是从“AI 能写代码”开始的，而是从企业已经愿意为研发效率付费开始的。</p>
+/* ===== 阅读进度条 ===== */
+(function () {
+  const bar = document.getElementById('readBar');
+  if (!bar) return;
+  const onScroll = () => {
+    const doc = document.documentElement;
+    const total = doc.scrollHeight - doc.clientHeight;
+    const pct = total > 0 ? (window.scrollY / total) * 100 : 0;
+    bar.style.width = Math.min(100, Math.max(0, pct)) + '%';
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
 
-    <h2>二、用户已经高频使用，但并没有盲目信任</h2>
-    <p>Stack Overflow 2025 开发者调查显示，<strong>84%</strong> 的受访者正在使用或计划使用 AI 工具，专业开发者中 <strong>51%</strong> 每天使用 AI 工具。来源：<a href="https://survey.stackoverflow.co/2025/ai/" target="_blank" rel="noreferrer">Stack Overflow Developer Survey 2025</a></p>
-    <p>这说明 AI Coding 已经越过了“尝鲜”阶段，进入日常工作流。</p>
-    <p>但同一份调查也给出了另一面：<strong>46%</strong> 的开发者不信任 AI 输出准确性，只有 <strong>33%</strong> 表示信任，只有约 <strong>3%</strong> 高度信任。开发者最大的挫败感，是 AI 给出的答案“差一点对，但不完全对”。来源：<a href="https://survey.stackoverflow.co/2025/ai/" target="_blank" rel="noreferrer">Stack Overflow Developer Survey 2025</a></p>
-    <p>这不是坏消息，反而是理解 Coding Agent 商业化的关键。</p>
-    <p>AI Coding Agent 并不是因为已经完全可靠才商业化，而是因为软件开发场景允许它“不完全可靠但可被约束”。代码可以跑测试，可以做 review，可以通过 CI 检查，可以回滚，可以逐步合并。换句话说，软件工程有一整套机制来吸收 AI 的不确定性。</p>
-    <p>这和很多通用 Agent 场景不同。一个商务 Agent 自动发错邮件，一个金融 Agent 错误解释数据，一个客服 Agent 错误承诺政策，后果可能难以及时发现。而 Coding Agent 的错误通常可以在测试、编译、代码审查、灰度发布中被拦截。</p>
-    <p>因此，Coding Agent 的商业化不是建立在“完全自主”之上，而是建立在“受控自主”之上。</p>
+/* ===== TOC 当前节高亮 ===== */
+(function () {
+  const tocLinks = document.querySelectorAll('.article-toc__list a[data-toc]');
+  if (!tocLinks.length) return;
+  const map = new Map();
+  tocLinks.forEach(a => map.set(a.dataset.toc, a));
+  const targets = Array.from(map.keys()).map(id => document.getElementById(id)).filter(Boolean);
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        tocLinks.forEach(a => a.classList.toggle('is-active', a.dataset.toc === id));
+      }
+    });
+  }, { rootMargin: '-30% 0px -55% 0px', threshold: 0 });
+  targets.forEach(t => io.observe(t));
+})();
+</script>
 
-    <h2>三、软件开发有 Agent 最需要的东西：可验证闭环</h2>
-    <p>Agent 商业化最难的，不是生成答案，而是证明自己完成了任务。</p>
-    <p>这正是 SWE-bench 重要的原因。SWE-bench Verified 是一个经过人工验证的 500 个真实软件工程任务子集，用来评估 coding agents 和语言模型。它的任务来自真实代码库和真实 issue，要求系统理解问题、修改代码，并通过测试。来源：<a href="https://www.swebench.com/verified.html" target="_blank" rel="noreferrer">SWE-bench Verified</a></p>
-    <p>这代表了 AI Coding 评测范式的变化：从“模型能不能写出一段代码”，转向“模型能不能在真实工程环境里解决问题”。</p>
-    <p>商业化也在发生同样变化。</p>
-    <p>早期 AI 编程工具的核心价值是补全：你写一半，它补一半。现在 Coding Agent 的价值开始转向执行：你描述一个问题，它读取代码库，定位文件，修改代码，运行测试，提交 PR，等待人类 review。</p>
-    <p>GitHub 在 2025 年推出 Copilot coding agent，定位为异步 coding agent，嵌入 GitHub 和 VS Code，可以形成从 issue 到 pull request 的 Agentic DevOps loop。GitHub 也明确强调，它完成任务后进入 PR 和 review 流程，而不是绕过人类直接合并。来源：<a href="https://github.com/newsroom/press-releases/coding-agent-for-github-copilot" target="_blank" rel="noreferrer">GitHub Newsroom</a>、<a href="https://docs.github.com/en/copilot/concepts/coding-agent/about-copilot-coding-agent" target="_blank" rel="noreferrer">GitHub Docs</a></p>
-    <p>OpenAI Codex 也是类似方向。OpenAI 将 Codex 定义为 cloud-based software engineering agent，可以写功能、修 bug、回答代码库问题，并在独立 sandbox 中运行测试、lint 和 type check。OpenAI 同样强调，用户仍需 review 和验证 Agent 生成的代码。来源：<a href="https://openai.com/index/introducing-codex/" target="_blank" rel="noreferrer">OpenAI Introducing Codex</a></p>
-    <p>这里的关键不是某个产品更强，而是产品形态正在收敛：<strong>Agent 不再只是给建议，而是进入任务系统；不再只是生成文本，而是交付可审查的工程改动。</strong></p>
-
-    <h2>四、Coding Agent 能嵌入现有工作流，而不是另造一套工作流</h2>
-    <p>Agent 产品最容易失败的地方，是它要求用户迁移工作方式。</p>
-    <p>很多 Agent Demo 看起来强大，但用户真正使用时会遇到三个问题：我要去哪儿给它任务？它怎么访问我的业务系统？它做完以后，结果怎么进入我原来的流程？</p>
-    <p>Coding 场景的优势在于，这些问题已经有答案。</p>
-    <p>软件开发有 issue、branch、commit、PR、review、CI/CD、merge、rollback。Agent 不需要发明新的协作协议，它只需要进入已有协议。GitHub Copilot coding agent 可以从 GitHub issue 被分配任务，完成后创建 PR。Codex 可以在云端环境执行任务，并与开发者工作流连接。Claude Code 则强调读取代码库、跨文件修改、运行测试和交付代码。来源：<a href="https://docs.github.com/en/copilot/concepts/coding-agent/about-copilot-coding-agent" target="_blank" rel="noreferrer">GitHub Docs</a>、<a href="https://openai.com/index/introducing-codex/" target="_blank" rel="noreferrer">OpenAI Codex</a>、<a href="https://www.anthropic.com/product/claude-code" target="_blank" rel="noreferrer">Claude Code</a></p>
-    <p>这就是 Coding Agent 的产品化优势：它不是一个悬浮在工作流外的聊天框，而是可以成为软件交付链条中的一个节点。</p>
-    <p>这一点对所有 Agent 商业化都有启发。真正可商业化的 Agent，不是“能做很多事”的 Agent，而是“能在某个既有工作流中稳定接收任务、执行动作、产出结果、接受审查”的 Agent。</p>
-
-    <h2>五、商业模式清晰：个人订阅、团队版、企业版、用量计费</h2>
-    <p>Agent 商业化的另一个难点是定价。</p>
-    <p>通用 Agent 很难定价，因为它的价值不稳定：今天帮你写邮件，明天帮你查资料，后天帮你订行程。用户很难判断该为它支付多少，企业也很难按部门预算归属。</p>
-    <p>Coding Agent 不同。它天然落在开发者工具预算、研发效率预算、工程平台预算之中。</p>
-    <p>GitHub Copilot 已经形成 Business、Enterprise 等企业定价结构。Cursor 则展现了典型的 Product-Led Growth 路径：个人开发者先试用和付费，工具进入日常开发习惯后，再扩散到团队和企业。Cursor 官方定价中，Pro 为每月 20 美元，Teams 为每用户每月 40 美元，Enterprise 为定制价格。来源：<a href="https://cursor.com/pricing" target="_blank" rel="noreferrer">Cursor Pricing</a></p>
-    <p>Menlo Ventures 的报告也指出，AI 应用支出中 PLG 占比达到 <strong>27%</strong>，约为传统软件的近 4 倍；如果考虑员工使用个人信用卡购买 AI 工具等 shadow AI adoption，PLG 相关占比可能接近 <strong>40%</strong>。来源：<a href="https://menlovc.com/perspective/2025-the-state-of-generative-ai-in-the-enterprise/" target="_blank" rel="noreferrer">Menlo Ventures</a></p>
-    <p>这对 Coding Agent 尤其重要。开发者是最容易自下而上采用工具的人群之一。只要工具能节省调试时间、减少重复代码、加快理解代码库，个人就可能先付费。个人使用形成习惯后，团队开始统一采购，企业再补齐权限、隐私、安全、审计、用量分析和合规能力。</p>
-    <p>这条路径已经被开发者工具反复验证。AI Coding Agent 只是把它加速了。</p>
-
-    <h2>六、AI Coding Agent 不是终点，而是 Agent 商业化的模板</h2>
-    <p>如果把 Agent 商业化抽象成一个公式，我认为它至少需要六个变量：</p>
-    <div class="formula">
-      <ol>
-        <li>任务是否高频</li>
-        <li>输入输出是否数字化</li>
-        <li>执行结果是否可验证</li>
-        <li>错误是否可拦截</li>
-        <li>ROI 是否可量化</li>
-        <li>是否存在既有付费路径</li>
-      </ol>
-    </div>
-    <p>Coding 几乎全部满足。</p>
-    <p>它的任务高频：写代码、修 bug、写测试、读代码库、改文档、处理技术债。<br />它的输入输出数字化：issue、repo、diff、test、PR 全部在线。<br />它的结果可验证：测试是否通过，CI 是否成功，PR 是否合并。<br />它的错误可拦截：review、权限、回滚、灰度发布。<br />它的 ROI 可量化：交付速度、修复时间、PR 周期、测试覆盖率。<br />它的付费路径成熟：个人订阅、团队版、企业版、用量计费。</p>
-    <p>这就是为什么 Coding Agent 会先跑出来。</p>
-    <p>但这不意味着 Coding Agent 会独占 Agent 未来。更准确的判断是：Coding Agent 会成为其他垂直 Agent 的产品原型。未来的法律 Agent、财务 Agent、市场研究 Agent、客服 Agent，都要回答同样的问题：任务从哪里来？工具怎么调用？结果怎么验证？错误怎么拦截？价值怎么计量？谁来付费？</p>
-    <p>Coding 给出了第一个相对完整的答案。</p>
-
-    <h2>结论：Agent 的第一站，不是最简单的场景，而是闭环最完整的场景</h2>
-    <p>AI Coding Agent 的商业化并不意味着程序员会被快速替代。相反，现阶段最成熟的产品形态，仍然是人类定义目标、Agent 执行部分任务、人类审查和合并结果。</p>
-    <p>真正发生变化的是：软件开发正在从“人手写每一行代码”，转向“人定义问题、拆分任务、审查结果、协调多个智能执行单元”。</p>
-    <p>这也是 Agent 商业化最现实的路径。不是一开始就追求完全自动化，而是在高价值、高频、可验证的工作流里，先成为一个可信的执行单元。</p>
-    <p>所以，AI Coding Agent 是 Agent 商业化的第一站，不是因为代码最容易，而是因为软件工程给了 Agent 最需要的商业化基础设施：任务系统、工具链、验证机制、协作协议和付费路径。</p>
-    <p>Agent 的未来不会只停留在 Coding。<br />但 Agent 的商业化，大概率会从 Coding 学会如何落地。</p>
-
-    <section class="sources">
-      <h2>主要信源</h2>
-      <ol>
-        <li><a href="https://menlovc.com/perspective/2025-the-state-of-generative-ai-in-the-enterprise/" target="_blank" rel="noreferrer">Menlo Ventures：2025 State of Generative AI in the Enterprise</a></li>
-        <li><a href="https://survey.stackoverflow.co/2025/ai/" target="_blank" rel="noreferrer">Stack Overflow Developer Survey 2025 - AI</a></li>
-        <li><a href="https://www.swebench.com/verified.html" target="_blank" rel="noreferrer">SWE-bench Verified</a></li>
-        <li><a href="https://github.com/newsroom/press-releases/coding-agent-for-github-copilot" target="_blank" rel="noreferrer">GitHub Copilot Coding Agent</a></li>
-        <li><a href="https://docs.github.com/en/copilot/concepts/coding-agent/about-copilot-coding-agent" target="_blank" rel="noreferrer">GitHub Docs：About Copilot Coding Agent</a></li>
-        <li><a href="https://openai.com/index/introducing-codex/" target="_blank" rel="noreferrer">OpenAI：Introducing Codex</a></li>
-        <li><a href="https://www.anthropic.com/product/claude-code" target="_blank" rel="noreferrer">Anthropic：Claude Code</a></li>
-        <li><a href="https://cursor.com/pricing" target="_blank" rel="noreferrer">Cursor Pricing</a></li>
-      </ol>
-    </section>
-  </article>
-
-  <footer class="shell">© 2026 Ningning Zheng · <a href="index.html">Back to Home</a></footer>
 </body>
 </html>

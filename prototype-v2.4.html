@@ -1227,18 +1227,10 @@ a { text-decoration: none; color: inherit; }
   overflow: hidden;
 }
 
-.workflow-diagram--vibe {
-  display: grid;
-  grid-template-columns: 72px minmax(0, 1fr);
-  gap: 8px;
-  align-items: stretch;
-}
-
+/* outcome 已删除，两个 diagram 变成单列，pipeline 撑满整宽 */
+.workflow-diagram--vibe,
 .workflow-diagram--research {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 72px;
-  gap: 8px;
-  align-items: stretch;
+  display: block;
 }
 
 .workflow-copy {
@@ -1260,10 +1252,7 @@ a { text-decoration: none; color: inherit; }
   transition: color 0.15s ease, border-color 0.15s ease;
 }
 
-.workflow-diagram--research .workflow-copy {
-  left: 8px;
-  right: auto;
-}
+/* outcome 已删除，行业研究的复制按钮跟 Vibe 一样统一放在右上角 */
 
 .workflow-copy:hover {
   color: var(--ink);
@@ -1329,6 +1318,135 @@ a { text-decoration: none; color: inherit; }
   color: var(--muted);
 }
 
+/* Outcome 填充版（去虚线，换实体 mock） */
+.workflow-outcome-frame--filled {
+  border: 1px solid var(--line);
+  background: var(--bg-paper);
+  background-image: none;
+  padding: 10px 10px;
+  align-items: stretch;
+  justify-content: flex-start;
+  text-align: left;
+  gap: 5px;
+  font-weight: 400;
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+/* —— site mock (Vibe Coding workflow outcome) —— */
+.wf-out-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(93, 112, 82, 0.14);
+  color: var(--moss);
+  font-size: 7.5px;
+  font-weight: 500;
+  align-self: flex-start;
+  white-space: nowrap;
+}
+.wf-out-chip::before {
+  content: "";
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--moss);
+}
+.wf-out-h1 {
+  font-family: var(--font-display);
+  font-size: 10.5px;
+  line-height: 1.28;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-top: 3px;
+}
+.wf-out-h1 em {
+  font-style: italic;
+  color: var(--moss-deep);
+  font-weight: 600;
+}
+.wf-out-tags {
+  font-family: var(--font-body);
+  font-size: 6.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.wf-out-cta {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 7.5px;
+  font-weight: 600;
+  color: var(--bg-primary);
+  background: var(--moss);
+  padding: 3px 8px;
+  border-radius: 999px;
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+/* —— WeChat mock (Research workflow outcome) —— */
+.wf-out-pub {
+  font-family: var(--font-body);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--moss-deep);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.wf-out-pub::before {
+  content: "";
+  width: 11px; height: 11px;
+  border-radius: 2px;
+  background: linear-gradient(135deg, #4CB35E, #2E8A45);
+  display: inline-block;
+  flex-shrink: 0;
+  position: relative;
+}
+.wf-out-title {
+  font-family: var(--font-display);
+  font-size: 10.5px;
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-top: 3px;
+}
+.wf-out-title em {
+  font-style: italic;
+  color: var(--moss-deep);
+  font-weight: 600;
+}
+.wf-out-meta {
+  font-family: var(--font-body);
+  font-size: 6.5px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  margin-top: 1px;
+}
+.wf-out-excerpt {
+  font-family: var(--font-body);
+  font-size: 7.5px;
+  line-height: 1.55;
+  color: var(--muted);
+  margin-top: auto;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .workflow-pipeline {
   display: flex;
   flex-direction: row;
@@ -1338,14 +1456,8 @@ a { text-decoration: none; color: inherit; }
   overflow-x: auto;
   overflow-y: hidden;
   padding-bottom: 2px;
-  padding-right: 22px;
   scrollbar-width: thin;
   -webkit-overflow-scrolling: touch;
-}
-
-.workflow-diagram--research .workflow-pipeline {
-  padding-right: 0;
-  padding-left: 22px;
 }
 
 .workflow-stage {
@@ -1517,93 +1629,558 @@ a { text-decoration: none; color: inherit; }
 }
 
 @media (max-width: 720px) {
-  .workflow-diagram--vibe,
-  .workflow-diagram--research {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
-  }
-
-  .workflow-diagram--research .workflow-outcome {
-    order: 2;
-  }
-
-  .workflow-diagram--research .workflow-pipeline {
-    order: 1;
-    padding-left: 0;
-    padding-right: 22px;
-  }
-
-  .workflow-outcome-frame {
-    min-height: 64px;
-  }
-
   .workflow-stage {
     min-width: 84px;
   }
 }
 
-/* ---------- §3.9.c · Vibe Coding 小项目（3 张卡占位） ---------- */
+/* ---------- §3.9.c · Vibe Coding 小项目（v2 · 设备框 mockup 卡） ---------- */
 .vibe-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 20px;
 }
 
 .vibe-card {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding: 22px;
   background: var(--bg-paper);
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  transition: all 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: all 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
 }
-
 .vibe-card:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow-md);
-  border-color: rgba(93, 112, 82, 0.28);
 }
 
+/* 公共 preview 容器（带顶部 chrome 栏） */
 .vibe-preview {
-  width: 100%;
   aspect-ratio: 4 / 3;
-  border-radius: 12px;
-  background:
-    repeating-linear-gradient(
-      135deg,
-      transparent 0,
-      transparent 14px,
-      rgba(93, 112, 82, 0.05) 14px,
-      rgba(93, 112, 82, 0.05) 15px
-    ),
-    linear-gradient(135deg, rgba(245, 240, 227, 0.7), rgba(255, 253, 247, 0.92));
-  border: 1px dashed rgba(93, 112, 82, 0.28);
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(140deg, #EFE9D7 0%, #FBF7EE 60%, #F6EFDD 100%);
+  display: block;
+  text-decoration: none;
+}
+.vibe-chrome {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 22px;
+  background: rgba(255, 253, 247, 0.82);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line);
   display: flex;
   align-items: center;
-  justify-content: center;
+  padding: 0 10px;
+  gap: 8px;
+  z-index: 2;
+}
+.vibe-dots {
+  display: inline-flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.vibe-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.vibe-dot:nth-child(1) { background: #E5805E; }
+.vibe-dot:nth-child(2) { background: #E5B85E; }
+.vibe-dot:nth-child(3) { background: #7DAE7D; }
+.vibe-url {
+  flex: 1;
+  min-width: 0;
+  height: 13px;
+  border-radius: 999px;
+  background: rgba(245, 240, 227, 0.92);
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
   color: var(--muted);
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.vibe-screen {
+  position: absolute;
+  top: 22px; left: 0; right: 0; bottom: 0;
+  overflow: hidden;
 }
 
-.vibe-card-name {
+/* ----- Card 1：浏览器（个人站） ----- */
+.vibe-preview--browser .vibe-screen {
+  background: linear-gradient(180deg, #FBF7EE 0%, #F5F0E3 100%);
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.vibe-chip-mini {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(93, 112, 82, 0.14);
+  color: var(--moss);
+  font-size: 8.5px;
+  font-weight: 500;
+  align-self: flex-start;
+  font-family: var(--font-body);
+}
+.vibe-chip-mini::before {
+  content: "";
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--moss);
+}
+.vibe-mini-h1 {
   font-family: var(--font-display);
-  font-size: 16px;
+  font-size: 13px;
+  line-height: 1.28;
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.vibe-mini-h1 em {
+  font-style: italic;
+  color: var(--moss-deep);
   font-weight: 600;
+}
+.vibe-mini-tags {
+  display: flex;
+  gap: 6px;
+  margin-top: auto;
+  font-family: var(--font-body);
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* JD Match mini mock（补充个人站卡中部 ） */
+.vibe-jd-match {
+  margin-top: 2px;
+  padding: 8px 10px;
+  background: rgba(255, 253, 247, 0.78);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  box-shadow: var(--shadow-sm);
+}
+.vibe-jd-eyebrow {
+  font-family: var(--font-body);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rust);
+}
+.vibe-jd-input {
+  font-family: var(--font-mono);
+  font-size: 7.5px;
+  color: var(--muted);
+  padding: 4px 7px;
+  background: rgba(245, 240, 227, 0.7);
+  border-radius: 4px;
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.vibe-jd-input::before {
+  content: "›";
+  margin-right: 4px;
+  color: var(--moss);
+  font-weight: 700;
+  font-style: normal;
+}
+.vibe-jd-examples {
+  display: flex;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+.vibe-jd-chip {
+  font-family: var(--font-body);
+  font-size: 6.5px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(93, 112, 82, 0.12);
+  color: var(--moss);
+  font-weight: 600;
+}
+.vibe-here-badge {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--moss-deep);
+  color: var(--bg-primary);
+  box-shadow: var(--shadow-md);
+  z-index: 3;
+}
+
+/* ----- Card 2：Obsidian × Codex 协同（左编辑器 + 右 Codex 侧栏） ----- */
+.vibe-preview--editor .vibe-screen {
+  background: linear-gradient(180deg, #FBF7EE 0%, #F8F2E3 100%);
+  display: grid;
+  grid-template-columns: 1fr 44%;
+}
+.vibe-editor-content {
+  padding: 10px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow: hidden;
+  border-right: 1px solid var(--line);
+}
+.vibe-breadcrumb {
+  font-family: var(--font-mono);
+  font-size: 6.5px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.vibe-md-h {
+  font-family: var(--font-display);
+  font-size: 11px;
+  color: var(--ink);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+.vibe-tag-row {
+  display: flex;
+  gap: 3px;
+  margin: 2px 0 3px;
+}
+.vibe-mini-tag {
+  font-family: var(--font-mono);
+  font-size: 6.5px;
+  padding: 1px 5px;
+  border-radius: 999px;
+  background: rgba(212, 165, 116, 0.22);
+  color: var(--rust);
+  font-weight: 600;
+}
+.vibe-info-row {
+  display: flex;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 7.5px;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+}
+.vibe-info-row .key {
+  color: var(--rust);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.vibe-info-row .val {
+  opacity: 0.78;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vibe-codex {
+  background: #1F2522;
+  color: #C5BFA8;
+  padding: 9px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow: hidden;
+  font-family: var(--font-mono);
+}
+.vibe-codex-head {
+  font-size: 7px;
+  color: #D4A574;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.vibe-codex-head::before {
+  content: ">_";
+  color: #7DAE7D;
+  font-weight: 700;
+}
+.vibe-codex-model {
+  color: #C5BFA8;
+  opacity: 0.6;
+  font-size: 6px;
+  letter-spacing: 0;
+}
+.vibe-codex-prompt {
+  background: rgba(212, 165, 116, 0.10);
+  border-left: 1.5px solid var(--rust);
+  padding: 4px 6px;
+  border-radius: 0 3px 3px 0;
+  font-family: var(--font-body);
+  font-size: 7.5px;
+  color: #FBF7EE;
+  line-height: 1.45;
+}
+.vibe-codex-prompt::before {
+  content: "▸ ";
+  color: var(--rust);
+}
+.vibe-codex-resp {
+  font-size: 7px;
+  color: #C5BFA8;
+  line-height: 1.5;
+  opacity: 0.85;
+}
+.vibe-codex-resp .out { color: #7DAE7D; font-weight: 700; }
+.vibe-codex-cursor {
+  font-size: 7px;
+  color: #D4A574;
+  margin-top: auto;
+  animation: vibeBlink 1.1s steps(2) infinite;
+}
+@keyframes vibeBlink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
+
+/* ----- Card 3：手机（Oral English Trainer） ----- */
+.vibe-preview--phone {
+  background:
+    radial-gradient(ellipse at 30% 30%, rgba(93,112,82,0.12), transparent 60%),
+    radial-gradient(ellipse at 75% 80%, rgba(212,165,116,0.10), transparent 65%),
+    linear-gradient(140deg, #EFE9D7 0%, #F8F2E3 100%);
+}
+.vibe-preview--phone .vibe-screen { padding: 0; }
+.vibe-phone {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) rotate(-5deg);
+  width: 52%;
+  aspect-ratio: 9 / 19;
+  background: #1F2522;
+  border-radius: 18px;
+  padding: 4px 4px 6px;
+  box-shadow: 0 12px 28px rgba(31, 37, 34, 0.22);
+  display: flex;
+  flex-direction: column;
+}
+.vibe-phone-notch {
+  width: 34%;
+  height: 4px;
+  background: #1F2522;
+  border-radius: 0 0 4px 4px;
+  margin: 0 auto 3px;
+  position: relative;
+  z-index: 2;
+}
+.vibe-phone-screen {
+  flex: 1;
+  background: linear-gradient(180deg, #FBF7EE 0%, #F5F0E3 100%);
+  border-radius: 12px;
+  padding: 6px 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5px;
+  overflow: hidden;
+}
+.vibe-phone-title {
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 6.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
   color: var(--ink);
 }
+.vibe-phone-sub {
+  text-align: center;
+  font-size: 4.5px;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  font-weight: 600;
+  margin-top: -1px;
+}
+.vibe-phone-tabs {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2px;
+  margin-top: 2px;
+}
+.vibe-phone-tab {
+  height: 10px;
+  background: rgba(255,253,247,0.75);
+  border-radius: 3px;
+}
+.vibe-phone-tab.is-active { background: rgba(93,112,82,0.22); }
+.vibe-phone-day {
+  font-family: var(--font-body);
+  font-size: 4.5px;
+  font-weight: 700;
+  color: var(--rust);
+  letter-spacing: 0.14em;
+  margin-top: 2px;
+}
+.vibe-phone-card {
+  background: rgba(255,253,247,0.85);
+  border-radius: 5px;
+  padding: 4px 5px;
+  font-family: var(--font-display);
+  font-size: 6px;
+  color: var(--ink);
+  font-weight: 600;
+  line-height: 1.2;
+}
+.vibe-phone-card-row {
+  display: flex;
+  gap: 3px;
+  justify-content: space-between;
+  font-family: var(--font-body);
+  font-size: 4px;
+  color: var(--muted);
+  margin-top: 2px;
+  font-weight: 500;
+}
+.vibe-phone-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+.vibe-phone-pill {
+  font-family: var(--font-body);
+  font-size: 4px;
+  padding: 1.5px 4px;
+  border-radius: 999px;
+  background: rgba(193,140,93,0.20);
+  color: var(--rust);
+  font-weight: 500;
+}
 
+/* ----- 卡片信息区 ----- */
+.vibe-meta {
+  padding: 18px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+.vibe-slug {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--moss);
+  letter-spacing: 0.04em;
+}
+.vibe-card-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.vibe-card-name em {
+  font-style: italic;
+  color: var(--moss-deep);
+  font-weight: 600;
+}
 .vibe-card-desc {
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 12.5px;
   line-height: 1.6;
   color: var(--muted);
 }
+.vibe-capability {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.vibe-capability strong {
+  color: var(--moss-deep);
+  font-weight: 600;
+}
+.vibe-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 2px;
+}
+.vibe-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(93, 112, 82, 0.08);
+  color: var(--moss);
+}
+.vibe-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.vibe-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.vibe-status::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--line-strong);
+}
+.vibe-status--live { color: var(--moss-deep); }
+.vibe-status--live::before { background: var(--moss); animation: pulse 2.4s ease-in-out infinite; }
+.vibe-status--lab { color: var(--rust); }
+.vibe-status--lab::before { background: var(--rust); }
+.vibe-cta {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--moss-deep);
+  text-decoration: none;
+  border-bottom: 1px solid var(--moss);
+  padding-bottom: 1px;
+  transition: all 200ms ease;
+}
+.vibe-cta:hover {
+  color: var(--moss);
+  transform: translateX(2px);
+}
+.vibe-cta--mute {
+  color: var(--muted);
+  border-bottom: none;
+  font-weight: 500;
+  cursor: default;
+}
+.vibe-cta--mute:hover { color: var(--muted); transform: none; }
 
 @media (max-width: 900px) {
   .vibe-grid { grid-template-columns: repeat(2, 1fr); }
@@ -2776,6 +3353,34 @@ a { text-decoration: none; color: inherit; }
   justify-content: center;
   gap: 10px;
 }
+
+/* spread 01（reading）/ 02（hobby）/ 03（podcast）：段间距缩短约 1/3。
+   原 space-around 把可用空隙全部均分，反而显得稀疏；换成 center + 固定 gap。 */
+.am-spread-pane[data-spread="reading"] .am-pane-body {
+  justify-content: center;
+  gap: 28px;
+}
+.am-spread-pane[data-spread="hobby"] .am-pane-body {
+  justify-content: center;
+  gap: 8px;
+}
+.am-spread-pane[data-spread="podcast"] .am-pane-body ul {
+  justify-content: center;
+  gap: 22px;
+}
+
+/* spread 01 / 02 / 03 也从 space-around 切到 center 聚拢，
+   inter-paragraph 间距按用户要求缩短三分之一 */
+.am-spread-pane[data-spread="reading"] .am-pane-body,
+.am-spread-pane[data-spread="hobby"] .am-pane-body {
+  justify-content: center;
+  gap: 18px;
+}
+.am-spread-pane[data-spread="hobby"] .am-pane-body { gap: 10px; }
+.am-spread-pane[data-spread="podcast"] .am-pane-body ul {
+  justify-content: center;
+  gap: 14px;
+}
 .am-pane-body li::before {
   content: "·";
   position: absolute;
@@ -3378,10 +3983,6 @@ a { text-decoration: none; color: inherit; }
         </div>
         <div class="workflow-diagram workflow-diagram--vibe" role="group" aria-label="Vibe Coding 四步工作流">
           <button type="button" class="workflow-copy" data-workflow="vibe" aria-label="复制 Vibe Coding 工作流文本"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
-          <div class="workflow-outcome">
-            <span class="workflow-outcome-label">Outcome</span>
-            <div class="workflow-outcome-frame">本页 Hero<br><small>可换站点截图</small></div>
-          </div>
           <div class="workflow-pipeline">
             <div class="workflow-stage">
               <div class="workflow-stage-zh">构想</div>
@@ -3444,10 +4045,6 @@ a { text-decoration: none; color: inherit; }
               <div class="workflow-stage-tools"><span class="wf-tool">人工审改</span><span class="wf-tool">公众号</span><span class="wf-tool">小红书</span></div>
             </div>
           </div>
-          <div class="workflow-outcome">
-            <span class="workflow-outcome-label">Outcome</span>
-            <div class="workflow-outcome-frame">公众号首屏<br><small>可换文章截图</small></div>
-          </div>
         </div>
         <div class="workflow-stack">
           <span class="workflow-stack-label">日常工具栈</span>
@@ -3464,26 +4061,145 @@ a { text-decoration: none; color: inherit; }
   <div class="toolkit-block">
     <div class="toolkit-block-head">
       <h3 class="toolkit-block-title">Vibe Coding 小项目</h3>
-      <span class="toolkit-block-meta">原型录屏 / 短视频 · 待补素材</span>
+      <span class="toolkit-block-meta">AI 信息聚合器项目搭建中</span>
     </div>
     <div class="vibe-grid">
 
+      <!-- Card 1：个人网站（浏览器框 + You are here） -->
       <article class="vibe-card">
-        <div class="vibe-preview">原型 / 视频 · 占位</div>
-        <h4 class="vibe-card-name">个人网站 v0</h4>
-        <p class="vibe-card-desc">你正在看的这个网站，完全用 Vibe Coding 搭建。</p>
+        <a class="vibe-preview vibe-preview--browser" href="#hero" aria-label="滚回本站顶部">
+          <div class="vibe-chrome">
+            <span class="vibe-dots"><span class="vibe-dot"></span><span class="vibe-dot"></span><span class="vibe-dot"></span></span>
+            <span class="vibe-url">ningningzheng · vibe-coded</span>
+          </div>
+          <div class="vibe-screen">
+            <span class="vibe-chip-mini">Open to Work · Hangzhou</span>
+            <div class="vibe-mini-h1">我是郑宁宁，关注 <em>AI 行业研究</em>、产品策略与智能体产品化。</div>
+            <div class="vibe-jd-match">
+              <div class="vibe-jd-eyebrow">JD MATCH · 看匹配度</div>
+              <div class="vibe-jd-input">粘贴 JD 链接 / 文本…</div>
+              <div class="vibe-jd-examples">
+                <span class="vibe-jd-chip">AI 行业研究员</span>
+                <span class="vibe-jd-chip">AI 产品策略</span>
+                <span class="vibe-jd-chip">战略分析师</span>
+              </div>
+            </div>
+            <div class="vibe-mini-tags">Industry Research · AI Product</div>
+          </div>
+          <span class="vibe-here-badge">← You are here</span>
+        </a>
+        <div class="vibe-meta">
+          <span class="vibe-slug">personal-site-v0</span>
+          <h4 class="vibe-card-name">这个 <em>网站</em> 本身</h4>
+          <p class="vibe-card-desc">你正在看的这个站点，完全用 Claude Code + Vibe Coding 搭建——设计系统、动效、3D 翻书都是手搓。</p>
+          <p class="vibe-capability"><strong>编辑式设计系统的落地实现</strong>。</p>
+          <div class="vibe-tags">
+            <span class="vibe-tag">HTML / CSS</span>
+            <span class="vibe-tag">Claude Code</span>
+            <span class="vibe-tag">Vibe Coding</span>
+          </div>
+          <div class="vibe-foot">
+            <span class="vibe-status vibe-status--live">Live</span>
+            <a class="vibe-cta" href="#hero">滚回顶部 →</a>
+          </div>
+        </div>
       </article>
 
+      <!-- Card 2：Obsidian × Codex 协同（编辑器框 + Codex 侧栏） -->
       <article class="vibe-card">
-        <div class="vibe-preview">原型 / 视频 · 占位</div>
-        <h4 class="vibe-card-name">AI 信息聚合器</h4>
-        <p class="vibe-card-desc">把电信情报体系方法迁移到 AI 行业的自动化追踪工具（搭建中）。</p>
+        <div class="vibe-preview vibe-preview--editor">
+          <div class="vibe-chrome">
+            <span class="vibe-dots"><span class="vibe-dot"></span><span class="vibe-dot"></span><span class="vibe-dot"></span></span>
+            <span class="vibe-url">obsidian · 小郑求职记</span>
+          </div>
+          <div class="vibe-screen">
+            <div class="vibe-editor-content">
+              <span class="vibe-breadcrumb">D.小郑求职记 / 01-岗位JD / AI公司</span>
+              <span class="vibe-md-h">「AI 战略和行研专家」</span>
+              <div class="vibe-tag-row">
+                <span class="vibe-mini-tag">求职/JD</span>
+              </div>
+              <div class="vibe-info-row"><span class="key">公司</span><span class="val">某 500 强上市公司</span></div>
+              <div class="vibe-info-row"><span class="key">城市</span><span class="val">杭州</span></div>
+              <div class="vibe-info-row"><span class="key">薪资</span><span class="val">35-55K · 16 薪</span></div>
+              <div class="vibe-info-row"><span class="key">经验</span><span class="val">3-5 年</span></div>
+            </div>
+            <div class="vibe-codex">
+              <div class="vibe-codex-head">OpenAI Codex <span class="vibe-codex-model">v0.128</span></div>
+              <div class="vibe-codex-prompt">帮我看看我和这个岗位的匹配度</div>
+              <div class="vibe-codex-resp"><span class="out">▸</span> 读取 02-简历 / 岗位 JD…</div>
+              <div class="vibe-codex-cursor">▮</div>
+            </div>
+          </div>
+        </div>
+        <div class="vibe-meta">
+          <span class="vibe-slug">notes-with-codex</span>
+          <h4 class="vibe-card-name"><em>Obsidian × Codex</em> 协同</h4>
+          <p class="vibe-card-desc">在 Obsidian 里嵌一个 Codex CLI 侧栏：Web Clip 一键剪 JD / 文章 / 财报，Codex 实时整理分析。</p>
+          <p class="vibe-capability"><strong>把 AI 工具内嵌进日常研究流程</strong>。</p>
+          <div class="vibe-tags">
+            <span class="vibe-tag">Obsidian</span>
+            <span class="vibe-tag">Codex CLI</span>
+            <span class="vibe-tag">Web Clipper</span>
+          </div>
+          <div class="vibe-foot">
+            <span class="vibe-status vibe-status--lab">自用</span>
+            <span class="vibe-cta vibe-cta--mute">持续迭代</span>
+          </div>
+        </div>
       </article>
 
+      <!-- Card 3：Oral English Trainer（手机框，倾斜 -5°） -->
       <article class="vibe-card">
-        <div class="vibe-preview">原型 / 视频 · 占位</div>
-        <h4 class="vibe-card-name">100 个 AI 场景</h4>
-        <p class="vibe-card-desc">小红书 AI 使用场景探索系列，每个场景实测 + 复盘。</p>
+        <a class="vibe-preview vibe-preview--phone" href="https://oral-english-trainer.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="打开 Oral English Trainer">
+          <div class="vibe-chrome">
+            <span class="vibe-dots"><span class="vibe-dot"></span><span class="vibe-dot"></span><span class="vibe-dot"></span></span>
+            <span class="vibe-url">oral-english-trainer.vercel.app</span>
+          </div>
+          <div class="vibe-screen">
+            <div class="vibe-phone">
+              <div class="vibe-phone-notch"></div>
+              <div class="vibe-phone-screen">
+                <div class="vibe-phone-title">ORAL ENGLISH</div>
+                <div class="vibe-phone-sub">30-DAY CHALLENGE</div>
+                <div class="vibe-phone-tabs">
+                  <span class="vibe-phone-tab is-active"></span>
+                  <span class="vibe-phone-tab"></span>
+                  <span class="vibe-phone-tab"></span>
+                  <span class="vibe-phone-tab"></span>
+                  <span class="vibe-phone-tab"></span>
+                  <span class="vibe-phone-tab"></span>
+                </div>
+                <div class="vibe-phone-day">DAY 6 · WEEK 1</div>
+                <div class="vibe-phone-card">
+                  Tell Me About a Challenge
+                  <div class="vibe-phone-card-row"><span>影子 20</span><span>模拟 30</span><span>复盘 10</span></div>
+                </div>
+                <div class="vibe-phone-pill-row">
+                  <span class="vibe-phone-pill">navigated ambiguity</span>
+                  <span class="vibe-phone-pill">pivoted the approach</span>
+                  <span class="vibe-phone-pill">tight deadlines</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+        <div class="vibe-meta">
+          <span class="vibe-slug">oral-english-trainer</span>
+          <h4 class="vibe-card-name">30-Day <em>Oral English</em> Trainer</h4>
+          <p class="vibe-card-desc">给自己写的英文口语训练器：30 天 AI 行研场景陪练，跨设备同步进度。</p>
+          <p class="vibe-capability"><strong>全栈 Vibe Coding · 自定义学习场景设计</strong>。</p>
+          <div class="vibe-tags">
+            <span class="vibe-tag">Next.js</span>
+            <span class="vibe-tag">Vercel</span>
+            <span class="vibe-tag">OpenAI</span>
+            <span class="vibe-tag">Gemini</span>
+          </div>
+          <div class="vibe-foot">
+            <span class="vibe-status vibe-status--live">Live</span>
+            <a class="vibe-cta" href="https://oral-english-trainer.vercel.app/" target="_blank" rel="noopener noreferrer">打开 ↗</a>
+          </div>
+        </div>
       </article>
 
     </div>
@@ -3505,11 +4221,11 @@ a { text-decoration: none; color: inherit; }
       <a class="fw-item" href="./writing-ai-coding-agent.html" data-channel="internal">
         <div class="fw-item-meta">
           <span class="fw-channel">站内长文</span>
-          <span class="fw-status">独立页面 · 2026-05-14</span>
+          <span class="fw-status">2026-04 · 约 18 分钟阅读</span>
         </div>
         <div class="fw-item-body">
           <h3 class="fw-item-title">为什么 <em>AI Coding Agent</em> 是 Agent 商业化的第一站？</h3>
-          <p class="fw-item-desc">从市场支出、开发者采用、SWE-bench、GitHub Copilot、OpenAI Codex、Claude Code 与商业模式切入，说明为何 Coding 场景会成为 Agent 商业化的第一站。</p>
+          <p class="fw-item-desc">技术层 + 商业基础设施层 + 产品工程层三层叠加的解读：含 5 维度商业化框架、5 场景对比矩阵，以及反面约束与行业判断。</p>
         </div>
         <span class="fw-arrow" aria-hidden="true">→</span>
       </a>
