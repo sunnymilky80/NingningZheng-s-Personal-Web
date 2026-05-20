@@ -1070,6 +1070,7 @@ a { text-decoration: none; color: inherit; }
 
 .skill-item::after {
   content: "↗";
+  pointer-events: none;
   position: absolute;
   top: 11px;
   right: 7px;
@@ -3797,16 +3798,43 @@ a { text-decoration: none; color: inherit; }
   .vibe-card { min-width: 0; }
   .vibe-preview { aspect-ratio: 16 / 11; }
 
-  .about-me { overflow-x: clip; }
+  .about-me,
+  .about-me .am-inner { overflow-x: visible; }
   .am-book-side {
     width: 100%;
+    max-width: 100%;
     padding-inline: 12px;
     box-sizing: border-box;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .works-media {
+    min-height: 200px;
+    aspect-ratio: 16 / 10;
+  }
+  .works-media img {
+    min-height: 180px;
+  }
+  .skill-item {
+    min-height: 44px;
+    -webkit-tap-highlight-color: rgba(93, 112, 82, 0.12);
+  }
+  .wf-app-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 }
 
 @media (max-width: 540px) {
-  .am-book-stage { --page-w: min(230px, calc(100vw - 88px)); --book-h: 380px; }
+  .am-book-stage {
+    --page-w: min(210px, calc(100vw - 96px));
+    --book-h: 360px;
+    max-width: calc(100vw - 32px);
+  }
+  .am-book-stage.is-open {
+    --page-w: min(168px, calc((100vw - 80px) / 2));
+  }
   .am-book-nav--prev { left: 4px; }
   .am-book-nav--next { right: 4px; }
   .am-book-sparkle.s1 { left: 4px; }
@@ -3998,8 +4026,8 @@ a { text-decoration: none; color: inherit; }
 
   <!-- Card 1 · 情报体系（图左文右） -->
   <article class="works-row works-row--img-left" id="work-telecom-intelligence">
-    <a class="works-media" href="./情报体系产出/portfolio-work-telecom-intelligence-v4.html" aria-label="查看电信行业情报体系作品详情">
-      <img src="./情报体系产出/情报体系详情图.png" width="2376" height="1308" alt="电信行业情报体系搭建：信源结构与机制示意" loading="lazy">
+    <a class="works-media" href="./%E6%83%85%E6%8A%A5%E4%BD%93%E7%B3%BB%E4%BA%A7%E5%87%BA/portfolio-work-telecom-intelligence-v4.html" aria-label="查看电信行业情报体系作品详情">
+      <img src="./%E6%83%85%E6%8A%A5%E4%BD%93%E7%B3%BB%E4%BA%A7%E5%87%BA/%E6%83%85%E6%8A%A5%E4%BD%93%E7%B3%BB%E8%AF%A6%E6%83%85%E5%9B%BE.png" width="2376" height="1308" alt="电信行业情报体系搭建：信源结构与机制示意" loading="eager" decoding="async">
     </a>
     <div class="works-copy">
       <div class="works-card-eyebrow">Work 01 · Market Intelligence</div>
@@ -4011,7 +4039,7 @@ a { text-decoration: none; color: inherit; }
         <span class="works-tag">信息体系</span>
         <span class="works-tag">持续研究机制</span>
       </div>
-      <a class="btn btn-primary works-cta" href="./情报体系产出/portfolio-work-telecom-intelligence-v4.html">查看详情 →</a>
+      <a class="btn btn-primary works-cta" href="./%E6%83%85%E6%8A%A5%E4%BD%93%E7%B3%BB%E4%BA%A7%E5%87%BA/portfolio-work-telecom-intelligence-v4.html">查看详情 →</a>
     </div>
   </article>
 
@@ -4027,17 +4055,17 @@ a { text-decoration: none; color: inherit; }
         <span class="works-tag">白皮书</span>
         <span class="works-tag">展会推广</span>
       </div>
-      <a class="btn btn-primary works-cta" href="./低空经济产出/portfolio-work-low-altitude-v1.html">查看详情 →</a>
+      <a class="btn btn-primary works-cta" href="./%E4%BD%8E%E7%A9%BA%E7%BB%8F%E6%B5%8E%E4%BA%A7%E5%87%BA/portfolio-work-low-altitude-v1.html">查看详情 →</a>
     </div>
-    <a class="works-media" href="./低空经济产出/portfolio-work-low-altitude-v1.html" aria-label="查看低空经济创新项目作品详情">
-      <img src="./低空经济产出/assets/whitepaper_05.png" width="1600" height="960" alt="低空经济白皮书相关示意图" loading="lazy">
+    <a class="works-media" href="./%E4%BD%8E%E7%A9%BA%E7%BB%8F%E6%B5%8E%E4%BA%A7%E5%87%BA/portfolio-work-low-altitude-v1.html" aria-label="查看低空经济创新项目作品详情">
+      <img src="./%E4%BD%8E%E7%A9%BA%E7%BB%8F%E6%B5%8E%E4%BA%A7%E5%87%BA/assets/whitepaper_05.png" width="1600" height="960" alt="低空经济白皮书相关示意图" loading="eager" decoding="async">
     </a>
   </article>
 
   <!-- Card 3 · 智能体（图左文右） -->
   <article class="works-row works-row--img-left" id="work-ai-agent">
-    <a class="works-media" href="./智能体产出/portfolio-work-ai-agent-portal-v1.html" aria-label="查看 AI 产品体系规划作品详情">
-      <img src="./智能体产出/智能体产出代表图片.png" width="1200" height="750" alt="智能体产品体系与门户规划代表图" loading="lazy">
+    <a class="works-media" href="./%E6%99%BA%E8%83%BD%E4%BD%93%E4%BA%A7%E5%87%BA/portfolio-work-ai-agent-portal-v1.html" aria-label="查看 AI 产品体系规划作品详情">
+      <img src="./%E6%99%BA%E8%83%BD%E4%BD%93%E4%BA%A7%E5%87%BA/%E6%99%BA%E8%83%BD%E4%BD%93%E4%BA%A7%E5%87%BA%E4%BB%A3%E8%A1%A8%E5%9B%BE%E7%89%87.png" width="1200" height="750" alt="智能体产品体系与门户规划代表图" loading="eager" decoding="async">
     </a>
     <div class="works-copy">
       <div class="works-card-eyebrow">Work 03 · AI Product Systems</div>
@@ -4049,7 +4077,7 @@ a { text-decoration: none; color: inherit; }
         <span class="works-tag">产品发布运营</span>
         <span class="works-tag">白皮书</span>
       </div>
-      <a class="btn btn-primary works-cta" href="./智能体产出/portfolio-work-ai-agent-portal-v1.html">查看详情 →</a>
+      <a class="btn btn-primary works-cta" href="./%E6%99%BA%E8%83%BD%E4%BD%93%E4%BA%A7%E5%87%BA/portfolio-work-ai-agent-portal-v1.html">查看详情 →</a>
     </div>
   </article>
 </section>
@@ -4169,7 +4197,7 @@ a { text-decoration: none; color: inherit; }
         <div class="workflow-stack">
           <span class="workflow-stack-label">日常工具栈</span>
           <div class="workflow-app-icons" aria-label="Vibe Coding 常用工具">
-            <span class="wf-app-icon wf-app-icon--square" title="Claude Code" aria-label="Claude Code"><img src="https://www.google.com/s2/favicons?domain=claude.ai&amp;sz=128" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="ChatGPT" aria-label="ChatGPT"><img src="https://www.google.com/s2/favicons?domain=chatgpt.com&amp;sz=128" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Gemini" aria-label="Gemini"><img src="https://www.google.com/s2/favicons?domain=gemini.google.com&amp;sz=128" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Cursor" aria-label="Cursor"><img src="https://www.google.com/s2/favicons?domain=cursor.com&amp;sz=128" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--codex" title="Codex" aria-label="Codex"><img src="./assets/codex-app-icon.png" alt="" width="20" height="20" loading="lazy"></span><span class="wf-app-icon wf-app-icon--square" title="Replit" aria-label="Replit"><img src="https://www.google.com/s2/favicons?domain=replit.com&amp;sz=128" alt="" loading="lazy" decoding="async"></span>
+            <span class="wf-app-icon wf-app-icon--square" title="Claude Code" aria-label="Claude Code"><img src="https://icons.duckduckgo.com/ip3/claude.ai.ico" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="ChatGPT" aria-label="ChatGPT"><img src="https://icons.duckduckgo.com/ip3/chatgpt.com.ico" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Gemini" aria-label="Gemini"><img src="https://icons.duckduckgo.com/ip3/gemini.google.com.ico" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Cursor" aria-label="Cursor"><img src="https://icons.duckduckgo.com/ip3/cursor.com.ico" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--codex" title="Codex" aria-label="Codex"><img src="./assets/codex-app-icon.png" alt="" width="20" height="20" loading="lazy"></span><span class="wf-app-icon wf-app-icon--square" title="Replit" aria-label="Replit"><img src="https://icons.duckduckgo.com/ip3/replit.com.ico" alt="" loading="lazy" decoding="async"></span>
           </div>
         </div>
       </article>
@@ -4208,7 +4236,7 @@ a { text-decoration: none; color: inherit; }
         <div class="workflow-stack">
           <span class="workflow-stack-label">日常工具栈</span>
           <div class="workflow-app-icons" aria-label="行业研究常用工具">
-            <span class="wf-app-icon wf-app-icon--aihot" title="AI HOT" aria-label="AI HOT"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 18" aria-hidden="true"><rect width="56" height="18" rx="4.5" fill="#1a2332"/><text x="6" y="12.8" fill="#ffffff" font-family="Inter,system-ui,sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.02em">AI</text><circle cx="27" cy="9" r="4.6" fill="none" stroke="#2dd4bf" stroke-width="1.35"/><line x1="24.2" y1="11.5" x2="29.8" y2="6.5" stroke="#2dd4bf" stroke-width="1.1" stroke-linecap="round"/><circle cx="27" cy="9" r="1.1" fill="#2dd4bf"/><text x="33" y="12.8" fill="#38bdf8" font-family="Inter,system-ui,sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.02em">HOT</text></svg></span><span class="wf-app-icon wf-app-icon--square" title="X" aria-label="X"><img src="https://www.google.com/s2/favicons?domain=x.com&amp;sz=128" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Obsidian" aria-label="Obsidian"><img src="https://www.google.com/s2/favicons?domain=obsidian.md&amp;sz=128" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--codex" title="Codex" aria-label="Codex"><img src="./assets/codex-app-icon.png" alt="" width="20" height="20" loading="lazy"></span><span class="wf-app-icon wf-app-icon--square" title="ChatGPT" aria-label="ChatGPT"><img src="https://www.google.com/s2/favicons?domain=chatgpt.com&amp;sz=128" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Claude" aria-label="Claude"><img src="https://www.google.com/s2/favicons?domain=claude.ai&amp;sz=128" alt="" loading="lazy" decoding="async"></span>
+            <span class="wf-app-icon wf-app-icon--aihot" title="AI HOT" aria-label="AI HOT"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 18" aria-hidden="true"><rect width="56" height="18" rx="4.5" fill="#1a2332"/><text x="6" y="12.8" fill="#ffffff" font-family="Inter,system-ui,sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.02em">AI</text><circle cx="27" cy="9" r="4.6" fill="none" stroke="#2dd4bf" stroke-width="1.35"/><line x1="24.2" y1="11.5" x2="29.8" y2="6.5" stroke="#2dd4bf" stroke-width="1.1" stroke-linecap="round"/><circle cx="27" cy="9" r="1.1" fill="#2dd4bf"/><text x="33" y="12.8" fill="#38bdf8" font-family="Inter,system-ui,sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.02em">HOT</text></svg></span><span class="wf-app-icon wf-app-icon--square" title="X" aria-label="X"><img src="https://icons.duckduckgo.com/ip3/x.com.ico" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Obsidian" aria-label="Obsidian"><img src="https://icons.duckduckgo.com/ip3/obsidian.md.ico" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--codex" title="Codex" aria-label="Codex"><img src="./assets/codex-app-icon.png" alt="" width="20" height="20" loading="lazy"></span><span class="wf-app-icon wf-app-icon--square" title="ChatGPT" aria-label="ChatGPT"><img src="https://icons.duckduckgo.com/ip3/chatgpt.com.ico" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Claude" aria-label="Claude"><img src="https://icons.duckduckgo.com/ip3/claude.ai.ico" alt="" loading="lazy" decoding="async"></span>
           </div>
         </div>
       </article>

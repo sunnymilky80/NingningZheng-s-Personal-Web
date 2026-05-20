@@ -665,6 +665,23 @@
       .time-card:nth-last-child(-n+2) { border-bottom: 1px solid var(--line); }
       h1 { font-size: 30px; }
     }
+  
+    @media (max-width: 560px) {
+      .shot-grid { grid-template-columns: 1fr; }
+      .frame {
+        height: auto;
+        min-height: 0;
+        max-width: 100%;
+      }
+      .frame img {
+        width: 100%;
+        height: auto;
+        max-height: none;
+        object-fit: contain;
+      }
+    }
+
+    /* mobile frames */
   </style>
 </head>
 <body>
@@ -697,7 +714,7 @@
 
       <div class="actions">
         <a class="btn" href="https://mp.weixin.qq.com/s/WTRMWj-xNqZPiPHlTJ4cfg" target="_blank" rel="noreferrer">查看对外推文</a>
-        <a class="btn secondary" href="/Users/kayla/Desktop/My resume/低空经济产出/思特奇低空经济白皮书（汇总版）v1.0@28May2025.pdf">查看白皮书 PDF</a>
+        <a class="btn secondary" href="assets/low-altitude-whitepaper.pdf">查看白皮书 PDF</a>
       </div>
     </header>
 
