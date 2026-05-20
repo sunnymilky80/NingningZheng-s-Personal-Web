@@ -1161,27 +1161,29 @@ a { text-decoration: none; color: inherit; }
     min-height: 0 !important;
   }
 }
-/* ---------- §3.9.b · 核心 AI 工作流（内联 HTML/CSS 流程图） ---------- */
+/* ---------- §3.9.b · 核心 AI 工作流（Outcome + 步骤内工具 + 底部工具栈） ---------- */
 .workflow-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: stretch;
 }
 
 .workflow-card {
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  padding: 28px;
-  background: linear-gradient(135deg, rgba(255, 253, 247, 1) 0%, rgba(245, 240, 227, 0.5) 100%);
+  gap: 12px;
+  min-width: 0;
+  padding: 18px 18px 16px;
+  background: linear-gradient(135deg, rgba(255, 253, 247, 1) 0%, rgba(245, 240, 227, 0.45) 100%);
   border: 1px solid var(--line);
-  border-radius: 22px;
-  transition: all 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  border-radius: var(--r-card);
+  transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
 }
 
 .workflow-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(193, 140, 93, 0.32);
+  transform: translateY(-2px);
+  border-color: rgba(193, 140, 93, 0.28);
   box-shadow: var(--shadow-md);
 }
 
@@ -1189,92 +1191,140 @@ a { text-decoration: none; color: inherit; }
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
 .workflow-card-title {
+  margin: 0;
   font-family: var(--font-display);
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.005em;
+  line-height: 1.3;
   color: var(--ink);
 }
 
 .workflow-card-sub {
   font-family: var(--font-body);
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--rust);
+  white-space: nowrap;
 }
 
 .workflow-diagram {
+  position: relative;
   width: 100%;
-  min-height: 220px;
-  border-radius: 14px;
-  border: 1px solid rgba(193, 140, 93, 0.22);
-  background: linear-gradient(160deg, rgba(255, 253, 247, 0.96) 0%, rgba(245, 240, 227, 0.55) 100%);
-  padding: 12px 12px 10px;
+  min-width: 0;
+  padding: 10px;
+  border-radius: var(--r-sm);
+  border: 1px solid rgba(193, 140, 93, 0.2);
+  background: linear-gradient(160deg, rgba(255, 253, 247, 0.96) 0%, rgba(245, 240, 227, 0.5) 100%);
   box-sizing: border-box;
   overflow: hidden;
 }
 
 .workflow-diagram--vibe {
   display: grid;
-  grid-template-columns: 84px minmax(0, 1fr);
-  gap: 10px;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 8px;
   align-items: stretch;
 }
 
 .workflow-diagram--research {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 84px;
-  gap: 10px;
+  grid-template-columns: minmax(0, 1fr) 72px;
+  gap: 8px;
   align-items: stretch;
+}
+
+.workflow-copy {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: rgba(255, 253, 247, 0.94);
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.workflow-diagram--research .workflow-copy {
+  left: 8px;
+  right: auto;
+}
+
+.workflow-copy:hover {
+  color: var(--ink);
+  border-color: rgba(93, 112, 82, 0.35);
+}
+
+.workflow-copy:focus-visible {
+  outline: 2px solid var(--moss);
+  outline-offset: 2px;
+}
+
+.workflow-copy svg {
+  width: 13px;
+  height: 13px;
+  display: block;
+}
+
+.workflow-copy.is-copied {
+  color: var(--moss-deep);
 }
 
 .workflow-outcome {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
   min-height: 0;
 }
 
 .workflow-outcome-label {
   font-family: var(--font-body);
-  font-size: 9px;
+  font-size: 8.5px;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(193, 140, 93, 0.9);
+  color: rgba(193, 140, 93, 0.88);
 }
 
 .workflow-outcome-frame {
   flex: 1;
-  min-height: 168px;
-  border-radius: 10px;
-  border: 1px dashed rgba(93, 112, 82, 0.28);
+  min-height: 132px;
+  border-radius: 8px;
+  border: 1px dashed rgba(93, 112, 82, 0.26);
   background:
-    linear-gradient(145deg, rgba(93, 112, 82, 0.09) 0%, rgba(255, 253, 247, 0.5) 45%, rgba(193, 140, 93, 0.08) 100%);
+    linear-gradient(145deg, rgba(93, 112, 82, 0.08) 0%, rgba(255, 253, 247, 0.55) 45%, rgba(193, 140, 93, 0.06) 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 8px 6px;
+  padding: 6px 4px;
   font-family: var(--font-body);
-  font-size: 11px;
-  line-height: 1.45;
+  font-size: 10px;
+  line-height: 1.4;
   font-weight: 600;
-  color: rgba(31, 37, 34, 0.55);
+  color: rgba(31, 37, 34, 0.52);
 }
 
 .workflow-outcome-frame small {
   display: block;
-  margin-top: 4px;
-  font-size: 9.5px;
+  margin-top: 3px;
+  font-size: 9px;
   font-weight: 500;
   color: var(--muted);
 }
@@ -1284,97 +1334,86 @@ a { text-decoration: none; color: inherit; }
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: stretch;
-  gap: 4px;
+  gap: 3px;
   overflow-x: auto;
   overflow-y: hidden;
-  padding-bottom: 4px;
+  padding-bottom: 2px;
+  padding-right: 22px;
   scrollbar-width: thin;
   -webkit-overflow-scrolling: touch;
-  max-width: 100%;
+}
+
+.workflow-diagram--research .workflow-pipeline {
+  padding-right: 0;
+  padding-left: 22px;
 }
 
 .workflow-stage {
   flex: 0 0 auto;
-  width: 102px;
-  min-width: 96px;
-  max-width: 118px;
-  padding: 8px 7px 9px;
-  border-radius: 10px;
-  background: rgba(255, 253, 247, 0.92);
-  border: 1px solid rgba(207, 197, 183, 0.55);
+  width: 94px;
+  min-width: 88px;
+  padding: 7px 6px 8px;
+  border-radius: 8px;
+  background: rgba(255, 253, 247, 0.94);
+  border: 1px solid rgba(207, 197, 183, 0.5);
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
   box-sizing: border-box;
 }
 
 .workflow-stage--wide {
-  width: 118px;
-  min-width: 112px;
-  max-width: 132px;
+  width: 104px;
+  min-width: 98px;
 }
 
-.workflow-stage-name {
+.workflow-stage-zh {
   font-family: var(--font-display);
-  font-size: 12.5px;
+  font-size: 11.5px;
   font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--ink);
   line-height: 1.2;
 }
 
+.workflow-stage-en {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--muted);
+  line-height: 1.25;
+}
+
 .workflow-stage-out {
   margin: 0;
   font-family: var(--font-body);
-  font-size: 10px;
-  line-height: 1.42;
-  color: rgba(31, 37, 34, 0.62);
+  font-size: 9.5px;
+  line-height: 1.38;
+  color: rgba(31, 37, 34, 0.6);
 }
 
 .workflow-stage-tools {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
   margin-top: auto;
   min-width: 0;
 }
 
-.workflow-stage-note {
-  font-family: var(--font-body);
-  font-size: 9px;
-  line-height: 1.35;
-  color: var(--muted);
-  margin-top: 2px;
-}
-
 .wf-tool {
   display: inline-flex;
-  padding: 2px 6px;
+  padding: 2px 5px;
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 8.5px;
   font-weight: 500;
   color: var(--moss-deep);
   background: rgba(93, 112, 82, 0.1);
-  border-radius: 5px;
-  letter-spacing: 0;
-  white-space: normal;
+  border-radius: 4px;
+  line-height: 1.25;
   max-width: 100%;
   overflow-wrap: anywhere;
   word-break: break-word;
-}
-
-.wf-tool-pair {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  flex-wrap: nowrap;
-}
-
-.wf-tool-pair .wf-tool-sep {
-  font-size: 10px;
-  color: rgba(31, 37, 34, 0.35);
-  user-select: none;
 }
 
 .workflow-pipe {
@@ -1382,43 +1421,124 @@ a { text-decoration: none; color: inherit; }
   align-items: center;
   align-self: center;
   flex-shrink: 0;
-  padding: 0 1px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
-  color: rgba(193, 140, 93, 0.85);
+  color: rgba(193, 140, 93, 0.75);
   line-height: 1;
 }
 
-.workflow-tools {
+.workflow-stack {
   display: flex;
+  align-items: center;
+  gap: 10px;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
 }
 
-.workflow-tool {
-  display: inline-flex;
-  padding: 5px 11px;
+.workflow-stack-label {
   font-family: var(--font-body);
-  font-size: 11.5px;
-  font-weight: 500;
-  color: rgba(31, 37, 34, 0.72);
-  background: rgba(207, 197, 183, 0.42);
-  border-radius: var(--r-pill);
-  letter-spacing: 0.02em;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.workflow-app-icons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.wf-app-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  width: auto;
+  min-width: 28px;
+  padding: 0 5px;
+  border-radius: 8px;
+  border: 1px solid rgba(207, 197, 183, 0.65);
+  background: rgba(255, 253, 247, 0.96);
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.wf-app-icon img,
+.wf-app-icon svg {
+  display: block;
+  height: 18px;
+  width: auto;
+  max-height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.wf-app-icon--square {
+  width: 28px;
+  min-width: 28px;
+  padding: 0;
+}
+
+.wf-app-icon--codex {
+  width: 28px;
+  min-width: 28px;
+  padding: 4px;
+  background: #fff;
+}
+
+.wf-app-icon--codex img {
+  width: 20px;
+  height: 20px;
+  max-height: 20px;
+}
+
+.wf-app-icon--aihot {
+  padding: 0 7px;
+  min-width: auto;
+  background: #1a2332;
+  border-color: rgba(26, 35, 50, 0.45);
+}
+
+.wf-app-icon--aihot svg {
+  height: 14px;
+  width: auto;
+}
+
+@media (max-width: 900px) {
+  .workflow-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 720px) {
-  .workflow-grid { grid-template-columns: 1fr; }
-
   .workflow-diagram--vibe,
   .workflow-diagram--research {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
   }
 
+  .workflow-diagram--research .workflow-outcome {
+    order: 2;
+  }
+
+  .workflow-diagram--research .workflow-pipeline {
+    order: 1;
+    padding-left: 0;
+    padding-right: 22px;
+  }
+
   .workflow-outcome-frame {
-    min-height: 72px;
+    min-height: 64px;
+  }
+
+  .workflow-stage {
+    min-width: 84px;
   }
 }
 
@@ -2641,104 +2761,85 @@ a { text-decoration: none; color: inherit; }
     </div>
   </div>
 
-  <!-- §3.9.b · 核心 AI 工作流（内联流程图） -->
+  <!-- §3.9.b · 核心 AI 工作流 -->
   <div class="toolkit-block">
     <div class="toolkit-block-head">
       <h3 class="toolkit-block-title">核心 AI 工作流</h3>
-      <span class="toolkit-block-meta">受众：招聘方 · 案例 01 个人网站 · 02 近期公众号长文 · 工具保留英文原名</span>
+      <span class="toolkit-block-meta">日常核心工作流</span>
     </div>
     <div class="workflow-grid">
 
       <article class="workflow-card">
         <div class="workflow-card-head">
           <h4 class="workflow-card-title">Vibe Coding 项目工作流</h4>
-          <span class="workflow-card-sub">Case 01 · 个人网站</span>
+          <span class="workflow-card-sub">从想法到可点原型站</span>
         </div>
-        <div class="workflow-diagram workflow-diagram--vibe" role="img" aria-label="Case 01：从 Brief 到可点原型；Build 阶段 Cursor 与 Claude Code 并列">
+        <div class="workflow-diagram workflow-diagram--vibe" role="group" aria-label="Vibe Coding 四步工作流">
+          <button type="button" class="workflow-copy" data-workflow="vibe" aria-label="复制 Vibe Coding 工作流文本"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
           <div class="workflow-outcome">
             <span class="workflow-outcome-label">Outcome</span>
             <div class="workflow-outcome-frame">本页 Hero<br><small>可换站点截图</small></div>
           </div>
           <div class="workflow-pipeline">
             <div class="workflow-stage">
-              <div class="workflow-stage-name">Brief</div>
-              <p class="workflow-stage-out">目标 / 受众 / 成功标准</p>
-              <div class="workflow-stage-tools"><span class="wf-tool">Cursor</span></div>
-            </div>
-            <span class="workflow-pipe" aria-hidden="true">→</span>
-            <div class="workflow-stage">
-              <div class="workflow-stage-name">Spec</div>
-              <p class="workflow-stage-out">需求与结构包（brief → PRD）</p>
-              <div class="workflow-stage-tools"><span class="wf-tool">spec-generator</span></div>
-            </div>
-            <span class="workflow-pipe" aria-hidden="true">→</span>
-            <div class="workflow-stage">
-              <div class="workflow-stage-name">Design</div>
-              <p class="workflow-stage-out">视觉与组件基调</p>
-              <div class="workflow-stage-tools"><span class="wf-tool">frontend-design</span></div>
-            </div>
-            <span class="workflow-pipe" aria-hidden="true">→</span>
-            <div class="workflow-stage workflow-stage--wide">
-              <div class="workflow-stage-name">Build</div>
-              <p class="workflow-stage-out">可点 HTML / 组件迭代</p>
-              <div class="workflow-stage-tools wf-tool-pair">
-                <span class="wf-tool">Cursor</span><span class="wf-tool-sep" aria-hidden="true">·</span><span class="wf-tool">Claude Code</span>
-              </div>
-            </div>
-            <span class="workflow-pipe" aria-hidden="true">→</span>
-            <div class="workflow-stage">
-              <div class="workflow-stage-name">Ship</div>
-              <p class="workflow-stage-out">v2.4 可点原型 / URL</p>
+              <div class="workflow-stage-zh">构想</div>
+              <div class="workflow-stage-en">Brain</div>
+              <p class="workflow-stage-out">内容 + 架构</p>
+              <div class="workflow-stage-tools"><span class="wf-tool">using-superpowers</span><span class="wf-tool">brainstorm</span></div>
+            </div>            <span class="workflow-pipe" aria-hidden="true">→</span>            <div class="workflow-stage">
+              <div class="workflow-stage-zh">找参考</div>
+              <div class="workflow-stage-en">Extract Spec / Design</div>
+              <p class="workflow-stage-out">风格规范</p>
+              <div class="workflow-stage-tools"><span class="wf-tool">design-extractor</span></div>
+            </div>            <span class="workflow-pipe" aria-hidden="true">→</span>            <div class="workflow-stage">
+              <div class="workflow-stage-zh">写 PRD</div>
+              <div class="workflow-stage-en">PRD</div>
+              <p class="workflow-stage-out">PRD 文档</p>
+              <div class="workflow-stage-tools"><span class="wf-tool">spec-generator</span><span class="wf-tool">using-superpowers</span></div>
+            </div>            <span class="workflow-pipe" aria-hidden="true">→</span>            <div class="workflow-stage workflow-stage--wide">
+              <div class="workflow-stage-zh">实现 & 部署</div>
+              <div class="workflow-stage-en">Build & Ship</div>
+              <p class="workflow-stage-out">上线网站</p>
+              <div class="workflow-stage-tools"><span class="wf-tool">Codex</span><span class="wf-tool">Cursor</span><span class="wf-tool">Claude Code</span><span class="wf-tool">frontend-design</span></div>
             </div>
           </div>
         </div>
-        <div class="workflow-tools">
-          <span class="workflow-tool">spec-generator</span>
-          <span class="workflow-tool">frontend-design</span>
-          <span class="workflow-tool">Cursor</span>
-          <span class="workflow-tool">Claude Code</span>
+        <div class="workflow-stack">
+          <span class="workflow-stack-label">日常工具栈</span>
+          <div class="workflow-app-icons" aria-label="Vibe Coding 常用工具">
+            <span class="wf-app-icon wf-app-icon--square" title="Claude Code" aria-label="Claude Code"><img src="https://www.google.com/s2/favicons?domain=claude.ai&amp;sz=128" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="ChatGPT" aria-label="ChatGPT"><img src="https://www.google.com/s2/favicons?domain=chatgpt.com&amp;sz=128" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Gemini" aria-label="Gemini"><img src="https://www.google.com/s2/favicons?domain=gemini.google.com&amp;sz=128" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Cursor" aria-label="Cursor"><img src="https://www.google.com/s2/favicons?domain=cursor.com&amp;sz=128" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--codex" title="Codex" aria-label="Codex"><img src="./assets/codex-app-icon.png" alt="" width="20" height="20" loading="lazy"></span><span class="wf-app-icon wf-app-icon--square" title="Replit" aria-label="Replit"><img src="https://www.google.com/s2/favicons?domain=replit.com&amp;sz=128" alt="" loading="lazy" decoding="async"></span>
+          </div>
         </div>
       </article>
 
       <article class="workflow-card">
         <div class="workflow-card-head">
-          <h4 class="workflow-card-title">研究行业工作流</h4>
-          <span class="workflow-card-sub">Case 02 · 公众号新文</span>
+          <h4 class="workflow-card-title">行业研究工作流</h4>
+          <span class="workflow-card-sub">从信息流到公众号成稿</span>
         </div>
-        <div class="workflow-diagram workflow-diagram--research" role="img" aria-label="Case 02：从信号到公众号成稿；Synthesize 阶段 Gemini 与 Codex 分叉再汇合">
+        <div class="workflow-diagram workflow-diagram--research" role="group" aria-label="行业研究四步工作流">
+          <button type="button" class="workflow-copy" data-workflow="research" aria-label="复制行业研究工作流文本"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
           <div class="workflow-pipeline">
             <div class="workflow-stage">
-              <div class="workflow-stage-name">Signals</div>
-              <p class="workflow-stage-out">每日信号 / 选题候选</p>
-              <div class="workflow-stage-tools wf-tool-pair">
-                <span class="wf-tool">aihot</span><span class="wf-tool-sep" aria-hidden="true">·</span><span class="wf-tool">follow-builders</span>
-              </div>
-            </div>
-            <span class="workflow-pipe" aria-hidden="true">→</span>
-            <div class="workflow-stage">
-              <div class="workflow-stage-name">Capture</div>
-              <p class="workflow-stage-out">卡片笔记 / 标签 / 引用链</p>
-              <div class="workflow-stage-tools"><span class="wf-tool">Obsidian</span></div>
-            </div>
-            <span class="workflow-pipe" aria-hidden="true">→</span>
-            <div class="workflow-stage workflow-stage--wide">
-              <div class="workflow-stage-name">Synthesize</div>
-              <p class="workflow-stage-out">对比、论点、反例</p>
-              <div class="workflow-stage-tools wf-tool-pair">
-                <span class="wf-tool">Gemini</span><span class="wf-tool-sep" aria-hidden="true">·</span><span class="wf-tool">Codex</span>
-              </div>
-              <span class="workflow-stage-note">分叉校验 · 结论汇合</span>
-            </div>
-            <span class="workflow-pipe" aria-hidden="true">→</span>
-            <div class="workflow-stage">
-              <div class="workflow-stage-name">Draft</div>
-              <p class="workflow-stage-out">结构与文风对齐的长文</p>
-              <div class="workflow-stage-tools"><span class="wf-tool">khazix-writer</span></div>
-            </div>
-            <span class="workflow-pipe" aria-hidden="true">→</span>
-            <div class="workflow-stage">
-              <div class="workflow-stage-name">Publish</div>
-              <p class="workflow-stage-out">定稿发布 · 标题与首屏可替换</p>
+              <div class="workflow-stage-zh">抓信号</div>
+              <div class="workflow-stage-en">Capture</div>
+              <p class="workflow-stage-out">原始信息</p>
+              <div class="workflow-stage-tools"><span class="wf-tool">aihot</span><span class="wf-tool">follow-builders</span></div>
+            </div>            <span class="workflow-pipe" aria-hidden="true">→</span>            <div class="workflow-stage workflow-stage--wide">
+              <div class="workflow-stage-zh">沉淀分析</div>
+              <div class="workflow-stage-en">Synthesize</div>
+              <p class="workflow-stage-out">结构化笔记</p>
+              <div class="workflow-stage-tools"><span class="wf-tool">Obsidian</span><span class="wf-tool">obsidian-claude-sidebar</span></div>
+            </div>            <span class="workflow-pipe" aria-hidden="true">→</span>            <div class="workflow-stage workflow-stage--wide">
+              <div class="workflow-stage-zh">起稿审改</div>
+              <div class="workflow-stage-en">Draft</div>
+              <p class="workflow-stage-out">长文初稿 v0.5</p>
+              <div class="workflow-stage-tools"><span class="wf-tool">Codex</span><span class="wf-tool">Claude Code</span><span class="wf-tool">khazix-writer</span></div>
+            </div>            <span class="workflow-pipe" aria-hidden="true">→</span>            <div class="workflow-stage">
+              <div class="workflow-stage-zh">人工发布</div>
+              <div class="workflow-stage-en">Publish</div>
+              <p class="workflow-stage-out">已发布长文</p>
+              <div class="workflow-stage-tools"><span class="wf-tool">人工审改</span><span class="wf-tool">公众号</span><span class="wf-tool">小红书</span></div>
             </div>
           </div>
           <div class="workflow-outcome">
@@ -2746,13 +2847,11 @@ a { text-decoration: none; color: inherit; }
             <div class="workflow-outcome-frame">公众号首屏<br><small>可换文章截图</small></div>
           </div>
         </div>
-        <div class="workflow-tools">
-          <span class="workflow-tool">aihot</span>
-          <span class="workflow-tool">follow-builders</span>
-          <span class="workflow-tool">Obsidian</span>
-          <span class="workflow-tool">Gemini</span>
-          <span class="workflow-tool">Codex</span>
-          <span class="workflow-tool">khazix-writer</span>
+        <div class="workflow-stack">
+          <span class="workflow-stack-label">日常工具栈</span>
+          <div class="workflow-app-icons" aria-label="行业研究常用工具">
+            <span class="wf-app-icon wf-app-icon--aihot" title="AI HOT" aria-label="AI HOT"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 18" aria-hidden="true"><rect width="56" height="18" rx="4.5" fill="#1a2332"/><text x="6" y="12.8" fill="#ffffff" font-family="Inter,system-ui,sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.02em">AI</text><circle cx="27" cy="9" r="4.6" fill="none" stroke="#2dd4bf" stroke-width="1.35"/><line x1="24.2" y1="11.5" x2="29.8" y2="6.5" stroke="#2dd4bf" stroke-width="1.1" stroke-linecap="round"/><circle cx="27" cy="9" r="1.1" fill="#2dd4bf"/><text x="33" y="12.8" fill="#38bdf8" font-family="Inter,system-ui,sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.02em">HOT</text></svg></span><span class="wf-app-icon wf-app-icon--square" title="X" aria-label="X"><img src="https://www.google.com/s2/favicons?domain=x.com&amp;sz=128" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Obsidian" aria-label="Obsidian"><img src="https://www.google.com/s2/favicons?domain=obsidian.md&amp;sz=128" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--codex" title="Codex" aria-label="Codex"><img src="./assets/codex-app-icon.png" alt="" width="20" height="20" loading="lazy"></span><span class="wf-app-icon wf-app-icon--square" title="ChatGPT" aria-label="ChatGPT"><img src="https://www.google.com/s2/favicons?domain=chatgpt.com&amp;sz=128" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Claude" aria-label="Claude"><img src="https://www.google.com/s2/favicons?domain=claude.ai&amp;sz=128" alt="" loading="lazy" decoding="async"></span>
+          </div>
         </div>
       </article>
 
@@ -3167,6 +3266,48 @@ if (statsSection) {
 
   statsObs.observe(statsSection);
 }
+
+// §3.9.b · 工作流复制
+const WORKFLOW_COPY = {
+  vibe: `Vibe Coding 项目工作流 · 从想法到可点原型站
+01 构想 Brain → 内容 + 架构
+02 找参考 Extract Spec / Design → 风格规范
+03 写 PRD PRD → PRD 文档
+04 实现 & 部署 Build & Ship → 上线网站`,
+  research: `行业研究工作流 · 从信息流到公众号成稿
+01 抓信号 Capture → 原始信息
+02 沉淀分析 Synthesize → 结构化笔记片段
+03 起稿审改 Draft → 长文初稿 v0.5
+04 人工发布 Publish → 已发布长文`
+};
+
+document.querySelectorAll('.workflow-copy').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const key = btn.dataset.workflow;
+    const copyText = WORKFLOW_COPY[key];
+    if (!copyText) return;
+    try {
+      await navigator.clipboard.writeText(copyText);
+    } catch {
+      const ta = document.createElement('textarea');
+      ta.value = copyText;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
+    btn.classList.add('is-copied');
+    const defaultLabel = key === 'vibe' ? '复制 Vibe Coding 工作流文本' : '复制行业研究工作流文本';
+    btn.setAttribute('aria-label', '已复制');
+    window.setTimeout(() => {
+      btn.classList.remove('is-copied');
+      btn.setAttribute('aria-label', defaultLabel);
+    }, 1600);
+  });
+});
 </script>
 </body>
 </html>
