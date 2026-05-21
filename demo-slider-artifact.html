@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>HTML Artifact Demo · 配图 6</title>
+<style>
+  body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #f5f3ec; font-family: -apple-system, "PingFang SC", sans-serif; }
+  .card { background: #fff; padding: 40px 48px; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,.08); width: 420px; }
+  h2 { margin: 0 0 4px; font-size: 20px; color: #222; }
+  .sub { color: #888; font-size: 13px; margin-bottom: 28px; }
+  .preview { height: 120px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 28px; transition: background .15s; }
+  .preview button { padding: 14px 32px; border: none; border-radius: 8px; font-size: 16px; color: #fff; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+  .row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; font-size: 14px; }
+  .row label { width: 60px; color: #555; }
+  .row input[type=range] { flex: 1; }
+  .row .val { width: 40px; text-align: right; color: #888; font-variant-numeric: tabular-nums; }
+  .out { background: #1a1a1a; color: #8fd87f; padding: 14px 18px; border-radius: 8px; font-family: "SF Mono", Menlo, monospace; font-size: 13px; margin-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+  .out code { background: none; }
+  .copy { background: #2d7a2d; color: #fff; border: none; padding: 6px 14px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+  .copy:hover { background: #38a038; }
+  .copy.ok { background: #555; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h2>调一下这个按钮的颜色</h2>
+  <div class="sub">拖滑块 → 实时看效果 → 复制参数粘回 Claude</div>
+
+  <div class="preview" id="preview">
+    <button id="btn" style="background: rgb(120, 90, 200);">Try Claude Code</button>
+  </div>
+
+  <div class="row">
+    <label>R</label>
+    <input type="range" min="0" max="255" value="120" id="r">
+    <div class="val" id="rv">120</div>
+  </div>
+  <div class="row">
+    <label>G</label>
+    <input type="range" min="0" max="255" value="90" id="g">
+    <div class="val" id="gv">90</div>
+  </div>
+  <div class="row">
+    <label>B</label>
+    <input type="range" min="0" max="255" value="200" id="b">
+    <div class="val" id="bv">200</div>
+  </div>
+  <div class="row">
+    <label>圆角</label>
+    <input type="range" min="0" max="32" value="8" id="rad">
+    <div class="val" id="radv">8</div>
+  </div>
+
+  <div class="out">
+    <code id="code">background: rgb(120, 90, 200); border-radius: 8px;</code>
+    <button class="copy" id="copy">复制</button>
+  </div>
+</div>
+
+<script>
+  const $ = id => document.getElementById(id);
+  function sync() {
+    const r = $('r').value, g = $('g').value, b = $('b').value, rad = $('rad').value;
+    $('rv').textContent = r; $('gv').textContent = g; $('bv').textContent = b; $('radv').textContent = rad;
+    $('btn').style.background = `rgb(${r}, ${g}, ${b})`;
+    $('btn').style.borderRadius = rad + 'px';
+    $('code').textContent = `background: rgb(${r}, ${g}, ${b}); border-radius: ${rad}px;`;
+  }
+  ['r','g','b','rad'].forEach(id => $(id).addEventListener('input', sync));
+  $('copy').addEventListener('click', () => {
+    navigator.clipboard.writeText($('code').textContent);
+    const btn = $('copy'); btn.textContent = '已复制 ✓'; btn.classList.add('ok');
+    setTimeout(() => { btn.textContent = '复制'; btn.classList.remove('ok'); }, 1500);
+  });
+</script>
+</body>
+</html>
