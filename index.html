@@ -235,10 +235,19 @@ a { text-decoration: none; color: inherit; }
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: var(--bg-paper) url('./assets/hero-avatar.jpg') center center / cover no-repeat;
   border: 1.5px solid var(--bg-paper);
   box-shadow: var(--shadow-sm);
   flex-shrink: 0;
+  overflow: hidden;
+  background: var(--bg-paper);
+  padding: 0;
+}
+.hero-avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 18%;
 }
 
 /* C1 Status Chip */
@@ -3108,7 +3117,12 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* ----- 左侧 Timeline（无边框无背景） ----- */
-.am-timeline { position: relative; padding-left: 18px; }
+.am-timeline {
+  position: relative;
+  padding-left: 18px;
+  margin: 0;
+  list-style: none;
+}
 .am-timeline::before {
   content: "";
   position: absolute;
@@ -3122,6 +3136,7 @@ a { text-decoration: none; color: inherit; }
 .am-tl-item {
   position: relative;
   padding-bottom: 30px;
+  list-style: none;
 }
 .am-tl-item:last-child { padding-bottom: 0; }
 .am-tl-item::before {
@@ -3841,6 +3856,48 @@ a { text-decoration: none; color: inherit; }
   .am-book-sparkle.s2 { right: 4px; }
   .am-tl-row { flex-direction: column; align-items: flex-start; gap: 6px; }
 }
+
+/* 手机端：书页正文可滚动，避免裁切 */
+@media (max-width: 540px) {
+  .am-spread-pane {
+    padding: 20px 16px;
+  }
+  .am-spread-pane--right {
+    padding: 16px 14px;
+  }
+  .am-pane-title {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  .am-pane-lead {
+    font-size: 11.5px;
+    line-height: 1.55;
+  }
+  .am-pane-body {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+    gap: 10px;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+  .am-pane-body p,
+  .am-pane-body li {
+    font-size: 11px;
+    line-height: 1.48;
+  }
+  .am-pane-body .anchor-line {
+    font-size: 13px;
+    padding: 8px 4px;
+    margin: 2px 0 8px;
+  }
+  .am-spread-pane[data-spread="reading"] .am-pane-body,
+  .am-spread-pane[data-spread="hobby"] .am-pane-body,
+  .am-spread-pane[data-spread="podcast"] .am-pane-body ul {
+    gap: 10px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -3874,7 +3931,7 @@ a { text-decoration: none; color: inherit; }
 <section class="hero" id="hero">
   <div class="hero-left">
     <div class="hero-meta-row fade-up delay-1">
-      <div class="hero-avatar"></div>
+      <div class="hero-avatar"><img src="./assets/hero-avatar.jpg" width="168" height="168" alt="郑宁宁" decoding="async"></div>
       <div class="status-chip">
         <span class="status-dot"></span>
         <span>Open to Work · Hangzhou · 寻找 AI 行业研究 / 产品策略全职机会</span>
@@ -4197,7 +4254,7 @@ a { text-decoration: none; color: inherit; }
         <div class="workflow-stack">
           <span class="workflow-stack-label">日常工具栈</span>
           <div class="workflow-app-icons" aria-label="Vibe Coding 常用工具">
-            <span class="wf-app-icon wf-app-icon--square" title="Claude Code" aria-label="Claude Code"><img src="https://icons.duckduckgo.com/ip3/claude.ai.ico" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="ChatGPT" aria-label="ChatGPT"><img src="https://icons.duckduckgo.com/ip3/chatgpt.com.ico" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Gemini" aria-label="Gemini"><img src="https://icons.duckduckgo.com/ip3/gemini.google.com.ico" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Cursor" aria-label="Cursor"><img src="https://icons.duckduckgo.com/ip3/cursor.com.ico" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--codex" title="Codex" aria-label="Codex"><img src="./assets/codex-app-icon.png" alt="" width="20" height="20" loading="lazy"></span><span class="wf-app-icon wf-app-icon--square" title="Replit" aria-label="Replit"><img src="https://icons.duckduckgo.com/ip3/replit.com.ico" alt="" loading="lazy" decoding="async"></span>
+            <span class="wf-app-icon wf-app-icon--square" title="Claude Code" aria-label="Claude Code"><img src="./assets/tool-icons/claude.png" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="ChatGPT" aria-label="ChatGPT"><img src="./assets/tool-icons/chatgpt.png" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Gemini" aria-label="Gemini"><img src="./assets/tool-icons/gemini.png" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Cursor" aria-label="Cursor"><img src="./assets/tool-icons/cursor.png" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--codex" title="Codex" aria-label="Codex"><img src="./assets/codex-app-icon.png" alt="" width="20" height="20" loading="lazy"></span><span class="wf-app-icon wf-app-icon--square" title="Replit" aria-label="Replit"><img src="./assets/tool-icons/replit.png" alt="" loading="lazy" decoding="async"></span>
           </div>
         </div>
       </article>
@@ -4236,7 +4293,7 @@ a { text-decoration: none; color: inherit; }
         <div class="workflow-stack">
           <span class="workflow-stack-label">日常工具栈</span>
           <div class="workflow-app-icons" aria-label="行业研究常用工具">
-            <span class="wf-app-icon wf-app-icon--aihot" title="AI HOT" aria-label="AI HOT"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 18" aria-hidden="true"><rect width="56" height="18" rx="4.5" fill="#1a2332"/><text x="6" y="12.8" fill="#ffffff" font-family="Inter,system-ui,sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.02em">AI</text><circle cx="27" cy="9" r="4.6" fill="none" stroke="#2dd4bf" stroke-width="1.35"/><line x1="24.2" y1="11.5" x2="29.8" y2="6.5" stroke="#2dd4bf" stroke-width="1.1" stroke-linecap="round"/><circle cx="27" cy="9" r="1.1" fill="#2dd4bf"/><text x="33" y="12.8" fill="#38bdf8" font-family="Inter,system-ui,sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.02em">HOT</text></svg></span><span class="wf-app-icon wf-app-icon--square" title="X" aria-label="X"><img src="https://icons.duckduckgo.com/ip3/x.com.ico" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Obsidian" aria-label="Obsidian"><img src="https://icons.duckduckgo.com/ip3/obsidian.md.ico" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--codex" title="Codex" aria-label="Codex"><img src="./assets/codex-app-icon.png" alt="" width="20" height="20" loading="lazy"></span><span class="wf-app-icon wf-app-icon--square" title="ChatGPT" aria-label="ChatGPT"><img src="https://icons.duckduckgo.com/ip3/chatgpt.com.ico" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Claude" aria-label="Claude"><img src="https://icons.duckduckgo.com/ip3/claude.ai.ico" alt="" loading="lazy" decoding="async"></span>
+            <span class="wf-app-icon wf-app-icon--aihot" title="AI HOT" aria-label="AI HOT"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 18" aria-hidden="true"><rect width="56" height="18" rx="4.5" fill="#1a2332"/><text x="6" y="12.8" fill="#ffffff" font-family="Inter,system-ui,sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.02em">AI</text><circle cx="27" cy="9" r="4.6" fill="none" stroke="#2dd4bf" stroke-width="1.35"/><line x1="24.2" y1="11.5" x2="29.8" y2="6.5" stroke="#2dd4bf" stroke-width="1.1" stroke-linecap="round"/><circle cx="27" cy="9" r="1.1" fill="#2dd4bf"/><text x="33" y="12.8" fill="#38bdf8" font-family="Inter,system-ui,sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.02em">HOT</text></svg></span><span class="wf-app-icon wf-app-icon--square" title="X" aria-label="X"><img src="./assets/tool-icons/x.png" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Obsidian" aria-label="Obsidian"><img src="./assets/tool-icons/obsidian.png" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--codex" title="Codex" aria-label="Codex"><img src="./assets/codex-app-icon.png" alt="" width="20" height="20" loading="lazy"></span><span class="wf-app-icon wf-app-icon--square" title="ChatGPT" aria-label="ChatGPT"><img src="./assets/tool-icons/chatgpt.png" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Claude" aria-label="Claude"><img src="./assets/tool-icons/claude.png" alt="" loading="lazy" decoding="async"></span>
           </div>
         </div>
       </article>
@@ -4552,7 +4609,7 @@ a { text-decoration: none; color: inherit; }
           <div class="am-page am-page--left">
             <div class="am-spread-pane is-active" data-pane="left" data-spread="reading">
               <div class="am-pane-num">01 / Reading</div>
-              <div class="am-pane-title">最近在读的 <em>三类书</em></div>
+              <div class="am-pane-title">最近在读的 <em>书籍</em></div>
               <p class="am-pane-lead">小说让我看见人性的褶皱，社会哲学让我搞清楚自己为什么这样想，行业书提醒我研究方法还可以再迭代。</p>
               <div class="am-pane-anchor">"人性在每一个幽微时刻的真实样子。"</div>
             </div>
