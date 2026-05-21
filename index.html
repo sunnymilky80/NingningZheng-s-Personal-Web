@@ -186,11 +186,21 @@ a { text-decoration: none; color: inherit; }
   border-radius: 2px;
 }
 
+@media (max-width: 900px) {
+  .nav {
+    max-width: min(920px, 96vw);
+    padding: 9px 16px 9px 12px;
+  }
+  .nav-links { gap: 12px; }
+  .nav-link { font-size: 13px; }
+  .nav-name-cn { display: none; }
+}
+
 @media (max-width: 768px) {
   .nav-links { gap: 14px; }
   .nav-link { font-size: 13px; }
   .nav-name-en { font-size: 13px; }
-  .nav-name-cn { font-size: 11px; }
+  .nav-link--wide { display: none; }
 }
 
 /* ============================================
@@ -336,10 +346,21 @@ a { text-decoration: none; color: inherit; }
 
 .hero-ctas {
   display: flex;
-  gap: 14px;
+  gap: 10px;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   margin-top: 8px;
+}
+
+.hero-ctas .btn {
+  padding: 12px 20px;
+.hero-ctas .btn-tertiary {
+  padding: 12px 6px;
+}
+
+  font-size: 14px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .btn {
@@ -378,6 +399,19 @@ a { text-decoration: none; color: inherit; }
   transform: translateY(-2px);
   background: rgba(93, 112, 82, 0.06);
 }
+.btn-resume {
+  background: rgba(61, 107, 84, 0.10);
+  color: var(--moss-deep);
+  border: 1.5px solid var(--moss-deep);
+  box-shadow: none;
+}
+
+.btn-resume:hover {
+  transform: translateY(-2px);
+  background: rgba(61, 107, 84, 0.16);
+  box-shadow: var(--shadow-sm);
+}
+
 
 .btn-tertiary {
   background: transparent;
@@ -435,9 +469,18 @@ a { text-decoration: none; color: inherit; }
   aspect-ratio: 4 / 5;
   border-radius: var(--r-img);
   box-shadow: var(--shadow-lg);
-  background: url('./assets/hero-photo.jpg') center 20% / cover no-repeat;
   position: relative;
   z-index: 1;
+  overflow: hidden;
+  background: var(--bg-paper);
+}
+
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 18%;
+  display: block;
 }
 
 /* ============================================
@@ -2540,7 +2583,7 @@ a { text-decoration: none; color: inherit; }
 
 .contact-card:hover {
   background: rgba(255, 253, 247, 0.08);
-  border-color: rgba(212, 165, 116, 0.45);
+  border-color: rgba(255, 253, 247, 0.22);
   transform: translateY(-2px);
 }
 
@@ -2552,13 +2595,33 @@ a { text-decoration: none; color: inherit; }
   height: 30px;
   flex-shrink: 0;
   border-radius: 7px;
-  background: rgba(212, 165, 116, 0.14);
-  color: rgba(212, 165, 116, 1);
 }
 
 .contact-icon svg {
   width: 16px;
   height: 16px;
+}
+
+/* 简历：琥珀色图标强调优先级 */
+.contact-card--resume .contact-icon {
+  background: rgba(212, 165, 116, 0.22);
+  color: var(--amber);
+  border: 1px solid rgba(212, 165, 116, 0.38);
+}
+
+.contact-card--resume:hover {
+  border-color: rgba(212, 165, 116, 0.55);
+}
+
+/* 邮箱 / LinkedIn / GitHub：苔藓绿图标 */
+.contact-icon--green {
+  background: rgba(93, 112, 82, 0.28);
+  color: rgba(186, 214, 195, 0.95);
+  border: 1px solid rgba(93, 112, 82, 0.42);
+}
+
+.contact-card:has(.contact-icon--green):hover {
+  border-color: rgba(125, 155, 132, 0.5);
 }
 
 .contact-text {
@@ -3789,13 +3852,20 @@ a { text-decoration: none; color: inherit; }
     max-width: 100%;
   }
   .hero-ctas {
-    flex-direction: column;
-    align-items: stretch;
+    flex-wrap: nowrap;
+    gap: 8px;
     width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 2px;
   }
+  .hero-ctas::-webkit-scrollbar { display: none; }
   .hero-ctas .btn {
+    padding: 10px 14px;
+    font-size: 13px;
     justify-content: center;
-    width: 100%;
+    width: auto;
     box-sizing: border-box;
   }
 
@@ -3916,12 +3986,12 @@ a { text-decoration: none; color: inherit; }
       </div>
     </div>
     <div class="nav-links">
-      <a href="#hero" class="nav-link active">Home</a>
-      <a href="#research" class="nav-link">Research</a>
+      <a href="#hero" class="nav-link nav-link--wide active">Home</a>
+      <a href="#research" class="nav-link nav-link--wide">Research</a>
       <a href="#works" class="nav-link">Works</a>
-      <a href="#toolkit" class="nav-link">AI Workflow</a>
+      <a href="#toolkit" class="nav-link">Workflow</a>
       <a href="#writing" class="nav-link">Writings</a>
-      <a href="#about" class="nav-link">About</a>
+      <a href="#about" class="nav-link nav-link--wide">About</a>
       <a href="#contact" class="nav-link">Contact</a>
     </div>
   </nav>
@@ -3957,14 +4027,15 @@ a { text-decoration: none; color: inherit; }
 
     <div class="hero-ctas fade-up delay-5">
       <a href="#works" class="btn btn-primary">查看代表作品 →</a>
-      <a href="#toolkit" class="btn btn-secondary">看看我的 AI 工作流</a>
+      <a href="./assets/zhengnn_resume.pdf" class="btn btn-resume" target="_blank" rel="noopener noreferrer">下载简历 ↓</a>
+      <a href="#toolkit" class="btn btn-secondary">看看 AI 工作流</a>
       <a href="#contact" class="btn btn-tertiary">联系我</a>
     </div>
 
     <!-- AI JD Match · Hero 内嵌 demo -->
     <div class="jd-match fade-up delay-6">
       <h3 class="jd-match-title">想看我和这个岗位的<em>匹配度</em>？</h3>
-      <p class="jd-match-subtitle">贴 JD 或选下方示例，30 秒内告诉你。</p>
+      <p class="jd-match-subtitle">选择一个岗位方向，看看我的匹配判断框架。</p>
 
       <div class="jd-match-row">
         <input type="text" class="jd-match-input" id="jd-input" placeholder="粘贴 JD 关键词，或直接选示例…" autocomplete="off">
@@ -3982,7 +4053,17 @@ a { text-decoration: none; color: inherit; }
   <div class="hero-right fade-up delay-2">
     <div class="hero-blob"></div>
     <div class="hero-blob-amber"></div>
-    <div class="hero-photo"></div>
+    <div class="hero-photo">
+      <img
+        src="./assets/hero-photo.jpg"
+        srcset="./assets/hero-photo.jpg 800w, ./assets/hero-photo@2x.jpg 1200w"
+        sizes="(max-width: 480px) 72vw, 360px"
+        width="800"
+        height="1000"
+        alt="郑宁宁"
+        decoding="async"
+        fetchpriority="high">
+    </div>
   </div>
 </section>
 
@@ -4254,8 +4335,7 @@ a { text-decoration: none; color: inherit; }
         <div class="workflow-stack">
           <span class="workflow-stack-label">日常工具栈</span>
           <div class="workflow-app-icons" aria-label="Vibe Coding 常用工具">
-            <span class="wf-app-icon wf-app-icon--square" title="Claude Code" aria-label="Claude Code"><img src="./assets/tool-icons/claude.png" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="ChatGPT" aria-label="ChatGPT"><img src="./assets/tool-icons/chatgpt.png" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Gemini" aria-label="Gemini"><img src="./assets/tool-icons/gemini.png" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Cursor" aria-label="Cursor"><img src="./assets/tool-icons/cursor.png" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--codex" title="Codex" aria-label="Codex"><img src="./assets/codex-app-icon.png" alt="" width="20" height="20" loading="lazy"></span><span class="wf-app-icon wf-app-icon--square" title="Replit" aria-label="Replit"><img src="./assets/tool-icons/replit.png" alt="" loading="lazy" decoding="async"></span>
-          </div>
+            <span class="wf-app-icon wf-app-icon--square" title="Claude" aria-label="Claude"><img src="https://icons.duckduckgo.com/ip3/claude.ai.ico" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Cursor" aria-label="Cursor"><img src="https://icons.duckduckgo.com/ip3/cursor.com.ico" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Gemini" aria-label="Gemini"><img src="https://icons.duckduckgo.com/ip3/gemini.google.com.ico" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="ChatGPT" aria-label="ChatGPT"><img src="https://icons.duckduckgo.com/ip3/chatgpt.com.ico" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--codex" title="Codex" aria-label="Codex"><img src="./assets/codex-app-icon.png" alt="" width="20" height="20" loading="lazy"></span><span class="wf-app-icon wf-app-icon--square" title="GitHub" aria-label="GitHub"><img src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Replit" aria-label="Replit"><img src="https://icons.duckduckgo.com/ip3/replit.com.ico" alt="" loading="lazy" decoding="async"></span></div>
         </div>
       </article>
 
@@ -4293,8 +4373,7 @@ a { text-decoration: none; color: inherit; }
         <div class="workflow-stack">
           <span class="workflow-stack-label">日常工具栈</span>
           <div class="workflow-app-icons" aria-label="行业研究常用工具">
-            <span class="wf-app-icon wf-app-icon--aihot" title="AI HOT" aria-label="AI HOT"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 18" aria-hidden="true"><rect width="56" height="18" rx="4.5" fill="#1a2332"/><text x="6" y="12.8" fill="#ffffff" font-family="Inter,system-ui,sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.02em">AI</text><circle cx="27" cy="9" r="4.6" fill="none" stroke="#2dd4bf" stroke-width="1.35"/><line x1="24.2" y1="11.5" x2="29.8" y2="6.5" stroke="#2dd4bf" stroke-width="1.1" stroke-linecap="round"/><circle cx="27" cy="9" r="1.1" fill="#2dd4bf"/><text x="33" y="12.8" fill="#38bdf8" font-family="Inter,system-ui,sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.02em">HOT</text></svg></span><span class="wf-app-icon wf-app-icon--square" title="X" aria-label="X"><img src="./assets/tool-icons/x.png" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Obsidian" aria-label="Obsidian"><img src="./assets/tool-icons/obsidian.png" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--codex" title="Codex" aria-label="Codex"><img src="./assets/codex-app-icon.png" alt="" width="20" height="20" loading="lazy"></span><span class="wf-app-icon wf-app-icon--square" title="ChatGPT" aria-label="ChatGPT"><img src="./assets/tool-icons/chatgpt.png" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Claude" aria-label="Claude"><img src="./assets/tool-icons/claude.png" alt="" loading="lazy" decoding="async"></span>
-          </div>
+            <span class="wf-app-icon wf-app-icon--aihot" title="AI HOT" aria-label="AI HOT"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 18" aria-hidden="true"><rect width="56" height="18" rx="4.5" fill="#1a2332"/><text x="6" y="12.8" fill="#ffffff" font-family="Inter,system-ui,sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.02em">AI</text><circle cx="27" cy="9" r="4.6" fill="none" stroke="#2dd4bf" stroke-width="1.35"/><line x1="24.2" y1="11.5" x2="29.8" y2="6.5" stroke="#2dd4bf" stroke-width="1.1" stroke-linecap="round"/><circle cx="27" cy="9" r="1.1" fill="#2dd4bf"/><text x="33" y="12.8" fill="#38bdf8" font-family="Inter,system-ui,sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.02em">HOT</text></svg></span><span class="wf-app-icon wf-app-icon--square" title="X" aria-label="X"><img src="https://icons.duckduckgo.com/ip3/x.com.ico" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="Obsidian" aria-label="Obsidian"><img src="https://icons.duckduckgo.com/ip3/obsidian.md.ico" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--codex" title="Codex" aria-label="Codex"><img src="./assets/codex-app-icon.png" alt="" width="20" height="20" loading="lazy"></span><span class="wf-app-icon wf-app-icon--square" title="Claude" aria-label="Claude"><img src="https://icons.duckduckgo.com/ip3/claude.ai.ico" alt="" loading="lazy" decoding="async"></span><span class="wf-app-icon wf-app-icon--square" title="ChatGPT" aria-label="ChatGPT"><img src="https://icons.duckduckgo.com/ip3/chatgpt.com.ico" alt="" loading="lazy" decoding="async"></span></div>
         </div>
       </article>
 
@@ -4744,19 +4823,21 @@ a { text-decoration: none; color: inherit; }
 
     <div class="contact-grid">
 
-      <a href="./assets/zhengnn_resume.pdf" target="_blank" rel="noopener noreferrer" class="contact-card">
+      <a href="./assets/zhengnn_resume.pdf" target="_blank" rel="noopener noreferrer" class="contact-card contact-card--resume">
         <span class="contact-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
-            <path d="M14 3v5h5"/>
-            <path d="M12 11v6m-3-3l3 3 3-3"/>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 3.5h7.2L18 6.5V20a1.5 1.5 0 0 1-1.5 1.5H8A1.5 1.5 0 0 1 6.5 20V5A1.5 1.5 0 0 1 8 3.5z"/>
+            <path d="M15 3.5V7H18.5"/>
+            <path d="M9 11.5h6"/>
+            <path d="M9 14.5h4.5"/>
+            <path d="M9 17.5h5.5"/>
           </svg>
         </span>
         <span class="contact-text">下载简历 PDF</span>
       </a>
 
       <a href="mailto:ningningzheng325@163.com" class="contact-card">
-        <span class="contact-icon" aria-hidden="true">
+        <span class="contact-icon contact-icon--green" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="5" width="18" height="14" rx="2"/>
             <path d="M3 7l9 6 9-6"/>
@@ -4766,7 +4847,7 @@ a { text-decoration: none; color: inherit; }
       </a>
 
       <a href="https://linkedin.com/in/ningning-zheng-580408240" target="_blank" rel="noopener noreferrer" class="contact-card">
-        <span class="contact-icon" aria-hidden="true">
+        <span class="contact-icon contact-icon--green" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="currentColor">
             <path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM8.5 17H6V9.5h2.5V17zM7.25 8.42a1.46 1.46 0 1 1 0-2.92 1.46 1.46 0 0 1 0 2.92zM18 17h-2.5v-4.16c0-1.07-.44-1.41-1.16-1.41-.76 0-1.34.5-1.34 1.5V17h-2.5V9.5h2.4v1.06c.4-.63 1.18-1.06 2.1-1.06 1.78 0 2.83.94 2.83 3V17z"/>
           </svg>
@@ -4775,7 +4856,7 @@ a { text-decoration: none; color: inherit; }
       </a>
 
       <a href="https://github.com/sunnymilky80" target="_blank" rel="noopener noreferrer" class="contact-card">
-        <span class="contact-icon" aria-hidden="true">
+        <span class="contact-icon contact-icon--green" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.05-.02-2.06-3.34.72-4.05-1.61-4.05-1.61-.54-1.4-1.34-1.77-1.34-1.77-1.09-.74.08-.73.08-.73 1.21.08 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.77.42-1.3.76-1.6-2.66-.3-5.46-1.33-5.46-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.53.12-3.18 0 0 1.01-.32 3.3 1.23.96-.27 1.99-.4 3.01-.41 1.02.01 2.05.14 3.01.41 2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.24 2.87.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.63-5.47 5.92.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.29 0 .32.22.69.83.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/>
           </svg>
