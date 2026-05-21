@@ -401,24 +401,96 @@ a { color: inherit; text-decoration: none; }
   width: 32%;
 }
 
-/* Matrix figure */
-.matrix-figure {
+/* 5 维度 × 5 场景对比矩阵（与 framework-table 同系样式） */
+.matrix-wrap {
   margin: 32px 0;
-  padding: 20px;
+  padding: 20px 18px 22px;
   background: var(--bg-paper);
   border-radius: var(--r-card);
   box-shadow: var(--shadow-sm);
+  border: 1px solid var(--line);
+}
+.matrix-legend {
+  margin: 0 0 16px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.06em;
   text-align: center;
 }
-.matrix-figure img {
-  width: 100%;
-  max-width: 640px;
-  height: auto;
-  display: block;
-  margin: 0 auto;
+.matrix-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 -4px;
+  padding: 0 4px 4px;
 }
-.matrix-figure figcaption {
-  margin-top: 14px;
+.matrix-table {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+  font-family: var(--font-body);
+  font-size: 14px;
+  background: var(--bg-paper);
+}
+.matrix-table thead th {
+  background: rgba(42, 53, 48, 0.92);
+  color: var(--bg-primary);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  padding: 12px 10px;
+  text-align: center;
+  border-bottom: 1px solid var(--line-strong);
+  white-space: nowrap;
+}
+.matrix-table thead th:first-child {
+  text-align: left;
+  padding-left: 14px;
+}
+.matrix-table tbody td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--line);
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.4;
+}
+.matrix-table tbody td:first-child {
+  text-align: left;
+  font-weight: 600;
+  color: var(--ink);
+  padding-left: 14px;
+  white-space: nowrap;
+}
+.matrix-table tbody tr:last-child td { border-bottom: none; }
+.matrix-table tbody tr.row-coding {
+  background: rgba(93, 112, 82, 0.10);
+}
+.matrix-table tbody tr.row-coding td:first-child {
+  color: var(--moss-deep);
+  font-weight: 700;
+}
+.matrix-table tbody tr.row-coding td:last-child {
+  color: var(--moss-deep);
+  font-weight: 700;
+}
+.matrix-table .cell-score {
+  font-weight: 700;
+  font-feature-settings: 'tnum';
+}
+.matrix-table .status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.6em;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1;
+}
+.matrix-table .status--yes { color: var(--moss-deep); }
+.matrix-table .status--partial { color: var(--amber); }
+.matrix-table .status--no { color: #A05A3E; }
+.matrix-caption {
+  margin: 14px 0 0;
   font-family: var(--font-body);
   font-size: 12px;
   color: var(--muted);
@@ -628,6 +700,9 @@ a { color: inherit; text-decoration: none; }
   .takeaway, .role-block, .sources { padding: 22px; }
   .framework-table { font-size: 13px; }
   .framework-table thead th, .framework-table tbody td { padding: 10px 12px; }
+  .matrix-wrap { padding: 16px 12px 18px; }
+  .matrix-table { font-size: 12.5px; min-width: 560px; }
+  .matrix-table thead th, .matrix-table tbody td { padding: 10px 8px; }
 }
 </style>
 </head>
@@ -820,10 +895,72 @@ a { color: inherit; text-decoration: none; }
       <h2 id="sec-matrix"><span class="h2-num">07</span>为什么是 Coding，不是其他场景？<em>5 场景对比矩阵</em></h2>
       <p>如果只看 Coding 一边的论证，很容易让人怀疑：是不是其他场景也能满足这 5 条？我把另外 4 个常被讨论的垂直 Agent 场景拉出来做对比。打分逻辑：✅ 满足、△ 部分满足、❌ 不满足。</p>
 
-      <figure class="matrix-figure">
-        <img src="./assets/coding-agent-matrix.svg" alt="Agent 商业化 5 维度 × 5 场景对比矩阵" />
-        <figcaption>5 维度 × 5 场景对比 · Coding 是唯一全勾的场景</figcaption>
-      </figure>
+      <div class="matrix-wrap">
+        <p class="matrix-legend">✓ 满足 · △ 部分满足 · ✗ 不满足</p>
+        <div class="matrix-scroll">
+          <table class="matrix-table" aria-label="Agent 商业化 5 维度与 5 场景对比矩阵">
+            <thead>
+              <tr>
+                <th scope="col">场景</th>
+                <th scope="col">高频需求</th>
+                <th scope="col">数字化工作流</th>
+                <th scope="col">可验证结果</th>
+                <th scope="col">可量化 ROI</th>
+                <th scope="col">成熟付费路径</th>
+                <th scope="col">达标项数</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-coding">
+                <th scope="row">Coding</th>
+                <td><span class="status status--yes" aria-label="满足">✓</span></td>
+                <td><span class="status status--yes" aria-label="满足">✓</span></td>
+                <td><span class="status status--yes" aria-label="满足">✓</span></td>
+                <td><span class="status status--yes" aria-label="满足">✓</span></td>
+                <td><span class="status status--yes" aria-label="满足">✓</span></td>
+                <td class="cell-score">5/5</td>
+              </tr>
+              <tr>
+                <th scope="row">客服</th>
+                <td><span class="status status--yes" aria-label="满足">✓</span></td>
+                <td><span class="status status--yes" aria-label="满足">✓</span></td>
+                <td><span class="status status--partial" aria-label="部分满足">△</span></td>
+                <td><span class="status status--yes" aria-label="满足">✓</span></td>
+                <td><span class="status status--yes" aria-label="满足">✓</span></td>
+                <td class="cell-score">4/5</td>
+              </tr>
+              <tr>
+                <th scope="row">法律</th>
+                <td><span class="status status--partial" aria-label="部分满足">△</span></td>
+                <td><span class="status status--partial" aria-label="部分满足">△</span></td>
+                <td><span class="status status--no" aria-label="不满足">✗</span></td>
+                <td><span class="status status--partial" aria-label="部分满足">△</span></td>
+                <td><span class="status status--partial" aria-label="部分满足">△</span></td>
+                <td class="cell-score">0–1/5</td>
+              </tr>
+              <tr>
+                <th scope="row">财务</th>
+                <td><span class="status status--yes" aria-label="满足">✓</span></td>
+                <td><span class="status status--yes" aria-label="满足">✓</span></td>
+                <td><span class="status status--partial" aria-label="部分满足">△</span></td>
+                <td><span class="status status--yes" aria-label="满足">✓</span></td>
+                <td><span class="status status--partial" aria-label="部分满足">△</span></td>
+                <td class="cell-score">3/5</td>
+              </tr>
+              <tr>
+                <th scope="row">市场研究</th>
+                <td><span class="status status--partial" aria-label="部分满足">△</span></td>
+                <td><span class="status status--partial" aria-label="部分满足">△</span></td>
+                <td><span class="status status--no" aria-label="不满足">✗</span></td>
+                <td><span class="status status--partial" aria-label="部分满足">△</span></td>
+                <td><span class="status status--no" aria-label="不满足">✗</span></td>
+                <td class="cell-score">0–1/5</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="matrix-caption">5 维度 × 5 场景对比 · Coding 是唯一全勾的场景</p>
+      </div>
 
       <p><strong>逐个解释打分逻辑：</strong></p>
       <ul>
