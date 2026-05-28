@@ -3979,6 +3979,20 @@ a { text-decoration: none; color: inherit; }
 }
 
 </style>
+
+<!-- ========================================================
+     Analytics · GoatCounter（无 cookie · 免费 · GDPR 友好）
+     ========================================================
+     使用步骤：
+     1. 打开 https://www.goatcounter.com/signup 注册（用 GitHub 登录即可，2 分钟）
+     2. 注册时选个 site code，比如 "ningningzheng"
+     3. 把下面 ningningzheng 替换成你刚选的 site code
+     4. git push → 上线生效，回 dashboard 看实时数据
+     5. 文章页 writing-ai-coding-agent.html 也已加同样脚本，会一起统计
+     ======================================================== -->
+<script data-goatcounter="https://ningningzheng.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
 </head>
 <body>
 
@@ -4883,7 +4897,7 @@ a { text-decoration: none; color: inherit; }
       <a href="https://okjk.co/NTIcUn" target="_blank" rel="noopener noreferrer">即刻</a>
     </div>
 
-    <p class="site-contact-footer">© 2026 Ningning Zheng · Personal site · Last updated 2026-05-19</p>
+    <p class="site-contact-footer">© 2026 Ningning Zheng · Personal site · Last updated 2026-05-28</p>
   </div>
 </section>
 
@@ -5259,6 +5273,50 @@ document.querySelectorAll('.workflow-copy').forEach(btn => {
     if (e.key === 'ArrowLeft') setSpread(idx - 1);
     else if (e.key === 'ArrowRight') setSpread(idx + 1);
     else if (e.key === 'Escape') closeBook();
+  });
+})();
+</script>
+
+<!-- ========================================================
+     GoatCounter · 关键转化事件追踪（点击型）
+     ========================================================
+     这段脚本会在 GoatCounter dashboard "Events" 标签下显示：
+       resume-hero       — Hero 区"下载简历"按钮点击
+       resume-contact    — Contact 区"完整简历 PDF"卡点击
+       email-click       — 邮件卡点击
+       linkedin-click    — LinkedIn 卡点击
+       github-click      — GitHub 卡点击
+       work-intel        — 情报体系 详情页跳转
+       work-low-altitude — 低空经济 详情页跳转
+       work-ai-agent     — 智能体 详情页跳转
+       read-article      — 站内长文（AI Coding Agent）点击
+       xhs-click         — 小红书外链点击
+     —— 投出去后可以精准看 HR 转化漏斗：
+        访问 N → 点简历 M → 点联系 K
+     ======================================================== -->
+<script>
+(function () {
+  function track(name) {
+    if (window.goatcounter && typeof window.goatcounter.count === 'function') {
+      window.goatcounter.count({ path: name, title: name, event: true });
+    }
+  }
+  const eventMap = [
+    ['.btn-resume',                                    'resume-hero'],
+    ['.contact-card--resume',                          'resume-contact'],
+    ['.contact-card[href^="mailto:"]',                 'email-click'],
+    ['.contact-card[href*="linkedin.com"]',            'linkedin-click'],
+    ['.contact-card[href*="github.com/sunnymilky80"]', 'github-click'],
+    ['a[href*="portfolio-work-telecom"]',              'work-intel'],
+    ['a[href*="portfolio-work-low-altitude"]',         'work-low-altitude'],
+    ['a[href*="portfolio-work-ai-agent"]',             'work-ai-agent'],
+    ['.fw-item[data-channel="internal"]',              'read-article'],
+    ['.fw-item[data-channel="redbook"]',               'xhs-click'],
+  ];
+  document.addEventListener('click', function (e) {
+    for (const [sel, name] of eventMap) {
+      if (e.target.closest(sel)) { track(name); break; }
+    }
   });
 })();
 </script>
