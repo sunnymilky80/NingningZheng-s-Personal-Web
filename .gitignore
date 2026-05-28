@@ -15,3 +15,10 @@ archive/
 *.xlsx
 *.xlsm
 智能体分类分域研发-发布v0.6@260107 copy.xlsx
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
